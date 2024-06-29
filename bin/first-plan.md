@@ -23,3 +23,9 @@ Onboarding:
 - Budget
 
 Start of with budget for the whole holiday. We start of with one trip.
+
+Questions Russell:
+-Use class to store data?
+-If and how to display past and future expenses
+-How to store passwords
+-How to do multiple trips in state? Different branches or key and value for trip?

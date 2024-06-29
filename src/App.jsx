@@ -1,53 +1,23 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  selectCount,
-} from './redux/counterSlice';
-import './css/App.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Dashboard from "./Dashboard/Dashboard";
+import { currencyCodes } from "./Data/currencyCodes";
+import { expenses, travelInfo } from "./Data/fakeExpenseData";
+import "./css/App.css";
+import { setData } from "./redux/expensesSlice";
 
 export default function App() {
-  const count = useSelector(selectCount);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+  useEffect(() => {
+    dispatch(setData({ text: "expenses", data: expenses }));
+    dispatch(setData({ text: "travelInfo", data: travelInfo }));
+    dispatch(setData({ text: "currencyCodes", data: currencyCodes }));
+  }, [expenses, travelInfo, currencyCodes]);
 
   return (
-<>
-  <div className="row">
-<button
-  className='button'
-  aria-label="Decrement value"
-  onClick={() => dispatch(decrement())}
->
-  -
-</button>
-<span className="value">{count}</span>
-<button
-  className="button"
-  aria-label="Increment value"
-  onClick={() => dispatch(increment())}
->
-  +
-</button>
-  </div>
-  <div className="row">
-<input
-  className="textbox"
-  aria-label="Set increment amount"
-  value={incrementAmount}
-  onChange={(e) => setIncrementAmount(e.target.value)}
-/>
-<button
-  className="button"
-  onClick={() => dispatch(incrementByAmount(incrementValue))}
->
-  Add Amount
-</button>
-  </div>
-</>
+    <div>
+      <Dashboard />
+    </div>
   );
 }
