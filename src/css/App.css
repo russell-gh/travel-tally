@@ -27,6 +27,11 @@ h1 {
   display: block;
 }
 
+.addExpense {
+  margin: 5px 0px;
+  width: 100%;
+}
+
 .dashboardFixed {
   position: fixed;
   top: 0;
@@ -37,7 +42,7 @@ h1 {
 }
 
 .mt {
-  margin-top: 300px;
+  margin-top: 315px;
 }
 
 .expenseItem {

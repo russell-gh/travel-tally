@@ -14,11 +14,11 @@ const Dashboard = () => {
         <Title />
         <Image src={"../src/img/piechart.png"} alt="piechart" />
         <Budget />
+        <Button className="addExpense" text="Add an expense" />
         <div className="controlsExpenses">
           <Filter />
           <Order />
           <FilterDate />
-          <Button className="addExpense" text="Add an expense" />
         </div>
       </div>
       <Expenses />
