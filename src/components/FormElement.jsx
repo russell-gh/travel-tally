@@ -1,10 +1,10 @@
-//FormElement supports input of text, email, password, file, date, checkbox and select with a label created for all inputs.
+//FormElement supports input of text, number, email, password, file, date, checkbox and select with a label created for all inputs.
 //Required params for all input types: id, label, type, name.
 //Callbacks are accepted but optional
-//Date inputs can additionally accept minDate and maxDate as a string in the format yyyy-mm-dd
+//Date inputs can additionally accept minDate and/or maxDate as a string in the format yyyy-mm-dd
+//Number inputs can additionally accept minValue and/or maxValue
 //Select inputs require an options parameter as an array of objects with a value property and name property
 //File uploads have been set to only accept image files for the profile picture
-
 
 const FormElement = ({
   type,
@@ -13,8 +13,11 @@ const FormElement = ({
   name,
   minDate,
   maxDate,
+  minValue,
+  maxValue,
   options,
   callback,
+
 }) => {
   switch (type) {
     case "text":
@@ -26,6 +29,21 @@ const FormElement = ({
           <input type={type} id={id} name={name} onChange={callback} />
         </>
       );
+    case "number":
+      return (
+        <>
+          <label htmlFor={id}>{label}:</label>
+          <input
+            type={type}
+            id={id}
+            name={name}
+            onChange={callback}
+            min={minValue}
+            max={maxValue}
+          />
+        </>
+      );
+
     case "file":
       return (
         <>

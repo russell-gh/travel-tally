@@ -22,6 +22,15 @@ const Form = () => {
         callback={(e) => console.log(e.target.value)}
       />
       <FormElement
+        type="number"
+        id="budget"
+        label="Enter your budget here"
+        name="budget"
+        minValue={10}
+        maxValue={100}
+        callback={(e) => console.log(e.target.value)}
+      />
+      <FormElement
         type="email"
         id="email"
         label="Enter your email here"
