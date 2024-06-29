@@ -1,6 +1,9 @@
 export const initialState = {
   expenses: [],
   PopUp: {},
+  filter: "Show All",
+  order: "Newest first",
+  filterDate: "All Dates",
   currencyCodes: {
     USD: {
       symbol: "$",

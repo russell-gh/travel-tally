@@ -2,7 +2,7 @@ export const expenses = [
   {
     expenseId: 1,
     amount: { amount: 2000, currency: "EUR", homeCurrency: 2500 },
-    category: "food",
+    category: "Food",
     description: "lunch",
     date: "14-07-2024",
     completed: true,
@@ -11,7 +11,7 @@ export const expenses = [
   {
     expenseId: 2,
     amount: { amount: 500, currency: "EUR", homeCurrency: 600 },
-    category: "food",
+    category: "Food",
     description: "waffle",
     date: "14-07-2024",
     completed: true,
@@ -19,9 +19,9 @@ export const expenses = [
   },
   {
     expenseId: 3,
-    amount: { amount: 1499, currency: "EUR", homeCurrency: 1995 },
-    category: "food",
-    description: "Pizzahut",
+    amount: { amount: 1499, currency: "USD", homeCurrency: 1995 },
+    category: "Food",
+    description: "",
     date: "14-07-2024",
     completed: true,
     splitBill: false,
@@ -29,7 +29,7 @@ export const expenses = [
   {
     expenseId: 4,
     amount: { amount: 1500, currency: "EUR", homeCurrency: 2500 },
-    category: "activity",
+    category: "Activities",
     description: "movies",
     date: "15-07-2024",
     completed: true,
@@ -38,7 +38,7 @@ export const expenses = [
   {
     expenseId: 5,
     amount: { amount: 10000, currency: "EUR", homeCurrency: 12000 },
-    category: "hotel",
+    category: "Hotel",
     description: "hotel Amsterdam",
     date: "14-07-2024",
     completed: true,
@@ -47,7 +47,7 @@ export const expenses = [
   {
     expenseId: 6,
     amount: { amount: 15000, currency: "EUR", homeCurrency: 20000 },
-    category: "hotel",
+    category: "Hotel",
     description: "hotel Utrecht",
     date: "14-07-2024",
     completed: true,
@@ -56,7 +56,7 @@ export const expenses = [
   {
     expenseId: 7,
     amount: { amount: 1250, currency: "EUR", homeCurrency: 1468 },
-    category: "transport",
+    category: "Transport",
     description: "train to Utrecht",
     date: "16-07-2024",
     completed: true,
@@ -65,7 +65,7 @@ export const expenses = [
   {
     expenseId: 8,
     amount: { amount: 500, currency: "EUR", homeCurrency: 620 },
-    category: "food",
+    category: "Food",
     description: "coffe and coockie",
     date: "16-07-2024",
     completed: true,
@@ -74,7 +74,7 @@ export const expenses = [
   {
     expenseId: 9,
     amount: { amount: 2999, currency: "EUR", homeCurrency: 3657 },
-    category: "activity",
+    category: "Activities",
     description: "paleis op de dam",
     date: "16-07-2024",
     completed: true,
@@ -83,7 +83,7 @@ export const expenses = [
   {
     expenseId: 10,
     amount: { amount: 250, currency: "EUR", homeCurrency: 300 },
-    category: "transport",
+    category: "Transport",
     description: "bus to museum",
     date: "17-07-2024",
     completed: true,
@@ -92,7 +92,7 @@ export const expenses = [
   {
     expenseId: 11,
     amount: { amount: 1000, currency: "EUR", homeCurrency: 1200 },
-    category: "activity",
+    category: "Activities",
     description: "dom museum",
     date: "17-07-2024",
     completed: true,
@@ -101,7 +101,7 @@ export const expenses = [
   {
     expenseId: 12,
     amount: { amount: 6538, currency: "EUR", homeCurrency: 7934 },
-    category: "food",
+    category: "Food",
     description: "Dinner at square",
     date: "17-07-2024",
     completed: true,
@@ -110,7 +110,7 @@ export const expenses = [
   {
     expenseId: 13,
     amount: { amount: 500, currency: "EUR", homeCurrency: 600 },
-    category: "transport",
+    category: "Transport",
     description: "rent bike",
     date: "18-07-2024",
     completed: true,
@@ -119,7 +119,7 @@ export const expenses = [
   {
     expenseId: 14,
     amount: { amount: 995, currency: "EUR", homeCurrency: 1287 },
-    category: "food",
+    category: "Food",
     description: "Sandwich",
     date: "18-07-2024",
     completed: true,
@@ -128,7 +128,7 @@ export const expenses = [
   {
     expenseId: 15,
     amount: { amount: 950, currency: "EUR", homeCurrency: 1065 },
-    category: "other",
+    category: "Other",
     description: "souvenir",
     date: "18-07-2024",
     completed: true,
@@ -137,7 +137,7 @@ export const expenses = [
   {
     expenseId: 16,
     amount: { amount: 4265, currency: "EUR", homeCurrency: 5394 },
-    category: "food",
+    category: "Food",
     description: "Italian",
     date: "18-07-2024",
     completed: true,
@@ -146,7 +146,7 @@ export const expenses = [
   {
     expenseId: 17,
     amount: { amount: 8000, currency: "EUR", homeCurrency: 9536 },
-    category: "hotel",
+    category: "Hotel",
     description: "hotel The Hague",
     date: "19-07-2024",
     completed: true,
@@ -155,7 +155,7 @@ export const expenses = [
   {
     expenseId: 18,
     amount: { amount: 368, currency: "EUR", homeCurrency: 459 },
-    category: "transport",
+    category: "Transport",
     description: "metro",
     date: "19-07-2024",
     completed: true,
@@ -164,7 +164,7 @@ export const expenses = [
   {
     expenseId: 19,
     amount: { amount: 2500, currency: "EUR", homeCurrency: 3000 },
-    category: "food",
+    category: "Food",
     description: "lunch at beach",
     date: "19-07-2024",
     completed: true,
@@ -173,7 +173,7 @@ export const expenses = [
   {
     expenseId: 20,
     amount: { amount: 13500, currency: "EUR", homeCurrency: 18900 },
-    category: "activity",
+    category: "Activities",
     description: "bungee jumping",
     date: "19-07-2024",
     completed: true,

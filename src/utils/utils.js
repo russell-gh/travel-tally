@@ -25,7 +25,7 @@ export function addDecimals(number) {
 
 export function getIndex(data, id) {
   const indexOf = data.findIndex((item) => {
-    return item.id === id;
+    return item.expenseId === id;
   });
   return indexOf;
 }
@@ -35,4 +35,21 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
     console.log("something went wrong with getting the currency symbol");
   }
   return currencyCodes[currencyCode].symbol;
+}
+
+export function getArrayOfDates(data) {
+  let copy = [...data];
+
+  //makes an array of the dates
+  copy = copy.map((item) => {
+    return item.date;
+  });
+
+  // removes duplicates
+  copy = [...new Set(copy)];
+
+  //add All Dates as first element
+  copy.unshift("All Dates");
+
+  return copy;
 }

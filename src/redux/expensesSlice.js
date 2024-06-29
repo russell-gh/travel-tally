@@ -16,9 +16,8 @@ export const expensesSlice = createSlice({
         );
       }
     },
-    deleteExpense: (state, { payload }) => {
-      console.log(state, payload);
-      const index = getIndex(state.expenses, payload);
+    deleteExpense: (state) => {
+      const index = getIndex(state.expenses, state.PopUp.id);
       state.expenses.splice(index, 1);
       state.PopUp.showPopUp = !state.PopUp.showPopUp; // would've preferred to keep this in toggelShowPopUp, could not call two dispatces with one click
     },
@@ -28,10 +27,13 @@ export const expensesSlice = createSlice({
       state.PopUp.id = id;
       state.PopUp.title = title;
     },
+    formEvent: (state, { payload }) => {
+      state[payload.id] = payload.value;
+    },
   },
 });
 
-export const { setData, deleteExpense, toggleShowPopUp } =
+export const { setData, deleteExpense, toggleShowPopUp, formEvent } =
   expensesSlice.actions;
 
 export const selectExpenses = (state) => state.expenses.expenses;
@@ -40,5 +42,8 @@ export const selectPopUp = (state) => state.expenses.PopUp;
 export const selectCurrencyCodes = (state) => state.expenses.currencyCodes;
 export const selectHomeCurrencySymbol = (state) =>
   state.expenses.travelInfo.homeCurrencySymbol;
+export const selectOrder = (state) => state.expenses.order;
+export const selectFilter = (state) => state.expenses.filter;
+export const selectFilterDate = (state) => state.expenses.filterDate;
 
 export default expensesSlice.reducer;

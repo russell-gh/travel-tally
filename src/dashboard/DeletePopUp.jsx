@@ -26,7 +26,7 @@ const DeletePopUp = () => {
         <Button
           text="delete"
           onClick={() => {
-            dispatch(deleteExpense(id));
+            dispatch(deleteExpense());
           }}
         />
       </div>

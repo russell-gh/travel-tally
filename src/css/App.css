@@ -11,8 +11,9 @@ h1 {
   height: fit-content;
 }
 
-body {
-  padding: 10px;
+.dashboardFixed,
+.expenses {
+  padding: 0px 10px 0px 10px;
 }
 
 .piechart {
@@ -21,10 +22,8 @@ body {
   display: block;
 }
 
-.addExpense {
-  width: 95%;
-  overflow: none;
-  padding: 5px;
+.controlsExpenses .addExpense {
+  padding: 5px 20px;
   display: block;
 }
 
@@ -33,10 +32,12 @@ body {
   top: 0;
   width: 100%;
   background-color: white;
+  box-sizing: border-box;
+  padding: 10px 10px 0px 10px;
 }
 
-.expenses {
-  margin-top: 280px;
+.mt {
+  margin-top: 300px;
 }
 
 .expenseItem {
@@ -90,4 +91,11 @@ body {
 
 .btn {
   padding: 5px 10px;
+}
+
+.controlsExpenses {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
 }
