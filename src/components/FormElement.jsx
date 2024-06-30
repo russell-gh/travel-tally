@@ -3,7 +3,7 @@
 //Callbacks are accepted but optional
 //Date inputs can additionally accept minDate and/or maxDate as a string in the format yyyy-mm-dd
 //Number inputs can additionally accept minValue and/or maxValue
-//Select inputs require an options parameter as an array of objects with a value property and name property. An option can be given a 'seslected property'
+//Select inputs require an options parameter as an array of objects with a value property and name property. An option can be given a defaultValue prop
 //File uploads have been set to only accept image files for the profile picture
 
 const FormElement = ({
@@ -17,7 +17,7 @@ const FormElement = ({
   maxValue,
   options,
   callback,
-  selected
+  defaultValue
 
 }) => {
   switch (type) {
@@ -83,8 +83,7 @@ const FormElement = ({
       return (
         <>
           <label htmlFor={id}>{label}:</label>
-          <select name={name} id={id} onChange={(e)=>callback(e,id)}>
-            <option disabled>Please choose from the below</option>
+          <select defaultValue={defaultValue} name={name} id={id} onChange={(e)=>callback(e,id)}>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}

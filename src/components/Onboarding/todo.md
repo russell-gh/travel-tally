@@ -16,24 +16,22 @@ state.holiday = [
   },
 ];
 
-now major:
-add all options for currencies
-validation
+Major:
+change hardcoded currencies to get from api. Get from Jack's call after merge
 make them controlled components?
 Display effects: Once all form inputs have passed validation, submit button is displayed, On submit of form, budget breakdown component is displayed
+use api for countries and add search on input
+Check if callback syntax is correct?
 
-now minor: 
+Minor: 
 Display total budget from store which auto-updates as user types to display remaining budget
 edit date format and number format
 
 later:
-Can they tab through?
-Automatically focus on display of component
+Add auto-focus on load
 Add geolocation to autodetect home country?
 fix selected/defaultValue bug
-Speak to Sacha about when to convert date
-check if callback syntax is correct?
+Date conversion?
 
-use api for countries
 
 

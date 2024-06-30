@@ -72,6 +72,7 @@ const Onboarding = () => {
               label={question.label}
               name={question.name}
               options={question.options}
+              defaultValue={question.defaultValue}
               callback={
                 question.type === "button" ? handleSubmit : handleChange
               }
