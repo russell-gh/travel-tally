@@ -19,15 +19,15 @@ const Onboarding = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let _onboardingDetails = onboardingDetails;
-  let startDate = _onboardingDetails.startDate;
-  let endDate = _onboardingDetails.endDate;
+    let startDate = _onboardingDetails.startDate;
+    let endDate = _onboardingDetails.endDate;
     // const dates = [startDate, endDate].map((date) => {
     //   date = date.split("-");
     //   date = new Date(date[0], date[1]-1, date[2])
     //   return date;
     // });
     // _onboardingDetails = {..._onboardingDetails, startDate: dates[0], endDate:dates[1]}
-  
+
     dispatch(addTrip(_onboardingDetails)); //send through original or timestamp as string as Date objs can't be sent to store?
   };
 
