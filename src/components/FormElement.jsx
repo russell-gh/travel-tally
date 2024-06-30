@@ -3,7 +3,7 @@
 //Callbacks are accepted but optional
 //Date inputs can additionally accept minDate and/or maxDate as a string in the format yyyy-mm-dd
 //Number inputs can additionally accept minValue and/or maxValue
-//Select inputs require an options parameter as an array of objects with a value property and name property. An option can be given a defaultValue prop
+//Select inputs require an options parameter as an array of objects with a value property and name property. An option can be given a defaultValue
 //File uploads have been set to only accept image files for the profile picture
 
 const FormElement = ({

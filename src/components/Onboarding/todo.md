@@ -26,6 +26,7 @@ Check if callback syntax is correct?
 Minor: 
 Display total budget from store which auto-updates as user types to display remaining budget
 edit date format and number format
+abstract validation and move to seperate folder
 
 later:
 Add auto-focus on load

@@ -3,24 +3,23 @@ import FormElement from "../FormElement";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTrip } from "../../redux/onboardingSlice";
 import { addTrip } from "../../redux/onboardingSlice";
 import Joi from "joi";
+import BudgetBreakdown from "./BudgetBreakdown";
+import { selectTrip } from "../../redux/onboardingSlice";
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
   const [validated, setValidated] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const trip = useSelector(selectTrip); 
+
 
   useEffect(() => {
     validate();
-    console.log(onboardingDetails);
   }, [onboardingDetails]);
-  const trip = useSelector(selectTrip);
-  const dispatch = useDispatch();
-
-  const handleChange = (e, id) => {
-    setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
-  };
 
   const schema = {
     destination: Joi.string().min(1).max(58).required(),
@@ -34,11 +33,16 @@ const Onboarding = () => {
 
     try {
       const result = await _joi.validateAsync(onboardingDetails);
+      console.log(result);
       setValidated(true);
     } catch (e) {
-      setValidated(false)
+      setValidated(false);
       console.log(e);
     }
+  };
+
+  const handleChange = (e, id) => {
+    setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -55,14 +59,16 @@ const Onboarding = () => {
 
     if (validated) {
       dispatch(addTrip(_onboardingDetails)); //send through original or timestamp as string as Date objs can't be sent to store?
+      console.log("added to store");
+      setVisible(true);
     } else {
       console.log("Check all fields have been inputted correctly");
     }
   };
-
+console.log(trip)
   return (
     <div>
-      <form className="onboardingForm">
+      <form>
         {onboardingQuestions.map((question) => {
           return (
             <FormElement
@@ -80,6 +86,8 @@ const Onboarding = () => {
           );
         })}
       </form>
+      <BudgetBreakdown trip={trip}/>
+      {/* {trip ? <BudgetBreakdown trip={trip} /> : ""}  */}
     </div>
   );
 };

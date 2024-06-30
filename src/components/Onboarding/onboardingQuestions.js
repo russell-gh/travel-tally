@@ -5,7 +5,6 @@ let currencies = [];
 for (const key of Object.keys(currencyCodes)) {
   currencies.push({ value: key, name: key });
 }
-console.log(currencies[7].value)
 export const onboardingQuestions = [
   {
     type: "text",
@@ -37,6 +36,7 @@ export const onboardingQuestions = [
     label: "Please select the currency of the country you live in.",
     name: "homeCurrency",
     options: currencies,
+    value: currencies[0].value,
     defaultValue: currencies[0].value
   },
   {
