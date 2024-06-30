@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormElement from "../FormElement";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTrip } from "../../redux/onboardingSlice";
 import { addTrip } from "../../redux/onboardingSlice";
+import Joi from "joi";
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
+  const [validated, setValidated] = useState(false);
 
+  useEffect(() => {
+    validate();
+    console.log(onboardingDetails);
+  }, [onboardingDetails]);
   const trip = useSelector(selectTrip);
   const dispatch = useDispatch();
 
@@ -16,11 +22,30 @@ const Onboarding = () => {
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
+  const schema = {
+    destination: Joi.string().min(1).max(58).required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().greater(Joi.ref("startDate")).required(),
+    budgetTotal: Joi.number().min(1).required(), //include max budget?
+    homeCurrency: Joi.string().required(),
+  };
+  const validate = async () => {
+    const _joi = Joi.object(schema);
+
+    try {
+      const result = await _joi.validateAsync(onboardingDetails);
+      setValidated(true);
+    } catch (e) {
+      setValidated(false)
+      console.log(e);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let _onboardingDetails = onboardingDetails;
-    let startDate = _onboardingDetails.startDate;
-    let endDate = _onboardingDetails.endDate;
+    // let startDate = _onboardingDetails.startDate;
+    // let endDate = _onboardingDetails.endDate;
     // const dates = [startDate, endDate].map((date) => {
     //   date = date.split("-");
     //   date = new Date(date[0], date[1]-1, date[2])
@@ -28,7 +53,11 @@ const Onboarding = () => {
     // });
     // _onboardingDetails = {..._onboardingDetails, startDate: dates[0], endDate:dates[1]}
 
-    dispatch(addTrip(_onboardingDetails)); //send through original or timestamp as string as Date objs can't be sent to store?
+    if (validated) {
+      dispatch(addTrip(_onboardingDetails)); //send through original or timestamp as string as Date objs can't be sent to store?
+    } else {
+      console.log("Check all fields have been inputted correctly");
+    }
   };
 
   return (

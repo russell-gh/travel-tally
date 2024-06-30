@@ -32,6 +32,8 @@ Automatically focus on display of component
 Add geolocation to autodetect home country?
 fix selected/defaultValue bug
 Speak to Sacha about when to convert date
+check if callback syntax is correct?
 
+use api for countries
 
 
