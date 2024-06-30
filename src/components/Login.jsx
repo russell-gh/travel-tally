@@ -8,13 +8,18 @@ const Login = () => {
   console.log(formData);
 
   const onSubmit = (e) => {
-    console.log("form submitted");
+    console.log("form submitted", formData);
   };
 
   return (
     <div onInput={onInput}>
-      <input type="email" name="email" id="email" />
-      <input type="password" name="password" id="password" />
+      <input type="email" name="email" id="login-email" placeholder="email" />
+      <input
+        type="password"
+        name="password"
+        id="login-password"
+        placeholder="password"
+      />
       <button onClick={onSubmit}>Login</button>
     </div>
   );
