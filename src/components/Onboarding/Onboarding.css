@@ -1,0 +1,4 @@
+.onboardingForm {
+    display: flex;
+    flex-direction: column;
+}
