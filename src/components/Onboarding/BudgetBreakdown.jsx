@@ -2,8 +2,8 @@ import FormElement from "../FormElement";
 import { useState } from "react";
 
 const BudgetBreakdown = ({trip}) => {
-if (trip[0]){                                //check why this works and if (trip) doesn't
-    const budgetTotal = trip[0].budgetTotal; //need to be abl eto dynamically access these
+if (trip[0]){                                //check why this works and why if (trip) doesn't
+    const budgetTotal = trip[0].budgetTotal; //need to be able to dynamically access these instead of hardcoding [0]
   const destination = trip[0].destination;
   const homeCurrency = trip[0].homeCurrency;
 
