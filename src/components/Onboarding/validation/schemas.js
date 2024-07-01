@@ -7,3 +7,5 @@ export const tripSchema = {
     budgetTotal: Joi.number().min(1).required(), //include max budget?
     homeCurrency: Joi.string().required(),
   };
+
+  

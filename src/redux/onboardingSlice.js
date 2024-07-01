@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {trip:[]};
+const initialState = {trips:[]};
 
 export const onboardingSlice = createSlice({
   name: "onboarding",
   initialState,
   reducers: {
     addTrip: (state, {payload}) => {
-        state.trip=[...state.trip, payload]
+        state.trips=[...state.trips, payload]
     },
   },
 });
 
 export const { addTrip } = onboardingSlice.actions;
-export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
+export const selectTrips = (state) => state.onboarding.trips; 
 export default onboardingSlice.reducer;
