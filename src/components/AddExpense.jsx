@@ -13,8 +13,6 @@ import FormElement from "./FormElement";
 export const AddExpense = () => {
   const dispatch = useDispatch();
   const currencies = useSelector(selectCurrencyNames);
-  const homeCurrency = useSelector(selectHomeCurrency);
-  const apiData = useSelector(selectCurrencyRates);
   const categories = [
     { value: "Food", name: "Food" },
     { value: "Accomodation", name: "Accomodation" },
@@ -43,6 +41,7 @@ export const AddExpense = () => {
   // };
 
   const handleSubmit = () => {
+    console.log(expense, "PRE");
     dispatch(addExpenseData(expense));
   };
   return (

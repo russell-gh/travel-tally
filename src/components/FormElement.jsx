@@ -101,6 +101,9 @@ const FormElement = ({
             id={id}
             onChange={(e) => callback(e, id)}
           >
+            <option disabled selected value>
+              ---
+            </option>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}

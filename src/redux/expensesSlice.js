@@ -43,11 +43,9 @@ export const expensesSlice = createSlice({
       state[payload.id] = payload.value;
     },
     addExpenseData: (state, { payload }) => {
-      let result = handleData(
-        { ...payload },
-        state.homeCurrency,
-        state.currencyRates
-      );
+      let result = handleData({ ...payload }, state.homeCurrency, {
+        ...state.currencyRates,
+      });
       state.expenses.push(result);
     },
   },
