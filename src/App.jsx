@@ -10,9 +10,13 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import "./css/App.css";
 import Onboarding from "./components/Onboarding/Onboarding.jsx";
+import AddExpense from "./components/AddExpense.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    getCurrencyData("GBP");
+  }, []);
 
   useEffect(() => {
     dispatch(setData({ text: "expenses", data: expenses }));
@@ -26,9 +30,9 @@ const App = () => {
       <Signup />
       <Onboarding />
       <Dashboard />
+      <AddExpense />
     </>
   );
 };
 
 export default App;
-
