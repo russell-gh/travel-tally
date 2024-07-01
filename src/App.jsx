@@ -5,8 +5,13 @@ import { expenses, travelInfo } from "./Data/fakeExpenseData";
 import "./css/App.css";
 import Dashboard from "./dashboard/Dashboard";
 import { setData } from "./redux/expensesSlice";
+import React, { useState } from "react";
+import Login from "./components/login";
+import Signup from "./components/signup";
+import "./css/App.css";
+import Onboarding from "./components/Onboarding/Onboarding.jsx";
 
-export default function App() {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,8 +21,14 @@ export default function App() {
   }, [expenses, travelInfo, currencyCodes]);
 
   return (
-    <div>
+    <>
+      <Login />
+      <Signup />
+      <Onboarding />
       <Dashboard />
-    </div>
+    </>
   );
-}
+};
+
+export default App;
+
