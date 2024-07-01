@@ -16,14 +16,14 @@ const FormElement = ({
     case "password":
       return (
         <>
-          <label htmlFor={id}>{label}:</label>
+          {label && <label htmlFor={id}>{label}:</label>}
           <input type={type} id={id} name={name} onChange={callback} />
         </>
       );
     case "number":
       return (
         <>
-          <label htmlFor={id}>{label}:</label>
+          {label && <label htmlFor={id}>{label}:</label>}
           <input
             type={type}
             id={id}
@@ -38,7 +38,7 @@ const FormElement = ({
     case "file":
       return (
         <>
-          <label htmlFor={id}>{label}:</label>
+          {label && <label htmlFor={id}>{label}:</label>}
           <input
             type={type}
             id={id}
@@ -51,7 +51,7 @@ const FormElement = ({
     case "date":
       return (
         <>
-          <label htmlFor={id}>{label}:</label>
+          {label && <label htmlFor={id}>{label}:</label>}
           <input
             type={type}
             id={id}
@@ -66,13 +66,13 @@ const FormElement = ({
       return (
         <>
           <input type={type} id={id} name={name} onChange={callback} />
-          <label htmlFor={id}>{label}</label>
+          {label && <label htmlFor={id}>{label}:</label>}
         </>
       );
     case "select":
       return (
         <>
-          <label htmlFor={id}>{label}:</label>
+          {label && <label htmlFor={id}>{label}:</label>}
           <select name={name} id={id} onChange={callback}>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
