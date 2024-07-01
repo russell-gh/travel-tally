@@ -47,7 +47,7 @@ const Onboarding = () => {
     //turn date strings to date objs and then to timestamps
     let startDate = stringToTimestamp(_onboardingDetails.startDate)
     let endDate = stringToTimestamp(_onboardingDetails.endDate)
-    
+
     //spread existing state and update modified keys
     _onboardingDetails = {..._onboardingDetails, startDate, endDate, budgetTotal}
       dispatch(addTrip(_onboardingDetails)); 
