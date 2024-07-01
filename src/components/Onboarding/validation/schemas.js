@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const schema = {
+export const tripSchema = {
     destination: Joi.string().min(1).max(58).required(),
     startDate: Joi.date().required(),
     endDate: Joi.date().greater(Joi.ref("startDate")).required(),

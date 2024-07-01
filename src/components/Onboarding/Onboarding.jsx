@@ -7,13 +7,14 @@ import { addTrip } from "../../redux/onboardingSlice";
 import Joi from "joi";
 import BudgetBreakdown from "./BudgetBreakdown";
 import { selectTrip } from "../../redux/onboardingSlice";
-import { schema } from "./validation.js";
+import { tripSchema } from "./validation/schemas.js";
+import { validate } from "./validation/validate.js";
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
   const [validated, setValidated] = useState(false);
   const [visible, setVisible] = useState(false);
-
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
   //access trip details from store
@@ -21,22 +22,23 @@ const Onboarding = () => {
 
   //run state through validate function everytime input is changed
   useEffect(() => {
-    validate();
+    const result = validate(onboardingDetails, "trip", setValidated);
+    setErrors(result);
   }, [onboardingDetails]);
 
   //validation. if all tests are successful change validated state to true
   //abstract this further? + write errors into DOM
-  const validate = async () => {
-    const _joi = Joi.object(schema);
-    try {
-      const result = await _joi.validateAsync(onboardingDetails);
-      console.log(result);
-      setValidated(true);
-    } catch (e) {
-      setValidated(false);
-      console.log(e);
-    }
-  };
+  // const validate = async () => {
+  //   const _joi = Joi.object(tripSchema);
+  //   try {
+  //     const result = await _joi.validateAsync(onboardingDetails);
+  //     console.log(result);
+  //     setValidated(true);
+  //   } catch (e) {
+  //     setValidated(false);
+  //     console.log(e);
+  //   }
+  // };
 
   //store input in state on every change
   const handleChange = (e, id) => {
@@ -67,7 +69,6 @@ const Onboarding = () => {
     }
   };
 
-  console.log(trip);
   return (
     <div>
       <form>
@@ -89,7 +90,7 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? <BudgetBreakdown trip={trip} /> : ""} 
+      {visible ? <BudgetBreakdown trip={trip} /> : ""}
     </div>
   );
 };
