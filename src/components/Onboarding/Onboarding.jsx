@@ -23,7 +23,7 @@ const Onboarding = () => {
   //run state through validate function everytime input is changed. 
   useEffect(() => {
     const result = validate(onboardingDetails, "trip", setValidated);
-    setErrors(result)
+    setErrors(result) //result returns promise 
   }, [onboardingDetails]);
 
   //validation. if all tests are successful change validated state to true
