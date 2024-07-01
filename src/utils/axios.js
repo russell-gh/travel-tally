@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
 import { setCurrencyApiData } from "../redux/counterSlice";
 import axios from "axios";
+import { store } from "../redux/store";
 
 export const getCurrencyData = async (base) => {
   // const base = "GBP";
   const key = "zbc6sv4OIbZjw6Dm08f7vBbnb05C6J3d";
-  const dispatch = useDispatch();
   const data = {
     meta: {
       code: 200,
@@ -466,7 +465,5 @@ export const getCurrencyData = async (base) => {
   //   `https://api.currencybeacon.com/v1/latest?api_key=${key}&base=${base}`
   // );
 
-  console.log(data.rates);
-
-  dispatch(setCurrencyApiData(data.rates));
+  store.dispatch(setCurrencyApiData(data.rates));
 };

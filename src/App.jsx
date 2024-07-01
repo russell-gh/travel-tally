@@ -9,8 +9,9 @@ import React, { useState } from "react";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import "./css/App.css";
-import Onboarding from "./components/Onboarding/Onboarding.jsx";
-import AddExpense from "./components/AddExpense.jsx";
+import Onboarding from "./components/Onboarding/Onboarding";
+import AddExpense from "./components/AddExpense";
+import { getCurrencyData } from "./utils/axios";
 
 const App = () => {
   const dispatch = useDispatch();

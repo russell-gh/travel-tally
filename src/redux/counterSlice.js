@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
-const initialState = { homeCurrency: "GBP", expenses: [] };
+const initialState = { homeCurrency: "GBP", expenses: [], currencies: [] };
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
