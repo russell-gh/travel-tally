@@ -78,7 +78,7 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {/* {visible ? <BudgetBreakdown trips={trips} /> : ""} */}
+      {visible ? <BudgetBreakdown trips={trips}/> : ""}
     </div>
   );
 };
