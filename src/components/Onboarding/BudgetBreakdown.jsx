@@ -4,9 +4,7 @@ import { useState } from "react";
 //if a trip exists, run the below. change this to return if no trip and else run the rest of func body
 const BudgetBreakdown = ({ trip }) => {
   if (trip[0]) { //check why this works and why if (trip) doesn't
-    const budgetTotal = trip[0].budgetTotal; //need to be able to dynamically access these instead of hardcoding [0]
-    const destination = trip[0].destination;
-    const homeCurrency = trip[0].homeCurrency;
+    const {budgetTotal, destination, homeCurrency} = trip[0]; //need to be able to dynamically access these instead of hardcoding [0]
 
     //todo: give all form elements below a callback which stores input in state. In heading text, display the remaining budget as user inputs allocations
     return (
