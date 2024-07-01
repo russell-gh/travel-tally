@@ -3,21 +3,27 @@ import { useState } from "react";
 
 //if a trip exists, run the below. change this to return if no trip and else run the rest of func body
 const BudgetBreakdown = ({ trip }) => {
-  const [budgetBreakdown, setBudgetBreakdown] = useState({})
-  console.log(trip)
-  if (trip) { //check why this works and why if (trip) doesn't
-    const {budgetTotal, destination, homeCurrency} = trip.details; //need to be able to dynamically access these instead of hardcoding [0]
+  if (trip) {
+    //check why this works and why if (trip) doesn't
+    const { budgetTotal, destination, homeCurrency } = trip.details; //need to be able to dynamically access these instead of hardcoding [0]
 
-const handleBudgetBreakdownChange = (e,id) => {
-  setBudgetBreakdown({...budgetBreakdown, [id]: e.target.value})
-}
+    const [budgetBreakdown, setBudgetBreakdown] = useState({});
+    const [budgetRemaining, setBudgetRemaining] = useState(budgetTotal);
+    console.log(trip);
+
+    const handleBudgetBreakdownChange = (e, id) => {
+      setBudgetBreakdown({ ...budgetBreakdown, [id]: e.target.value });
+      setBudgetRemaining((budgetTotal/100 )- e.target.value); //buggy, to be fixed. instead of makign this state, calc  using existing state but need to handle errors if non existent data
+    };
+
+    const myFunc = () => {};
 
     //todo: give all form elements below a callback which stores input in state. In heading text, display the remaining budget as user inputs allocations
     return (
       <div>
-        Let's break down your budget of {budgetTotal/100} {homeCurrency}. Allocate
-        your budget into the following categories so you can track your
-        spending.
+        Let's break down your budget of {budgetRemaining}
+        {homeCurrency}. Allocate your budget into the following categories so
+        you can track your spending.
         <form>
           <FormElement
             type="number"
