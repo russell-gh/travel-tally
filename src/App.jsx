@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Dashboard from "./Dashboard/Dashboard";
 import { currencyCodes } from "./Data/currencyCodes";
 import { expenses, travelInfo } from "./Data/fakeExpenseData";
 import "./css/App.css";
+import Dashboard from "./dashboard/Dashboard";
 import { setData } from "./redux/expensesSlice";
 
 export default function App() {
