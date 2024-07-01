@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice';
+import onboardingReducer from "./onboardingSlice";
+import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
   reducer: {
-counter: counterReducer,
+    onboarding: onboardingReducer,
   },
 });
