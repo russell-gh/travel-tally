@@ -7,7 +7,8 @@ export const onboardingSlice = createSlice({
   initialState,
   reducers: {
     addTrip: (state, {payload}) => {
-        state.trips=[...state.trips, payload]
+        state.trips.push(payload)
+
     },
   },
 });
