@@ -3,17 +3,19 @@ import Button from "./Button";
 import "../css/expense.css";
 import FormElement from "./FormElement";
 import { handleData } from "../utils/expenseData";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrencies,
   selectCurrencyAPIData,
   selectHomeCurrency,
+  addExpenseData,
 } from "../redux/counterSlice";
 
 export const AddExpense = () => {
+  const dispatch = useDispatch();
   const currencies = useSelector(selectCurrencies);
   const homeCurrency = useSelector(selectHomeCurrency);
-  const data = useSelector(selectCurrencyAPIData);
+  const apiData = useSelector(selectCurrencyAPIData);
   const categories = [
     { value: "Food", name: "Food" },
     { value: "Accomodation", name: "Accomodation" },
@@ -23,23 +25,22 @@ export const AddExpense = () => {
 
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
-  const expense = [
-    // { date: "" },
-    // { description: "" },
-    // { category: "" },
-    // { amount: "" },
-    // { currency: "" },
-    // { split: "" },
-  ];
+  const expense = {};
   const dataInput = (e) => {
     let target = e.target.name;
     let value = e.target.value;
-    expense[`${target}`] = value;
+    expense[target] = value;
   };
 
+  // const handleSubmit = () => {
+  //   let result;
+  //   result = handleData({ ...expense }, homeCurrency, apiData);
+  //   console.log(result, "HERE");
+  //   dispatch(addExpenseData(result));
+  // };
+
   const handleSubmit = () => {
-    console.log(expense, "TRIED");
-    handleData(expense, homeCurrency);
+    dispatch(addExpenseData(expense));
   };
   return (
     <div className="expenseContainer">
@@ -88,17 +89,13 @@ export const AddExpense = () => {
         name={"split"}
         id={"splitExpense"}
         options={[
-          { value: "No", name: "No" },
-          { value: "Yes", name: "Yes" },
+          { value: false, name: "No" },
+          { value: true, name: "Yes" },
         ]}
         callback={dataInput}
       />
 
-      <Button
-        onClick={handleSubmit}
-        text={"Submit"}
-        className={"expenseSubmit"}
-      />
+      <Button onClick={handleSubmit} text={"Add"} className={"expenseSubmit"} />
     </div>
   );
 };

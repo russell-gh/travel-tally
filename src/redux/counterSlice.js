@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { homeCurrency: "GBP" };
+import { handleData } from "../utils/expenseData";
+const initialState = { homeCurrency: "GBP", expenses: [] };
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
     setCurrencyApiData: (state, { payload }) => {
+      state.currencyApiData = payload;
+
       const currencies = Object.keys(payload);
       const favs = ["EUR", "USD", "GBP"];
       favs.forEach((item) => {
@@ -12,16 +15,23 @@ export const counterSlice = createSlice({
         currencies.splice(found, 1);
         currencies.unshift(item);
       });
-      state.currencyApiData = payload;
       state.currencies = currencies;
+    },
+    addExpenseData: (state, { payload }) => {
+      let result = handleData(
+        { ...payload },
+        state.homeCurrency,
+        state.currencyApiData
+      );
+      state.expenses.push(result);
     },
   },
 });
 
-export const { setCurrencyApiData } = counterSlice.actions;
+export const { setCurrencyApiData, addExpenseData } = counterSlice.actions;
 
 export const selectCount = (state) => state.counter.value;
-export const selectCurrencyAPIData = (state) => state.counter.currencyAPIData;
+export const selectCurrencyAPIData = (state) => state.counter.currencyApiData;
 export const selectCurrencies = (state) => state.counter.currencies;
 export const selectHomeCurrency = (state) => state.counter.homeCurrency;
 
