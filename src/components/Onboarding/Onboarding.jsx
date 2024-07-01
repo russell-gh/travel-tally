@@ -7,6 +7,7 @@ import { addTrip } from "../../redux/onboardingSlice";
 import Joi from "joi";
 import BudgetBreakdown from "./BudgetBreakdown";
 import { selectTrip } from "../../redux/onboardingSlice";
+import { schema } from "./validation.js";
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
@@ -14,23 +15,19 @@ const Onboarding = () => {
   const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
-  const trip = useSelector(selectTrip); 
 
+  //access trip details from store
+  const trip = useSelector(selectTrip);
 
+  //run state through validate function everytime input is changed
   useEffect(() => {
     validate();
   }, [onboardingDetails]);
 
-  const schema = {
-    destination: Joi.string().min(1).max(58).required(),
-    startDate: Joi.date().required(),
-    endDate: Joi.date().greater(Joi.ref("startDate")).required(),
-    budgetTotal: Joi.number().min(1).required(), //include max budget?
-    homeCurrency: Joi.string().required(),
-  };
+  //validation. if all tests are successful change validated state to true
+  //abstract this further? + write errors into DOM
   const validate = async () => {
     const _joi = Joi.object(schema);
-
     try {
       const result = await _joi.validateAsync(onboardingDetails);
       console.log(result);
@@ -41,13 +38,17 @@ const Onboarding = () => {
     }
   };
 
+  //store input in state on every change
   const handleChange = (e, id) => {
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
+  //make a copy of state. if validated is true, send data to store and set visible to true
+  //check what to do with date
   const handleSubmit = (e) => {
     e.preventDefault();
     let _onboardingDetails = onboardingDetails;
+
     // let startDate = _onboardingDetails.startDate;
     // let endDate = _onboardingDetails.endDate;
     // const dates = [startDate, endDate].map((date) => {
@@ -58,14 +59,15 @@ const Onboarding = () => {
     // _onboardingDetails = {..._onboardingDetails, startDate: dates[0], endDate:dates[1]}
 
     if (validated) {
-      dispatch(addTrip(_onboardingDetails)); //send through original or timestamp as string as Date objs can't be sent to store?
+      dispatch(addTrip(_onboardingDetails)); //currently sending through copy of original state without any date formatting
       console.log("added to store");
       setVisible(true);
     } else {
-      console.log("Check all fields have been inputted correctly");
+      console.log("Check all fields have been entered correctly");
     }
   };
-console.log(trip)
+
+  console.log(trip);
   return (
     <div>
       <form>
@@ -86,8 +88,8 @@ console.log(trip)
           );
         })}
       </form>
-      <BudgetBreakdown trip={trip}/>
-      {/* {trip ? <BudgetBreakdown trip={trip} /> : ""}  */}
+      {/* //only show next part of form once initial data has been sent to store */}
+      {visible ? <BudgetBreakdown trip={trip} /> : ""} 
     </div>
   );
 };

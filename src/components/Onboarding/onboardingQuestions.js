@@ -1,4 +1,4 @@
-import { currencyCodes } from "./dummyCurrencyCodes.js"; //change dummy to get from api + sort to get big 3 at top
+import { currencyCodes } from "./dummyCurrencyCodes.js"; //change dummy to get from Jacks api call
 
 let currencies = [];
 
