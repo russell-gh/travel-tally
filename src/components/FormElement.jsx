@@ -21,7 +21,9 @@ const FormElement = ({
   options,
   callback,
   defaultValue,
+  error
 }) => {
+  // console.log(error)
   switch (type) {
     case "text":
     case "email":
@@ -35,6 +37,7 @@ const FormElement = ({
             name={name}
             onChange={(e) => callback(e, id)}
           />
+          {/* {error & <p>{error}</p>} */}
         </>
       );
     case "number":

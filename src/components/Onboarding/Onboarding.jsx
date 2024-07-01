@@ -20,25 +20,13 @@ const Onboarding = () => {
   //access trip details from store
   const trip = useSelector(selectTrip);
 
-  //run state through validate function everytime input is changed
+  //run state through validate function everytime input is changed. 
   useEffect(() => {
     const result = validate(onboardingDetails, "trip", setValidated);
-    setErrors(result);
+    setErrors(result)
   }, [onboardingDetails]);
 
   //validation. if all tests are successful change validated state to true
-  //abstract this further? + write errors into DOM
-  // const validate = async () => {
-  //   const _joi = Joi.object(tripSchema);
-  //   try {
-  //     const result = await _joi.validateAsync(onboardingDetails);
-  //     console.log(result);
-  //     setValidated(true);
-  //   } catch (e) {
-  //     setValidated(false);
-  //     console.log(e);
-  //   }
-  // };
 
   //store input in state on every change
   const handleChange = (e, id) => {
@@ -46,19 +34,23 @@ const Onboarding = () => {
   };
 
   //make a copy of state. if validated is true, send data to store and set visible to true
-  //check what to do with date
   const handleSubmit = (e) => {
     e.preventDefault();
     let _onboardingDetails = onboardingDetails;
 
-    // let startDate = _onboardingDetails.startDate;
-    // let endDate = _onboardingDetails.endDate;
-    // const dates = [startDate, endDate].map((date) => {
-    //   date = date.split("-");
-    //   date = new Date(date[0], date[1]-1, date[2])
-    //   return date;
-    // });
-    // _onboardingDetails = {..._onboardingDetails, startDate: dates[0], endDate:dates[1]}
+    //convert budget to pennies
+    let budgetTotal = _onboardingDetails.budgetTotal;
+    budgetTotal *= 100
+
+    //turn date strings to date objs and then to timestamps
+    let startDate = _onboardingDetails.startDate;
+    let endDate = _onboardingDetails.endDate;
+    const dates = [startDate, endDate].map((date) => {
+      date = date.split("-");
+      date = new Date(date[0], date[1]-1, date[2])
+      return date;
+    });
+    _onboardingDetails = {..._onboardingDetails, startDate: dates[0].getTime(), endDate:dates[1].getTime(), budgetTotal}
 
     if (validated) {
       dispatch(addTrip(_onboardingDetails)); //currently sending through copy of original state without any date formatting
@@ -68,7 +60,6 @@ const Onboarding = () => {
       console.log("Check all fields have been entered correctly");
     }
   };
-
   return (
     <div>
       <form>
@@ -82,6 +73,7 @@ const Onboarding = () => {
               name={question.name}
               options={question.options}
               defaultValue={question.defaultValue}
+              error = {errors[question.id]}
               callback={
                 question.type === "button" ? handleSubmit : handleChange
               }
