@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./css/App.css";
 import AddExpense from "./components/AddExpense";
 import { getCurrencyData } from "./utils/axios";
 
-export default function App() {
-  getCurrencyData("GBP");
+const App = () => {
+  useEffect(() => {
+    getCurrencyData("GBP");
+  }, []);
+
   return (
     <>
       <AddExpense />
     </>
   );
-}
+};
+
+export default App;
