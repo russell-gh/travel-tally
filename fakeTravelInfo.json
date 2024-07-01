@@ -1,0 +1,12 @@
+{
+  "budgetTotal": 140000,
+  "budgetHotel": 50000,
+  "budgetFood": 30000,
+  "budgetTransport": 20000,
+  "budgetActivities": 40000,
+  "budgetOther": 5000,
+  "homeCurrency": "GBP",
+  "destination": "Netherlands",
+  "startDate": "14-07-2024",
+  "endDate": "19-07-2024"
+}
