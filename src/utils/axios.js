@@ -1,5 +1,3 @@
-import { setCurrencyApiData } from "../redux/counterSlice";
-import axios from "axios";
 import { store } from "../redux/store";
 
 export const getCurrencyData = async (base) => {

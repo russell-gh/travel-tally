@@ -2,9 +2,10 @@
   {
     "expenseId": 1,
     "amount": {
-      "amount": 2000,
-      "currency": "EUR",
-      "homeCurrency": 2500
+      "fromValue": 2000,
+      "fromCurrency": "EUR",
+      "toCurrency": "GBP",
+      "toValue": 2500
     },
     "category": "Food",
     "description": "lunch",

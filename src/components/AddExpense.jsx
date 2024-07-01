@@ -1,27 +1,30 @@
 import React from "react";
-import Button from "../reusable-code/Button";
+import { useDispatch, useSelector } from "react-redux";
 import "../css/expense.css";
-import FormElement from "./FormElement";
-import { handleData } from "../utils/expenseData";
-import { useSelector, useDispatch } from "react-redux";
 import {
-  selectCurrencies,
-  selectCurrencyAPIData,
-  selectHomeCurrency,
   addExpenseData,
-} from "../redux/counterSlice";
+  selectCurrencyNames,
+  selectCurrencyRates,
+  selectHomeCurrency,
+} from "../redux/expensesSlice";
+import Button from "../reusable-code/Button";
+import FormElement from "./FormElement";
 
 export const AddExpense = () => {
   const dispatch = useDispatch();
-  const currencies = useSelector(selectCurrencies);
+  const currencies = useSelector(selectCurrencyNames);
   const homeCurrency = useSelector(selectHomeCurrency);
-  const apiData = useSelector(selectCurrencyAPIData);
+  const apiData = useSelector(selectCurrencyRates);
   const categories = [
     { value: "Food", name: "Food" },
     { value: "Accomodation", name: "Accomodation" },
     { value: "Travel", name: "Travel" },
     { value: "Other", name: "Other" },
   ];
+
+  if (!currencies) {
+    return <p>Loading</p>;
+  }
 
   const currency = currencies.map((code) => ({ value: code, name: code }));
 

@@ -1,18 +1,14 @@
-import { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { currencyCodes } from "./Data/currencyCodes";
-// import { expenses, travelInfo } from "./Data/fakeExpenseData";
+import { Route, Routes } from "react-router-dom";
+import AddExpense from "./components/AddExpense";
+import Login from "./components/Login";
+import Onboarding from "./components/Onboarding/Onboarding";
+import Signup from "./components/Signup";
 import "./css/App.css";
 import Dashboard from "./dashboard/Dashboard";
 import { setData } from "./redux/expensesSlice";
-import React, { useState } from "react";
-import Login from "./components/login";
-import Signup from "./components/signup";
-import "./css/App.css";
-import Onboarding from "./components/Onboarding/Onboarding";
-import AddExpense from "./components/AddExpense";
-import { getCurrencyData } from "./utils/axios";
-import axios from "axios";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,17 +36,20 @@ const App = () => {
     }
     {
       const { data } = await axios.get(`fakeCurrencies.json`);
-      dispatch(setData({ text: "fakeCurrencies", data }));
+      dispatch(setData({ text: "currencies", data: data.rates }));
     }
   };
 
   return (
     <>
-      {/* <Login />
-      <Signup />
-      <Onboarding />
-      <Dashboard />
-      <AddExpense /> */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-expense" element={<AddExpense />} />
+        <Route path="*" element={<p>No page selected</p>} />
+      </Routes>
     </>
   );
 };

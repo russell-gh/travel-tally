@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { handleData } from "../utils/expenseData";
 import { getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
 
@@ -15,6 +16,17 @@ export const expensesSlice = createSlice({
           state.travelInfo.homeCurrency
         );
       }
+      if (text === "currencies") {
+        const currencies = Object.keys(data);
+        const favs = ["EUR", "USD", "GBP"];
+        favs.forEach((item) => {
+          const found = currencies.findIndex((el) => el === item);
+          currencies.splice(found, 1);
+          currencies.unshift(item);
+        });
+        state.currencyRates = data;
+        state.currencyNames = currencies;
+      }
     },
     deleteExpense: (state) => {
       const index = getIndex(state.expenses, state.PopUp.id);
@@ -30,11 +42,24 @@ export const expensesSlice = createSlice({
     formEvent: (state, { payload }) => {
       state[payload.id] = payload.value;
     },
+    addExpenseData: (state, { payload }) => {
+      let result = handleData(
+        { ...payload },
+        state.homeCurrency,
+        state.currencyRates
+      );
+      state.expenses.push(result);
+    },
   },
 });
 
-export const { setData, deleteExpense, toggleShowPopUp, formEvent } =
-  expensesSlice.actions;
+export const {
+  setData,
+  deleteExpense,
+  toggleShowPopUp,
+  formEvent,
+  addExpenseData,
+} = expensesSlice.actions;
 
 export const selectExpenses = (state) => state.expenses.expenses;
 export const selectTravelInfo = (state) => state.expenses.travelInfo;
@@ -45,5 +70,8 @@ export const selectHomeCurrencySymbol = (state) =>
 export const selectOrder = (state) => state.expenses.order;
 export const selectFilter = (state) => state.expenses.filter;
 export const selectFilterDate = (state) => state.expenses.filterDate;
+export const selectCurrencyRates = (state) => state.expenses.currencyRates;
+export const selectCurrencyNames = (state) => state.expenses.currencyNames;
+export const selectHomeCurrency = (state) => state.expenses.homeCurrency;
 
 export default expensesSlice.reducer;

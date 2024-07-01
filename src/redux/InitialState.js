@@ -1,4 +1,5 @@
 export const initialState = {
+  homeCurrency: "GBP",
   expenses: [],
   PopUp: {},
   filter: "Show All",

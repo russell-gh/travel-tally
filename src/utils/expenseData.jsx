@@ -1,7 +1,8 @@
 export function handleData(expense, home, data) {
-  const { date, description, category, amount, currency, split } = expense;
+  let { date, description, category, amount, currency, split } = expense;
   let newAmount = { amount: 0, homeCurrency: 0 };
   amount = Number(amount * 100);
+  console.log(amount, currency, data);
   if (currency === home) {
     newAmount.homeCurrency = amount;
     newAmount.amount = amount;

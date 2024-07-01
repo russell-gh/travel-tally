@@ -34,6 +34,7 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
     console.log("something went wrong with getting the currency symbol");
   }
+  console.log(currencyCodes, currencyCode);
   return currencyCodes[currencyCode].symbol;
 }
 
