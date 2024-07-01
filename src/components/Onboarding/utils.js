@@ -8,3 +8,8 @@ export const stringToTimestamp = (date) => {
     const timestamp = _date.getTime()
     return timestamp;
 }
+
+export const getCurrentTrip = (trips, id) => {
+  const index = trips.findIndex(trip=>trip.id === id)
+  return index
+  }

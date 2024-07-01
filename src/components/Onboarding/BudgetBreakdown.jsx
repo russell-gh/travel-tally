@@ -2,11 +2,11 @@ import FormElement from "../FormElement";
 import { useState } from "react";
 
 //if a trip exists, run the below. change this to return if no trip and else run the rest of func body
-const BudgetBreakdown = ({ trips, callback }) => {
+const BudgetBreakdown = ({ trip }) => {
   const [budgetBreakdown, setBudgetBreakdown] = useState({})
-  console.log(trips)
-  if (trips[0]) { //check why this works and why if (trip) doesn't
-    const {budgetTotal, destination, homeCurrency} = trips[0]; //need to be able to dynamically access these instead of hardcoding [0]
+  console.log(trip)
+  if (trip) { //check why this works and why if (trip) doesn't
+    const {budgetTotal, destination, homeCurrency} = trip.details; //need to be able to dynamically access these instead of hardcoding [0]
 
 const handleBudgetBreakdownChange = (e,id) => {
   setBudgetBreakdown({...budgetBreakdown, [id]: e.target.value})
