@@ -12,7 +12,6 @@ const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState({});
-  const [id, setId] = useState("");
   const dispatch = useDispatch();
 
   //run state through validate function everytime input is changed.
@@ -43,23 +42,25 @@ const Onboarding = () => {
     }
     let _onboardingDetails = onboardingDetails;
 
-    //convert budget to pennies
+    //convert budgets to pennies
     const budgetTotal = toPennies(_onboardingDetails.budgetTotal);
+    const budgetHotel = toPennies(_onboardingDetails.budgetHotel);
+    const budgetFood = toPennies(_onboardingDetails.budgetFood);
+    const budgetTransport = toPennies(_onboardingDetails.budgetTransport);
+    const budgetActivities = toPennies(_onboardingDetails.budgetActivities);
+    const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
     let startDate = stringToTimestamp(_onboardingDetails.startDate);
     let endDate = stringToTimestamp(_onboardingDetails.endDate);
 
     //spread existing state and update modified keys
-    //generate id and store in state to be passed to budgetbreakdown later
-    const _id = generateId("trip");
-    setId(_id);
     _onboardingDetails = {
-      id: _id,
-      details: { ..._onboardingDetails, startDate, endDate, budgetTotal },
+      id: generateId("trip"),
+      details: { ..._onboardingDetails, startDate, endDate, budgetTotal, budgetHotel,budgetFood,budgetTransport,budgetActivities, budgetOther},
     };
+    
     dispatch(addTrip(_onboardingDetails));
-    setVisible(true);
   };
 
   const createFormSection = (section) => {
