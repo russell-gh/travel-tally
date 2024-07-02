@@ -58,19 +58,9 @@ export function getArrayOfDates(data, key) {
   return copy;
 }
 
-export function getArrayOfDetails(data, key) {
-  let copy = [...data];
-  //makes an array of the details
-  copy = copy.map((item) => {
-    return item.id + " " + item.details[key];
-  });
-
-  return copy;
-}
-
 export function findIndex(data, id) {
   const indexOf = data.findIndex((item) => {
-    return item.id == id; // id in state is a string
+    return item.id == id; // id in state is a string --> better to do *1 to turn into number?
   });
 
   if (indexOf === -1) {

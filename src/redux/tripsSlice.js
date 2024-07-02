@@ -12,7 +12,6 @@ export const tripsSlice = createSlice({
       state[text] = data; // Dynamically set the state property
       if (state.trips) {
         state.destinationId = state.trips.length;
-        console.log(state.destinationId);
       }
       if (state.trips && state.currencyCodes) {
         state.trips.map((item, index) => {
