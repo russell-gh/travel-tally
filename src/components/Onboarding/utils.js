@@ -21,3 +21,4 @@ export const getCurrentTrip = (trips, id) => {
 export const generateId = (type) => {
   return `_${type}_${nanoid()}`
 }
+

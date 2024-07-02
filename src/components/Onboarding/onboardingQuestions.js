@@ -37,7 +37,6 @@ export const onboardingQuestions = {
     name: "homeCurrency",
     options: currencies,
     value: currencies[0].value,
-    defaultValue: currencies[0].value,
   }],
   secondaryForm:[{
     type: "number",

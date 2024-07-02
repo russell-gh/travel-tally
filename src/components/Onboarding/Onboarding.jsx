@@ -14,13 +14,14 @@ const Onboarding = () => {
     startDate: "",
     endDate: "",
     budgetTotal: "",
-    homeCurrency: ",",
+    homeCurrency: "",
     budgetHotel: "",
     budgetFood: "",
     budgetTransport: "",
     budgetActivities: "",
     budgetOther: "",
   });
+
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
@@ -35,11 +36,37 @@ const Onboarding = () => {
       return;
     }
     const result = await validate(onboardingDetails, "trip");
-    setErrors(result); //result returns promise
+    checkPrimaryFormValidation(result);
+    setErrors(result);
   };
 
-  //store input in state on every change
+  //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
+  const checkPrimaryFormValidation = (validationResult) => {
+    console.log("loop starts");
+
+    //loop through all the questions in the primary form
+    onboardingQuestions.primaryForm.forEach((question) => {
+      // console.log(
+      //   question.id,
+      //   Object.keys(validationResult),
+      //   Object.keys(validationResult).includes(question.id)
+      // );
+
+      //compare the id of that question against the keys of the validation result to see whether there are any errors present which correspond to that id
+      if (Object.keys(validationResult).includes(question.id)) {
+        setVisible(false);
+        return;
+      }
+    });
+    
+    setVisible(true);
+  };
+
+  //store input in state on every change. if the id is a type of budget, convert to a number before store in state
   const handleChange = (e, id) => {
+    if (id.includes("budget")) {
+      e.target.value = Number(e.target.value);
+    }
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
@@ -51,9 +78,11 @@ const Onboarding = () => {
     if (Object.keys(errors).length) {
       return;
     }
+
     let _onboardingDetails = onboardingDetails;
 
-    //convert budgets to pennies
+    //convert budgets to pennies. 
+    //too repetitive. condense
     const budgetTotal = toPennies(_onboardingDetails.budgetTotal);
     const budgetHotel = toPennies(_onboardingDetails.budgetHotel);
     const budgetFood = toPennies(_onboardingDetails.budgetFood);
@@ -84,6 +113,7 @@ const Onboarding = () => {
     dispatch(addTrip(_onboardingDetails));
   };
 
+  //can we move this to another file? would also have to move handlesubmit and handlechange funcs
   const createFormSection = (section) => {
     return (
       <div>
@@ -113,8 +143,30 @@ const Onboarding = () => {
     <div>
       <form>
         {createFormSection(onboardingQuestions.primaryForm)}
-        <Button text={"test"} className={"viewMore"} />
-        {createFormSection(onboardingQuestions.secondaryForm)}
+
+        {/* <Button text={"test"} className={"viewMore"} /> */}
+
+        {visible && (
+          <>
+            <h1>
+              Great. Let's break down your budget of{" "}
+              {onboardingDetails.budgetTotal} {onboardingDetails.homeCurrency}
+            </h1>
+            {/* change this to a func and add message to be displayed if they over-allocate */}
+            <h2>
+              You have{" "}
+              {onboardingDetails.budgetTotal -
+                onboardingDetails.budgetHotel -
+                onboardingDetails.budgetOther -
+                onboardingDetails.budgetActivities -
+                onboardingDetails.budgetTransport -
+                onboardingDetails.budgetFood}{" "}
+              {onboardingDetails.homeCurrency} remaining to allocate.
+            </h2>
+
+            {createFormSection(onboardingQuestions.secondaryForm)}
+          </>
+        )}
       </form>
     </div>
   );

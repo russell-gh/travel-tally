@@ -81,6 +81,7 @@ const FormElement = ({
         <>
           {label && <label htmlFor={id}>{label}:</label>}
           <select name={name} id={id} onChange={e=>{callback(e,id)}}>
+            <option disabled value="">Please choose from the below</option>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}
