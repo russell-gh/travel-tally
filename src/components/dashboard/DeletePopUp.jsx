@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteExpense,
   selectPopUp,
-  toggleShowPopUp,
+  togglePopUp,
 } from "../../redux/tripsSlice";
 import Button from "../../reusable-code/Button";
 
@@ -19,10 +19,7 @@ const DeletePopUp = () => {
     <div className="deletePopUp">
       <p>{`Are you sure you want to delete "${title}"?`}</p>
       <div className="containerBtnPopUp">
-        <Button
-          text="cancel"
-          onClick={() => dispatch(toggleShowPopUp({ id: id, title: title }))}
-        />
+        <Button text="cancel" onClick={() => dispatch(togglePopUp())} />
         <Button
           text="delete"
           onClick={() => {

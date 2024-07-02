@@ -6,7 +6,7 @@ import {
   selectOrder,
   selectPopUp,
   selectTrips,
-  toggleShowPopUp,
+  togglePopUp,
 } from "../../redux/tripsSlice";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import { addDecimals, getCurrencySymbol } from "../../utils/utils";
@@ -16,12 +16,14 @@ import Image from "./Image";
 
 const Expenses = ({ expenses, homeCurrencySymbol }) => {
   const trips = useSelector(selectTrips);
-  const showPopUp = useSelector(selectPopUp).showPopUp;
+  const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const order = useSelector(selectOrder);
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
   const dispatch = useDispatch();
+
+  const stringToComponent = { DeletePopUp: <DeletePopUp /> };
 
   if (!currencyCodes || !trips) {
     return;
@@ -63,14 +65,17 @@ const Expenses = ({ expenses, homeCurrencySymbol }) => {
               alt="delete"
               onClick={() => {
                 dispatch(
-                  toggleShowPopUp({ title: description, id: expenseId })
+                  togglePopUp({
+                    config: { title: description, id: expenseId },
+                    component: "DeletePopUp",
+                  })
                 );
               }}
             />
           </div>
         );
       })}
-      {showPopUp && <DeletePopUp />}
+      {stringToComponent[popUp.component]}
     </div>
   );
 };

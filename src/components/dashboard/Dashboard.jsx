@@ -1,7 +1,13 @@
-import { useSelector } from "react-redux";
-import { selectDestinationId, selectTrips } from "../../redux/tripsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDestinationId,
+  selectPopUp,
+  selectTrips,
+  togglePopUp,
+} from "../../redux/tripsSlice";
 import Button from "../../reusable-code/Button";
 import { findItem, getIndex } from "../../utils/utils";
+import AddExpense from "../AddExpense";
 import Budget from "./Budget";
 import Expenses from "./Expenses";
 import Image from "./Image";
@@ -13,6 +19,10 @@ import Order from "./filter/order";
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
   const destinationId = useSelector(selectDestinationId);
+  const popUp = useSelector(selectPopUp);
+  const dispatch = useDispatch();
+
+  const stringToComponent = { AddExpense: <AddExpense /> };
 
   if (!trips || trips.length === 0) {
     return <p>Loading...</p>;
@@ -31,7 +41,19 @@ const Dashboard = () => {
           budgetTotal={trip.details.budgetTotal}
           homeCurrencySymbol={trip.details.homeCurrencySymbol}
         />
-        <Button className="addExpense" text="Add an expense" />
+        <Button
+          className="addExpense"
+          text="Add an expense"
+          onClick={() => {
+            dispatch(
+              togglePopUp({
+                config: {},
+                component: "AddExpense",
+              })
+            );
+          }}
+        />
+        {stringToComponent[popUp.component]}
         <div className="controlsExpenses">
           <Filter />
           <Order />

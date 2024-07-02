@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleData } from "../utils/expenseData";
 import { getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
 
@@ -34,15 +33,31 @@ export const tripsSlice = createSlice({
       }
     },
     deleteExpense: (state) => {
-      const index = getIndex(state.expenses, state.popUp.id, expenseId);
-      state.expenses.splice(index, 1);
-      state.popUp.showPopUp = !state.popUp.showPopUp; // would've preferred to keep this in toggelShowPopUp, could not call two dispatces with one click
+      //get index of the current trip
+      const indexTrip = getIndex(state.trips, state.destinationId);
+      //get index of clicked expense
+      const index = getIndex(
+        state.trips[indexTrip].expenses,
+        state.popUp.id,
+        "expenseId"
+      );
+      // delete expense
+      state.trips[indexTrip].expenses.splice(index, 1);
+      //set popUp to empty so popUp disappears
+      state.popUp = {};
     },
-    toggleShowPopUp: (state, { payload }) => {
-      const { id, title } = payload;
+    togglePopUp: (state, { payload }) => {
+      if (!payload) {
+        state.popUp = {};
+        return;
+      }
+
+      const { config, component } = payload;
+      const { id, title } = config;
       state.popUp.showPopUp = !state.popUp.showPopUp;
       state.popUp.id = id;
       state.popUp.title = title;
+      state.popUp.component = component;
     },
     formEvent: (state, { payload }) => {
       console.log(payload.id, payload.value);
@@ -62,7 +77,7 @@ export const tripsSlice = createSlice({
 export const {
   setData,
   deleteExpense,
-  toggleShowPopUp,
+  togglePopUp,
   formEvent,
   addExpenseData,
 } = tripsSlice.actions;
