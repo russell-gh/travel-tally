@@ -1,4 +1,5 @@
 import FormElement from "../../reusable-code/FormElement";
+import { useState } from "react";
 
 //if a trip exists, run the below. change this to return if no trip and else run the rest of func body
 const BudgetBreakdown = ({ trip }) => {

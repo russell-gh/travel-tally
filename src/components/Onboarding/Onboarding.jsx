@@ -8,7 +8,7 @@ import { addTrip } from "../../redux/onboardingSlice.js";
 import BudgetBreakdown from "./BudgetBreakdown.jsx";
 import { selectTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
-import { toPennies, stringToTimestamp, getCurrentTrip } from "./utils.js";
+import { toPennies, stringToTimestamp, getCurrentTrip, generateId } from "./utils.js";
 import { nanoid } from "nanoid";
 
 const Onboarding = () => {
@@ -36,6 +36,7 @@ const Onboarding = () => {
 
   //store input in state on every change
   const handleChange = (e, id) => {
+    console.log(e,id)
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
@@ -58,7 +59,7 @@ const Onboarding = () => {
 
     //spread existing state and update modified keys
     //generate id and store in state to be passed to budgetbreakdown later
-    const _id = nanoid();
+    const _id = generateId("trip");
     setId(_id);
     _onboardingDetails = {
       id: _id,

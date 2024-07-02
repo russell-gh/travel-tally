@@ -18,7 +18,7 @@ const FormElement = ({
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
-          <input type={type} id={id} name={name} onChange={callback} />
+          <input type={type} id={id} name={name} onChange={e=>{callback(e,id)}} />
           {error && <p>{error}</p>}
         </>
       );
@@ -30,7 +30,7 @@ const FormElement = ({
             type={type}
             id={id}
             name={name}
-            onChange={callback}
+            onChange={e=>{callback(e,id)}}
             min={minValue}
             max={maxValue}
           />
@@ -47,7 +47,7 @@ const FormElement = ({
             id={id}
             name={name}
             accept="image/*"
-            onChange={callback}
+            onChange={e=>{callback(e,id)}}
           />
           {error && <p>{error}</p>}
         </>
@@ -62,7 +62,7 @@ const FormElement = ({
             name={name}
             min={minDate}
             max={maxDate}
-            onChange={callback}
+            onChange={e=>{callback(e,id)}}
           />
           {error && <p>{error}</p>}
         </>
@@ -70,7 +70,7 @@ const FormElement = ({
     case "checkbox":
       return (
         <>
-          <input type={type} id={id} name={name} onChange={callback} />
+          <input type={type} id={id} name={name} onChange={e=>{callback(e,id)}}/>
           {label && <label htmlFor={id}>{label}:</label>}
           {error && <p>{error}</p>}
         </>
@@ -79,7 +79,7 @@ const FormElement = ({
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
-          <select name={name} id={id} onChange={callback}>
+          <select name={name} id={id} onChange={e=>{callback(e,id)}}>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}
@@ -91,7 +91,7 @@ const FormElement = ({
       );
     case "button":
       return (
-        <button type="submit" onChange={callback}>
+        <button type="submit" onClick={e=>callback(e)}>
           Submit
         </button>
       );
