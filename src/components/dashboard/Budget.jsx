@@ -2,7 +2,6 @@ import { addDecimals, calculateTotalSpend } from "../../utils/utils";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/tripsSlice";
 import { getBudget } from "../../utils/utils";
-import { ProgressBar } from "react-bootstrap";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const filter = useSelector(selectFilter);
@@ -36,11 +35,6 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
           {Math.abs(difference)}
         </p>
       )}
-      <ProgressBar>
-        <ProgressBar striped variant="success" now={35} key={1} />
-        <ProgressBar variant="warning" now={20} key={2} />
-        <ProgressBar striped variant="danger" now={10} key={3} />
-      </ProgressBar>
     </div>
   );
 };
