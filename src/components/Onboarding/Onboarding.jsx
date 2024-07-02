@@ -1,41 +1,35 @@
-import { useEffect, useState } from "react";
-import FormElement from "../FormElement";
-import "./Onboarding.css";
-import { onboardingQuestions } from "./onboardingQuestions";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrip } from "../../redux/onboardingSlice";
 import Joi from "joi";
-import BudgetBreakdown from "./BudgetBreakdown";
-import { selectTrip } from "../../redux/onboardingSlice";
-import { schema } from "./validation.js";
+import { useEffect, useState } from "react";
+import FormElement from "../../reusable-code/FormElement.jsx";
+import "./Onboarding.css";
+import { onboardingQuestions } from "./onboardingQuestions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { addTrip } from "../../redux/onboardingSlice.js";
+import BudgetBreakdown from "./BudgetBreakdown.jsx";
+import { selectTrips } from "../../redux/onboardingSlice.js";
+import { validate } from "./validation/validate.js";
+import { toPennies, stringToTimestamp, getCurrentTrip } from "./utils.js";
+import { nanoid } from "nanoid";
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
-  const [validated, setValidated] = useState(false);
   const [visible, setVisible] = useState(false);
-
+  const [errors, setErrors] = useState({});
+  const [id, setId] = useState("");
   const dispatch = useDispatch();
 
   //access trip details from store
-  const trip = useSelector(selectTrip);
+  const trips = useSelector(selectTrips);
 
-  //run state through validate function everytime input is changed
+  //run state through validate function everytime input is changed.
   useEffect(() => {
-    validate();
+    getValidationResult();
   }, [onboardingDetails]);
 
-  //validation. if all tests are successful change validated state to true
-  //abstract this further? + write errors into DOM
-  const validate = async () => {
-    const _joi = Joi.object(schema);
-    try {
-      const result = await _joi.validateAsync(onboardingDetails);
-      console.log(result);
-      setValidated(true);
-    } catch (e) {
-      setValidated(false);
-      console.log(e);
-    }
+  const getValidationResult = async () => {
+    if (!Object.values(onboardingDetails).length) {return}
+    const result = await validate(onboardingDetails, "trip");
+    setErrors(result); //result returns promise
   };
 
   //store input in state on every change
@@ -43,31 +37,35 @@ const Onboarding = () => {
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
-  //make a copy of state. if validated is true, send data to store and set visible to true
-  //check what to do with date
+  //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //if errors exist abort early
+    if (Object.keys(errors).length) {
+      return;
+    }
     let _onboardingDetails = onboardingDetails;
 
-    // let startDate = _onboardingDetails.startDate;
-    // let endDate = _onboardingDetails.endDate;
-    // const dates = [startDate, endDate].map((date) => {
-    //   date = date.split("-");
-    //   date = new Date(date[0], date[1]-1, date[2])
-    //   return date;
-    // });
-    // _onboardingDetails = {..._onboardingDetails, startDate: dates[0], endDate:dates[1]}
+    //convert budget to pennies
+    const budgetTotal = toPennies(_onboardingDetails.budgetTotal);
 
-    if (validated) {
-      dispatch(addTrip(_onboardingDetails)); //currently sending through copy of original state without any date formatting
-      console.log("added to store");
-      setVisible(true);
-    } else {
-      console.log("Check all fields have been entered correctly");
-    }
+    //turn date strings to date objs and then to timestamps
+    let startDate = stringToTimestamp(_onboardingDetails.startDate);
+    let endDate = stringToTimestamp(_onboardingDetails.endDate);
+
+    //spread existing state and update modified keys
+    //generate id and store in state to be passed to budgetbreakdown later
+    const _id = nanoid();
+    setId(_id)
+    _onboardingDetails = {
+      id: _id,
+      details: { ..._onboardingDetails, startDate, endDate, budgetTotal },
+    };
+    dispatch(addTrip(_onboardingDetails));
+    setVisible(true);
   };
 
-  console.log(trip);
   return (
     <div>
       <form>
@@ -81,6 +79,7 @@ const Onboarding = () => {
               name={question.name}
               options={question.options}
               defaultValue={question.defaultValue}
+              error={errors[question.id]}
               callback={
                 question.type === "button" ? handleSubmit : handleChange
               }
@@ -89,7 +88,7 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? <BudgetBreakdown trip={trip} /> : ""} 
+      {visible ? <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} /> : ""}
     </div>
   );
 };

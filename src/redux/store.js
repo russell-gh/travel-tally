@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import expensesReducer from "./expensesSlice";
 import onboardingReducer from "./onboardingSlice";
+import tripsReducer from "./tripsSlice";
 
 export const store = configureStore({
   reducer: {
-    expenses: expensesReducer,
+    trips: tripsReducer,
     onboarding: onboardingReducer,
   },
 });
