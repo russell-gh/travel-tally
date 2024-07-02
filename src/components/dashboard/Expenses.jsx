@@ -14,29 +14,16 @@ import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
 
-const Expenses = ({ expenses, homeCurrencySymbol }) => {
+const Expenses = ({ filtered, homeCurrencySymbol }) => {
   const trips = useSelector(selectTrips);
   const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
-  const order = useSelector(selectOrder);
-  const filter = useSelector(selectFilter);
-  const filterDate = useSelector(selectFilterDate);
   const dispatch = useDispatch();
 
   const stringToComponent = { DeletePopUp: <DeletePopUp /> };
 
   if (!currencyCodes || !trips) {
     return;
-  }
-
-  if (expenses.length === 0) {
-    return <p className="mt">You have no expenses yet.</p>;
-  }
-  const _expenses = [...expenses].reverse();
-  const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
-
-  if (filtered.length === 0) {
-    return <p className="mt">There are no matches</p>;
   }
 
   return (

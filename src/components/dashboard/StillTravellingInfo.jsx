@@ -1,15 +1,21 @@
+import { useSelector } from "react-redux";
 import { addDecimals } from "../../utils/utils";
 import dayjs from "dayjs";
+import { selectFilter } from "../../redux/tripsSlice";
+import { getBudget } from "../../utils/utils";
 
 const StillTravellingInfo = ({ endDate, details, amountOfDays }) => {
-  const { budgetTotal, homeCurrencySymbol } = details;
+  const { budgetTotal, homeCurrencySymbol, budgetFood } = details;
+  const filter = useSelector(selectFilter);
+
+  const budget = getBudget(details, filter);
 
   return (
     <div className="containerTravellingInfo">
       <p>Days left: {endDate.diff(dayjs(), "day")} days</p>
       <p>
         Budget per day: {homeCurrencySymbol}
-        {addDecimals(budgetTotal / amountOfDays)}
+        {addDecimals((budget * 100) / amountOfDays)}
       </p>
     </div>
   );

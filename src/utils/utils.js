@@ -91,3 +91,29 @@ export function unixToDate(unix) {
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
   return formattedDate;
 }
+
+export function getBudget(data, value) {
+  let budget;
+
+  switch (value) {
+    case "Show All":
+      budget = data.budgetTotal;
+      break;
+    case "Hotel":
+    case "Food":
+    case "Activities":
+    case "Transport":
+    case "Other":
+      let string = "budget" + value;
+      console.log(string);
+      budget = data[string];
+      break;
+    default:
+      console.log("something went wrong with getting the budget");
+      break;
+  }
+
+  console.log(budget);
+
+  return addDecimals(budget);
+}

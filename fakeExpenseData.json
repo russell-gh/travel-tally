@@ -2,11 +2,11 @@
   {
     "id": "trip_A2rdJ7nN8kJ3fHA25T4gd",
     "details": {
-      "budgetTotal": 140000,
-      "budgetHotel": 50000,
-      "budgetFood": 30000,
+      "budgetTotal": 255000,
+      "budgetHotel": 100000,
+      "budgetFood": 60000,
       "budgetTransport": 20000,
-      "budgetActivities": 40000,
+      "budgetActivities": 70000,
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Netherlands",
@@ -24,6 +24,20 @@
         },
         "category": "Food",
         "description": "lunch",
+        "date": 1719499900000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A2sdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Other",
+        "description": "dress",
         "date": 1719499900000,
         "completed": true,
         "splitBill": false

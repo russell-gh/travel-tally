@@ -17,12 +17,21 @@ import FilterDate from "./filter/FilterDate";
 import Order from "./filter/order";
 import TripInfo from "./TripInfo";
 import "../../css/dashboard.css";
+import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
+import {
+  selectOrder,
+  selectFilter,
+  selectFilterDate,
+} from "../../redux/tripsSlice";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
   const popUp = useSelector(selectPopUp);
+  const order = useSelector(selectOrder);
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  const filterDate = useSelector(selectFilterDate);
 
   const stringToComponent = { AddExpense: <AddExpense /> };
 
@@ -33,14 +42,17 @@ const Dashboard = () => {
   const index = getIndex(trips, selectedTripId);
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
-  const {
-    destination,
-    homeCurrencySymbol,
-    startDate,
-    endDate,
-    homecurrency,
-    budgetTotal,
-  } = details;
+  const { destination, homeCurrencySymbol, startDate, endDate } = details;
+
+  if (expenses.length === 0) {
+    return <p className="mt">You have no expenses yet.</p>;
+  }
+  const _expenses = [...expenses].reverse();
+  const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
+
+  if (filtered.length === 0) {
+    return <p className="mt">There are no matches</p>;
+  }
 
   return (
     <div className="dashboard">
@@ -53,8 +65,8 @@ const Dashboard = () => {
         <Image src={"../src/img/piechart.png"} alt="piechart" />
         <div className="containerBudget">
           <Budget
-            expenses={expenses}
-            budgetTotal={budgetTotal}
+            expenses={filtered}
+            details={details}
             homeCurrencySymbol={homeCurrencySymbol}
           />
           <TripInfo startDate={startDate} endDate={endDate} details={details} />
@@ -78,7 +90,7 @@ const Dashboard = () => {
           <FilterDate />
         </div>
       </div>
-      <Expenses expenses={expenses} homecurrency={homecurrency} />
+      <Expenses filtered={filtered} homeCurrencySymbol={homeCurrencySymbol} />
     </div>
   );
 };
