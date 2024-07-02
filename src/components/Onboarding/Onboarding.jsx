@@ -1,15 +1,12 @@
-import Joi from "joi";
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrip } from "../../redux/onboardingSlice.js";
-import BudgetBreakdown from "./BudgetBreakdown.jsx";
-import { selectTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
-import { toPennies, stringToTimestamp, getCurrentTrip, generateId } from "./utils.js";
-import { nanoid } from "nanoid";
+import { toPennies, stringToTimestamp, generateId } from "./utils.js";
+import Button from '../../reusable-code/Button.jsx'
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({});
@@ -17,9 +14,6 @@ const Onboarding = () => {
   const [errors, setErrors] = useState({});
   const [id, setId] = useState("");
   const dispatch = useDispatch();
-
-  //access trip details from store
-  const trips = useSelector(selectTrip);
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -68,10 +62,10 @@ const Onboarding = () => {
     setVisible(true);
   };
 
-  return (
-    <div>
-      <form>
-        {onboardingQuestions.map((question) => {
+  const createFormSection = (section) => {
+    return (
+      <div>
+        {section.map((question) => {
           return (
             <FormElement
               key={question.id}
@@ -88,13 +82,17 @@ const Onboarding = () => {
             />
           );
         })}
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <form>
+        {createFormSection(onboardingQuestions.primaryForm)}
+        <Button text={"test"} className={"viewMore"}/>
+        {createFormSection(onboardingQuestions.secondaryForm)}
       </form>
-      {/* //only show next part of form once initial data has been sent to store */}
-      {/* {visible ? (
-        <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} />
-      ) : (
-        ""
-      )} */}
     </div>
   );
 };

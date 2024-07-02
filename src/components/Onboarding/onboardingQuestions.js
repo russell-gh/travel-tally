@@ -5,8 +5,8 @@ let currencies = [];
 for (const key of Object.keys(currencyCodes)) {
   currencies.push({ value: key, name: key });
 }
-export const onboardingQuestions = [
-  {
+export const onboardingQuestions = {
+  primaryForm:[{
     type: "text",
     id: "destination",
     label: "Where are you off to?",
@@ -38,8 +38,8 @@ export const onboardingQuestions = [
     options: currencies,
     value: currencies[0].value,
     defaultValue: currencies[0].value,
-  },
-  {
+  }],
+  secondaryForm:[{
     type: "number",
     id: "budgetHotel",
     name: "budgetHotel",
@@ -73,6 +73,6 @@ export const onboardingQuestions = [
     type: "button",
     id: "onboardingFormSubmit",
     label: "Great, you're all set! Let's visit your dashboard >",
-  },
+  }],
 
-];
+};
