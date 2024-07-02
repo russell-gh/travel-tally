@@ -15,6 +15,8 @@ import Title from "./Title";
 import Filter from "./filter/Filter";
 import FilterDate from "./filter/FilterDate";
 import Order from "./filter/order";
+import TripInfo from "./TripInfo";
+import "../../css/dashboard.css";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -30,17 +32,33 @@ const Dashboard = () => {
 
   const index = getIndex(trips, selectedTripId);
   const trip = findItem(trips, selectedTripId);
+  const { details, expenses } = trip;
+  const {
+    destination,
+    homeCurrencySymbol,
+    startDate,
+    endDate,
+    homecurrency,
+    budgetTotal,
+  } = details;
 
   return (
     <div className="dashboard">
       <div className="dashboardFixed">
-        <Title destination={trip.details.destination} />
-        <Image src={"../src/img/piechart.png"} alt="piechart" />
-        <Budget
-          expenses={trip.expenses}
-          budgetTotal={trip.details.budgetTotal}
-          homeCurrencySymbol={trip.details.homeCurrencySymbol}
+        <Title
+          destination={destination}
+          startDate={startDate}
+          endDate={endDate}
         />
+        <Image src={"../src/img/piechart.png"} alt="piechart" />
+        <div className="containerBudget">
+          <Budget
+            expenses={expenses}
+            budgetTotal={budgetTotal}
+            homeCurrencySymbol={homeCurrencySymbol}
+          />
+          <TripInfo startDate={startDate} endDate={endDate} details={details} />
+        </div>
         <Button
           className="addExpense"
           text="Add an expense"
@@ -60,10 +78,7 @@ const Dashboard = () => {
           <FilterDate />
         </div>
       </div>
-      <Expenses
-        expenses={trip.expenses}
-        homecurrency={trip.details.homecurrency}
-      />
+      <Expenses expenses={expenses} homecurrency={homecurrency} />
     </div>
   );
 };

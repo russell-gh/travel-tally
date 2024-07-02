@@ -7,7 +7,6 @@ import Login from "./components/Login";
 import Onboarding from "./components/Onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
-import "./css/App.css";
 import { selectPopUp, setData } from "./redux/tripsSlice";
 
 const App = () => {

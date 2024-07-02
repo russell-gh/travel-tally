@@ -39,7 +39,7 @@ export const tripsSlice = createSlice({
     },
     deleteExpense: (state) => {
       //get index of the current trip
-      const indexTrip = getIndex(state.trips, state.destinationId);
+      const indexTrip = getIndex(state.trips, state.selectedTripId);
       //get index of clicked expense
       const index = getIndex(state.trips[indexTrip].expenses, state.popUp.id);
       // delete expense

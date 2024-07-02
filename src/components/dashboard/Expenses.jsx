@@ -66,7 +66,7 @@ const Expenses = ({ expenses, homeCurrencySymbol }) => {
               onClick={() => {
                 dispatch(
                   togglePopUp({
-                    config: { title: description, id: expenseId },
+                    config: { title: description, id: id },
                     component: "DeletePopUp",
                   })
                 );

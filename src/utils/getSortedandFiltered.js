@@ -15,7 +15,6 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
         return 0;
       });
       break;
-      break;
     case "Price: high to low":
       filtered.sort((a, b) => {
         if (a.amount.toValue < b.amount.toValue) {

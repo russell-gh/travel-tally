@@ -104,3 +104,19 @@ h1 {
   align-items: flex-end;
   gap: 10px;
 }
+
+.containerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.containerTitle p {
+  color: green;
+}
+
+.containerBudget {
+  display: flex;
+  justify-content: space-between;
+}

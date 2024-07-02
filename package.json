@@ -22,6 +22,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "dayjs": "^1.11.11",
     "joi": "^17.13.3",
     "nanoid": "^5.0.7",
     "react": "^18.3.1",
