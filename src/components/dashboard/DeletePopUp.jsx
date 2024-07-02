@@ -3,8 +3,8 @@ import {
   deleteExpense,
   selectPopUp,
   toggleShowPopUp,
-} from "../redux/tripsSlice";
-import Button from "../reusable-code/Button";
+} from "../../redux/tripsSlice";
+import Button from "../../reusable-code/Button";
 
 const DeletePopUp = () => {
   const popUp = useSelector(selectPopUp);

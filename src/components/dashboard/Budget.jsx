@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { selectCurrencyCodes, selectTrips } from "../redux/tripsSlice";
-import { addDecimals, calculateTotalSpend } from "../utils/utils";
+import { selectCurrencyCodes, selectTrips } from "../../redux/tripsSlice";
+import { addDecimals, calculateTotalSpend } from "../../utils/utils";
 
 const Budget = ({ index }) => {
   const trips = useSelector(selectTrips);

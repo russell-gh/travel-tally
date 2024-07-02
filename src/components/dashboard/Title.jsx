@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectTrips } from "../redux/tripsSlice";
+import { selectTrips } from "../../redux/tripsSlice";
 import FilterTrip from "./filter/FilterTrip";
 
-const Title = ({ index }) => {
+const Title = ({ destination }) => {
   const trips = useSelector(selectTrips);
 
   if (!trips) {
@@ -11,7 +11,7 @@ const Title = ({ index }) => {
 
   return (
     <div>
-      <h1>{trips[index].details.destination}</h1>
+      <h1>{destination}</h1>
       <FilterTrip />
     </div>
   );

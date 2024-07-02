@@ -60,7 +60,7 @@ export function getArrayOfDates(data, key) {
 
 export function findIndex(data, id) {
   const indexOf = data.findIndex((item) => {
-    return item.id == id; // id in state is a string --> better to do *1 to turn into number?
+    return item.id === id;
   });
 
   if (indexOf === -1) {
@@ -69,4 +69,17 @@ export function findIndex(data, id) {
   }
 
   return indexOf;
+}
+
+export function findItem(data, id) {
+  const item = data.find((item) => {
+    return item.id === id;
+  });
+
+  if (!item) {
+    console.log("something went wrong getting the item");
+    return;
+  }
+
+  return item;
 }

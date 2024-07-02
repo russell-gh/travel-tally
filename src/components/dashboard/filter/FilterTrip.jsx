@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formEvent, selectTrips } from "../../redux/tripsSlice";
-import FormElement from "../../reusable-code/FormElement";
+import { formEvent, selectTrips } from "../../../redux/tripsSlice";
+import FormElement from "../../../reusable-code/FormElement";
 
 const FilterDate = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const FilterDate = () => {
         id="destinationId"
         name="destination"
         callback={(e) => {
-          dispatch(formEvent({ id: e.target.id, value: e.target.value }));
+          dispatch(
+            formEvent({ id: e.target.id, value: Number(e.target.value) })
+          );
         }}
         options={arrDestinations.reverse()}
       />

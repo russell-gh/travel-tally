@@ -7,9 +7,9 @@ import {
   selectPopUp,
   selectTrips,
   toggleShowPopUp,
-} from "../redux/tripsSlice";
-import { getSortedandFiltered } from "../utils/getSortedandFiltered";
-import { addDecimals, getCurrencySymbol } from "../utils/utils";
+} from "../../redux/tripsSlice";
+import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
+import { addDecimals, getCurrencySymbol } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";

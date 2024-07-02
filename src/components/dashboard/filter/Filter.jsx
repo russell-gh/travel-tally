@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { formEvent } from "../../redux/tripsSlice";
-import FormElement from "../../reusable-code/FormElement";
+import { formEvent } from "../../../redux/tripsSlice";
+import FormElement from "../../../reusable-code/FormElement";
 
 const Filter = () => {
   const dispatch = useDispatch();

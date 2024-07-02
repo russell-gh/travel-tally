@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formEvent, selectTrips } from "../../redux/tripsSlice";
-import FormElement from "../../reusable-code/FormElement";
-import { getArrayOfDates } from "../../utils/utils";
+import { formEvent, selectTrips } from "../../../redux/tripsSlice";
+import FormElement from "../../../reusable-code/FormElement";
+import { getArrayOfDates } from "../../../utils/utils";
 
 const FilterDate = () => {
   const dispatch = useDispatch();
