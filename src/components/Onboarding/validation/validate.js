@@ -11,7 +11,6 @@ export const validate = async (formData, schema) => {
     return {};
   } catch (err) {
     //if tests are unsuccessful send err obj to errObj func below
-    console.log(errObj(err));
     return errObj(err);
   }
 };

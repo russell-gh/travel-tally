@@ -8,6 +8,7 @@ import React from "react";
 //Select inputs require an options parameter as an array of objects with a value property and name property. An option can be given a defaultValue
 //Select inputs require an options parameter as an array of objects with a value property and name property
 //File uploads have been set to only accept image files for the profile picture
+//Error message can be passed in as string
 
 const FormElement = ({
   type,
@@ -23,7 +24,7 @@ const FormElement = ({
   defaultValue,
   error
 }) => {
-  // console.log(error)
+
   switch (type) {
     case "text":
     case "email":
@@ -37,7 +38,7 @@ const FormElement = ({
             name={name}
             onChange={(e) => callback(e, id)}
           />
-          {/* {error & <p>{error}</p>} */}
+          {error && <p>{error}</p>}
         </>
       );
     case "number":
@@ -52,6 +53,8 @@ const FormElement = ({
             min={minValue}
             max={maxValue}
           />
+          {error && <p>{error}</p>}
+
         </>
       );
 
@@ -66,6 +69,8 @@ const FormElement = ({
             accept="image/*"
             onChange={(e) => callback(e, id)}
           />
+          {error && <p>{error}</p>}
+
         </>
       );
     case "date":
@@ -80,6 +85,8 @@ const FormElement = ({
             max={maxDate}
             onChange={(e) => callback(e, id)}
           />
+          {error && <p>{error}</p>}
+
         </>
       );
     case "checkbox":
@@ -92,6 +99,8 @@ const FormElement = ({
             onChange={(e) => callback(e, id)}
           />
           <label htmlFor={id}>{label}</label>
+          {error && <p>{error}</p>}
+
         </>
       );
     case "select":
@@ -110,6 +119,8 @@ const FormElement = ({
               </option>
             ))}
           </select>
+          {error && <p>{error}</p>}
+
         </>
       );
     case "button":

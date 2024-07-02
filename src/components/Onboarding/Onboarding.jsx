@@ -61,7 +61,6 @@ const Onboarding = () => {
       details: { ..._onboardingDetails, startDate, endDate, budgetTotal },
     };
     dispatch(addTrip(_onboardingDetails));
-    console.log("added to store");
     setVisible(true);
   };
 
