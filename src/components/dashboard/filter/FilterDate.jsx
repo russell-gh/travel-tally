@@ -1,17 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formEvent, selectExpenses } from "../../redux/expensesSlice";
-import FormElement from "../../reusable-code/FormElement";
-import { getArrayOfDates } from "../../utils/utils";
+import { formEvent, selectTrips } from "../../../redux/tripsSlice";
+import FormElement from "../../../reusable-code/FormElement";
+import { getArrayOfDates } from "../../../utils/utils";
 
 const FilterDate = () => {
   const dispatch = useDispatch();
-  const expenses = useSelector(selectExpenses);
+  const trip = useSelector(selectTrips);
 
-  if (!expenses || expenses.length === 0) {
+  if (!trip) {
     return;
   }
 
-  let arrDates = getArrayOfDates(expenses);
+  const expenses = trip[0].expenses;
+
+  let arrDates = getArrayOfDates(expenses, "date");
 
   arrDates = arrDates.map((item) => {
     return { key: item, value: item, name: item };

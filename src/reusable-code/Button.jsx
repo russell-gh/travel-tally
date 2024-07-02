@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Button = ({ onClick, text, className }) => {
   return (
-    <button
-      className={`btn ${className}`}
-      onClick={() => {
-        onClick();
-      }}
-    >
-      {text}
-    </button>
+    <Link to="/add-expense">
+      <button
+        className={`btn ${className}`}
+        onClick={() => {
+          onClick();
+        }}
+      >
+        {text}
+      </button>
+    </Link>
   );
 };
 

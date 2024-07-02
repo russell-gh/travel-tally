@@ -9,6 +9,7 @@ const FormElement = ({
   maxValue,
   options,
   callback,
+  error,
 }) => {
   switch (type) {
     case "text":
@@ -18,6 +19,7 @@ const FormElement = ({
         <>
           {label && <label htmlFor={id}>{label}:</label>}
           <input type={type} id={id} name={name} onChange={callback} />
+          {error && <p>{error}</p>}
         </>
       );
     case "number":
@@ -32,6 +34,7 @@ const FormElement = ({
             min={minValue}
             max={maxValue}
           />
+          {error && <p>{error}</p>}
         </>
       );
 
@@ -46,6 +49,7 @@ const FormElement = ({
             accept="image/*"
             onChange={callback}
           />
+          {error && <p>{error}</p>}
         </>
       );
     case "date":
@@ -60,6 +64,7 @@ const FormElement = ({
             max={maxDate}
             onChange={callback}
           />
+          {error && <p>{error}</p>}
         </>
       );
     case "checkbox":
@@ -67,6 +72,7 @@ const FormElement = ({
         <>
           <input type={type} id={id} name={name} onChange={callback} />
           {label && <label htmlFor={id}>{label}:</label>}
+          {error && <p>{error}</p>}
         </>
       );
     case "select":
@@ -80,6 +86,7 @@ const FormElement = ({
               </option>
             ))}
           </select>
+          {error && <p>{error}</p>}
         </>
       );
     case "button":
