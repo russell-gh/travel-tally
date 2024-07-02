@@ -10,6 +10,7 @@ const FormElement = ({
   options,
   callback,
   error,
+  value
 }) => {
   switch (type) {
     case "text":
@@ -18,7 +19,7 @@ const FormElement = ({
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
-          <input type={type} id={id} name={name} onChange={e=>{callback(e,id)}} />
+          <input type={type} id={id} name={name} value={value} onChange={e=>{callback(e,id)}} />
           {error && <p>{error}</p>}
         </>
       );
@@ -29,7 +30,7 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name}
+            name={name}  value={value} 
             onChange={e=>{callback(e,id)}}
             min={minValue}
             max={maxValue}
@@ -45,7 +46,7 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name}
+            name={name} value={value} 
             accept="image/*"
             onChange={e=>{callback(e,id)}}
           />
@@ -59,7 +60,7 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name}
+            name={name} value={value} 
             min={minDate}
             max={maxDate}
             onChange={e=>{callback(e,id)}}
@@ -70,7 +71,7 @@ const FormElement = ({
     case "checkbox":
       return (
         <>
-          <input type={type} id={id} name={name} onChange={e=>{callback(e,id)}}/>
+          <input type={type} id={id} name={name} value={value}  onChange={e=>{callback(e,id)}}/>
           {label && <label htmlFor={id}>{label}:</label>}
           {error && <p>{error}</p>}
         </>

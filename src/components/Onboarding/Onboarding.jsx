@@ -6,10 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
-import Button from '../../reusable-code/Button.jsx'
+import Button from "../../reusable-code/Button.jsx";
 
 const Onboarding = () => {
-  const [onboardingDetails, setOnboardingDetails] = useState({});
+  const [onboardingDetails, setOnboardingDetails] = useState({
+    destination: "",
+    startDate: "",
+    endDate: "",
+    budgetTotal: "",
+    homeCurrency: ",",
+    budgetHotel: "",
+    budgetFood: "",
+    budgetTransport: "",
+    budgetActivities: "",
+    budgetOther: "",
+  });
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
@@ -57,9 +68,19 @@ const Onboarding = () => {
     //spread existing state and update modified keys
     _onboardingDetails = {
       id: generateId("trip"),
-      details: { ..._onboardingDetails, startDate, endDate, budgetTotal, budgetHotel,budgetFood,budgetTransport,budgetActivities, budgetOther},
+      details: {
+        ..._onboardingDetails,
+        startDate,
+        endDate,
+        budgetTotal,
+        budgetHotel,
+        budgetFood,
+        budgetTransport,
+        budgetActivities,
+        budgetOther,
+      },
     };
-    
+
     dispatch(addTrip(_onboardingDetails));
   };
 
@@ -74,6 +95,7 @@ const Onboarding = () => {
               id={question.id}
               label={question.label}
               name={question.name}
+              value={onboardingDetails[question.id]}
               options={question.options}
               defaultValue={question.defaultValue}
               error={errors[question.id]}
@@ -91,7 +113,7 @@ const Onboarding = () => {
     <div>
       <form>
         {createFormSection(onboardingQuestions.primaryForm)}
-        <Button text={"test"} className={"viewMore"}/>
+        <Button text={"test"} className={"viewMore"} />
         {createFormSection(onboardingQuestions.secondaryForm)}
       </form>
     </div>
