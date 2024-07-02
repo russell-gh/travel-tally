@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addUser, addPass } from "../../redux/onboardingSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { addUser, addPass } from "../../redux/onboardingSlice";
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const onInput = (e) => {
