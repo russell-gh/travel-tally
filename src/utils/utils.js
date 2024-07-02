@@ -64,6 +64,19 @@ export function getArrayOfDetails(data, key) {
   copy = copy.map((item) => {
     return item.id + " " + item.details[key];
   });
-  console.log(copy);
+
   return copy;
+}
+
+export function findIndex(data, id) {
+  const indexOf = data.findIndex((item) => {
+    return item.id == id; // id in state is a string
+  });
+
+  if (indexOf === -1) {
+    console.log("something went wrong getting the index");
+    return;
+  }
+
+  return indexOf;
 }

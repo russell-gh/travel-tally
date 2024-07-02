@@ -14,7 +14,7 @@ import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
 
-const Expenses = () => {
+const Expenses = ({ index }) => {
   const trips = useSelector(selectTrips);
   const showPopUp = useSelector(selectPopUp).showPopUp;
   const currencyCodes = useSelector(selectCurrencyCodes);
@@ -27,14 +27,14 @@ const Expenses = () => {
     return;
   }
 
-  const expenses = trips[0].expenses;
+  const expenses = trips[index].expenses;
 
   if (expenses.length === 0) {
     return <p className="mt">You have no expenses yet.</p>;
   }
   const _expenses = [...expenses].reverse();
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
-  const homeCurrencySymbol = trips[0].details.homeCurrencySymbol;
+  const homeCurrencySymbol = trips[index].details.homeCurrencySymbol;
 
   if (filtered.length === 0) {
     return <p className="mt">There are no matches</p>;

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectCurrencyCodes, selectTrips } from "../redux/tripsSlice";
 import { addDecimals, calculateTotalSpend } from "../utils/utils";
 
-const Budget = () => {
+const Budget = ({ index }) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
 
@@ -10,15 +10,15 @@ const Budget = () => {
     return;
   }
 
-  const expenses = trips[0].expenses;
+  const expenses = trips[index].expenses;
   const totalSpend = calculateTotalSpend(expenses);
 
   if (!currencyCodes || !trips) {
     return;
   }
-  const currencySymbol = trips[0].details.homeCurrencySymbol;
+  const currencySymbol = trips[index].details.homeCurrencySymbol;
 
-  const budgetTotal = addDecimals(trips[0].details.budgetTotal);
+  const budgetTotal = addDecimals(trips[index].details.budgetTotal);
 
   return (
     <div className="budget">

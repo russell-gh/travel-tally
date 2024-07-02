@@ -3,5 +3,4 @@ export const initialState = {
   filter: "Show All",
   order: "Newest first",
   filterDate: "All Dates",
-  destinations: "1",
 };

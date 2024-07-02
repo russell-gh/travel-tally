@@ -10,11 +10,17 @@ export const tripsSlice = createSlice({
     setData: (state, action) => {
       const { text, data } = action.payload;
       state[text] = data; // Dynamically set the state property
+      if (state.trips) {
+        state.destinationId = state.trips.length;
+        console.log(state.destinationId);
+      }
       if (state.trips && state.currencyCodes) {
-        state.trips[0].details.homeCurrencySymbol = getCurrencySymbol(
-          { ...state.currencyCodes },
-          state.trips[0].details.homeCurrency
-        );
+        state.trips.map((item, index) => {
+          item.details.homeCurrencySymbol = getCurrencySymbol(
+            { ...state.currencyCodes },
+            state.trips[index].details.homeCurrency
+          );
+        });
       }
       if (text === "currencies") {
         const currencies = Object.keys(data);
@@ -74,5 +80,6 @@ export const selectFilterDate = (state) => state.trips.filterDate;
 export const selectCurrencyRates = (state) => state.trips.currencyRates;
 export const selectCurrencyNames = (state) => state.trips.currencyNames;
 export const selectHomeCurrency = (state) => state.trips.homeCurrency;
+export const selectDestinationId = (state) => state.trips.destinationId;
 
 export default tripsSlice.reducer;

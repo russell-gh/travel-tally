@@ -299,13 +299,13 @@
   {
     "id": 2,
     "details": {
-      "budgetTotal": 140000,
+      "budgetTotal": 150000,
       "budgetHotel": 50000,
       "budgetFood": 30000,
       "budgetTransport": 20000,
       "budgetActivities": 40000,
       "budgetOther": 5000,
-      "homeCurrency": "THB",
+      "homeCurrency": "GBP",
       "destination": "Thailand",
       "startDate": "14-07-2024",
       "endDate": "19-07-2024"
