@@ -3,12 +3,15 @@ import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrip } from "../../redux/onboardingSlice.js";
+import { addTrip, selectTrips } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
-import Button from "../../reusable-code/Button.jsx";
 
 const Onboarding = () => {
+
+  // const trips = useSelector(selectTrips);
+  // console.log(trips)
+
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     startDate: "",
@@ -53,12 +56,11 @@ const Onboarding = () => {
       // );
 
       //compare the id of that question against the keys of the validation result to see whether there are any errors present which correspond to that id
-      if (Object.keys(validationResult).includes(question.id)) {
-        setVisible(false);
-        return;
-      }
+      const primaryFormErrors = key => !key.includes(question.id) 
+      const checkErrors = Object.keys(validationResult).every(primaryFormErrors)
+      console.log(checkErrors)
     });
-    
+
     setVisible(true);
   };
 
@@ -110,7 +112,9 @@ const Onboarding = () => {
       },
     };
 
+    console.log("about to add", _onboardingDetails)
     dispatch(addTrip(_onboardingDetails));
+    console.log(trips)
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs
