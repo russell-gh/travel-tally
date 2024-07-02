@@ -36,7 +36,6 @@ const Onboarding = () => {
 
   //store input in state on every change
   const handleChange = (e, id) => {
-    console.log(e,id)
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
@@ -91,11 +90,11 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? (
+      {/* {visible ? (
         <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} />
       ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 };

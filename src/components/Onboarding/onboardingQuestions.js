@@ -37,11 +37,42 @@ export const onboardingQuestions = [
     name: "homeCurrency",
     options: currencies,
     value: currencies[0].value,
-    defaultValue: currencies[0].value
+    defaultValue: currencies[0].value,
   },
+  {
+    type: "number",
+    id: "budgetHotel",
+    name: "budgetHotel",
+    label: "Hotels and accommodation",
+  },
+  {
+    type: "number",
+    id: "budgetFood",
+    name: "budgetFood",
+    label: "Food",
+  },
+  {
+    type: "number",
+    id: "budgetTransport",
+    name: "budgetTransport",
+    label: "Transport",
+  },
+  {
+    type: "number",
+    id: "budgetActivities",
+    name: "budgetActivities",
+    label: "Activities",
+  },
+  {
+    type: "number",
+    id: "budgetOther",
+    name: "budgetOther",
+    label: "Other",
+  },  
   {
     type: "button",
     id: "onboardingFormSubmit",
-    label: "Let's move on to breaking down your budget >",
+    label: "Great, you're all set! Let's visit your dashboard >",
   },
+
 ];
