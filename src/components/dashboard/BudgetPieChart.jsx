@@ -1,4 +1,5 @@
 import { PieChart } from "@mui/x-charts";
+import { addDecimals } from "../../utils/utils";
 
 const BudgetPieChart = ({ details }) => {
   const {
@@ -13,11 +14,15 @@ const BudgetPieChart = ({ details }) => {
       series={[
         {
           data: [
-            { id: 0, value: budgetFood, label: "Food" },
-            { id: 1, value: budgetActivities, label: "Activities" },
-            { id: 2, value: budgetHotel, label: "Hotel" },
-            { id: 3, value: budgetTransport, label: "Transport" },
-            { id: 4, value: budgetOther, label: "other" },
+            { id: 0, value: addDecimals(budgetFood), label: "Food" },
+            {
+              id: 1,
+              value: addDecimals(budgetActivities),
+              label: "Activities",
+            },
+            { id: 2, value: addDecimals(budgetHotel), label: "Hotel" },
+            { id: 3, value: addDecimals(budgetTransport), label: "Transport" },
+            { id: 4, value: addDecimals(budgetOther), label: "other" },
           ],
         },
       ]}
