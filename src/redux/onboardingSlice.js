@@ -1,18 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {trips:[]};
+const initialState = { trip: [], user: [], pass: [] };
+
 
 export const onboardingSlice = createSlice({
   name: "onboarding",
   initialState,
   reducers: {
-    addTrip: (state, {payload}) => {
-              state.trips.push(payload)
 
+    addTrip: (state, { payload }) => {
+      state.trip = [...state.trip, payload];
+    },
+    addUser: (state, { payload }) => {
+      state.user = payload; //TODO check if need to spread
+    },
+    addPass: (state, { payload }) => {
+      state.pass = payload; //TODO check if need to spread
     },
   },
 });
 
-export const { addTrip } = onboardingSlice.actions;
-export const selectTrips = (state) => state.onboarding.trips; 
+export const { addTrip, addUser, addPass } = onboardingSlice.actions;
+export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
+
 export default onboardingSlice.reducer;
