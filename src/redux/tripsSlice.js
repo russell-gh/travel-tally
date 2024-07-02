@@ -9,9 +9,13 @@ export const tripsSlice = createSlice({
     setData: (state, action) => {
       const { text, data } = action.payload;
       state[text] = data; // Dynamically set the state property
+
+      // set selectedTripId
       if (state.trips) {
-        state.destinationId = state.trips.length;
+        state.selectedTripId = state.trips[state.trips.length - 1].id;
       }
+
+      //set homecurrencySymbol inside each trip
       if (state.trips && state.currencyCodes) {
         state.trips.map((item, index) => {
           item.details.homeCurrencySymbol = getCurrencySymbol(
@@ -20,6 +24,7 @@ export const tripsSlice = createSlice({
           );
         });
       }
+
       if (text === "currencies") {
         const currencies = Object.keys(data);
         const favs = ["EUR", "USD", "GBP"];
@@ -36,11 +41,7 @@ export const tripsSlice = createSlice({
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.destinationId);
       //get index of clicked expense
-      const index = getIndex(
-        state.trips[indexTrip].expenses,
-        state.popUp.id,
-        "expenseId"
-      );
+      const index = getIndex(state.trips[indexTrip].expenses, state.popUp.id);
       // delete expense
       state.trips[indexTrip].expenses.splice(index, 1);
       //set popUp to empty so popUp disappears
@@ -60,7 +61,6 @@ export const tripsSlice = createSlice({
       state.popUp.component = component;
     },
     formEvent: (state, { payload }) => {
-      console.log(payload.id, payload.value);
       state[payload.id] = payload.value;
     },
     addExpenseData: (state, { payload }) => {
@@ -94,6 +94,6 @@ export const selectFilterDate = (state) => state.trips.filterDate;
 export const selectCurrencyRates = (state) => state.trips.currencyRates;
 export const selectCurrencyNames = (state) => state.trips.currencyNames;
 export const selectHomeCurrency = (state) => state.trips.homeCurrency;
-export const selectDestinationId = (state) => state.trips.destinationId;
+export const selectSelectedTripId = (state) => state.trips.selectedTripId;
 
 export default tripsSlice.reducer;

@@ -26,9 +26,9 @@ export function addDecimals(number) {
   return Number(number / 100).toFixed(2);
 }
 
-export function getIndex(data, id, key = "id") {
+export function getIndex(data, id) {
   const indexOf = data.findIndex((item) => {
-    return item[key] === id;
+    return item.id === id;
   });
 
   if (indexOf === -1) {
@@ -50,16 +50,24 @@ export function getArrayOfDates(data, key) {
   let copy = [...data];
   //makes an array of the dates
   copy = copy.map((item) => {
-    return item[key];
+    return unixToDate(item[key]);
   });
 
   // removes duplicates
   copy = [...new Set(copy)];
 
-  if (key === "date") {
-    //add All Dates as first element
-    copy.unshift("All Dates");
-  }
+  // get dates in right order
+  copy.sort((a, b) => {
+    if (a > b) {
+      return 1;
+    } else if (a < b) {
+      return -1;
+    }
+    return 0;
+  });
+
+  //add All Dates as first element
+  copy.unshift("All Dates");
 
   return copy;
 }
@@ -75,4 +83,11 @@ export function findItem(data, id) {
   }
 
   return item;
+}
+
+export function unixToDate(unix) {
+  const date = new Date(unix); //converts unix back to object
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
+  return formattedDate;
 }

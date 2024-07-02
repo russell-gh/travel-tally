@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "trip_A2rdJ7nN8kJ3fHA25T4gd",
     "details": {
       "budgetTotal": 140000,
       "budgetHotel": 50000,
@@ -10,12 +10,12 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Netherlands",
-      "startDate": "14-07-2024",
-      "endDate": "19-07-2024"
+      "startDate": 1720911600000,
+      "endDate": 1721343600000
     },
     "expenses": [
       {
-        "expenseId": 1,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 2000,
           "fromCurrency": "EUR",
@@ -24,12 +24,12 @@
         },
         "category": "Food",
         "description": "lunch",
-        "date": "14-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 2,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4ga",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "EUR",
@@ -38,12 +38,12 @@
         },
         "category": "Food",
         "description": "waffle",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 3,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gb",
         "amount": {
           "fromValue": 1499,
           "fromCurrency": "USD",
@@ -52,12 +52,12 @@
         },
         "category": "Food",
         "description": "",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 4,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gc",
         "amount": {
           "fromValue": 1500,
           "fromCurrency": "EUR",
@@ -66,12 +66,12 @@
         },
         "category": "Activities",
         "description": "movies",
-        "date": "15-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 5,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
         "amount": {
           "fromValue": 100000,
           "fromCurrency": "EUR",
@@ -80,12 +80,12 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 6,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
           "fromValue": 15000,
           "fromCurrency": "EUR",
@@ -94,12 +94,12 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 7,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gg",
         "amount": {
           "fromValue": 1250,
           "fromCurrency": "EUR",
@@ -108,12 +108,12 @@
         },
         "category": "Transport",
         "description": "train to Utrecht",
-        "date": "16-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 8,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gh",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "EUR",
@@ -122,12 +122,12 @@
         },
         "category": "Food",
         "description": "coffe and coockie",
-        "date": "16-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 9,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gi",
         "amount": {
           "fromValue": 2999,
           "fromCurrency": "EUR",
@@ -136,12 +136,12 @@
         },
         "category": "Activities",
         "description": "paleis op de dam",
-        "date": "16-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 10,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gj",
         "amount": {
           "fromValue": 250,
           "fromCurrency": "EUR",
@@ -150,12 +150,12 @@
         },
         "category": "Transport",
         "description": "bus to museum",
-        "date": "17-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 11,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gk",
         "amount": {
           "fromValue": 1000,
           "fromCurrency": "EUR",
@@ -164,12 +164,12 @@
         },
         "category": "Activities",
         "description": "dom museum",
-        "date": "17-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 12,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gl",
         "amount": {
           "fromValue": 6538,
           "fromCurrency": "EUR",
@@ -178,12 +178,12 @@
         },
         "category": "Food",
         "description": "Dinner at square",
-        "date": "17-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 13,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gm",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "EUR",
@@ -192,12 +192,12 @@
         },
         "category": "Transport",
         "description": "rent bike",
-        "date": "18-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 14,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gn",
         "amount": {
           "fromValue": 995,
           "fromCurrency": "EUR",
@@ -206,12 +206,12 @@
         },
         "category": "Food",
         "description": "Sandwich",
-        "date": "18-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 15,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4go",
         "amount": {
           "fromValue": 950,
           "fromCurrency": "EUR",
@@ -220,12 +220,12 @@
         },
         "category": "Other",
         "description": "souvenir",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 16,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gp",
         "amount": {
           "fromValue": 4265,
           "fromCurrency": "EUR",
@@ -234,12 +234,12 @@
         },
         "category": "Food",
         "description": "Italian",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 17,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gq",
         "amount": {
           "fromValue": 8000,
           "fromCurrency": "EUR",
@@ -248,12 +248,12 @@
         },
         "category": "Hotel",
         "description": "hotel The Hague",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 18,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gr",
         "amount": {
           "fromValue": 368,
           "fromCurrency": "EUR",
@@ -262,12 +262,12 @@
         },
         "category": "Transport",
         "description": "metro",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 19,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gs",
         "amount": {
           "fromValue": 2500,
           "fromCurrency": "EUR",
@@ -276,12 +276,12 @@
         },
         "category": "Food",
         "description": "lunch at beach",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 20,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gt",
         "amount": {
           "fromValue": 13500,
           "fromCurrency": "EUR",
@@ -290,14 +290,14 @@
         },
         "category": "Activities",
         "description": "bungee jumping",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       }
     ]
   },
   {
-    "id": 2,
+    "id": "trip_B2rdJ7nN8kJ3fHA25T4gd",
     "details": {
       "budgetTotal": 150000,
       "budgetHotel": 50000,
@@ -307,12 +307,12 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Thailand",
-      "startDate": "14-07-2024",
-      "endDate": "19-07-2024"
+      "startDate": 1720911600000,
+      "endDate": 1721343600000
     },
     "expenses": [
       {
-        "expenseId": 1,
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 2000,
           "fromCurrency": "THB",
@@ -321,12 +321,12 @@
         },
         "category": "Food",
         "description": "lunch",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 2,
+        "id": "expense_B2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "THB",
@@ -335,12 +335,12 @@
         },
         "category": "Food",
         "description": "waffle",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 3,
+        "id": "expense_C2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 1499,
           "fromCurrency": "USD",
@@ -349,12 +349,12 @@
         },
         "category": "Food",
         "description": "",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 4,
+        "id": "expense_D2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 1500,
           "fromCurrency": "THB",
@@ -363,12 +363,12 @@
         },
         "category": "Activities",
         "description": "movies",
-        "date": "15-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 5,
+        "id": "expense_E2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 100000,
           "fromCurrency": "THB",
@@ -377,12 +377,12 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 6,
+        "id": "expense_F2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 15000,
           "fromCurrency": "THB",
@@ -391,12 +391,12 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "date": "14-07-2024",
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 7,
+        "id": "expense_H2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 1250,
           "fromCurrency": "THB",
@@ -405,12 +405,12 @@
         },
         "category": "Transport",
         "description": "train to Utrecht",
-        "date": "16-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 8,
+        "id": "expense_G2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "THB",
@@ -419,12 +419,12 @@
         },
         "category": "Food",
         "description": "coffe and coockie",
-        "date": "16-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 9,
+        "id": "expense_I2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 2999,
           "fromCurrency": "THB",
@@ -433,12 +433,12 @@
         },
         "category": "Activities",
         "description": "paleis op de dam",
-        "date": "16-07-2024",
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 10,
+        "id": "expense_J2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 250,
           "fromCurrency": "THB",
@@ -447,12 +447,12 @@
         },
         "category": "Transport",
         "description": "bus to museum",
-        "date": "17-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 11,
+        "id": "expense_K2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 1000,
           "fromCurrency": "THB",
@@ -461,12 +461,12 @@
         },
         "category": "Activities",
         "description": "dom museum",
-        "date": "17-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 12,
+        "id": "expense_L2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 6538,
           "fromCurrency": "THB",
@@ -475,12 +475,12 @@
         },
         "category": "Food",
         "description": "Dinner at square",
-        "date": "17-07-2024",
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 13,
+        "id": "expense_M2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 500,
           "fromCurrency": "THB",
@@ -489,12 +489,12 @@
         },
         "category": "Transport",
         "description": "rent bike",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 14,
+        "id": "expense_N2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 995,
           "fromCurrency": "THB",
@@ -503,12 +503,12 @@
         },
         "category": "Food",
         "description": "Sandwich",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 15,
+        "id": "expense_O2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 950,
           "fromCurrency": "THB",
@@ -517,12 +517,12 @@
         },
         "category": "Other",
         "description": "souvenir",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 16,
+        "id": "expense_P2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 4265,
           "fromCurrency": "THB",
@@ -531,12 +531,12 @@
         },
         "category": "Food",
         "description": "Italian",
-        "date": "18-07-2024",
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 17,
+        "id": "expense_Q2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 8000,
           "fromCurrency": "THB",
@@ -545,12 +545,12 @@
         },
         "category": "Hotel",
         "description": "hotel The Hague",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 18,
+        "id": "expense_R2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 368,
           "fromCurrency": "THB",
@@ -559,12 +559,12 @@
         },
         "category": "Transport",
         "description": "metro",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 19,
+        "id": "expense_S2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 2500,
           "fromCurrency": "THB",
@@ -573,12 +573,12 @@
         },
         "category": "Food",
         "description": "lunch at beach",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
       {
-        "expenseId": 20,
+        "id": "expense_T2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 13500,
           "fromCurrency": "THB",
@@ -587,7 +587,7 @@
         },
         "category": "Activities",
         "description": "bungee jumping",
-        "date": "19-07-2024",
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       }

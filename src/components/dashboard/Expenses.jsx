@@ -9,7 +9,7 @@ import {
   togglePopUp,
 } from "../../redux/tripsSlice";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
-import { addDecimals, getCurrencySymbol } from "../../utils/utils";
+import { addDecimals, getCurrencySymbol, unixToDate } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
@@ -42,13 +42,13 @@ const Expenses = ({ expenses, homeCurrencySymbol }) => {
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, expenseId, category, date, amount } = item;
+        const { description, id, category, date, amount } = item;
         return (
-          <div className="expenseItem" key={expenseId}>
+          <div className="expenseItem" key={id}>
             <CategoryIcon category={category} />
             <div>
               <h2>{description ? description : category}</h2>
-              <p>{date}</p>
+              <p>{unixToDate(date)}</p>
             </div>
             <div>
               <p>

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectDestinationId,
   selectPopUp,
+  selectSelectedTripId,
   selectTrips,
   togglePopUp,
 } from "../../redux/tripsSlice";
@@ -18,7 +18,7 @@ import Order from "./filter/order";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
-  const destinationId = useSelector(selectDestinationId);
+  const selectedTripId = useSelector(selectSelectedTripId);
   const popUp = useSelector(selectPopUp);
   const dispatch = useDispatch();
 
@@ -28,8 +28,8 @@ const Dashboard = () => {
     return <p>Loading...</p>;
   }
 
-  const index = getIndex(trips, destinationId);
-  const trip = findItem(trips, destinationId);
+  const index = getIndex(trips, selectedTripId);
+  const trip = findItem(trips, selectedTripId);
 
   return (
     <div className="dashboard">
