@@ -62,7 +62,7 @@ const Dashboard = () => {
           startDate={startDate}
           endDate={endDate}
         />
-        <Image src={"../src/img/piechart.png"} alt="piechart" />
+        {/* <Image src={"../src/img/piechart.png"} alt="piechart" /> */}
         <div className="containerBudget">
           <Budget
             expenses={filtered}

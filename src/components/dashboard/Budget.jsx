@@ -2,6 +2,8 @@ import { addDecimals, calculateTotalSpend } from "../../utils/utils";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/tripsSlice";
 import { getBudget } from "../../utils/utils";
+import BudgetPieChart from "./BudgetPieChart";
+import CategoryGauge from "./CategoryGauge";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const filter = useSelector(selectFilter);
@@ -15,27 +17,36 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const difference = addDecimals(budget * 100 - totalSpend * 100);
 
   return (
-    <div className="budget">
-      <p>
-        Spend: {homeCurrencySymbol}
-        {totalSpend}
-      </p>
-      <p>
-        Budget: {homeCurrencySymbol}
-        {budget}
-      </p>
-      {difference > 0 ? (
-        <p className="positive">
-          Money left: {homeCurrencySymbol}
-          {difference}
+    <>
+      <div className="chart">
+        {filter === "Show All" ? (
+          <BudgetPieChart details={details} />
+        ) : (
+          <CategoryGauge budget={budget} spend={totalSpend} />
+        )}
+      </div>
+      <div className="budget">
+        <p>
+          Spend: {homeCurrencySymbol}
+          {totalSpend}
         </p>
-      ) : (
-        <p className="negative">
-          Overspend: {homeCurrencySymbol}
-          {Math.abs(difference)}
+        <p>
+          Budget: {homeCurrencySymbol}
+          {budget}
         </p>
-      )}
-    </div>
+        {difference > 0 ? (
+          <p className="positive">
+            Money left: {homeCurrencySymbol}
+            {difference}
+          </p>
+        ) : (
+          <p className="negative">
+            Overspend: {homeCurrencySymbol}
+            {Math.abs(difference)}
+          </p>
+        )}
+      </div>
+    </>
   );
 };
 

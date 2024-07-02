@@ -119,8 +119,18 @@ h1 {
 }
 
 .containerBudget {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  padding: 0px 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr fit-content(100px);
+}
+
+.chart {
+  display: inherit;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
 }
 
 .positive {
@@ -129,4 +139,8 @@ h1 {
 
 .negative {
   color: red;
+}
+
+.tripInfo {
+  justify-self: flex-end;
 }

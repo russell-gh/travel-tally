@@ -113,7 +113,5 @@ export function getBudget(data, value) {
       break;
   }
 
-  console.log(budget);
-
   return addDecimals(budget);
 }
