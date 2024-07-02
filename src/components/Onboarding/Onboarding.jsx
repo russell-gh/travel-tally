@@ -8,7 +8,6 @@ import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 
 const Onboarding = () => {
-
   // const trips = useSelector(selectTrips);
   // console.log(trips)
 
@@ -42,29 +41,30 @@ const Onboarding = () => {
     checkPrimaryFormValidation(result);
     setErrors(result);
   };
-
+  
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
   const checkPrimaryFormValidation = (validationResult) => {
-    console.log("loop starts");
-
+    let validated;
     //loop through all the questions in the primary form
-    onboardingQuestions.primaryForm.forEach((question) => {
-      // console.log(
-      //   question.id,
-      //   Object.keys(validationResult),
-      //   Object.keys(validationResult).includes(question.id)
-      // );
+    //compare the id of that question against the keys of the validation result to see whether there are any errors present which correspond to that id
 
-      //compare the id of that question against the keys of the validation result to see whether there are any errors present which correspond to that id
-      const primaryFormErrors = key => !key.includes(question.id) 
-      const checkErrors = Object.keys(validationResult).every(primaryFormErrors)
-      console.log(checkErrors)
+    onboardingQuestions.primaryForm.every((question) => {
+      const id = question.id;
+      const errorKeys = Object.keys(validationResult);
+      const checkIfTypeIsValidated = (errorKey) => !errorKey.includes(id);
+      if (errorKeys.every(checkIfTypeIsValidated)) {
+        validated = true;
+      }
     });
 
-    setVisible(true);
+    if (validated) {
+      // setVisible(true);
+    }
   };
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  //store input in state on every change. if the id is a type of budget, convert to a number before store in state
+//store input in state on every change. if the id is a type of budget, convert to a number before store in state
   const handleChange = (e, id) => {
     if (id.includes("budget")) {
       e.target.value = Number(e.target.value);
@@ -83,7 +83,7 @@ const Onboarding = () => {
 
     let _onboardingDetails = onboardingDetails;
 
-    //convert budgets to pennies. 
+    //convert budgets to pennies.
     //too repetitive. condense
     const budgetTotal = toPennies(_onboardingDetails.budgetTotal);
     const budgetHotel = toPennies(_onboardingDetails.budgetHotel);
@@ -112,9 +112,9 @@ const Onboarding = () => {
       },
     };
 
-    console.log("about to add", _onboardingDetails)
+    console.log("about to add", _onboardingDetails);
     dispatch(addTrip(_onboardingDetails));
-    console.log(trips)
+    console.log(trips);
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs
