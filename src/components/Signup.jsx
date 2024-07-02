@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, addPass } from "../../redux/onboardingSlice";
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const onInput = (e) => {
@@ -10,9 +12,9 @@ const Signup = () => {
     // console.log("form submitted", formData);
 
     if (formData.signupPassword1 === formData.signupPassword2) {
-      console.log("form submitted", formData);
+      console.log("passwords match", formData);
     } else {
-      console.log("passwords don't match");
+      console.log("passwords don't match", formData);
     }
   };
   return (
