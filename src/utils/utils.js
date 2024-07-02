@@ -26,10 +26,16 @@ export function addDecimals(number) {
   return Number(number / 100).toFixed(2);
 }
 
-export function getIndex(data, id) {
+export function getIndex(data, id, key = "id") {
   const indexOf = data.findIndex((item) => {
-    return item.expenseId === id;
+    return item[key] === id;
   });
+
+  if (indexOf === -1) {
+    console.log("something went wrong getting the index");
+    return;
+  }
+
   return indexOf;
 }
 
@@ -56,19 +62,6 @@ export function getArrayOfDates(data, key) {
   }
 
   return copy;
-}
-
-export function findIndex(data, id) {
-  const indexOf = data.findIndex((item) => {
-    return item.id === id;
-  });
-
-  if (indexOf === -1) {
-    console.log("something went wrong getting the index");
-    return;
-  }
-
-  return indexOf;
 }
 
 export function findItem(data, id) {

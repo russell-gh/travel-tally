@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectDestinationId, selectTrips } from "../../redux/tripsSlice";
 import Button from "../../reusable-code/Button";
-import { findIndex, findItem } from "../../utils/utils";
+import { findItem, getIndex } from "../../utils/utils";
 import Budget from "./Budget";
 import Expenses from "./Expenses";
 import Image from "./Image";
@@ -18,7 +18,7 @@ const Dashboard = () => {
     return <p>Loading...</p>;
   }
 
-  const index = findIndex(trips, destinationId);
+  const index = getIndex(trips, destinationId);
   const trip = findItem(trips, destinationId);
 
   return (
@@ -26,7 +26,11 @@ const Dashboard = () => {
       <div className="dashboardFixed">
         <Title destination={trip.details.destination} />
         <Image src={"../src/img/piechart.png"} alt="piechart" />
-        <Budget index={index} />
+        <Budget
+          expenses={trip.expenses}
+          budgetTotal={trip.details.budgetTotal}
+          homeCurrencySymbol={trip.details.homeCurrencySymbol}
+        />
         <Button className="addExpense" text="Add an expense" />
         <div className="controlsExpenses">
           <Filter />
@@ -34,7 +38,10 @@ const Dashboard = () => {
           <FilterDate />
         </div>
       </div>
-      <Expenses index={index} />
+      <Expenses
+        expenses={trip.expenses}
+        homecurrency={trip.details.homecurrency}
+      />
     </div>
   );
 };

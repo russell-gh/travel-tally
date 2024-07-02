@@ -34,7 +34,7 @@ export const tripsSlice = createSlice({
       }
     },
     deleteExpense: (state) => {
-      const index = getIndex(state.expenses, state.popUp.id);
+      const index = getIndex(state.expenses, state.popUp.id, expenseId);
       state.expenses.splice(index, 1);
       state.popUp.showPopUp = !state.popUp.showPopUp; // would've preferred to keep this in toggelShowPopUp, could not call two dispatces with one click
     },
