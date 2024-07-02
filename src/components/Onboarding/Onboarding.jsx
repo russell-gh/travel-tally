@@ -6,7 +6,7 @@ import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrip } from "../../redux/onboardingSlice.js";
 import BudgetBreakdown from "./BudgetBreakdown.jsx";
-import { selectTrips } from "../../redux/onboardingSlice.js";
+import { selectTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, getCurrentTrip } from "./utils.js";
 import { nanoid } from "nanoid";
@@ -19,7 +19,7 @@ const Onboarding = () => {
   const dispatch = useDispatch();
 
   //access trip details from store
-  const trips = useSelector(selectTrips);
+  const trips = useSelector(selectTrip);
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -27,7 +27,9 @@ const Onboarding = () => {
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
-    if (!Object.values(onboardingDetails).length) {return}
+    if (!Object.values(onboardingDetails).length) {
+      return;
+    }
     const result = await validate(onboardingDetails, "trip");
     setErrors(result); //result returns promise
   };
@@ -57,7 +59,7 @@ const Onboarding = () => {
     //spread existing state and update modified keys
     //generate id and store in state to be passed to budgetbreakdown later
     const _id = nanoid();
-    setId(_id)
+    setId(_id);
     _onboardingDetails = {
       id: _id,
       details: { ..._onboardingDetails, startDate, endDate, budgetTotal },
@@ -88,7 +90,11 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} /> : ""}
+      {visible ? (
+        <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
