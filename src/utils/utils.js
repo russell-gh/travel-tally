@@ -1,7 +1,10 @@
 export function calculateTotalSpend(expenses) {
+  if (!expenses || expenses.length === 0) {
+    return;
+  }
   const _expenses = [...expenses];
   const priceArr = _expenses.map((item) => {
-    return item.amount.homeCurrency;
+    return item.amount.toValue;
   });
   if (priceArr.length !== 0) {
     let totalSpend = priceArr.reduce((acc, value) => {
@@ -34,23 +37,49 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
     console.log("something went wrong with getting the currency symbol");
   }
-  console.log(currencyCodes, currencyCode);
   return currencyCodes[currencyCode].symbol;
 }
 
-export function getArrayOfDates(data) {
+export function getArrayOfDates(data, key) {
   let copy = [...data];
-
   //makes an array of the dates
   copy = copy.map((item) => {
-    return item.date;
+    return item[key];
   });
 
   // removes duplicates
   copy = [...new Set(copy)];
 
-  //add All Dates as first element
-  copy.unshift("All Dates");
+  if (key === "date") {
+    //add All Dates as first element
+    copy.unshift("All Dates");
+  }
 
   return copy;
+}
+
+export function findIndex(data, id) {
+  const indexOf = data.findIndex((item) => {
+    return item.id === id;
+  });
+
+  if (indexOf === -1) {
+    console.log("something went wrong getting the index");
+    return;
+  }
+
+  return indexOf;
+}
+
+export function findItem(data, id) {
+  const item = data.find((item) => {
+    return item.id === id;
+  });
+
+  if (!item) {
+    console.log("something went wrong getting the item");
+    return;
+  }
+
+  return item;
 }

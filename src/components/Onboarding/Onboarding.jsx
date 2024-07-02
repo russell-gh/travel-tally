@@ -1,12 +1,11 @@
+import Joi from "joi";
 import { useEffect, useState } from "react";
-import FormElement from "../FormElement";
+import { useDispatch, useSelector } from "react-redux";
+import { addTrip, selectTrip } from "../../redux/onboardingSlice";
+import FormElement from "../../reusable-code/FormElement.jsx";
+import BudgetBreakdown from "./BudgetBreakdown";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrip } from "../../redux/onboardingSlice";
-import Joi from "joi";
-import BudgetBreakdown from "./BudgetBreakdown";
-import { selectTrip } from "../../redux/onboardingSlice";
 import { schema } from "./validation.js";
 
 const Onboarding = () => {
@@ -89,7 +88,7 @@ const Onboarding = () => {
         })}
       </form>
       {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? <BudgetBreakdown trip={trip} /> : ""} 
+      {visible ? <BudgetBreakdown trip={trip} /> : ""}
     </div>
   );
 };

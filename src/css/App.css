@@ -33,7 +33,7 @@ h1 {
 }
 
 .dashboardFixed {
-  /* position: fixed; */
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: white;
@@ -42,7 +42,7 @@ h1 {
 }
 
 .mt {
-  margin-top: 315px;
+  margin-top: 350px;
 }
 
 .expenseItem {
