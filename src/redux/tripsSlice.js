@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
-import { getCurrencySymbol, getIndex } from "../utils/utils";
+import { findIndex, getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
 
 export const tripsSlice = createSlice({
@@ -49,12 +49,20 @@ export const tripsSlice = createSlice({
       state[payload.id] = payload.value;
     },
     addExpenseData: (state, { payload }) => {
-      let result = handleData(
-        { ...payload },
-        state.homeCurrency,
-        state.currencyRates
-      );
-      state.expenses.push(result);
+      // Close expense popup
+      state.popUp = {};
+      // Find index of trip from id
+      const indexOf = state.trips.findIndex((trip) => {
+        return trip.id === state.destinationId;
+      });
+      // Create variable for the correct trip
+      const thisTrip = state.trips[indexOf];
+      // Send data to be converted into the preferred format (uses function in expenseData.js)
+      let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
+        ...state.currencyRates,
+      });
+      // Push data into expenses array
+      state.trips[indexOf].expenses.push(result);
     },
   },
 });
