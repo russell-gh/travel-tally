@@ -7,9 +7,9 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
       break;
     case "Price: high to low":
       filtered.sort((a, b) => {
-        if (a.amount.amount < b.amount.amount) {
+        if (a.amount.toValue < b.amount.toValue) {
           return 1;
-        } else if (a.amount.amount > b.amount.amount) {
+        } else if (a.amount.toValue > b.amount.toValue) {
           return -1;
         }
         return 0;
@@ -17,9 +17,9 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
       break;
     case "Price: low to high":
       filtered.sort((a, b) => {
-        if (a.amount.amount > b.amount.amount) {
+        if (a.amount.toValue > b.amount.toValue) {
           return 1;
-        } else if (a.amount.amount < b.amount.amount) {
+        } else if (a.amount.toValue < b.amount.toValue) {
           return -1;
         }
         return 0;

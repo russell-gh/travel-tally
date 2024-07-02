@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyCodes,
-  selectExpenses,
   selectFilter,
   selectFilterDate,
   selectOrder,
   selectPopUp,
-  selectTravelInfo,
+  selectTrips,
   toggleShowPopUp,
-} from "../redux/expensesSlice";
+} from "../redux/tripsSlice";
 import { getSortedandFiltered } from "../utils/getSortedandFiltered";
 import { addDecimals, getCurrencySymbol } from "../utils/utils";
 import CategoryIcon from "./CategoryIcon";
@@ -16,24 +15,26 @@ import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
 
 const Expenses = () => {
-  const expenses = useSelector(selectExpenses);
+  const trips = useSelector(selectTrips);
   const showPopUp = useSelector(selectPopUp).showPopUp;
   const currencyCodes = useSelector(selectCurrencyCodes);
-  const travelInfo = useSelector(selectTravelInfo);
   const order = useSelector(selectOrder);
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
   const dispatch = useDispatch();
 
-  if (!travelInfo || !currencyCodes) {
+  if (!currencyCodes || !trips) {
     return;
   }
+
+  const expenses = trips[0].expenses;
+
   if (expenses.length === 0) {
     return <p className="mt">You have no expenses yet.</p>;
   }
   const _expenses = [...expenses].reverse();
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
-  const homeCurrencySymbol = travelInfo.homeCurrencySymbol;
+  const homeCurrencySymbol = trips[0].details.homeCurrencySymbol;
 
   if (filtered.length === 0) {
     return <p className="mt">There are no matches</p>;
@@ -53,11 +54,11 @@ const Expenses = () => {
             <div>
               <p>
                 {homeCurrencySymbol}
-                {addDecimals(amount.homeCurrency)}
+                {addDecimals(amount.toValue)}
               </p>
               <p className="foreignAmount">
-                {getCurrencySymbol(currencyCodes, amount.currency)}
-                {addDecimals(amount.amount)}
+                {getCurrencySymbol(currencyCodes, amount.fromCurrency)}
+                {addDecimals(amount.fromValue)}
               </p>
             </div>
             <Image

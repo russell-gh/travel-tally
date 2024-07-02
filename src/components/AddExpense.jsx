@@ -6,9 +6,9 @@ import {
   selectCurrencyNames,
   selectCurrencyRates,
   selectHomeCurrency,
-} from "../redux/expensesSlice";
+} from "../redux/tripsSlice";
 import Button from "../reusable-code/Button";
-import FormElement from "./FormElement";
+import FormElement from "../reusable-code/FormElement";
 
 export const AddExpense = () => {
   const dispatch = useDispatch();
