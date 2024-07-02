@@ -20,7 +20,6 @@ export function handleData(expense, home, data) {
   }
   expense.amount = newAmount;
   delete expense.currency;
-  console.log(expense, "Hi");
   return expense;
 }
 
