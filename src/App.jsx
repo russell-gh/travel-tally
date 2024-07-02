@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import Onboarding from "./components/Onboarding/Onboarding";
 import Signup from "./components/Signup";
 import "./css/App.css";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import { setData } from "./redux/tripsSlice";
 
 const App = () => {

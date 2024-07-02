@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { useEffect, useState } from "react";
-import FormElement from "../FormElement.jsx";
+import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
