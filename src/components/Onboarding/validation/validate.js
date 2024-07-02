@@ -7,7 +7,7 @@ export const validate = async (formData, schema) => {
   const _joi = schemaObjFromString(schema);
 
   try {
-    await _joi.validateAsync(formData, { abortEarly: false });
+    await _joi.validateAsync(formData, { abortEarly: true });
     return {};
   } catch (err) {
     //if tests are unsuccessful send err obj to errObj func below

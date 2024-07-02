@@ -26,6 +26,7 @@ const Onboarding = () => {
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
+    if (!Object.values(onboardingDetails).length) {return}
     const result = await validate(onboardingDetails, "trip");
     setErrors(result); //result returns promise
   };
