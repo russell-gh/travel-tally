@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formEvent, selectTrips } from "../../../redux/tripsSlice";
+import { formEvent, selectTrips } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 import { getArrayOfDates } from "../../../utils/utils";
 

@@ -1,6 +1,6 @@
 import { addDecimals, calculateTotalSpend } from "../../utils/utils";
 import { useSelector } from "react-redux";
-import { selectFilter } from "../../redux/tripsSlice";
+import { selectFilter } from "../../redux/homeSlice";
 import { getBudget } from "../../utils/utils";
 import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";

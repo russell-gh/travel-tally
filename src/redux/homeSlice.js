@@ -3,8 +3,8 @@ import { handleData } from "../utils/expenseData";
 import { getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
 
-export const tripsSlice = createSlice({
-  name: "trips",
+export const homeSlice = createSlice({
+  name: "home",
   initialState,
   reducers: {
     setData: (state, action) => {
@@ -89,20 +89,20 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
-} = tripsSlice.actions;
+} = homeSlice.actions;
 
-export const selectTrips = (state) => state.trips.trips;
-// export const selectExpenses = (state) => state.trips.trips[0].expenses;
-export const selectPopUp = (state) => state.trips.popUp;
-export const selectCurrencyCodes = (state) => state.trips.currencyCodes;
+export const selectTrips = (state) => state.home.trips;
+// export const selectExpenses = (state) => state.home.trips[0].expenses;
+export const selectPopUp = (state) => state.home.popUp;
+export const selectCurrencyCodes = (state) => state.home.currencyCodes;
 export const selectHomeCurrencySymbol = (state) =>
-  state.trips.travelInfo.homeCurrencySymbol;
-export const selectOrder = (state) => state.trips.order;
-export const selectFilter = (state) => state.trips.filter;
-export const selectFilterDate = (state) => state.trips.filterDate;
-export const selectCurrencyRates = (state) => state.trips.currencyRates;
-export const selectCurrencyNames = (state) => state.trips.currencyNames;
-export const selectHomeCurrency = (state) => state.trips.homeCurrency;
-export const selectSelectedTripId = (state) => state.trips.selectedTripId;
+  state.home.travelInfo.homeCurrencySymbol;
+export const selectOrder = (state) => state.home.order;
+export const selectFilter = (state) => state.home.filter;
+export const selectFilterDate = (state) => state.home.filterDate;
+export const selectCurrencyRates = (state) => state.home.currencyRates;
+export const selectCurrencyNames = (state) => state.home.currencyNames;
+export const selectHomeCurrency = (state) => state.home.homeCurrency;
+export const selectSelectedTripId = (state) => state.home.selectedTripId;
 
-export default tripsSlice.reducer;
+export default homeSlice.reducer;

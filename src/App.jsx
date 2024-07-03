@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import Onboarding from "./components/Onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
-import { selectPopUp, setData } from "./redux/tripsSlice";
+import { selectPopUp, setData } from "./redux/homeSlice";
 
 const App = () => {
   const dispatch = useDispatch();

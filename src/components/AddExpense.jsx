@@ -6,7 +6,7 @@ import {
   selectCurrencyNames,
   selectCurrencyRates,
   selectHomeCurrency,
-} from "../redux/tripsSlice";
+} from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";

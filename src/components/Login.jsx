@@ -2,7 +2,7 @@ import { useState } from "react";
 import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectTrips } from "../redux/tripsSlice";
+import { selectTrips } from "../redux/homeSlice";
 
 const Login = () => {
   const user = useSelector(selectUser);

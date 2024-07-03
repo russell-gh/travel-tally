@@ -7,7 +7,7 @@ import {
   selectPopUp,
   selectTrips,
   togglePopUp,
-} from "../../redux/tripsSlice";
+} from "../../redux/homeSlice";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import { addDecimals, getCurrencySymbol, unixToDate } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";

@@ -3,7 +3,7 @@ import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrip, selectTrips } from "../../redux/onboardingSlice.js";
+import { addTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 
@@ -51,8 +51,10 @@ const Onboarding = () => {
     );
     const errorIds = Object.keys(validationResult);
     const result = ids.some((id) => errorIds.includes(id));
-    console.log(result)
-    if (!result) {setVisible(true)}
+    console.log(result);
+    if (!result) {
+      setVisible(true);
+    }
   };
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

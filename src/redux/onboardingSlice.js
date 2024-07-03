@@ -7,7 +7,7 @@ export const onboardingSlice = createSlice({
   initialState,
   reducers: {
     addTrip: (state, { payload }) => {
-      console.log(payload)
+      console.log(payload);
       state.trips.push(payload);
     },
     addUser: (state, { payload }) => {
@@ -16,7 +16,6 @@ export const onboardingSlice = createSlice({
   },
 });
 
-export const { addTrip, addUser } = onboardingSlice.actions;
 export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
 export const selectUser = (state) => state.onboarding.user;
 export const { addTrip, addUser, addPass } = onboardingSlice.actions;

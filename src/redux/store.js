@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import onboardingReducer from "./onboardingSlice";
-import tripsReducer from "./tripsSlice";
+import homeReducer from "./homeSlice";
 
 export const store = configureStore({
   reducer: {
-    trips: tripsReducer,
+    home: homeReducer,
     onboarding: onboardingReducer,
   },
 });

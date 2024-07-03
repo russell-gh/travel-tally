@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectTrips } from "../../redux/tripsSlice";
+import { selectTrips } from "../../redux/homeSlice";
 import FilterTrip from "./filter/FilterTrip";
 import dayjs from "dayjs";
 

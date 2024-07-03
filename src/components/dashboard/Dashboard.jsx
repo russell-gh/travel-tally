@@ -4,7 +4,7 @@ import {
   selectSelectedTripId,
   selectTrips,
   togglePopUp,
-} from "../../redux/tripsSlice";
+} from "../../redux/homeSlice";
 import Button from "../../reusable-code/Button";
 import { findItem, getIndex } from "../../utils/utils";
 import AddExpense from "../AddExpense";
@@ -22,7 +22,7 @@ import {
   selectOrder,
   selectFilter,
   selectFilterDate,
-} from "../../redux/tripsSlice";
+} from "../../redux/homeSlice";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);

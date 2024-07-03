@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteExpense,
-  selectPopUp,
-  togglePopUp,
-} from "../../redux/tripsSlice";
+import { deleteExpense, selectPopUp, togglePopUp } from "../../redux/homeSlice";
 import Button from "../../reusable-code/Button";
 
 const DeletePopUp = () => {
