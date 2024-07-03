@@ -15,6 +15,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const redirect = useNavigate();
 
+  //Validates sign-in info. Displays error in console.
   const onSubmit = async (e) => {
     // console.log("form submitted", formData);
     const errObj = await validate(formData, "signup");

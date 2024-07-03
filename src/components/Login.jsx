@@ -3,6 +3,8 @@ import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
+import Joi from "joi";
+import { validate } from "./onboarding/validation/validate";
 
 const Login = () => {
   const user = useSelector(selectUser);
@@ -12,19 +14,24 @@ const Login = () => {
   const onInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  console.log(formData, user);
+  // console.log(formData, user);
   const localUser = JSON.parse(localStorage.getItem("user")); // selects "email" part of object. Turns back into object.
-  const onSubmit = (e) => {
-    if (
-      formData.password === localUser.password1 &&
-      formData.email === localUser.email
-    ) {
-      console.log("form submitted", formData);
-      if (trips.length) {
-        redirect("/dashboard");
-      } else redirect("/onboarding");
+  const onSubmit = async (e) => {
+    const errObj = await validate(formData, "signup");
+    if (errObj.password || errObj.email) {
+      console.log(errObj);
     } else {
-      console.log("wrong email/password");
+      if (
+        formData.password === localUser.password1 &&
+        formData.email === localUser.email
+      ) {
+        console.log("form submitted", formData);
+        if (trips.length) {
+          redirect("/dashboard");
+        } else redirect("/onboarding");
+      } else {
+        console.log("wrong email/password");
+      }
     }
   };
 
