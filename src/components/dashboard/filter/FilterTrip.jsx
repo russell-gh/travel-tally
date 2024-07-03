@@ -19,12 +19,10 @@ const FilterDate = () => {
       <FormElement
         label="Trips"
         type="select"
-        id="destinationId"
+        id="selectedTripId"
         name="destination"
         callback={(e) => {
-          dispatch(
-            formEvent({ id: e.target.id, value: Number(e.target.value) })
-          );
+          dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}
         options={arrDestinations.reverse()}
       />

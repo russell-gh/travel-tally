@@ -1,40 +1,63 @@
-import { useSelector } from "react-redux";
-import { selectCurrencyCodes, selectTrips } from "../../redux/tripsSlice";
 import { addDecimals, calculateTotalSpend } from "../../utils/utils";
+import { useSelector } from "react-redux";
+import { selectFilter } from "../../redux/tripsSlice";
+import { getBudget } from "../../utils/utils";
+import BudgetPieChart from "./BudgetPieChart";
+import CategoryGauge from "./CategoryGauge";
+import { useMemo } from "react";
 
-const Budget = ({ index }) => {
-  const trips = useSelector(selectTrips);
-  const currencyCodes = useSelector(selectCurrencyCodes);
+const Budget = ({ expenses, homeCurrencySymbol, details }) => {
+  const filter = useSelector(selectFilter);
 
-  if (!trips || trips.length === 0) {
+  if (!expenses) {
     return;
   }
 
-  const expenses = trips[index].expenses;
+  // const totalSpend = useMemo(() => {
+  //   calculateTotalSpend(expenses);
+  // }, [expenses]);
+  // const budget = useMemo(() => {
+  //   getBudget(details, filter);
+  // }, [details, filter]);
+  // const difference = useMemo(() => {
+  //   addDecimals(budget * 100 - totalSpend * 100);
+  // }, [budget, totalSpend]);
+
   const totalSpend = calculateTotalSpend(expenses);
-
-  if (!currencyCodes || !trips) {
-    return;
-  }
-  const currencySymbol = trips[index].details.homeCurrencySymbol;
-
-  const budgetTotal = addDecimals(trips[index].details.budgetTotal);
+  const budget = getBudget(details, filter);
+  const difference = addDecimals(budget * 100 - totalSpend * 100);
 
   return (
-    <div className="budget">
-      <p>
-        Spend: {currencySymbol}
-        {totalSpend}
-      </p>
-      <p>
-        Total budget: {currencySymbol}
-        {budgetTotal}
-      </p>
-      <p>
-        Money left: {currencySymbol}
-        {budgetTotal - totalSpend}
-      </p>
-    </div>
+    <>
+      <div className="chart">
+        {filter === "Show All" ? (
+          <BudgetPieChart details={details} />
+        ) : (
+          <CategoryGauge budget={budget} spend={totalSpend} />
+        )}
+      </div>
+      <div className="budget">
+        <p>
+          Spend: {homeCurrencySymbol}
+          {totalSpend}
+        </p>
+        <p>
+          Budget: {homeCurrencySymbol}
+          {budget}
+        </p>
+        {difference > 0 ? (
+          <p className="positive">
+            Money left: {homeCurrencySymbol}
+            {difference}
+          </p>
+        ) : (
+          <p className="negative">
+            Overspend: {homeCurrencySymbol}
+            {Math.abs(difference)}
+          </p>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -1,9 +1,19 @@
+import { unixToDate } from "./utils";
+
 export const getSortedandFiltered = (data, order, filter, filterDate) => {
   let filtered = [...data];
 
   // select
   switch (order) {
     case "Newest first":
+      filtered.sort((a, b) => {
+        if (a.date < b.date) {
+          return 1;
+        } else if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      });
       break;
     case "Price: high to low":
       filtered.sort((a, b) => {
@@ -49,12 +59,11 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
   }
 
   //filterDate
-
   if (filterDate === "All Dates") {
     ("everything stays the same");
   } else {
     filtered = filtered.filter((item) => {
-      return item.date === filterDate;
+      return unixToDate(item.date) === filterDate;
     });
     if (filtered.length === 0) {
       console.log("Something went wrong with filtering the date");

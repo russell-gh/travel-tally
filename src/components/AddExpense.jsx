@@ -9,9 +9,17 @@ import {
 } from "../redux/tripsSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
+import { useState, useEffect } from "react";
+import { validate } from "./Onboarding/validation/validate";
 
 export const AddExpense = () => {
   const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    split: false,
+    currency: "GBP",
+    category: "Food",
+  });
+  const [errors, setErrors] = useState({});
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Food", name: "Food" },
@@ -26,24 +34,29 @@ export const AddExpense = () => {
 
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
-  const expense = {};
   const dataInput = (e) => {
+    getValidationResult();
     let target = e.target.name;
     let value = e.target.value;
-    expense[target] = value;
+    if (value === "true") value = true;
+    if (value === "false") value = false;
+    setFormData({ ...formData, [target]: value });
   };
 
-  // const handleSubmit = () => {
-  //   let result;
-  //   result = handleData({ ...expense }, homeCurrency, apiData);
-  //   console.log(result, "HERE");
-  //   dispatch(addExpenseData(result));
-  // };
+  const getValidationResult = async () => {
+    if (!Object.values(formData).length) {
+      return;
+    }
+    const result = await validate(formData, "expense");
+    setErrors(result); //result returns promise
+    console.log(errors);
+  };
 
   const handleSubmit = () => {
-    console.log(expense, "PRE");
-    dispatch(addExpenseData(expense));
+    console.log("hello world");
+    dispatch(addExpenseData(formData));
   };
+
   return (
     <div className="expenseContainer">
       <FormElement
@@ -74,6 +87,7 @@ export const AddExpense = () => {
           label={"Amount"}
           name={"amount"}
           id={"expenseAmount"}
+          minValue={0}
           callback={dataInput}
         />
         <FormElement

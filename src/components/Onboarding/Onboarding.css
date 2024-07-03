@@ -1,6 +1,10 @@
-form {
-    display: flex;
-    flex-direction: column;
-    margin: 2em;
-    
+form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2em;
+}
+.viewMore {
+  width: 100%;
+  margin: auto;
 }
