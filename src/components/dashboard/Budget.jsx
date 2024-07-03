@@ -12,9 +12,15 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
     return;
   }
 
-  const totalSpend = calculateTotalSpend(expenses);
-  const budget = getBudget(details, filter);
-  const difference = addDecimals(budget * 100 - totalSpend * 100);
+  const totalSpend = useMemo(() => {
+    calculateTotalSpend(expenses);
+  }, [expenses]);
+  const budget = useMemo(() => {
+    getBudget(details, filter);
+  }, [details, filter]);
+  const difference = useMemo(() => {
+    addDecimals(budget * 100 - totalSpend * 100);
+  }, [budget, totalSpend]);
 
   return (
     <>
