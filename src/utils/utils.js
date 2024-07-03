@@ -46,11 +46,11 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   return currencyCodes[currencyCode].symbol;
 }
 
-export function getArrayOfDates(data, key) {
+export function getArrayOfDates(data) {
   let copy = [...data];
   //makes an array of the dates
   copy = copy.map((item) => {
-    return unixToDate(item[key]);
+    return item.date;
   });
 
   // removes duplicates
@@ -58,12 +58,17 @@ export function getArrayOfDates(data, key) {
 
   // get dates in right order
   copy.sort((a, b) => {
-    if (a > b) {
+    if (a < b) {
       return 1;
-    } else if (a < b) {
+    } else if (a > b) {
       return -1;
     }
     return 0;
+  });
+
+  // turns unixCode to timestamp
+  copy = copy.map((item) => {
+    return unixToDate(item);
   });
 
   //add All Dates as first element
@@ -105,7 +110,6 @@ export function getBudget(data, value) {
     case "Transport":
     case "Other":
       let string = "budget" + value;
-      console.log(string);
       budget = data[string];
       break;
     default:

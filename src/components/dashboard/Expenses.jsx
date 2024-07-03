@@ -1,20 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyCodes,
-  selectFilter,
-  selectFilterDate,
-  selectOrder,
   selectPopUp,
   selectTrips,
   togglePopUp,
 } from "../../redux/homeSlice";
-import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
-import { addDecimals, getCurrencySymbol, unixToDate } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
+import Message from "./Message";
+import DescriptionAndDate from "./DescriptionAndDate";
+import ExpenseAmount from "./ExpenseAmount";
 
-const Expenses = ({ filtered, homeCurrencySymbol }) => {
+const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
   const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
@@ -26,6 +24,14 @@ const Expenses = ({ filtered, homeCurrencySymbol }) => {
     return;
   }
 
+  if (expenses.length === 0) {
+    return <Message message="You have no expenses yet." className="mt" />;
+  }
+
+  if (filtered.length === 0) {
+    return <Message message="There are no matches" className="mt" />;
+  }
+
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
@@ -33,20 +39,16 @@ const Expenses = ({ filtered, homeCurrencySymbol }) => {
         return (
           <div className="expenseItem" key={id}>
             <CategoryIcon category={category} />
-            <div>
-              <h2>{description ? description : category}</h2>
-              <p>{unixToDate(date)}</p>
-            </div>
-            <div>
-              <p>
-                {homeCurrencySymbol}
-                {addDecimals(amount.toValue)}
-              </p>
-              <p className="foreignAmount">
-                {getCurrencySymbol(currencyCodes, amount.fromCurrency)}
-                {addDecimals(amount.fromValue)}
-              </p>
-            </div>
+            <DescriptionAndDate
+              description={description}
+              category={category}
+              date={date}
+            />
+            <ExpenseAmount
+              homeCurrencySymbol={homeCurrencySymbol}
+              amount={amount}
+              currencyCodes={currencyCodes}
+            />
             <Image
               src="../src/img/delete.svg"
               alt="delete"

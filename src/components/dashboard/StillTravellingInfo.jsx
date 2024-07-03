@@ -5,7 +5,7 @@ import { selectFilter } from "../../redux/homeSlice";
 import { getBudget } from "../../utils/utils";
 
 const StillTravellingInfo = ({ endDate, details, amountOfDays }) => {
-  const { budgetTotal, homeCurrencySymbol, budgetFood } = details;
+  const { homeCurrencySymbol } = details;
   const filter = useSelector(selectFilter);
 
   const budget = getBudget(details, filter);

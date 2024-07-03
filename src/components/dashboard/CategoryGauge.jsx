@@ -5,9 +5,9 @@ const CategoryGauge = ({ budget, spend }) => {
     <Gauge
       width={150}
       height={150}
-      value={spend}
-      valueMax={budget}
-      text={({ value, valueMax }) => `${value} / ${valueMax}`}
+      value={Number(spend)}
+      valueMax={Number(budget)}
+      text={`${spend} / ${budget}`}
     />
   );
 };

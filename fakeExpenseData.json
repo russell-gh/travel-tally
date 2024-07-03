@@ -24,7 +24,8 @@
         },
         "category": "Food",
         "description": "lunch",
-        "date": 1719499900000,
+        "startdate": 1719499900000,
+        "enddate": 1719499900000,
         "completed": true,
         "splitBill": false
       },
@@ -38,7 +39,8 @@
         },
         "category": "Other",
         "description": "dress",
-        "date": 1719499900000,
+        "startdate": 1719672700000,
+        "enddate": 1719499900000,
         "completed": true,
         "splitBill": false
       },

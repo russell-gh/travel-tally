@@ -4,26 +4,11 @@ import { selectFilter } from "../../redux/homeSlice";
 import { getBudget } from "../../utils/utils";
 import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";
-import { useMemo } from "react";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const filter = useSelector(selectFilter);
 
-  if (!expenses) {
-    return;
-  }
-
-  // const totalSpend = useMemo(() => {
-  //   calculateTotalSpend(expenses);
-  // }, [expenses]);
-  // const budget = useMemo(() => {
-  //   getBudget(details, filter);
-  // }, [details, filter]);
-  // const difference = useMemo(() => {
-  //   addDecimals(budget * 100 - totalSpend * 100);
-  // }, [budget, totalSpend]);
-
-  const totalSpend = calculateTotalSpend(expenses);
+  const totalSpend = expenses.length === 0 ? 0 : calculateTotalSpend(expenses);
   const budget = getBudget(details, filter);
   const difference = addDecimals(budget * 100 - totalSpend * 100);
 
