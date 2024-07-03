@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export function calculateTotalSpend(expenses) {
   if (!expenses || expenses.length === 0) {
     return;
@@ -55,7 +57,6 @@ export function getArrayOfDates(data) {
 
   // removes duplicates
   copy = [...new Set(copy)];
-
   // get dates in right order
   copy.sort((a, b) => {
     if (a < b) {
@@ -122,4 +123,62 @@ export function getBudget(data, value) {
   }
 
   return addDecimals(budget);
+}
+
+export function getSpendToday(startDate, data) {
+  const now = dayjs();
+  const index = now.diff(startDate, "day");
+  let spendToday = data[index].map((item) => {
+    return item.amount.toValue;
+  });
+  if (spendToday.length === 0) {
+    spendToday = 0;
+  } else if (spendToday.length !== 0) {
+    spendToday = spendToday.reduce((acc, value) => {
+      return acc + value;
+    });
+
+    if (isNaN(spendToday)) {
+      console.log("Something went wrong with calculating total.");
+      return "Something went wrong with the calculations";
+    }
+
+    spendToday = Number(spendToday / 100).toFixed(2);
+    return spendToday;
+  }
+}
+
+export function getSpendPerDay(budgetPerDay, data) {
+  // Create an array with the expense amounts and unix
+  let arr = data.map((arr) => {
+    return arr.map((item) => ({
+      amount: item.amount.toValue,
+      startDate: item.startDate,
+    }));
+  });
+
+  // Create array with totalspend, budgetperday, difference and differences from days before
+  let cumulativeDifference = 0;
+  let arrValues = {};
+
+  arr.forEach((values) => {
+    const totalSpendPerDay = values.reduce(
+      (acc, value) => acc + value.amount,
+      0
+    );
+    const difference = budgetPerDay - totalSpendPerDay;
+    const cumulativeDifferenceForDay = cumulativeDifference;
+    cumulativeDifference += difference;
+    const startDate = unixToDate(values[0].startDate); // Assuming all items in the same day have the same startDate
+
+    arrValues[startDate] = {
+      totalSpendPerDay,
+      budgetPerDay,
+      difference,
+      cumulativeDifference: cumulativeDifferenceForDay,
+    };
+  });
+
+  console.log(arrValues);
+  return arrValues;
 }

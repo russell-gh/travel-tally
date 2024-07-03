@@ -121,7 +121,7 @@ h1 {
 .containerBudget {
   display: grid;
   padding: 0px 10px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr fit-content(100px);
 }
 
@@ -129,7 +129,7 @@ h1 {
   display: inherit;
   grid-row: 1;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
   justify-self: center;
 }
 

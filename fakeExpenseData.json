@@ -10,21 +10,21 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Netherlands",
-      "startDate": 1719499900000,
+      "startDate": 1719442800000,
       "endDate": 1721343600000
     },
     "expenses": [
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 2000,
+          "fromValue": 20000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 2500
+          "toValue": 25000
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719499900000,
+        "startDate": 1719442800000,
         "endDate": 1721343600000,
         "completed": true,
         "splitBill": false
@@ -39,8 +39,8 @@
         },
         "category": "Other",
         "description": "dress",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -69,8 +69,8 @@
         },
         "category": "Food",
         "description": "",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -84,23 +84,23 @@
         },
         "category": "Activities",
         "description": "movies",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
         "completed": true,
         "splitBill": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 100000,
+          "fromValue": 20000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 12000
+          "toValue": 22000
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719442800000,
+        "endDate": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -114,8 +114,8 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719961200000,
+        "endDate": 1720220400000,
         "completed": true,
         "splitBill": false
       },
@@ -129,8 +129,8 @@
         },
         "category": "Transport",
         "description": "train to Utrecht",
-        "startDate": 1719499900000,
-        "endDate": 1719499900000,
+        "startDate": 1719442800000,
+        "endDate": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -144,8 +144,8 @@
         },
         "category": "Food",
         "description": "coffe and coockie",
-        "startDate": 1719672700000,
-        "endDate": 1719672700000,
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -159,8 +159,8 @@
         },
         "category": "Activities",
         "description": "paleis op de dam",
-        "startDate": 1719499900000,
-        "endDate": 1719499900000,
+        "startDate": 1719442800000,
+        "endDate": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -204,8 +204,8 @@
         },
         "category": "Food",
         "description": "Dinner at square",
-        "startDate": 1719499900000,
-        "endDate": 1719499900000,
+        "startDate": 1719442800000,
+        "endDate": 1719442800000,
         "completed": true,
         "splitBill": false
       },

@@ -7,17 +7,16 @@ export const createExpensesArray = (expenses, details) => {
   // calculate days of trip
   const startDateTrip = dayjs(startDate);
   const endDateTrip = dayjs(endDate);
-  const amountOfDays = endDateTrip.diff(startDateTrip, "day");
+  const amountOfDaysTrip = endDateTrip.diff(startDateTrip, "day") + 1;
 
   //make array with empty arrays inside. Same amount as travel days
-  let expensesArray = new Array(amountOfDays + 1).fill(null).map(() => []);
+  let expensesArray = new Array(amountOfDaysTrip).fill(null).map(() => []);
 
   // puts same day expenses in the same array
   expenses.map((item) => {
     if (item.startDate === item.endDate) {
-      for (let i = 0; i < amountOfDays + 1; i++) {
+      for (let i = 0; i < amountOfDaysTrip; i++) {
         const date = unixToDate(startDateTrip.add(i, "day"));
-        console.log(date === unixToDate(item.startDate));
         if (date === unixToDate(item.startDate)) {
           expensesArray[i].push(item);
           break;
@@ -27,7 +26,6 @@ export const createExpensesArray = (expenses, details) => {
       const itemStartDate = dayjs(item.startDate);
       const itemEndDate = dayjs(item.endDate);
       const amountOfDays = itemEndDate.diff(itemStartDate, "day") + 1;
-
       // divides the budget throught the amount of days
       const dailyAmount = {
         fromValue: item.amount.fromValue / amountOfDays,
@@ -36,17 +34,21 @@ export const createExpensesArray = (expenses, details) => {
 
       // splits up the expense object and puts in the right part of array
       for (let j = 0; j < amountOfDays; j++) {
-        const currentDate = itemStartDate.add(j, "day");
+        const currentDate = itemStartDate.add(j, "day").unix() * 1000;
         const copy = {
           ...item,
-          startDate: currentDate.toISOString(),
-          endDate: currentDate.toISOString(),
-          amount: { ...item.amount, dailyAmount },
+          startDate: currentDate,
+          endDate: currentDate,
+          amount: {
+            ...item.amount,
+            fromValue: dailyAmount.fromValue,
+            toValue: dailyAmount.toValue,
+          },
+          id: `${item.id} ${item.id}${j}`,
         };
-        for (let k = 0; k < amountOfDays; k++) {
+        for (let k = 0; k < amountOfDaysTrip; k++) {
           const date = unixToDate(startDateTrip.add(k, "day"));
-          if (date === unixToDate(currentDate)) {
-            console.log(expensesArray[k]);
+          if (date === unixToDate(copy.startDate)) {
             expensesArray[k].push(copy);
             break;
           }
@@ -55,6 +57,5 @@ export const createExpensesArray = (expenses, details) => {
     }
   });
 
-  console.log(expensesArray);
   return expensesArray;
 };

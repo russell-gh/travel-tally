@@ -23,22 +23,22 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
       </div>
       <div className="budget">
         <p>
-          Spend: {homeCurrencySymbol}
-          {totalSpend}
-        </p>
-        <p>
           Budget: {homeCurrencySymbol}
           {budget}
         </p>
-        {difference > 0 ? (
+        <p>
+          Spend: {homeCurrencySymbol}
+          {totalSpend}
+        </p>
+        {difference < 0 ? (
+          <p className="negative">
+            Overspend: {homeCurrencySymbol}
+            {Math.abs(difference).toFixed(2)}
+          </p>
+        ) : (
           <p className="positive">
             Money left: {homeCurrencySymbol}
             {difference}
-          </p>
-        ) : (
-          <p className="negative">
-            Overspend: {homeCurrencySymbol}
-            {Math.abs(difference)}
           </p>
         )}
       </div>

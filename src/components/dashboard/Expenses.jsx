@@ -18,7 +18,9 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
 
-  const stringToComponent = { DeletePopUp: <DeletePopUp /> };
+  const stringToComponent = {
+    DeletePopUp: <DeletePopUp />,
+  };
 
   if (!currencyCodes || !trips) {
     return;
@@ -50,9 +52,10 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
               amount={amount}
               currencyCodes={currencyCodes}
             />
-            <Image
+            <img
               src="../src/img/delete.svg"
               alt="delete"
+              className="delete"
               onClick={() => {
                 dispatch(
                   togglePopUp({

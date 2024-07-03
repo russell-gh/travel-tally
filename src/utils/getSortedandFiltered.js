@@ -7,9 +7,9 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
   switch (order) {
     case "Newest first":
       filtered.sort((a, b) => {
-        if (a.date < b.date) {
+        if (a.startDate < b.startDate) {
           return 1;
-        } else if (a.date > b.date) {
+        } else if (a.startDate > b.startDate) {
           return -1;
         }
         return 0;
@@ -63,7 +63,7 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
     ("everything stays the same");
   } else {
     filtered = filtered.filter((item) => {
-      return unixToDate(item.date) === filterDate;
+      return unixToDate(item.startDate) === filterDate;
     });
     if (filtered.length === 0) {
       console.log("Something went wrong with filtering the date");

@@ -15,6 +15,7 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "./Message";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -31,9 +32,11 @@ const Dashboard = () => {
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, startDate, endDate } = details;
-  createExpensesArray(expenses, details);
 
-  const _expenses = [...expenses].reverse();
+  let expensesArray = createExpensesArray(expenses, details); //should this be in a useEffect?
+
+  let _expenses = [...expensesArray].reverse();
+  _expenses = _expenses.flat();
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
 
   return (
@@ -50,9 +53,10 @@ const Dashboard = () => {
           homeCurrencySymbol={homeCurrencySymbol}
           startDate={startDate}
           endDate={endDate}
+          expensesArray={expensesArray}
         />
         <ControlsAddExpense />
-        <ControlsExpenses index={index} />
+        <ControlsExpenses filtered={filtered} />
       </div>
       {}
       <Expenses
