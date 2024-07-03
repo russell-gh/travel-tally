@@ -10,7 +10,8 @@ const FormElement = ({
   options,
   callback,
   error,
-  value
+  value,
+  choose,
 }) => {
   switch (type) {
     case "text":
@@ -19,7 +20,15 @@ const FormElement = ({
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
-          <input type={type} id={id} name={name} value={value} onChange={e=>{callback(e,id)}} />
+          <input
+            type={type}
+            id={id}
+            name={name}
+            value={value}
+            onChange={(e) => {
+              callback(e, id);
+            }}
+          />
           {error && <p>{error}</p>}
         </>
       );
@@ -30,8 +39,11 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name}  value={value} 
-            onChange={e=>{callback(e,id)}}
+            name={name}
+            value={value}
+            onChange={(e) => {
+              callback(e, id);
+            }}
             min={minValue}
             max={maxValue}
           />
@@ -46,9 +58,12 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name} value={value} 
+            name={name}
+            value={value}
             accept="image/*"
-            onChange={e=>{callback(e,id)}}
+            onChange={(e) => {
+              callback(e, id);
+            }}
           />
           {error && <p>{error}</p>}
         </>
@@ -60,10 +75,13 @@ const FormElement = ({
           <input
             type={type}
             id={id}
-            name={name} value={value} 
+            name={name}
+            value={value}
             min={minDate}
             max={maxDate}
-            onChange={e=>{callback(e,id)}}
+            onChange={(e) => {
+              callback(e, id);
+            }}
           />
           {error && <p>{error}</p>}
         </>
@@ -71,7 +89,15 @@ const FormElement = ({
     case "checkbox":
       return (
         <>
-          <input type={type} id={id} name={name} value={value}  onChange={e=>{callback(e,id)}}/>
+          <input
+            type={type}
+            id={id}
+            name={name}
+            value={value}
+            onChange={(e) => {
+              callback(e, id);
+            }}
+          />
           {label && <label htmlFor={id}>{label}:</label>}
           {error && <p>{error}</p>}
         </>
@@ -80,8 +106,18 @@ const FormElement = ({
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
-          <select name={name} id={id} onChange={e=>{callback(e,id)}}>
-            <option disabled value="">Please choose from the below</option>
+          <select
+            name={name}
+            id={id}
+            onChange={(e) => {
+              callback(e, id);
+            }}
+          >
+            {choose && (
+              <option disabled value="">
+                Please choose from the below
+              </option>
+            )}
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}
@@ -93,7 +129,7 @@ const FormElement = ({
       );
     case "button":
       return (
-        <button type="submit" onClick={e=>callback(e)}>
+        <button type="submit" onClick={(e) => callback(e)}>
           Submit
         </button>
       );
