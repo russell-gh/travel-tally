@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { expenseSchema, tripSchema } from "./schemas";
+import { expenseSchema, tripSchema, signupSchema } from "./schemas";
 
 //pass through form data as obj, schema as string and any callback which needs to occur on successful tests.
 //the func will return an empty obj on success or obj of err messages on failure
@@ -21,8 +21,8 @@ const schemaObjFromString = (schema) => {
     case "trip": {
       return Joi.object(tripSchema);
     }
-    case "login": {
-      return Joi.object(loginSchema);
+    case "signup": {
+      return Joi.object(signupSchema);
     }
     case "expense": {
       return Joi.object(expenseSchema);
