@@ -1,4 +1,6 @@
-* {
+body p,
+body h1,
+body h2 {
   margin: 0px;
 }
 
@@ -103,4 +105,42 @@ h1 {
   justify-content: space-between;
   align-items: flex-end;
   gap: 10px;
+}
+
+.containerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.containerTitle p {
+  color: green;
+}
+
+.containerBudget {
+  display: grid;
+  padding: 0px 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr fit-content(100px);
+}
+
+.chart {
+  display: inherit;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.tripInfo {
+  justify-self: flex-end;
 }
