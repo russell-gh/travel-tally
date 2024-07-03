@@ -53,9 +53,8 @@ export const AddExpense = () => {
   };
 
   const handleSubmit = () => {
-    if (Object.values(formData).length === 6) {
-      dispatch(addExpenseData(formData));
-    }
+    console.log("hello world");
+    dispatch(addExpenseData(formData));
   };
 
   return (

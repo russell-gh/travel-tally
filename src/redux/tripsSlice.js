@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
-import { findIndex, getCurrencySymbol, getIndex } from "../utils/utils";
+import { getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
 
 export const tripsSlice = createSlice({
@@ -69,7 +69,7 @@ export const tripsSlice = createSlice({
       state.popUp = {};
       // Find index of trip from id
       const indexOf = state.trips.findIndex((trip) => {
-        return trip.id === state.destinationId;
+        return trip.id === state.selectedTripId;
       });
       // Create variable for the correct trip
       const thisTrip = state.trips[indexOf];
