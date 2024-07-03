@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { tripSchema } from "./schemas";
+import { expenseSchema, tripSchema } from "./schemas";
 
-//pass through form data as obj, schema as string and any callback which needs to occur on successful tests. 
+//pass through form data as obj, schema as string and any callback which needs to occur on successful tests.
 //the func will return an empty obj on success or obj of err messages on failure
 export const validate = async (formData, schema) => {
   const _joi = schemaObjFromString(schema);
@@ -23,6 +23,9 @@ const schemaObjFromString = (schema) => {
     }
     case "login": {
       return Joi.object(loginSchema);
+    }
+    case "expense": {
+      return Joi.object(expenseSchema);
     }
   }
 };
