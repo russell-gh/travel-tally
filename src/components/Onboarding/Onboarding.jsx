@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
-import { SliderComp } from "./SliderComp.jsx";
+import { BudgetSlider } from "./BudgetSlider.jsx";
 
 const Onboarding = () => {
   // const trips = useSelector(selectTrips);
@@ -128,6 +128,7 @@ const Onboarding = () => {
               defaultValue={question.defaultValue}
               error={errors[question.id]}
               choose={question.choose}
+              onboardingDetails={onboardingDetails}
               callback={
                 question.type === "button" ? handleSubmit : handleChange
               }
@@ -143,22 +144,24 @@ const Onboarding = () => {
       <form>
         {createFormSection(onboardingQuestions.primaryForm)}
 
-        {visible && (      
-            onboardingQuestions.secondaryForm.map((question) => {
-          return (
-            <SliderComp
-              label={question.label}
-              budgetTotal={onboardingDetails.budgetTotal}
-              id={question.id}
-              callback={handleChange}
-            />
-          );
-        })
+        {visible && (
+          <div>
+            {onboardingQuestions.secondaryForm.map((question) => {
+              return (
+                <BudgetSlider
+                  key={question.id}
+                  label={question.label}
+                  budgetTotal={onboardingDetails.budgetTotal}
+                  id={question.id}
+                  callback={handleChange}
+                  onboardingDetails={onboardingDetails}
+                />
+              );
+            })}
 
+            {createFormSection(onboardingQuestions.submit)}
+          </div>
         )}
-
-
-        {createFormSection(onboardingQuestions.submit)}
       </form>
     </div>
   );
