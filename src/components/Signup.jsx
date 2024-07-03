@@ -18,8 +18,9 @@ const Signup = () => {
 
     if (formData.signupPassword1 === formData.signupPassword2) {
       dispatch(addUser(formData));
+      localStorage.setItem("user", JSON.stringify(formData));
       console.log("passwords match", formData);
-      redirect("/onboarding");
+      redirect("/login");
     } else {
       console.log("passwords don't match", formData);
     }

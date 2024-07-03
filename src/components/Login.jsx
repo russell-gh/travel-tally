@@ -7,20 +7,22 @@ const Login = () => {
   const user = useSelector(selectUser);
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
+
   const onInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
   console.log(formData, user);
-
+  const localUser = JSON.parse(localStorage.getItem("user")); // selects "email" part of object. Turns back into object.
   const onSubmit = (e) => {
-    // if (formData.password === state.user.password) {
-    //   console.log("form submitted", formData);
-    //   redirect("/dashboard");
-    // } else {
-    //   console.log("wrong password");
-    // }
-
-    console.log(user);
+    if (
+      formData.password === localUser.password1 &&
+      formData.email === localUser.email
+    ) {
+      console.log("form submitted", formData);
+      redirect("/dashboard");
+    } else {
+      console.log("wrong email/password");
+    }
   };
 
   return (
