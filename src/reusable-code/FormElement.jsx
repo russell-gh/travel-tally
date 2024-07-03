@@ -12,6 +12,7 @@ const FormElement = ({
   error,
   value,
   choose,
+  list,
 }) => {
   switch (type) {
     case "text":
@@ -25,6 +26,7 @@ const FormElement = ({
             id={id}
             name={name}
             value={value}
+            list={list}
             onChange={(e) => {
               callback(e, id);
             }}

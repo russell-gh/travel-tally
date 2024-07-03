@@ -4,22 +4,30 @@ import "../css/expense.css";
 import {
   addExpenseData,
   selectCurrencyNames,
-  selectCurrencyRates,
-  selectHomeCurrency,
+  selectSelectedTripId,
+  selectTrips,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";
 import { validate } from "./Onboarding/validation/validate";
+import { date } from "joi";
+import { getExpenseList } from "../utils/expenseData";
 
 export const AddExpense = () => {
   const dispatch = useDispatch();
+  const tripID = useSelector(selectSelectedTripId);
+  const trips = useSelector(selectTrips);
+  let expenses = getExpenseList(tripID, trips);
   const [formData, setFormData] = useState({
+    startDate: new Date().toLocaleDateString("en-CA"),
+    endDate: new Date().toLocaleDateString("en-CA"),
     split: false,
     currency: "GBP",
     category: "Food",
   });
   const [errors, setErrors] = useState({});
+  let [multi, setMulti] = useState(false);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Food", name: "Food" },
@@ -31,7 +39,6 @@ export const AddExpense = () => {
   if (!currencies) {
     return <p>Loading</p>;
   }
-
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const dataInput = (e) => {
@@ -40,6 +47,7 @@ export const AddExpense = () => {
     let value = e.target.value;
     if (value === "true") value = true;
     if (value === "false") value = false;
+
     setFormData({ ...formData, [target]: value });
   };
 
@@ -53,32 +61,83 @@ export const AddExpense = () => {
   };
 
   const handleSubmit = () => {
-    console.log("hello world");
-    dispatch(addExpenseData(formData));
+    if (Object.keys(errors).length) {
+      console.log("FAIL", errors);
+      return;
+    }
+    if (formData.description && formData.amount) {
+      console.log("pass");
+      if (formData.endDate === "") {
+        formData.endDate = formData.startDate;
+      }
+      dispatch(addExpenseData(formData));
+    } else {
+      console.log("FAIL FINAL");
+      return;
+    }
+  };
+  const multiDay = () => {
+    setMulti((multi = !multi));
+  };
+  const renderMultiDay = () => {
+    if (multi) {
+      return (
+        <FormElement
+          type={"date"}
+          label={"End date"}
+          name={"endDate"}
+          value={formData.endDate}
+          id={"endDatePicker"}
+          error={errors["endDate"]}
+          callback={dataInput}
+        />
+      );
+    } else {
+      return <></>;
+    }
   };
 
   return (
     <div className="expenseContainer">
-      <FormElement
-        type={"date"}
-        label={"Date"}
-        name={"date"}
-        id={"datePicker"}
-        callback={dataInput}
-      />
+      <div>
+        <FormElement
+          type={"date"}
+          label={"Date"}
+          name={"startDate"}
+          value={formData.startDate}
+          id={"datePicker"}
+          callback={dataInput}
+        />
+        {renderMultiDay()}
+        <FormElement
+          type={"checkbox"}
+          label={"Multiple days"}
+          name={"dateCheck"}
+          id={"dateCheck"}
+          callback={multiDay}
+        />
+      </div>
       <FormElement
         type={"text"}
         label={"Description"}
         name={"description"}
         id={"expenseDescription"}
+        error={errors["description"]}
+        list={"descriptionOptions"}
         callback={dataInput}
       />
+      <datalist id="descriptionOptions">
+        {expenses.map((expense) => {
+          return <option value={expense.description}></option>;
+        })}
+      </datalist>
       <FormElement
         type={"select"}
         label={"Category"}
         name={"category"}
         id={"categorySelectExpense"}
         options={categories}
+        error={errors["category"]}
         callback={dataInput}
       />
       <div>
@@ -88,6 +147,7 @@ export const AddExpense = () => {
           name={"amount"}
           id={"expenseAmount"}
           minValue={0}
+          error={errors["amount"]}
           callback={dataInput}
         />
         <FormElement
