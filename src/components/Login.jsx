@@ -2,12 +2,13 @@ import { useState } from "react";
 import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectTrips } from "../redux/tripsSlice";
 
 const Login = () => {
   const user = useSelector(selectUser);
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
-
+  const trips = useSelector(selectTrips);
   const onInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -19,7 +20,9 @@ const Login = () => {
       formData.email === localUser.email
     ) {
       console.log("form submitted", formData);
-      redirect("/dashboard");
+      if (trips.length) {
+        redirect("/dashboard");
+      } else redirect("/onboarding");
     } else {
       console.log("wrong email/password");
     }
