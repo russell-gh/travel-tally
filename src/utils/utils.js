@@ -28,8 +28,14 @@ export function addDecimals(number) {
 
 export function getIndex(data, id) {
   const indexOf = data.findIndex((item) => {
-    return item.expenseId === id;
+    return item.id === id;
   });
+
+  if (indexOf === -1) {
+    console.log("something went wrong getting the index");
+    return;
+  }
+
   return indexOf;
 }
 
@@ -44,31 +50,26 @@ export function getArrayOfDates(data, key) {
   let copy = [...data];
   //makes an array of the dates
   copy = copy.map((item) => {
-    return item[key];
+    return unixToDate(item[key]);
   });
 
   // removes duplicates
   copy = [...new Set(copy)];
 
-  if (key === "date") {
-    //add All Dates as first element
-    copy.unshift("All Dates");
-  }
-
-  return copy;
-}
-
-export function findIndex(data, id) {
-  const indexOf = data.findIndex((item) => {
-    return item.id === id;
+  // get dates in right order
+  copy.sort((a, b) => {
+    if (a > b) {
+      return 1;
+    } else if (a < b) {
+      return -1;
+    }
+    return 0;
   });
 
-  if (indexOf === -1) {
-    console.log("something went wrong getting the index");
-    return;
-  }
+  //add All Dates as first element
+  copy.unshift("All Dates");
 
-  return indexOf;
+  return copy;
 }
 
 export function findItem(data, id) {
@@ -82,4 +83,35 @@ export function findItem(data, id) {
   }
 
   return item;
+}
+
+export function unixToDate(unix) {
+  const date = new Date(unix); //converts unix back to object
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
+  return formattedDate;
+}
+
+export function getBudget(data, value) {
+  let budget;
+
+  switch (value) {
+    case "Show All":
+      budget = data.budgetTotal;
+      break;
+    case "Hotel":
+    case "Food":
+    case "Activities":
+    case "Transport":
+    case "Other":
+      let string = "budget" + value;
+      console.log(string);
+      budget = data[string];
+      break;
+    default:
+      console.log("something went wrong with getting the budget");
+      break;
+  }
+
+  return addDecimals(budget);
 }

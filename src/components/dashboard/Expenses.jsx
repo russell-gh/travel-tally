@@ -6,50 +6,36 @@ import {
   selectOrder,
   selectPopUp,
   selectTrips,
-  toggleShowPopUp,
+  togglePopUp,
 } from "../../redux/tripsSlice";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
-import { addDecimals, getCurrencySymbol } from "../../utils/utils";
+import { addDecimals, getCurrencySymbol, unixToDate } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
 import Image from "./Image";
 
-const Expenses = ({ index }) => {
+const Expenses = ({ filtered, homeCurrencySymbol }) => {
   const trips = useSelector(selectTrips);
-  const showPopUp = useSelector(selectPopUp).showPopUp;
+  const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
-  const order = useSelector(selectOrder);
-  const filter = useSelector(selectFilter);
-  const filterDate = useSelector(selectFilterDate);
   const dispatch = useDispatch();
+
+  const stringToComponent = { DeletePopUp: <DeletePopUp /> };
 
   if (!currencyCodes || !trips) {
     return;
   }
 
-  const expenses = trips[index].expenses;
-
-  if (expenses.length === 0) {
-    return <p className="mt">You have no expenses yet.</p>;
-  }
-  const _expenses = [...expenses].reverse();
-  const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
-  const homeCurrencySymbol = trips[index].details.homeCurrencySymbol;
-
-  if (filtered.length === 0) {
-    return <p className="mt">There are no matches</p>;
-  }
-
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, expenseId, category, date, amount } = item;
+        const { description, id, category, date, amount } = item;
         return (
-          <div className="expenseItem" key={expenseId}>
+          <div className="expenseItem" key={id}>
             <CategoryIcon category={category} />
             <div>
               <h2>{description ? description : category}</h2>
-              <p>{date}</p>
+              <p>{unixToDate(date)}</p>
             </div>
             <div>
               <p>
@@ -66,14 +52,17 @@ const Expenses = ({ index }) => {
               alt="delete"
               onClick={() => {
                 dispatch(
-                  toggleShowPopUp({ title: description, id: expenseId })
+                  togglePopUp({
+                    config: { title: description, id: id },
+                    component: "DeletePopUp",
+                  })
                 );
               }}
             />
           </div>
         );
       })}
-      {showPopUp && <DeletePopUp />}
+      {stringToComponent[popUp.component]}
     </div>
   );
 };

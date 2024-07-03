@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const toPennies = (val) => {
   return val * 100;
 };
@@ -14,3 +16,9 @@ export const getCurrentTrip = (trips, id) => {
 
   return index;
 };
+
+//send type as string (e.g. "trip", "user", expenses")
+export const generateId = (type) => {
+  return `_${type}_${nanoid()}`
+}
+

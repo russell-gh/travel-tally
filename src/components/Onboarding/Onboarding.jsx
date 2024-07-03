@@ -1,25 +1,32 @@
-import Joi from "joi";
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrip } from "../../redux/onboardingSlice.js";
-import BudgetBreakdown from "./BudgetBreakdown.jsx";
-import { selectTrip } from "../../redux/onboardingSlice.js";
+import { addTrip, selectTrips } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
-import { toPennies, stringToTimestamp, getCurrentTrip } from "./utils.js";
-import { nanoid } from "nanoid";
+import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 
 const Onboarding = () => {
-  const [onboardingDetails, setOnboardingDetails] = useState({});
+  // const trips = useSelector(selectTrips);
+  // console.log(trips)
+
+  const [onboardingDetails, setOnboardingDetails] = useState({
+    destination: "",
+    startDate: "",
+    endDate: "",
+    budgetTotal: "",
+    homeCurrency: "",
+    budgetHotel: "",
+    budgetFood: "",
+    budgetTransport: "",
+    budgetActivities: "",
+    budgetOther: "",
+  });
+
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState({});
-  const [id, setId] = useState("");
   const dispatch = useDispatch();
-
-  //access trip details from store
-  const trips = useSelector(selectTrip);
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -31,11 +38,29 @@ const Onboarding = () => {
       return;
     }
     const result = await validate(onboardingDetails, "trip");
-    setErrors(result); //result returns promise
+    checkPrimaryFormValidation(result);
+    setErrors(result);
   };
 
-  //store input in state on every change
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
+  const ids = [];
+  const checkPrimaryFormValidation = (validationResult) => {
+    onboardingQuestions.primaryForm.forEach((question) =>
+      ids.push(question.id)
+    );
+    const errorIds = Object.keys(validationResult);
+    const result = ids.some((id) => errorIds.includes(id));
+    console.log(result)
+    if (!result) {setVisible(true)}
+  };
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //store input in state on every change. if the id is a type of budget, convert to a number before store in state
   const handleChange = (e, id) => {
+    if (id.includes("budget")) {
+      e.target.value = Number(e.target.value);
+    }
     setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
   };
 
@@ -47,31 +72,48 @@ const Onboarding = () => {
     if (Object.keys(errors).length) {
       return;
     }
+
     let _onboardingDetails = onboardingDetails;
 
-    //convert budget to pennies
+    //convert budgets to pennies.
+    //too repetitive. condense
     const budgetTotal = toPennies(_onboardingDetails.budgetTotal);
+    const budgetHotel = toPennies(_onboardingDetails.budgetHotel);
+    const budgetFood = toPennies(_onboardingDetails.budgetFood);
+    const budgetTransport = toPennies(_onboardingDetails.budgetTransport);
+    const budgetActivities = toPennies(_onboardingDetails.budgetActivities);
+    const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
     let startDate = stringToTimestamp(_onboardingDetails.startDate);
     let endDate = stringToTimestamp(_onboardingDetails.endDate);
 
     //spread existing state and update modified keys
-    //generate id and store in state to be passed to budgetbreakdown later
-    const _id = nanoid();
-    setId(_id);
     _onboardingDetails = {
-      id: _id,
-      details: { ..._onboardingDetails, startDate, endDate, budgetTotal },
+      id: generateId("trip"),
+      details: {
+        ..._onboardingDetails,
+        startDate,
+        endDate,
+        budgetTotal,
+        budgetHotel,
+        budgetFood,
+        budgetTransport,
+        budgetActivities,
+        budgetOther,
+      },
     };
+
+    console.log("about to add", _onboardingDetails);
     dispatch(addTrip(_onboardingDetails));
-    setVisible(true);
+    console.log(trips);
   };
 
-  return (
-    <div>
-      <form>
-        {onboardingQuestions.map((question) => {
+  //can we move this to another file? would also have to move handlesubmit and handlechange funcs
+  const createFormSection = (section) => {
+    return (
+      <div>
+        {section.map((question) => {
           return (
             <FormElement
               key={question.id}
@@ -79,6 +121,7 @@ const Onboarding = () => {
               id={question.id}
               label={question.label}
               name={question.name}
+              value={onboardingDetails[question.id]}
               options={question.options}
               defaultValue={question.defaultValue}
               error={errors[question.id]}
@@ -88,13 +131,39 @@ const Onboarding = () => {
             />
           );
         })}
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <form>
+        {createFormSection(onboardingQuestions.primaryForm)}
+
+        {/* <Button text={"test"} className={"viewMore"} /> */}
+
+        {visible && (
+          <>
+            <h1>
+              Great. Let's break down your budget of{" "}
+              {onboardingDetails.budgetTotal} {onboardingDetails.homeCurrency}
+            </h1>
+            {/* change this to a func and add message to be displayed if they over-allocate */}
+            <h2>
+              You have{" "}
+              {onboardingDetails.budgetTotal -
+                onboardingDetails.budgetHotel -
+                onboardingDetails.budgetOther -
+                onboardingDetails.budgetActivities -
+                onboardingDetails.budgetTransport -
+                onboardingDetails.budgetFood}{" "}
+              {onboardingDetails.homeCurrency} remaining to allocate.
+            </h2>
+
+            {createFormSection(onboardingQuestions.secondaryForm)}
+          </>
+        )}
       </form>
-      {/* //only show next part of form once initial data has been sent to store */}
-      {visible ? (
-        <BudgetBreakdown trip={trips[getCurrentTrip(trips, id)]} />
-      ) : (
-        ""
-      )}
     </div>
   );
 };

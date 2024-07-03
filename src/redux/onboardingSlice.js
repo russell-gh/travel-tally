@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { trip: [], user: [], pass: [] };
+const initialState = { trips: [], user: [], pass: [] };
 
 
 export const onboardingSlice = createSlice({
@@ -9,7 +9,8 @@ export const onboardingSlice = createSlice({
   reducers: {
 
     addTrip: (state, { payload }) => {
-      state.trip = [...state.trip, payload];
+      console.log(payload)
+      state.trips.push(payload);
     },
     addUser: (state, { payload }) => {
       state.user = payload; //TODO check if need to spread
@@ -21,6 +22,6 @@ export const onboardingSlice = createSlice({
 });
 
 export const { addTrip, addUser, addPass } = onboardingSlice.actions;
-export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
+export const selectTrips = (state) => state.onboarding.trips; 
 
 export default onboardingSlice.reducer;
