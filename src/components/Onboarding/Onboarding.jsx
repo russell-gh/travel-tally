@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
+import { SliderComp } from "./SliderComp.jsx";
 
 const Onboarding = () => {
   // const trips = useSelector(selectTrips);
@@ -24,7 +25,7 @@ const Onboarding = () => {
     budgetOther: "",
   });
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
@@ -51,7 +52,6 @@ const Onboarding = () => {
     );
     const errorIds = Object.keys(validationResult);
     const result = ids.some((id) => errorIds.includes(id));
-    console.log(result);
     if (!result) {
       setVisible(true);
     }
@@ -127,6 +127,7 @@ const Onboarding = () => {
               options={question.options}
               defaultValue={question.defaultValue}
               error={errors[question.id]}
+              choose={question.choose}
               callback={
                 question.type === "button" ? handleSubmit : handleChange
               }
@@ -142,29 +143,22 @@ const Onboarding = () => {
       <form>
         {createFormSection(onboardingQuestions.primaryForm)}
 
-        {/* <Button text={"test"} className={"viewMore"} /> */}
+        {visible && (      
+            onboardingQuestions.secondaryForm.map((question) => {
+          return (
+            <SliderComp
+              label={question.label}
+              budgetTotal={onboardingDetails.budgetTotal}
+              id={question.id}
+              callback={handleChange}
+            />
+          );
+        })
 
-        {visible && (
-          <>
-            <h1>
-              Great. Let's break down your budget of{" "}
-              {onboardingDetails.budgetTotal} {onboardingDetails.homeCurrency}
-            </h1>
-            {/* change this to a func and add message to be displayed if they over-allocate */}
-            <h2>
-              You have{" "}
-              {onboardingDetails.budgetTotal -
-                onboardingDetails.budgetHotel -
-                onboardingDetails.budgetOther -
-                onboardingDetails.budgetActivities -
-                onboardingDetails.budgetTransport -
-                onboardingDetails.budgetFood}{" "}
-              {onboardingDetails.homeCurrency} remaining to allocate.
-            </h2>
-
-            {createFormSection(onboardingQuestions.secondaryForm)}
-          </>
         )}
+
+
+        {createFormSection(onboardingQuestions.submit)}
       </form>
     </div>
   );

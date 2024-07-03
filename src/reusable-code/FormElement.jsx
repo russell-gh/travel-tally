@@ -110,11 +110,11 @@ const FormElement = ({
             name={name}
             id={id}
             onChange={(e) => {
-              callback(e, id);
+              callback(e.target.textContent, id);
             }}
           >
             {choose && (
-              <option disabled value="">
+              <option disabled selected value="">
                 Please choose from the below
               </option>
             )}
