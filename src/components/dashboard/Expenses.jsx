@@ -35,14 +35,15 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, id, category, date, amount } = item;
+        const { description, id, category, startDate, endDate, amount } = item;
         return (
           <div className="expenseItem" key={id}>
             <CategoryIcon category={category} />
             <DescriptionAndDate
               description={description}
               category={category}
-              date={date}
+              startDate={startDate}
+              endDate={endDate}
             />
             <ExpenseAmount
               homeCurrencySymbol={homeCurrencySymbol}

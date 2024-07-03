@@ -6,7 +6,7 @@ const TripInfo = ({ startDate, endDate, details }) => {
   // converts and calculates days traveling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
-  const amountOfDays = endDate.diff(startDate, "day");
+  const amountOfDays = endDate.diff(startDate, "day") + 1;
 
   return (
     <div className="tripInfo">

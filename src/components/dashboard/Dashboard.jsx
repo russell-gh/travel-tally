@@ -14,6 +14,7 @@ import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
 import Message from "./Message";
 import ControlsAddExpense from "./ControlsAddExpense";
+import { createExpensesArray } from "../../utils/createExpensesArray";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -30,6 +31,7 @@ const Dashboard = () => {
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, startDate, endDate } = details;
+  createExpensesArray(expenses, details);
 
   const _expenses = [...expenses].reverse();
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);

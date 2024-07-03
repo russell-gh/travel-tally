@@ -50,7 +50,7 @@ export function getArrayOfDates(data) {
   let copy = [...data];
   //makes an array of the dates
   copy = copy.map((item) => {
-    return item.date;
+    return item.startDate;
   });
 
   // removes duplicates
@@ -91,6 +91,10 @@ export function findItem(data, id) {
 }
 
 export function unixToDate(unix) {
+  if (!unix) {
+    console.log("unix is undefined");
+    return;
+  }
   const date = new Date(unix); //converts unix back to object
   const options = { year: "numeric", month: "numeric", day: "numeric" };
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
