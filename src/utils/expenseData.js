@@ -28,7 +28,7 @@ export function handleData(expense, home, data) {
   expense.amount = newAmount;
   delete expense.currency;
   expense.date = unix;
-  expense.id = `expense_${nanoid()}`;
+  expense.id = nanoid("expense");
 
   return expense;
 }
