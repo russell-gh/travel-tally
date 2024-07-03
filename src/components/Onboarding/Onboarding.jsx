@@ -41,30 +41,22 @@ const Onboarding = () => {
     checkPrimaryFormValidation(result);
     setErrors(result);
   };
-  
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
+  const ids = [];
   const checkPrimaryFormValidation = (validationResult) => {
-    let validated;
-    //loop through all the questions in the primary form
-    //compare the id of that question against the keys of the validation result to see whether there are any errors present which correspond to that id
-
-    onboardingQuestions.primaryForm.every((question) => {
-      const id = question.id;
-      const errorKeys = Object.keys(validationResult);
-      const checkIfTypeIsValidated = (errorKey) => !errorKey.includes(id);
-      if (errorKeys.every(checkIfTypeIsValidated)) {
-        validated = true;
-      }
-    });
-
-    if (validated) {
-      // setVisible(true);
-    }
+    onboardingQuestions.primaryForm.forEach((question) =>
+      ids.push(question.id)
+    );
+    const errorIds = Object.keys(validationResult);
+    const result = ids.some((id) => errorIds.includes(id));
+    console.log(result)
+    if (!result) {setVisible(true)}
   };
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//store input in state on every change. if the id is a type of budget, convert to a number before store in state
+  //store input in state on every change. if the id is a type of budget, convert to a number before store in state
   const handleChange = (e, id) => {
     if (id.includes("budget")) {
       e.target.value = Number(e.target.value);
