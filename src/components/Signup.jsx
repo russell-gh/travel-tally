@@ -6,6 +6,7 @@ import Joi from "joi";
 import { validate } from "./onboarding/validation/validate";
 import { nanoid } from "nanoid";
 import { signupSchema } from "./onboarding/validation/schemas";
+import { generateId } from "./onboarding/utils";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -20,17 +21,15 @@ const Signup = () => {
 
   //======Validates credentials============
   const onSubmit = async (e) => {
-    // console.log("User_" + nanoid());
-    // console.log("form submitted", formData);
-    formData.userID = "User_" + nanoid();
     const errObj = await validate(formData, "signup");
     if (errObj.password1 || errObj.email) {
       console.log(errObj);
     } else {
-      if (formData.signupPassword1 === formData.signupPassword2) {
+      if (formData.password1 === formData.password2) {
+        formData.userID = generateId("user");
         dispatch(addUser(formData));
         localStorage.setItem("user", JSON.stringify(formData));
-        console.log("passwords match", formData);
+        console.log(formData);
         redirect("/login");
       } else {
         console.log("passwords don't match", formData);
