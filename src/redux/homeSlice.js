@@ -79,13 +79,11 @@ export const homeSlice = createSlice({
       });
       // Push data into expenses array
       if (Array.isArray(result)) {
-        console.log(result, "inside ifArray");
         result.forEach((element) => {
-          console.log(element.endDate, "PUSHING");
+          console.log(element);
           state.trips[indexOf].expenses.push(element);
         });
       } else {
-        console.log(result, "beyond ifARR");
         state.trips[indexOf].expenses.push(result);
       }
     },

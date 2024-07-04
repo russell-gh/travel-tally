@@ -73,13 +73,14 @@ export function splitExpenseDays(expense) {
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
-    let day = 86400000 * j;
-    const currentDate = startDate + day;
+    const date = new Date(startDate);
+    const currentDate = new Date(date.setDate(date.getDate() + j));
+    let unix = Math.round(currentDate.getTime());
     const copy = {
       ...expense,
       id: generateId("expense"),
-      startDate: currentDate,
-      endDate: currentDate,
+      startDate: unix,
+      endDate: unix,
       amount: {
         ...expense.amount,
         fromValue: newFrom,
@@ -87,7 +88,6 @@ export function splitExpenseDays(expense) {
       },
     };
     allExpenses.push(copy);
-    console.log(allExpenses, "TEST");
   }
   return allExpenses;
 }
