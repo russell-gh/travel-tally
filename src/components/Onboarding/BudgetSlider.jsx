@@ -1,19 +1,10 @@
 import { Slider, Stack } from "@mui/material";
 import { useState } from "react";
 
-export const BudgetSlider = ({
-  label,
-  id,
-  budgetTotal,
-  callback,
-  onboardingDetails,
-}) => {
+export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
+  const [position, setPosition] = useState(0);
 
-  //set original remaining to total budget
-  const [leeway, setLeeway] = useState(onboardingDetails.budgetTotal)
-
-  const setSliderVal = (e, id) => {
-    //check sum of everything except current slider
+  const positionUpdate = (e) => {
     const sumOfNonActiveSliders =
       onboardingDetails.budgetHotel +
       onboardingDetails.budgetFood +
@@ -21,14 +12,12 @@ export const BudgetSlider = ({
       onboardingDetails.budgetTransport +
       onboardingDetails.budgetActivities -
       onboardingDetails[id];
-//set leeway to total - running total
-    setLeeway(onboardingDetails.budgetTotal - sumOfNonActiveSliders)
 
-    // if (e.target.value < leeway) {
-    //   callback(e, id);
-    // } else {
-    //   callback(e, id, leeway);
-    // }
+    const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
+    if (remaining >= e.target.value) {
+      setPosition(Number(e.target.value));
+      callback(e, id);
+    }
   };
 
   return (
@@ -37,14 +26,14 @@ export const BudgetSlider = ({
       <Stack direction="row">
         <p>0</p>
         <Slider
-          // value={}
+          value={position}
           min={0}
-          //check why conversion is needed here
-          max={Number(leeway)}
+          max={onboardingDetails.budgetTotal}
           valueLabelDisplay="on"
-          onChange={(e) => setSliderVal(e, id)}
+          onChange={positionUpdate}
         />
-        <p>{budgetTotal}</p>
+
+        <p>{onboardingDetails.budgetTotal}</p>
       </Stack>
     </>
   );

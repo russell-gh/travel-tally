@@ -16,17 +16,20 @@ const Onboarding = () => {
     destination: "",
     startDate: "",
     endDate: "",
-    budgetTotal: "",
+    budgetTotal: 0,
     homeCurrency: "",
-    budgetHotel: "",
-    budgetFood: "",
-    budgetTransport: "",
-    budgetActivities: "",
-    budgetOther: "",
+    budgetHotel: 0,
+    budgetFood: 0,
+    budgetTransport: 0,
+    budgetActivities: 0,
+    budgetOther: 0,
   });
 
   const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
+
+  //set original remaining to total budget
+
   const dispatch = useDispatch();
 
   //run state through validate function everytime input is changed.
@@ -72,6 +75,7 @@ const Onboarding = () => {
     if (id.includes("budget")) {
       input = Number(e.target.value);
     }
+
     setOnboardingDetails({ ...onboardingDetails, [id]: input });
   };
 
