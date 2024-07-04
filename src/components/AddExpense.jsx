@@ -20,6 +20,7 @@ export const AddExpense = () => {
   const trips = useSelector(selectTrips);
   let expenses = getExpenseList(tripID, trips);
   const [formData, setFormData] = useState({
+    multiDay: false,
     startDate: new Date().toLocaleDateString("en-CA"),
     endDate: new Date().toLocaleDateString("en-CA"),
     split: false,
@@ -39,6 +40,7 @@ export const AddExpense = () => {
   if (!currencies) {
     return <p>Loading</p>;
   }
+
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const dataInput = (e) => {
@@ -62,14 +64,11 @@ export const AddExpense = () => {
 
   const handleSubmit = () => {
     if (Object.keys(errors).length) {
-      console.log("FAIL", errors);
+      console.log(formData, "FAIL", errors);
       return;
     }
     if (formData.description && formData.amount) {
-      console.log("pass");
-      if (formData.endDate === "") {
-        formData.endDate = formData.startDate;
-      }
+      console.log(formData, "pass");
       dispatch(addExpenseData(formData));
     } else {
       console.log("FAIL FINAL");
@@ -78,6 +77,8 @@ export const AddExpense = () => {
   };
   const multiDay = () => {
     setMulti((multi = !multi));
+    const inverted = !formData.multiDay;
+    setFormData({ ...formData, multiDay: inverted });
   };
   const renderMultiDay = () => {
     if (multi) {
