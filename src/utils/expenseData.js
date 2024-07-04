@@ -1,9 +1,10 @@
-import { stringToTimestamp } from "../components/Onboarding/utils";
-import { nanoid } from "nanoid";
+import { stringToTimestamp, generateId } from "../components/Onboarding/utils";
 
 export function handleData(expense, home, data) {
-  let { date, description, category, amount, currency, split } = expense;
-  let unix = stringToTimestamp(expense.date);
+  let { startDate, endDate, description, category, amount, currency, split } =
+    expense;
+  let start = stringToTimestamp(expense.startDate);
+  let end = stringToTimestamp(expense.endDate);
 
   // Creates object that replaces amount in original expense obj
   let newAmount = {
@@ -27,8 +28,10 @@ export function handleData(expense, home, data) {
   // Tidies object up, adds unique id and unix time
   expense.amount = newAmount;
   delete expense.currency;
-  expense.date = unix;
-  expense.id = nanoid("expense");
+  expense.startDate = start;
+  expense.endDate = end;
+  expense.id = generateId("expense");
+  console.log(expense, "TEST");
 
   return expense;
 }
@@ -38,4 +41,14 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   const rate = data[fromCurrency];
   const result = origin / rate;
   return result;
+}
+
+export function getExpenseList(tripID, trips) {
+  const indexOf = trips.findIndex((trip) => {
+    return trip.id === tripID;
+  });
+  console.log(indexOf);
+  // Create variable for the correct trip
+  const thisTrip = trips[indexOf];
+  return thisTrip.expenses;
 }
