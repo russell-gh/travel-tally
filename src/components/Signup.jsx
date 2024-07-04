@@ -15,7 +15,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const redirect = useNavigate();
 
-  //Validates sign-in info. Displays error in console.
+  //======Validates credentials============
   const onSubmit = async (e) => {
     // console.log("form submitted", formData);
     const errObj = await validate(formData, "signup");
@@ -32,9 +32,6 @@ const Signup = () => {
       }
     }
   };
-
-  // export const validate = async (formData, schema) => {
-  //   const _joi = schemaObjFromString(schema);
 
   return (
     <div onInput={onInput}>
