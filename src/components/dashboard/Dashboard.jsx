@@ -32,7 +32,6 @@ const Dashboard = () => {
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, startDate, endDate } = details;
-
   let expensesArray = createExpensesArray(expenses, details); //should this be in a useEffect?
 
   let _expenses = [...expensesArray].reverse();
@@ -56,7 +55,7 @@ const Dashboard = () => {
           expensesArray={expensesArray}
         />
         <ControlsAddExpense />
-        <ControlsExpenses filtered={filtered} />
+        <ControlsExpenses expenses={_expenses} />
       </div>
       {}
       <Expenses

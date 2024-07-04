@@ -125,37 +125,83 @@ export function getBudget(data, value) {
   return addDecimals(budget);
 }
 
-export function getSpendToday(startDate, data) {
-  const now = dayjs();
-  const index = now.diff(startDate, "day");
-  let spendToday = data[index].map((item) => {
-    return item.amount.toValue;
-  });
-  if (spendToday.length === 0) {
-    spendToday = 0;
-  } else if (spendToday.length !== 0) {
-    spendToday = spendToday.reduce((acc, value) => {
-      return acc + value;
-    });
+// export function getSpendToday(startDate, data) {
+//   const now = dayjs();
+//   const index = now.diff(startDate, "day");
+//   let spendToday = data[index].map((item) => {
+//     return item.amount.toValue;
+//   });
+//   if (spendToday.length === 0) {
+//     spendToday = 0;
+//   } else if (spendToday.length !== 0) {
+//     spendToday = spendToday.reduce((acc, value) => {
+//       return acc + value;
+//     });
 
-    if (isNaN(spendToday)) {
-      console.log("Something went wrong with calculating total.");
-      return "Something went wrong with the calculations";
-    }
+//     if (isNaN(spendToday)) {
+//       console.log("Something went wrong with calculating total.");
+//       return "Something went wrong with the calculations";
+//     }
 
-    spendToday = Number(spendToday / 100).toFixed(2);
-    return spendToday;
-  }
-}
+//     spendToday = Number(spendToday / 100).toFixed(2);
+//     return spendToday;
+//   }
+// }
 
-export function getSpendPerDay(budgetPerDay, data) {
+export function getSpendPerDay(budgetPerDay, data, filter) {
   // Create an array with the expense amounts and unix
-  let arr = data.map((arr) => {
-    return arr.map((item) => ({
+  if (!filter) {
+    return console.log("there is no filter");
+  }
+  // console.log(data);
+  // console.log(filter);
+
+  // let arr = data.map((arr) => {
+  //   arr.filter((item) => {
+  //     switch (filter) {
+  //       case "Show All":
+  //         console.log(item.category);
+  //         return true;
+  //       case "Activities":
+  //       case "Food":
+  //       case "Transport":
+  //       case "Hotel":
+  //       case "Other":
+  //         console.log(item.category);
+  //         return item.category === filter;
+  //       default:
+  //         console.log(item);
+  //         console.log("Something went wrong with the filtering");
+  //         return false;
+  //     }
+  //   });
+  // });
+
+  // console.log(arr);
+
+  // arr = arr.map((item) => ({
+  //   amount: item.amount.toValue,
+  //   startDate: item.startDate,
+  // }));
+
+  let arr = data.map((Arr) =>
+    Arr.map((item) => ({
       amount: item.amount.toValue,
       startDate: item.startDate,
-    }));
+    }))
+  );
+
+  //sort the dates
+  arr.sort((a, b) => {
+    if (a[0].startDate > b[0].startDate) {
+      return 1;
+    } else if (a[0].startDate < b[0].startDate) {
+      return -1;
+    }
+    return 0;
   });
+
+  console.log(arr);
 
   // Create array with totalspend, budgetperday, difference and differences from days before
   let cumulativeDifference = 0;
@@ -181,4 +227,14 @@ export function getSpendPerDay(budgetPerDay, data) {
 
   console.log(arrValues);
   return arrValues;
+}
+
+export function getSpendSelectedDay(data, filter, filterDate) {
+  //filterDate
+  if (filterDate === "All Dates") {
+    const now = unixToDate(dayjs());
+    return data[now];
+  } else {
+    return data[filterDate];
+  }
 }

@@ -4,12 +4,12 @@ import {
   getSpendPerDay,
 } from "../../utils/utils";
 import { useSelector } from "react-redux";
-import { selectFilter } from "../../redux/homeSlice";
+import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
 import { getBudget } from "../../utils/utils";
 import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";
 import dayjs from "dayjs";
-import { getSpendToday } from "../../utils/utils";
+import { getSpendSelectedDay } from "../../utils/utils";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -20,12 +20,22 @@ const BudgetPerDay = ({
   endDate,
 }) => {
   const filter = useSelector(selectFilter);
-  const totalSpend = getSpendToday(startDate, expensesArray);
+  const filterDate = useSelector(selectFilterDate);
+
   const budget = getBudget(details, filter);
   const budgetPerDay = addDecimals((budget * 100) / amountOfDays);
-  const difference = addDecimals(budgetPerDay * 100 - totalSpend * 100);
-  getSpendPerDay((budget * 100) / amountOfDays, expensesArray);
 
+  const data = getSpendPerDay(
+    (budget * 100) / amountOfDays,
+    expensesArray,
+    filter
+  );
+
+  const selectedDay = getSpendSelectedDay(data, filter, filterDate);
+
+  const difference = addDecimals(
+    budgetPerDay * 100 - selectedDay.totalSpendPerDay
+  );
   return (
     <div className="dayBudget">
       <p>
@@ -34,7 +44,7 @@ const BudgetPerDay = ({
       </p>
       <p>
         Spend Today: {homeCurrencySymbol}
-        {totalSpend}
+        {addDecimals(selectedDay.totalSpendPerDay)}
       </p>
       {difference < 0 ? (
         <p className="negative">
@@ -47,17 +57,17 @@ const BudgetPerDay = ({
           {difference}
         </p>
       )}
-      {/* {difference > 0 ? (
+      {selectedDay.cumulativeDifference > 0 ? (
         <p className="positive">
           Saved previous days: {homeCurrencySymbol}
-          {difference}
+          {addDecimals(selectedDay.cumulativeDifference)}
         </p>
       ) : (
         <p className="negative">
           Overspend previous days: {homeCurrencySymbol}
-          {Math.abs(difference)}
+          {Math.abs(selectedDay.cumulativeDifference / 100).toFixed(2)}
         </p>
-      )} */}
+      )}
     </div>
   );
 };
