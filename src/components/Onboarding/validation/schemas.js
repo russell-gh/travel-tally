@@ -21,6 +21,7 @@ export const expenseSchema = {
   amount: Joi.number().min(0).required(),
   currency: Joi.string(),
   split: Joi.boolean(),
+  multiDay: Joi.boolean(),
 };
 
 export const signupSchema = {
