@@ -27,7 +27,7 @@ const Login = () => {
         formData.password === localUser.password1 &&
         formData.email === localUser.email
       ) {
-        console.log("form submitted", formData);
+        console.log("form submitted", user);
         if (trips.length) {
           redirect("/dashboard");
         } else redirect("/onboarding");
