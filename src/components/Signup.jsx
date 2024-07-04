@@ -4,6 +4,9 @@ import { addUser } from "../redux/onboardingSlice";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { validate } from "./onboarding/validation/validate";
+import { nanoid } from "nanoid";
+import { signupSchema } from "./onboarding/validation/schemas";
+
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const onInput = (e) => {
@@ -17,7 +20,9 @@ const Signup = () => {
 
   //======Validates credentials============
   const onSubmit = async (e) => {
+    // console.log("User_" + nanoid());
     // console.log("form submitted", formData);
+    formData.userID = "User_" + nanoid();
     const errObj = await validate(formData, "signup");
     if (errObj.password1 || errObj.email) {
       console.log(errObj);

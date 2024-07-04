@@ -10,7 +10,7 @@ import {
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";
-import { validate } from "./Onboarding/validation/validate";
+import { validate } from "./onboarding/validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
 
