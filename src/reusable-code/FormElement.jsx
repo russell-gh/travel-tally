@@ -110,7 +110,7 @@ const FormElement = ({
             name={name}
             id={id}
             onChange={(e) => {
-              callback(e.target, id);
+              callback(e, id);
             }}
           >
             {choose && (
