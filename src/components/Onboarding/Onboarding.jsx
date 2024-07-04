@@ -25,7 +25,7 @@ const Onboarding = () => {
     budgetOther: "",
   });
 
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
@@ -59,11 +59,20 @@ const Onboarding = () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  const handleChange = (e, id) => {
-    if (id.includes("budget")) {
-      e.target.value = Number(e.target.value);
+  const handleChange = (e, id, value) => {
+    let input;
+    //slider events may send through a fixed value instead of the user selected value
+    if (value) {
+      input = value;
+    } else {
+      input = e.target.value;
     }
-    setOnboardingDetails({ ...onboardingDetails, [id]: e.target.value });
+
+    //if id is a type of budget convert to a number
+    if (id.includes("budget")) {
+      input = Number(e.target.value);
+    }
+    setOnboardingDetails({ ...onboardingDetails, [id]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
