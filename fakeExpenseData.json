@@ -16,6 +16,7 @@
     "expenses": [
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
           "fromValue": 20000,
           "fromCurrency": "EUR",
@@ -25,7 +26,199 @@
         "category": "Food",
         "description": "lunch",
         "startDate": 1719442800000,
-        "endDate": 1721343600000,
+        "endDate": 1719442800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A3rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719356400000,
+        "endDate": 1719356400000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A4rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719442800000,
+        "endDate": 1719442800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A5rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719529200000,
+        "endDate": 1719529200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A6rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A7rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719702000000,
+        "endDate": 1719702000000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A8rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719788400000,
+        "endDate": 1719788400000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T4gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719874800000,
+        "endDate": 1719874800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T5gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1719961200000,
+        "endDate": 1719961200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T6gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1720047600000,
+        "endDate": 1720047600000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T7gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1720134000000,
+        "endDate": 1720134000000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T8gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1720220400000,
+        "endDate": 1720220400000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A9rdJ7nN8kJ3fHA25T9gd",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 25000
+        },
+        "category": "Food",
+        "description": "lunch",
+        "startDate": 1720306800000,
+        "endDate": 1720306800000,
         "completed": true,
         "splitBill": false
       },
@@ -90,7 +283,8 @@
         "splitBill": false
       },
       {
-        "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
+        "id": "expense_A1rdJ7nN8kJ3fHA25T4ge",
+        "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
           "fromValue": 20000,
           "fromCurrency": "EUR",
@@ -100,12 +294,77 @@
         "category": "Hotel",
         "description": "hotel Amsterdam",
         "startDate": 1719442800000,
+        "endDate": 1719442800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
+        "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 22000
+        },
+        "category": "Hotel",
+        "description": "hotel Amsterdam",
+        "startDate": 1719788400000,
         "endDate": 1719788400000,
         "completed": true,
         "splitBill": false
       },
       {
+        "id": "expense_A3rdJ7nN8kJ3fHA25T4ge",
+        "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 22000
+        },
+        "category": "Hotel",
+        "description": "hotel Amsterdam",
+        "startDate": 1719615600000,
+        "endDate": 1719615600000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A4rdJ7nN8kJ3fHA25T4ge",
+        "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 22000
+        },
+        "category": "Hotel",
+        "description": "hotel Amsterdam",
+        "startDate": 17195292000000,
+        "endDate": 1719529200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A5rdJ7nN8kJ3fHA25T4ge",
+        "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
+        "amount": {
+          "fromValue": 20000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 22000
+        },
+        "category": "Hotel",
+        "description": "hotel Amsterdam",
+        "startDate": 1719442800000,
+        "endDate": 1719442800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gf",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
           "fromValue": 15000,
           "fromCurrency": "EUR",
@@ -115,7 +374,55 @@
         "category": "Hotel",
         "description": "hotel Utrecht",
         "startDate": 1719961200000,
+        "endDate": 1719961200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A3rdJ7nN8kJ3fHA25T4gf",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 15000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 20000
+        },
+        "category": "Hotel",
+        "description": "hotel Utrecht",
+        "startDate": 1720220400000,
         "endDate": 1720220400000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A4rdJ7nN8kJ3fHA25T4gf",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 15000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 20000
+        },
+        "category": "Hotel",
+        "description": "hotel Utrecht",
+        "startDate": 1719961200000,
+        "endDate": 1719961200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A4rdJ7nN8kJ3fHA25T4gf",
+        "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 15000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 20000
+        },
+        "category": "Hotel",
+        "description": "hotel Utrecht",
+        "startDate": 1720047600000,
+        "endDate": 1720047600000,
         "completed": true,
         "splitBill": false
       },
