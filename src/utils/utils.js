@@ -191,6 +191,8 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
     }))
   );
 
+  console.log(arr);
+
   //sort the dates
   arr.sort((a, b) => {
     if (a[0].startDate > b[0].startDate) {
@@ -207,6 +209,8 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
   let cumulativeDifference = 0;
   let arrValues = {};
 
+  let actualArrValues = [];
+
   arr.forEach((values) => {
     const totalSpendPerDay = values.reduce(
       (acc, value) => acc + value.amount,
@@ -215,7 +219,7 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
     const difference = budgetPerDay - totalSpendPerDay;
     const cumulativeDifferenceForDay = cumulativeDifference;
     cumulativeDifference += difference;
-    const startDate = unixToDate(values[0].startDate); // Assuming all items in the same day have the same startDate
+    const startDate = values[0].startDate; // Assuming all items in the same day have the same startDate
 
     arrValues[startDate] = {
       totalSpendPerDay,
@@ -223,9 +227,16 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
       difference,
       cumulativeDifference: cumulativeDifferenceForDay,
     };
+    actualArrValues.push({
+      totalSpendPerDay,
+      budgetPerDay,
+      difference,
+      cumulativeDifference: cumulativeDifferenceForDay,
+      startDate: startDate,
+    });
   });
 
-  console.log(arrValues);
+  console.log(actualArrValues, arrValues);
   return arrValues;
 }
 
