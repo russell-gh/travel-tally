@@ -44,7 +44,7 @@ const Signup = () => {
   return (
     <div onInput={onInput}>
       <input type="email" name="email" id="email" placeholder="email" />
-      <p>{errors.email}</p>
+      <p className="errortext">{errors.email}</p>
 
       <input
         type="password"
@@ -52,14 +52,14 @@ const Signup = () => {
         id="password1"
         placeholder="new password"
       />
-      <p>{errors.password1}</p>
+      <p className="errortext">{errors.password1}</p>
       <input
         type="password"
         name="password"
         id="password2"
         placeholder="confirm password"
       />
-      <p>{errors.password2}</p>
+      <p className="errortext">{errors.password2}</p>
       <button onClick={onSubmit}>Sign Up</button>
     </div>
   );
