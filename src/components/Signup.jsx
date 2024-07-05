@@ -28,16 +28,14 @@ const Signup = () => {
 
     if (errObj.password1 || errObj.email) {
       console.log(">>>", errObj);
+    } else if (formData.password1 === formData.password2) {
+      formData.userID = generateId("user");
+      dispatch(addUser(formData));
+      localStorage.setItem("user", JSON.stringify(formData));
+      console.log(formData);
+      redirect("/login");
     } else {
-      if (formData.password1 === formData.password2) {
-        formData.userID = generateId("user");
-        dispatch(addUser(formData));
-        localStorage.setItem("user", JSON.stringify(formData));
-        console.log(formData);
-        redirect("/login");
-      } else {
-        console.log("passwords don't match", formData);
-      }
+      console.log("passwords don't match", formData);
     }
   };
 

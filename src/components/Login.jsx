@@ -6,6 +6,8 @@ import { selectTrips } from "../redux/homeSlice";
 import Joi from "joi";
 import { validate } from "./onboarding/validation/validate";
 import "./login.css";
+import FormElement from "../reusable-code/FormElement";
+import Button from "../reusable-code/Button";
 //=======Displays Login Data================
 const Login = () => {
   const user = useSelector(selectUser);
@@ -13,47 +15,68 @@ const Login = () => {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const trips = useSelector(selectTrips);
-  const onInput = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+  const onInput = async (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value }); //BUG Why is state not synced?
+    const errObj = await validate(formData, "login");
+    setErrors(errObj);
+    console.log(errors, formData);
   };
   // console.log(formData, user);
   const localUser = JSON.parse(localStorage.getItem("user")); // selects "email" part of object. Turns back into object.
-
   //=======Compares Credentials to Local Storage================
   const onSubmit = async (e) => {
-    const errObj = await validate(formData, "signup");
-    setErrors(errObj);
-    if (errObj.password || errObj.email) {
-      console.log(errObj);
-    } else {
-      if (
-        formData.password === localUser.password1 &&
-        formData.email === localUser.email
-      ) {
-        console.log("form submitted", user);
-        if (trips.length) {
-          redirect("/dashboard");
-        } else redirect("/onboarding");
-      } else {
-        console.log("wrong email/password");
-      }
-    }
+    console.log(errors, formData);
+    Object.keys(errors).length
+      ? alert("Form Incomplete!")
+      : !(
+          formData.password === localUser.password1 &&
+          formData.email === localUser.email
+        )
+      ? alert("wrong email/password")
+      : trips.length
+      ? redirect("/dashboard")
+      : redirect("/onboarding");
+    // if (errors.password || errors.email) {
+    //   console.log(errors);
+    // } else {
+    //   if (
+    //     formData.password === localUser.password &&
+    //     formData.email === localUser.email
+    //   ) {
+    //     console.log("form submitted", user);
+    //     if (trips.length) {
+    //       redirect("/dashboard");
+    //     } else redirect("/onboarding");
+    //   } else {
+    //     console.log("wrong email/password");
+    //   }
+    // }
   };
 
   return (
+    //TODOask Zahra for placeholder
     <>
-      <div onInput={onInput}>
-        <input type="email" name="email" id="email" placeholder="email" />
+      <div>
+        <FormElement
+          callback={onInput}
+          type="email"
+          name="email"
+          id="email"
+          placeholder="email"
+        />
+
         <p className="errortext">{errors.email}</p>
-        <input
+        <FormElement
+          callback={onInput}
           type="password"
           name="password"
           id="password"
           placeholder="password"
         />
-        <p className="errortext">{errors.password1}</p>
-        {/*BUG Shows password1 */}
-        <button onClick={onSubmit}>Login</button>
+
+        <p className="errortext">{errors.password}</p>
+
+        <Button onClick={onSubmit} text="Login" />
       </div>
     </>
   );
