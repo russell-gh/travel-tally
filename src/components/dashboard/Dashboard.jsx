@@ -3,7 +3,7 @@ import { selectSelectedTripId, selectTrips } from "../../redux/homeSlice";
 import { findItem, getIndex } from "../../utils/utils";
 import Expenses from "./Expenses";
 import Title from "./Title";
-import "../../css/dashboard.css";
+import "../../css/dashboard.scss";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import {
   selectOrder,
@@ -15,7 +15,6 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "./Message";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
-import { useEffect } from "react";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -57,7 +56,6 @@ const Dashboard = () => {
         <ControlsAddExpense />
         <ControlsExpenses expenses={_expenses} />
       </div>
-      {}
       <Expenses
         filtered={filtered}
         expenses={expenses}

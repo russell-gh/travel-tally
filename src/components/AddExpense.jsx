@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "../css/expense.css";
+import "../css/expense.scss";
 import {
   addExpenseData,
   selectCurrencyNames,
@@ -10,7 +10,7 @@ import {
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";
-import { validate } from "./Onboarding/validation/validate";
+import { validate } from "./onboarding/validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
 
