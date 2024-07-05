@@ -78,7 +78,14 @@ export const homeSlice = createSlice({
         ...state.currencyRates,
       });
       // Push data into expenses array
-      state.trips[indexOf].expenses.push(result);
+      if (Array.isArray(result)) {
+        result.forEach((element) => {
+          console.log(element);
+          state.trips[indexOf].expenses.push(element);
+        });
+      } else {
+        state.trips[indexOf].expenses.push(result);
+      }
     },
   },
 });
