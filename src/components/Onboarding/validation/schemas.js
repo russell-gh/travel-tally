@@ -28,13 +28,12 @@ export const signupSchema = {
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password1: Joi.string().min(1).required(),
+  password1: Joi.string().min(8).required(),
+  password2: Joi.string().min(8).required(),
 };
 export const loginSchema = {
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Joi.string().min(1).required(),
+  password: Joi.string().min(8).required(),
 };
-
-//TODO Change min length back
