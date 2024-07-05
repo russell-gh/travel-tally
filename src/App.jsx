@@ -8,6 +8,8 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { selectPopUp, setData } from "./redux/homeSlice";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,14 +40,18 @@ const App = () => {
 
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add-expense" element={<AddExpense />} />
-        <Route path="*" element={<p>No page selected</p>} />
-      </Routes>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/add-expense" element={<AddExpense />} />
+          <Route path="*" element={<p>No page selected</p>} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 };
