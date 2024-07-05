@@ -7,13 +7,16 @@ import { validate } from "./onboarding/validation/validate";
 import { nanoid } from "nanoid";
 import { signupSchema } from "./onboarding/validation/schemas";
 import { generateId } from "./onboarding/utils";
+import FormElement from "../reusable-code/FormElement";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
-  const onInput = (e) => {
+  const onInput = async (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+    const errObj = await validate(formData, "signup");
+    setErrors(errObj);
   };
   // console.log(formData);
 
@@ -26,9 +29,9 @@ const Signup = () => {
     const errObj = await validate(formData, "signup");
     setErrors(errObj);
 
-    if (errObj.password1 || errObj.email) {
+    if (errObj.password || errObj.email) {
       console.log(">>>", errObj);
-    } else if (formData.password1 === formData.password2) {
+    } else if (formData.password === formData.passwordConfirm) {
       formData.userID = generateId("user");
       dispatch(addUser(formData));
       localStorage.setItem("user", JSON.stringify(formData));
@@ -41,23 +44,32 @@ const Signup = () => {
 
   return (
     <div onInput={onInput}>
-      <input type="email" name="email" id="email" placeholder="email" />
+      <FormElement
+        callback={onInput}
+        type="email"
+        name="email"
+        id="email"
+        placeholder="email"
+      />
       <p className="errortext">{errors.email}</p>
 
-      <input
+      <FormElement
+        callback={onInput}
         type="password"
         name="password"
-        id="password1"
+        id="password"
         placeholder="new password"
       />
-      <p className="errortext">{errors.password1}</p>
-      <input
+      <p className="errortext">{errors.password}</p>
+
+      <FormElement
+        callback={onInput}
         type="password"
-        name="password"
-        id="password2"
-        placeholder="confirm password"
+        name="passwordConfirm"
+        id="passwordConfirm"
+        placeholder="confirm new password"
       />
-      <p className="errortext">{errors.password2}</p>
+      <p className="errortext">{errors.passwordConfirm}</p>
       <button onClick={onSubmit}>Sign Up</button>
     </div>
   );

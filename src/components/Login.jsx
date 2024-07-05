@@ -29,7 +29,7 @@ const Login = () => {
     Object.keys(errors).length
       ? alert("Form Incomplete!")
       : !(
-          formData.password === localUser.password1 &&
+          formData.password === localUser.password &&
           formData.email === localUser.email
         )
       ? alert("wrong email/password")
@@ -54,7 +54,6 @@ const Login = () => {
   };
 
   return (
-    //TODOask Zahra for placeholder
     <>
       <div>
         <FormElement
