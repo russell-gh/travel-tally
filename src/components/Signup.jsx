@@ -10,6 +10,7 @@ import { generateId } from "./onboarding/utils";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
 
   const onInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -23,9 +24,7 @@ const Signup = () => {
   //======Validates credentials============
   const onSubmit = async (e) => {
     const errObj = await validate(formData, "signup");
-
-    const userError = !!errObj; //BUG Why doesn't this display false?
-    console.log(userError);
+    setErrors(errObj);
 
     if (errObj.password1 || errObj.email) {
       console.log(">>>", errObj);
@@ -45,6 +44,7 @@ const Signup = () => {
   return (
     <div onInput={onInput}>
       <input type="email" name="email" id="email" placeholder="email" />
+      <p>{errors.email}</p>
 
       <input
         type="password"
@@ -52,13 +52,14 @@ const Signup = () => {
         id="password1"
         placeholder="new password"
       />
-
+      <p>{errors.password1}</p>
       <input
         type="password"
         name="password"
         id="password2"
         placeholder="confirm password"
       />
+      <p>{errors.password2}</p>
       <button onClick={onSubmit}>Sign Up</button>
     </div>
   );
