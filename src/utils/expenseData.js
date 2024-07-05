@@ -1,4 +1,4 @@
-import { stringToTimestamp, generateId } from "../components/Onboarding/utils";
+import { stringToTimestamp, generateId } from "../components/onboarding/utils";
 
 export function handleData(expense, home, data) {
   let { startDate, endDate, description, category, amount, currency, split } =
