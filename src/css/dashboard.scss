@@ -122,20 +122,25 @@
   .containerBudget {
     display: grid;
     padding: 0px 10px;
-    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    grid-template-columns: 1fr 1.5fr 1fr;
     grid-template-rows: 1fr fit-content(100px);
   }
 
-  .chart {
+  .chartAll {
     display: inherit;
     grid-row: 1;
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     justify-self: center;
   }
 
   .positive {
     color: green;
+  }
+
+  .neutral {
+    color: orange;
   }
 
   .negative {
@@ -144,5 +149,9 @@
 
   .tripInfo {
     justify-self: flex-end;
+  }
+
+  .dayBudget {
+    justify-self: center;
   }
 }

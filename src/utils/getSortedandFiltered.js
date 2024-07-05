@@ -40,23 +40,7 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
       break;
   }
 
-  //filter
-  switch (filter) {
-    case "Show All":
-      break;
-    case "Activities":
-    case "Food":
-    case "Transport":
-    case "Hotel":
-    case "Other":
-      filtered = filtered.filter((item) => {
-        return item.category === filter;
-      });
-      break;
-    default:
-      console.log("something went wrong with the filtering");
-      break;
-  }
+  filtered = filterCategories(filtered, filter);
 
   //filterDate
   if (filterDate === "All Dates") {
@@ -71,4 +55,25 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
   }
 
   return filtered;
+};
+
+export const filterCategories = (data, filter) => {
+  //filter
+  switch (filter) {
+    case "Show All":
+      break;
+    case "Activities":
+    case "Food":
+    case "Transport":
+    case "Hotel":
+    case "Other":
+      data = data.filter((item) => {
+        return item.category === filter;
+      });
+      break;
+    default:
+      console.log("something went wrong with the filtering");
+      break;
+  }
+  return data;
 };

@@ -3,7 +3,7 @@ import { formEvent, selectTrips } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 import { getArrayOfDates } from "../../../utils/utils";
 
-const FilterDate = ({ expenses }) => {
+const FilterDate = ({ expenses, expensesCategories }) => {
   const dispatch = useDispatch();
 
   if (!expenses) {
@@ -11,6 +11,7 @@ const FilterDate = ({ expenses }) => {
   }
 
   let arrDates = getArrayOfDates(expenses);
+  let arrDatesCategories = getArrayOfDates(expensesCategories);
 
   arrDates = arrDates.map((item) => {
     return { key: item, value: item, name: item };

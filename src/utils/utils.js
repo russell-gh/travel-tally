@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 export function calculateTotalSpend(expenses) {
   if (!expenses || expenses.length === 0) {
     return;
@@ -28,9 +26,9 @@ export function addDecimals(number) {
   return Number(number / 100).toFixed(2);
 }
 
-export function getIndex(data, id) {
+export function getIndex(data, id, key) {
   const indexOf = data.findIndex((item) => {
-    return item.id === id;
+    return item[key] === id;
   });
 
   if (indexOf === -1) {
@@ -125,93 +123,25 @@ export function getBudget(data, value) {
   return addDecimals(budget);
 }
 
-// export function getSpendToday(startDate, data) {
-//   const now = dayjs();
-//   const index = now.diff(startDate, "day");
-//   let spendToday = data[index].map((item) => {
-//     return item.amount.toValue;
-//   });
-//   if (spendToday.length === 0) {
-//     spendToday = 0;
-//   } else if (spendToday.length !== 0) {
-//     spendToday = spendToday.reduce((acc, value) => {
-//       return acc + value;
-//     });
-
-//     if (isNaN(spendToday)) {
-//       console.log("Something went wrong with calculating total.");
-//       return "Something went wrong with the calculations";
-//     }
-
-//     spendToday = Number(spendToday / 100).toFixed(2);
-//     return spendToday;
-//   }
-// }
-
 export function getSpendPerDay(budgetPerDay, data, filter) {
-  // Create an array with the expense amounts and unix
-  if (!filter) {
-    return console.log("there is no filter");
-  }
-  // console.log(data);
-  // console.log(filter);
+  //take out empty days (a.k.a. empty arrays)
+  let filteredData = data.filter((subArray) => subArray.length > 0);
 
-  // let arr = data.map((arr) => {
-  //   arr.filter((item) => {
-  //     switch (filter) {
-  //       case "Show All":
-  //         console.log(item.category);
-  //         return true;
-  //       case "Activities":
-  //       case "Food":
-  //       case "Transport":
-  //       case "Hotel":
-  //       case "Other":
-  //         console.log(item.category);
-  //         return item.category === filter;
-  //       default:
-  //         console.log(item);
-  //         console.log("Something went wrong with the filtering");
-  //         return false;
-  //     }
-  //   });
-  // });
-
-  // console.log(arr);
-
-  // arr = arr.map((item) => ({
-  //   amount: item.amount.toValue,
-  //   startDate: item.startDate,
-  // }));
-
-  let arr = data.map((Arr) =>
+  let arr = filteredData.map((Arr) =>
     Arr.map((item) => ({
       amount: item.amount.toValue,
       startDate: item.startDate,
     }))
   );
 
-  console.log(arr);
-
-  //sort the dates
-  arr.sort((a, b) => {
-    if (a[0].startDate > b[0].startDate) {
-      return 1;
-    } else if (a[0].startDate < b[0].startDate) {
-      return -1;
-    }
-    return 0;
-  });
-
-  console.log(arr);
-
   // Create array with totalspend, budgetperday, difference and differences from days before
   let cumulativeDifference = 0;
-  let arrValues = {};
-
-  let actualArrValues = [];
+  let arrValues = [];
 
   arr.forEach((values) => {
+    if (values.length === 0) {
+      return;
+    }
     const totalSpendPerDay = values.reduce(
       (acc, value) => acc + value.amount,
       0
@@ -221,13 +151,7 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
     cumulativeDifference += difference;
     const startDate = values[0].startDate; // Assuming all items in the same day have the same startDate
 
-    arrValues[startDate] = {
-      totalSpendPerDay,
-      budgetPerDay,
-      difference,
-      cumulativeDifference: cumulativeDifferenceForDay,
-    };
-    actualArrValues.push({
+    arrValues.push({
       totalSpendPerDay,
       budgetPerDay,
       difference,
@@ -236,16 +160,42 @@ export function getSpendPerDay(budgetPerDay, data, filter) {
     });
   });
 
-  console.log(actualArrValues, arrValues);
   return arrValues;
 }
 
-export function getSpendSelectedDay(data, filter, filterDate) {
+export function getSpendSelectedDay(data, filterDate) {
+  let date;
   //filterDate
   if (filterDate === "All Dates") {
-    const now = unixToDate(dayjs());
-    return data[now];
+    const now = unixToDate(new Date());
+    const index = data.findIndex((item) => {
+      return unixToDate(item.startDate) === now;
+    });
+    if (index !== -1) {
+      date = data[index];
+    } else {
+      date = {
+        budgetPerDay: data[0].budgetPerDay,
+        cumulativeDifference: 0,
+        totalSpendPerDay: 0,
+        difference: data[0].budgetPerDay,
+      };
+    }
   } else {
-    return data[filterDate];
+    const index = data.findIndex((item) => {
+      return unixToDate(item.startDate) === filterDate;
+    });
+    if (index !== -1) {
+      date = data[index];
+    } else {
+      date = {
+        budgetPerDay: data[0].budgetPerDay,
+        cumulativeDifference: 0,
+        totalSpendPerDay: 0,
+        difference: data[0].budgetPerDay,
+      };
+    }
   }
+
+  return date;
 }

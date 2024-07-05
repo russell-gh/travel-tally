@@ -10,7 +10,7 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Netherlands",
-      "startDate": 1719442800000,
+      "startDate": 1719356400000,
       "endDate": 1721343600000
     },
     "expenses": [
@@ -18,10 +18,10 @@
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -34,10 +34,10 @@
         "id": "expense_A3rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -50,10 +50,10 @@
         "id": "expense_A4rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -66,10 +66,10 @@
         "id": "expense_A5rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -82,10 +82,10 @@
         "id": "expense_A6rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -98,10 +98,10 @@
         "id": "expense_A7rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -114,10 +114,10 @@
         "id": "expense_A8rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -130,10 +130,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T4gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -146,10 +146,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T5gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -162,10 +162,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T6gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -178,10 +178,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T7gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -194,10 +194,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T8gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -210,10 +210,10 @@
         "id": "expense_A9rdJ7nN8kJ3fHA25T9gd",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gd",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 25000
+          "toValue": 2500
         },
         "category": "Food",
         "description": "lunch",
@@ -286,10 +286,10 @@
         "id": "expense_A1rdJ7nN8kJ3fHA25T4ge",
         "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 22000
+          "toValue": 2200
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
@@ -302,10 +302,10 @@
         "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
         "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 22000
+          "toValue": 2200
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
@@ -318,10 +318,10 @@
         "id": "expense_A3rdJ7nN8kJ3fHA25T4ge",
         "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 22000
+          "toValue": 2200
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
@@ -334,14 +334,14 @@
         "id": "expense_A4rdJ7nN8kJ3fHA25T4ge",
         "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 22000
+          "toValue": 2200
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 17195292000000,
+        "startDate": 1719529200000,
         "endDate": 1719529200000,
         "completed": true,
         "splitBill": false
@@ -350,15 +350,15 @@
         "id": "expense_A5rdJ7nN8kJ3fHA25T4ge",
         "sharedId": "shared_A1rdJ7nN8kJ3fHA25T4ge",
         "amount": {
-          "fromValue": 20000,
+          "fromValue": 2000,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 22000
+          "toValue": 2200
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "startDate": 1719356400000,
+        "endDate": 1719356400000,
         "completed": true,
         "splitBill": false
       },
@@ -366,10 +366,10 @@
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gf",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
-          "fromValue": 15000,
+          "fromValue": 1500,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 20000
+          "toValue": 2000
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
@@ -382,10 +382,10 @@
         "id": "expense_A3rdJ7nN8kJ3fHA25T4gf",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
-          "fromValue": 15000,
+          "fromValue": 1500,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 20000
+          "toValue": 2000
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
@@ -398,10 +398,10 @@
         "id": "expense_A4rdJ7nN8kJ3fHA25T4gf",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
-          "fromValue": 15000,
+          "fromValue": 1500,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 20000
+          "toValue": 2000
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
@@ -411,13 +411,13 @@
         "splitBill": false
       },
       {
-        "id": "expense_A4rdJ7nN8kJ3fHA25T4gf",
+        "id": "expense_A5rdJ7nN8kJ3fHA25T4gf",
         "sharedId": "shared_A2rdJ7nN8kJ3fHA25T4gf",
         "amount": {
-          "fromValue": 15000,
+          "fromValue": 1500,
           "fromCurrency": "EUR",
           "toCurrency": "GBP",
-          "toValue": 20000
+          "toValue": 2000
         },
         "category": "Hotel",
         "description": "hotel Utrecht",

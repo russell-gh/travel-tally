@@ -15,6 +15,7 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "./Message";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
+import { filterCategories } from "../../utils/getSortedandFiltered";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -27,14 +28,16 @@ const Dashboard = () => {
     return <Message message="Loading.." />;
   }
 
-  const index = getIndex(trips, selectedTripId);
+  const index = getIndex(trips, selectedTripId, "id");
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, startDate, endDate } = details;
-  let expensesArray = createExpensesArray(expenses, details); //should this be in a useEffect?
+  let _expenses = [...trip.expenses].reverse();
 
-  let _expenses = [...expensesArray].reverse();
-  _expenses = _expenses.flat();
+  console.log(filterDate);
+
+  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
+  let expensesArray = createExpensesArray(expensesCategories, details); //should this be in a useEffect?
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
 
   return (
@@ -54,11 +57,14 @@ const Dashboard = () => {
           expensesArray={expensesArray}
         />
         <ControlsAddExpense />
-        <ControlsExpenses expenses={_expenses} />
+        <ControlsExpenses
+          expensesCategories={expensesCategories}
+          expenses={expenses}
+        />
       </div>
       <Expenses
         filtered={filtered}
-        expenses={expenses}
+        expenses={_expenses}
         homeCurrencySymbol={homeCurrencySymbol}
       />
     </div>

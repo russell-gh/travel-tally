@@ -121,7 +121,11 @@ const FormElement = ({
               </option>
             )}
             {options.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option
+                key={option.value}
+                value={option.value}
+                className={`_${option.value.replaceAll("/", "")}`}
+              >
                 {option.name}
               </option>
             ))}

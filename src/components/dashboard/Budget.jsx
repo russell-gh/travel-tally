@@ -14,7 +14,7 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
 
   return (
     <>
-      <div className="chart">
+      <div className="chartAll">
         {filter === "Show All" ? (
           <BudgetPieChart details={details} />
         ) : (
@@ -34,6 +34,11 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
           <p className="negative">
             Overspend: {homeCurrencySymbol}
             {Math.abs(difference).toFixed(2)}
+          </p>
+        ) : difference === 0 ? (
+          <p className="neutral">
+            Money left: {homeCurrencySymbol}
+            {difference}
           </p>
         ) : (
           <p className="positive">
