@@ -1,6 +1,6 @@
 # HoliDough
 
-Welcome to **HoliDough**, designed by developed by **Sacha, Jack, Zahra, and Manzi (link to githubs)**.
+Welcome to **HoliDough**, designed by developed by **[Sacha](https://gitbhub.com/sacha1995), [Jack](https://gitbhub.com/jack-berry), [Zahra](https://gitbhub.com/zedvas), and [Manzi](https://gitbhub.com/manzi9) (link to githubs)**.
 
 Holigouh is designed to help you plan, budget, and schedule your holidays with ease!
 
