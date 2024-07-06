@@ -8,11 +8,7 @@ const DescriptionAndDate = ({ description, category, startDate, endDate }) => {
   return (
     <div>
       <h2>{description ? description : category}</h2>
-      <p>
-        {" "}
-        {unixToDate(startDate)}
-        {/* {startDate === endDate ? unixToDate(startDate) : "Something went wrong"} */}
-      </p>
+      <p>{unixToDate(startDate)}</p>
     </div>
   );
 };

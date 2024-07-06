@@ -1,4 +1,9 @@
 .dashboard {
+  /*
+**************************
+        general
+**************************
+*/
   width: 100%;
   height: fit-content;
 
@@ -12,6 +17,22 @@
     text-align: center;
   }
 
+  .mt {
+    margin-top: 350px;
+  }
+
+  .btn {
+    padding: 5px 10px;
+  }
+
+  /*
+************END***********
+*/
+  /*
+**************************
+      fixed top
+**************************
+*/
   .dashboardFixed,
   .expenses {
     padding: 0px 10px 0px 10px;
@@ -44,10 +65,92 @@
     padding: 10px 10px 0px 10px;
   }
 
-  .mt {
-    margin-top: 350px;
+  .containerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
   }
 
+  .containerTitle p {
+    color: green;
+  }
+
+  .containerBudgetWhilst {
+    display: grid;
+    padding: 0px 10px;
+    gap: 10px;
+    grid-template-columns: 1fr 0.7fr 0.7fr 1fr;
+    grid-template-rows: 1fr fit-content(100px);
+
+    .chartAll {
+      display: inherit;
+      grid-row: 1;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      justify-self: center;
+    }
+
+    .chartDay {
+      display: inherit;
+      grid-row: 1;
+      grid-column-start: 3;
+      grid-column-end: 5;
+      justify-self: center;
+    }
+  }
+
+  .containerBudgetAfter {
+    display: grid;
+    padding: 0px 10px;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr fit-content(100px);
+
+    .chartAll {
+      display: inherit;
+      grid-row: 1;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      justify-self: center;
+    }
+  }
+
+  .positive {
+    color: green;
+  }
+
+  .neutral {
+    color: orange;
+  }
+
+  .negative {
+    color: red;
+  }
+
+  .tripInfo {
+    justify-self: flex-end;
+  }
+
+  .dayBudget {
+    justify-self: center;
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+
+  .includes {
+    background-color: rgb(220, 245, 245);
+  }
+
+  /*
+************END***********
+*/
+  /*
+**************************
+        expenses
+**************************
+*/
   .expenseItem {
     padding: 5px;
     border: lightgray 2px solid;
@@ -78,6 +181,14 @@
     font-size: 12px;
   }
 
+  /*
+************END***********
+*/
+  /*
+**************************
+     delete pop-up
+**************************
+*/
   .deletePopUp {
     position: fixed;
     background: white;
@@ -97,76 +208,10 @@
     justify-content: space-between;
   }
 
-  .btn {
-    padding: 5px 10px;
-  }
-
   .controlsExpenses {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 10px;
-  }
-
-  .containerTitle {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .containerTitle p {
-    color: green;
-  }
-
-  .containerBudget {
-    display: grid;
-    padding: 0px 10px;
-    gap: 10px;
-    grid-template-columns: 1fr 0.7fr 0.7fr 1fr;
-    grid-template-rows: 1fr fit-content(100px);
-  }
-
-  .chartAll {
-    display: inherit;
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    justify-self: center;
-  }
-
-  .chartDay {
-    display: inherit;
-    grid-row: 1;
-    grid-column-start: 3;
-    grid-column-end: 5;
-    justify-self: center;
-  }
-
-  .positive {
-    color: green;
-  }
-
-  .neutral {
-    color: orange;
-  }
-
-  .negative {
-    color: red;
-  }
-
-  .tripInfo {
-    justify-self: flex-end;
-  }
-
-  .dayBudget {
-    justify-self: center;
-    grid-row: 2;
-    grid-column-start: 2;
-    grid-column-end: 4;
-  }
-
-  .includes {
-    background-color: rgb(220, 245, 245);
   }
 }

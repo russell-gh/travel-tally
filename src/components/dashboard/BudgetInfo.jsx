@@ -14,17 +14,25 @@ const BudgetInfo = ({
   // converts and calculates days traveling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
+  const stillTravelling =
+    dayjs().isBefore(endDate) && startDate.isBefore(dayjs());
+  console.log(stillTravelling);
   const amountOfDays = endDate.diff(startDate, "day") + 1;
 
+  ("containerBudget");
   return (
-    <div className="containerBudget">
+    <div
+      className={
+        stillTravelling ? "containerBudgetWhilst" : "containerBudgetAfter"
+      }
+    >
       <Budget
         expenses={expenses}
         details={details}
         homeCurrencySymbol={homeCurrencySymbol}
       />
       {/* if today is during traveltime, daily budget is calculated */}
-      {dayjs().isBefore(endDate) && startDate.isBefore(dayjs()) && (
+      {stillTravelling && (
         <BudgetPerDay
           expensesArray={expensesArray}
           details={details}

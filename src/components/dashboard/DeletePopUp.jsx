@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectPopUp } from "../../redux/homeSlice";
 import OneItemDelete from "./OneItemDelete";
 import SharedDelete from "./SharedDelete";
 
 const DeletePopUp = () => {
   const popUp = useSelector(selectPopUp);
-  const dispatch = useDispatch();
 
   if (!popUp) {
     return;

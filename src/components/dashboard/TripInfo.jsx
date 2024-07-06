@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { addDecimals } from "../../utils/utilsBudget";
 import StillTravellingInfo from "./StillTravellingInfo";
 
 const TripInfo = ({ startDate, endDate, details, amountOfDays }) => {
@@ -13,7 +12,6 @@ const TripInfo = ({ startDate, endDate, details, amountOfDays }) => {
           amountOfDays={amountOfDays}
         />
       )}
-      {/* checks if today is during the traveltime and creates extra info in case of true */}
     </div>
   );
 };

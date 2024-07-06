@@ -60,42 +60,55 @@ export function getBudget(data, value) {
   return addDecimals(budget);
 }
 
-export function getSpendSelectedDay(data, filterDate) {
+export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
   let date;
-  //filterDate
-  if (filterDate === "All Dates") {
-    const now = unixToDate(new Date());
-    const index = data.findIndex((item) => {
-      return unixToDate(item.startDate) === now;
-    });
-    if (index !== -1) {
-      date = data[index];
+
+  // if there are no expenses yet
+  if (data.length === 0) {
+    date = {
+      budgetPerDay: budgetPerDay,
+      cumulativeDifference: 0,
+      totalSpendPerDay: 0,
+      difference: budgetPerDay,
+    };
+  }
+
+  if (data.length !== 0) {
+    //filterDate
+    if (filterDate === "All Dates") {
+      const now = unixToDate(new Date());
+      const index = data.findIndex((item) => {
+        return unixToDate(item.startDate) === now;
+      });
+      if (index !== -1) {
+        date = data[index];
+      } else {
+        const cumulativeDifference = getClosestCumulativeDifference(data, now);
+        date = {
+          budgetPerDay: data[0].budgetPerDay,
+          cumulativeDifference: cumulativeDifference,
+          totalSpendPerDay: 0,
+          difference: data[0].budgetPerDay,
+        };
+      }
     } else {
-      const cumulativeDifference = getClosestCumulativeDifference(data, now);
-      date = {
-        budgetPerDay: data[0].budgetPerDay,
-        cumulativeDifference: cumulativeDifference,
-        totalSpendPerDay: 0,
-        difference: data[0].budgetPerDay,
-      };
-    }
-  } else {
-    const index = data.findIndex((item) => {
-      return unixToDate(item.startDate) === filterDate;
-    });
-    if (index !== -1) {
-      date = data[index];
-    } else {
-      const cumulativeDifference = getClosestCumulativeDifference(
-        data,
-        filterDate
-      );
-      date = {
-        budgetPerDay: data[0].budgetPerDay,
-        cumulativeDifference: cumulativeDifference,
-        totalSpendPerDay: 0,
-        difference: data[0].budgetPerDay,
-      };
+      const index = data.findIndex((item) => {
+        return unixToDate(item.startDate) === filterDate;
+      });
+      if (index !== -1) {
+        date = data[index];
+      } else {
+        const cumulativeDifference = getClosestCumulativeDifference(
+          data,
+          filterDate
+        );
+        date = {
+          budgetPerDay: data[0].budgetPerDay,
+          cumulativeDifference: cumulativeDifference,
+          totalSpendPerDay: 0,
+          difference: data[0].budgetPerDay,
+        };
+      }
     }
   }
 
@@ -110,7 +123,6 @@ export function getClosestCumulativeDifference(data, filterDate) {
   for (let i = 1; i < 50; i++) {
     let previousDate = filterDateDayJs.subtract(i, "day");
     index = data.findIndex((item) => {
-      console.log(unixToDate(item.startDate), unixToDate(previousDate));
       return unixToDate(item.startDate) === unixToDate(previousDate);
     });
     if (index !== -1) {
@@ -120,7 +132,7 @@ export function getClosestCumulativeDifference(data, filterDate) {
   return data[index].cumulativeDifference;
 }
 
-export function getSpendPerDay(budgetPerDay, data, filter) {
+export function getSpendPerDay(budgetPerDay, data) {
   //take out empty days (a.k.a. empty arrays)
   let filteredData = data.filter((subArray) => subArray.length > 0);
 
