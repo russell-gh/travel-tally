@@ -18,3 +18,13 @@ export function getUnixfromDate(str1) {
   var date1 = new Date(yr1, mon1 - 1, dt1);
   return date1;
 }
+
+export function includesFutureExpenses(data) {
+  let includesFutureExpenses;
+  data.forEach((item) => {
+    if (dayjs().isBefore(dayjs(item.startDate))) {
+      includesFutureExpenses = true;
+    }
+  });
+  return includesFutureExpenses;
+}

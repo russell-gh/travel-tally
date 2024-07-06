@@ -1,5 +1,9 @@
 import { useSelector } from "react-redux";
-import { selectSelectedTripId, selectTrips } from "../../redux/homeSlice";
+import {
+  selectSelectedTripId,
+  selectHideFutureExpenses,
+  selectTrips,
+} from "../../redux/homeSlice";
 import { findItem, getIndex } from "../../utils/utils";
 import Expenses from "./Expenses";
 import Title from "./Title";
@@ -23,6 +27,7 @@ const Dashboard = () => {
   const order = useSelector(selectOrder);
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
+  const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
   if (!trips || trips.length === 0) {
     return <Message message="Loading.." />;
@@ -36,7 +41,13 @@ const Dashboard = () => {
 
   const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
   let expensesArray = createExpensesArray(expensesCategories, details); //should this be in a useEffect?
-  const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
+  const filtered = getSortedandFiltered(
+    _expenses,
+    order,
+    filter,
+    filterDate,
+    hideFutureExpenses
+  );
 
   return (
     <div className="dashboard">

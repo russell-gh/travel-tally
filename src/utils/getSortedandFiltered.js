@@ -1,6 +1,13 @@
 import { unixToDate } from "./utilsDates";
+import dayjs from "dayjs";
 
-export const getSortedandFiltered = (data, order, filter, filterDate) => {
+export const getSortedandFiltered = (
+  data,
+  order,
+  filter,
+  filterDate,
+  hideFutureExpenses
+) => {
   let filtered = [...data];
 
   // select
@@ -52,6 +59,13 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
     if (filtered.length === 0) {
       console.log("Something went wrong with filtering the date");
     }
+  }
+
+  //toggle show future expenses
+  if (hideFutureExpenses === true) {
+    filtered = filtered.filter((item) => {
+      return dayjs(item.startDate).isBefore(dayjs());
+    });
   }
 
   return filtered;

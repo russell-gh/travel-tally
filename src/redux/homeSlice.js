@@ -114,6 +114,9 @@ export const homeSlice = createSlice({
         state.trips[indexOf].expenses.push(result);
       }
     },
+    toggleHideFutureExpenses: (state, { payload }) => {
+      state.hideFutureExpenses = payload;
+    },
   },
 });
 
@@ -123,6 +126,7 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
+  toggleHideFutureExpenses,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
@@ -138,5 +142,7 @@ export const selectCurrencyRates = (state) => state.home.currencyRates;
 export const selectCurrencyNames = (state) => state.home.currencyNames;
 export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
+export const selectHideFutureExpenses = (state) =>
+  state.home.hideFutureExpenses;
 
 export default homeSlice.reducer;

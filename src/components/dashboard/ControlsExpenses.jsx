@@ -3,6 +3,7 @@ import Order from "./filter/order";
 import FilterDate from "./filter/FilterDate";
 import ShowFutureExpenses from "./filter/ShowFutureExpenses";
 import dayjs from "dayjs";
+import { includesFutureExpenses } from "../../utils/utilsDates";
 
 const ControlsExpenses = ({
   expenses,
@@ -15,8 +16,7 @@ const ControlsExpenses = ({
   }
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
-  const stillTravelling =
-    dayjs().isBefore(endDate) && startDate.isBefore(dayjs());
+  const includesFuture = includesFutureExpenses(expenses);
   return (
     <>
       <div className="controlsExpenses">
@@ -27,7 +27,7 @@ const ControlsExpenses = ({
           expensesCategories={expensesCategories}
         />
       </div>
-      {stillTravelling && <ShowFutureExpenses />}
+      {includesFuture && <ShowFutureExpenses />}
     </>
   );
 };

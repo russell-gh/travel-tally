@@ -1,16 +1,17 @@
-import { useDispatch } from "react-redux";
-import { formEvent } from "../../../redux/homeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { formEvent, selectHideFutureExpenses } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 import { getArrayOfValues } from "../../../utils/utils";
 
 const FilterDate = ({ expenses, expensesCategories }) => {
   const dispatch = useDispatch();
+  const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
   if (!expenses || !expensesCategories) {
     return;
   }
 
-  let arrDates = getArrayOfValues(expenses, "startDate");
+  let arrDates = getArrayOfValues(expenses, "startDate", hideFutureExpenses);
   let arrDatesCategories = getArrayOfValues(expensesCategories, "startDate");
 
   if (!arrDatesCategories) {
