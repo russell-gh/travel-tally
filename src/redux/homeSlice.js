@@ -83,6 +83,13 @@ export const homeSlice = createSlice({
     },
     formEvent: (state, { payload }) => {
       state[payload.id] = payload.value;
+
+      // resets the filters when switching between trips
+      if (payload.id === "selectedTripId") {
+        state.filter = "Show All";
+        state.order = "Newest first";
+        state.filterDate = "All Dates";
+      }
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
