@@ -1,5 +1,4 @@
-import { addDecimals } from "../../utils/utils";
-import { getCurrencySymbol } from "../../utils/utils";
+import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
 
 const ExpenseAmount = ({ homeCurrencySymbol, amount, currencyCodes }) => {
   const { fromCurrency, toValue, fromValue } = amount;

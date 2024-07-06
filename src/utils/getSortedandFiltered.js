@@ -1,4 +1,4 @@
-import { unixToDate } from "./utils";
+import { unixToDate } from "./utilsDates";
 
 export const getSortedandFiltered = (data, order, filter, filterDate) => {
   let filtered = [...data];

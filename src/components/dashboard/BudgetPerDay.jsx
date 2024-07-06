@@ -1,15 +1,12 @@
 import {
   addDecimals,
-  calculateTotalSpend,
   getSpendPerDay,
-} from "../../utils/utils";
+  getBudget,
+  getSpendSelectedDay,
+} from "../../utils/utilsBudget";
 import { useSelector } from "react-redux";
 import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
-import { getBudget } from "../../utils/utils";
-import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";
-import dayjs from "dayjs";
-import { getSpendSelectedDay } from "../../utils/utils";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -38,12 +35,13 @@ const BudgetPerDay = ({
   );
   return (
     <>
-      {/* <div className="chartDay">
+      <div className="chartDay">
+        <p>Daily budget</p>
         <CategoryGauge
           budget={budgetPerDay}
           spend={addDecimals(selectedDay.totalSpendPerDay)}
         />
-      </div> */}
+      </div>
       <div className="dayBudget">
         <p>
           Budget per day: {homeCurrencySymbol}

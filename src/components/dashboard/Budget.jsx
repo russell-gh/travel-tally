@@ -1,7 +1,10 @@
-import { addDecimals, calculateTotalSpend } from "../../utils/utils";
+import {
+  addDecimals,
+  calculateTotalSpend,
+  getBudget,
+} from "../../utils/utilsBudget";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
-import { getBudget } from "../../utils/utils";
 import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";
 
@@ -15,11 +18,13 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   return (
     <>
       <div className="chartAll">
-        {filter === "Show All" ? (
+        <p>Total budget</p>
+        <CategoryGauge budget={budget} spend={totalSpend} />
+        {/* {filter === "Show All" ? (
           <BudgetPieChart details={details} />
         ) : (
           <CategoryGauge budget={budget} spend={totalSpend} />
-        )}
+        )} */}
       </div>
       <div className="budget">
         <p>

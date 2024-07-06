@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { addDecimals } from "../../utils/utils";
+import { addDecimals } from "../../utils/utilsBudget";
 import StillTravellingInfo from "./StillTravellingInfo";
 
 const TripInfo = ({ startDate, endDate, details, amountOfDays }) => {

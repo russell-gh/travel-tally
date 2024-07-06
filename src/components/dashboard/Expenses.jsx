@@ -7,7 +7,6 @@ import {
 } from "../../redux/homeSlice";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
-import Image from "./Image";
 import Message from "./Message";
 import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
@@ -37,7 +36,15 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, id, category, startDate, endDate, amount } = item;
+        const {
+          description,
+          id,
+          category,
+          startDate,
+          endDate,
+          amount,
+          sharedId,
+        } = item;
         return (
           <div className="expenseItem" key={id}>
             <CategoryIcon category={category} />
@@ -59,7 +66,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
               onClick={() => {
                 dispatch(
                   togglePopUp({
-                    config: { title: description, id: id },
+                    config: { title: description, id: id, sharedId: sharedId },
                     component: "DeletePopUp",
                   })
                 );

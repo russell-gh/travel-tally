@@ -13,6 +13,7 @@ const FormElement = ({
   value,
   choose,
   list,
+  className = [],
 }) => {
   switch (type) {
     case "text":
@@ -124,7 +125,9 @@ const FormElement = ({
               <option
                 key={option.value}
                 value={option.value}
-                className={`_${option.value.replaceAll("/", "")}`}
+                className={
+                  className.includes(option.name) ? "includes" : "excludes"
+                }
               >
                 {option.name}
               </option>

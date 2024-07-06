@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
-import { addDecimals } from "../../utils/utils";
 import dayjs from "dayjs";
 import { selectFilter } from "../../redux/homeSlice";
-import { getBudget } from "../../utils/utils";
+import { getBudget, addDecimals } from "../../utils/utilsBudget";
 
 const StillTravellingInfo = ({ endDate }) => {
   const filter = useSelector(selectFilter);

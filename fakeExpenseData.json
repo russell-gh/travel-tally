@@ -11,7 +11,12 @@
       "homeCurrency": "GBP",
       "destination": "Netherlands",
       "startDate": 1719356400000,
-      "endDate": 1721343600000
+      "endDate": 1721343600000,
+
+      "dates": {
+        "startDateIncluded": true,
+        "endDateIncluded": false
+      }
     },
     "expenses": [
       {

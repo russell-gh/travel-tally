@@ -34,8 +34,6 @@ const Dashboard = () => {
   const { destination, homeCurrencySymbol, startDate, endDate } = details;
   let _expenses = [...trip.expenses].reverse();
 
-  console.log(filterDate);
-
   const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
   let expensesArray = createExpensesArray(expensesCategories, details); //should this be in a useEffect?
   const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
@@ -49,7 +47,7 @@ const Dashboard = () => {
           endDate={endDate}
         />
         <BudgetInfo
-          expenses={filtered}
+          expenses={expensesCategories}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           startDate={startDate}

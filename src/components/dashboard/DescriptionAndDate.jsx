@@ -1,4 +1,4 @@
-import { unixToDate } from "../../utils/utils";
+import { unixToDate } from "../../utils/utilsDates";
 
 const DescriptionAndDate = ({ description, category, startDate, endDate }) => {
   if (!startDate || !endDate) {

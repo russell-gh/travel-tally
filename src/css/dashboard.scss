@@ -123,7 +123,7 @@
     display: grid;
     padding: 0px 10px;
     gap: 10px;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 0.7fr 0.7fr 1fr;
     grid-template-rows: 1fr fit-content(100px);
   }
 
@@ -131,7 +131,15 @@
     display: inherit;
     grid-row: 1;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
+    justify-self: center;
+  }
+
+  .chartDay {
+    display: inherit;
+    grid-row: 1;
+    grid-column-start: 3;
+    grid-column-end: 5;
     justify-self: center;
   }
 
@@ -153,5 +161,12 @@
 
   .dayBudget {
     justify-self: center;
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+
+  .includes {
+    background-color: rgb(220, 245, 245);
   }
 }
