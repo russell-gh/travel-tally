@@ -16,7 +16,6 @@ const BudgetInfo = ({
   endDate = dayjs(endDate);
   const stillTravelling =
     dayjs().isBefore(endDate) && startDate.isBefore(dayjs());
-  console.log(stillTravelling);
   const amountOfDays = endDate.diff(startDate, "day") + 1;
 
   ("containerBudget");

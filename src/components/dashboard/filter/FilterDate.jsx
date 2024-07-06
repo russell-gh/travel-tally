@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { formEvent } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
-import { getArrayOfDates } from "../../../utils/utilsDates";
+import { getArrayOfValues } from "../../../utils/utilsDates";
 
 const FilterDate = ({ expenses, expensesCategories }) => {
   const dispatch = useDispatch();
@@ -10,8 +10,8 @@ const FilterDate = ({ expenses, expensesCategories }) => {
     return;
   }
 
-  let arrDates = getArrayOfDates(expenses);
-  let arrDatesCategories = getArrayOfDates(expensesCategories);
+  let arrDates = getArrayOfValues(expenses, "startDate");
+  let arrDatesCategories = getArrayOfValues(expensesCategories, "startDate");
 
   if (!arrDatesCategories) {
     return;

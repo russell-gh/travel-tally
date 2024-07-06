@@ -53,6 +53,8 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
               category={category}
               startDate={startDate}
               endDate={endDate}
+              sharedId={sharedId}
+              expenses={expenses}
             />
             <ExpenseAmount
               homeCurrencySymbol={homeCurrencySymbol}
