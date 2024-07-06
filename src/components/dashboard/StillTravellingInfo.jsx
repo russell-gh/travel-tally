@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 
 const StillTravellingInfo = ({ endDate }) => {
   const now = dayjs();
-  console.log(endDate, now);
   const daysLeft = endDate.diff(now, "day");
   const hoursLeft = endDate.subtract(daysLeft, "day").diff(now, "hour", true);
 

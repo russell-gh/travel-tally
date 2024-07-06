@@ -58,6 +58,8 @@ const Dashboard = () => {
         <ControlsExpenses
           expensesCategories={expensesCategories}
           expenses={expenses}
+          startDate={startDate}
+          endDate={endDate}
         />
       </div>
       <Expenses

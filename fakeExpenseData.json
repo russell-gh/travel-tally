@@ -640,6 +640,101 @@
         "endDate": 1719788400000,
         "completed": true,
         "splitBill": false
+      },
+      {
+        "id": "expense_A1rdJ7nS8kJ3fHA25T4gf",
+        "sharedId": "shared_A1rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Hotel",
+        "description": "hotel Groningen",
+        "startDate": 1720220400000,
+        "endDate": 1720220400000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A2rdJ7nS8kJ3fHA25T4gf",
+        "sharedId": "shared_A1rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Hotel",
+        "description": "hotel Groningen",
+        "startDate": 1720306800000,
+        "endDate": 1720306800000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A3rdJ7nS8kJ3fHA25T4gf",
+        "sharedId": "shared_A1rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Hotel",
+        "description": "hotel Groningen",
+        "startDate": 1720393200000,
+        "endDate": 1720393200000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A4rdJ7nS8kJ3fHA25T4gf",
+        "sharedId": "shared_A1rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Hotel",
+        "description": "hotel Groningen",
+        "startDate": 1720479600000,
+        "endDate": 1720479600000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A5rdJ7nS8kJ3fHA25T4gf",
+        "sharedId": "shared_A1rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Hotel",
+        "description": "hotel Groningen",
+        "startDate": 1720566000000,
+        "endDate": 1720566000000,
+        "completed": true,
+        "splitBill": false
+      },
+      {
+        "id": "expense_A5rdJ7nS8kJ3fHA25T4gf",
+        "amount": {
+          "fromValue": 4000,
+          "fromCurrency": "EUR",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Transport",
+        "description": "train to airport",
+        "startDate": 1721343600000,
+        "endDate": 1721343600000,
+        "completed": true,
+        "splitBill": false
       }
     ]
   },

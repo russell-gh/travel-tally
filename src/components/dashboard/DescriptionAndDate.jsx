@@ -1,5 +1,5 @@
 import { unixToDate } from "../../utils/utilsDates";
-import { getArrayOfValues } from "../../utils/utilsDates";
+import { getArrayOfValues } from "../../utils/utils";
 import { getColourForSharedId } from "../../utils/utils";
 
 const DescriptionAndDate = ({
@@ -24,8 +24,8 @@ const DescriptionAndDate = ({
   return (
     <div>
       <h2>
-        {description ? description : category}
         {sharedId && <span className="dot" style={dotStyle}></span>}
+        {description ? description : category}
       </h2>
       <p>{unixToDate(startDate)}</p>
     </div>

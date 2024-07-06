@@ -18,36 +18,3 @@ export function getUnixfromDate(str1) {
   var date1 = new Date(yr1, mon1 - 1, dt1);
   return date1;
 }
-
-export function getArrayOfValues(data, key) {
-  let copy = [...data];
-  //makes an array of the dates
-  copy = copy.map((item) => {
-    return item[key];
-  });
-
-  // removes duplicates
-  copy = [...new Set(copy)];
-
-  if (key === "startDate") {
-    // get dates in right order
-    copy.sort((a, b) => {
-      if (a < b) {
-        return 1;
-      } else if (a > b) {
-        return -1;
-      }
-      return 0;
-    });
-
-    // turns unixCode to timestamp
-    copy = copy.map((item) => {
-      return unixToDate(item);
-    });
-
-    //add All Dates as first element
-    copy.unshift("All Dates");
-  }
-
-  return copy;
-}

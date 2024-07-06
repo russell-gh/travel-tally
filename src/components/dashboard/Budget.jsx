@@ -5,7 +5,6 @@ import {
 } from "../../utils/utilsBudget";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
-import BudgetPieChart from "./BudgetPieChart";
 import CategoryGauge from "./CategoryGauge";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {

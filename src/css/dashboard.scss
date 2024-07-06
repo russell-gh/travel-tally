@@ -58,6 +58,7 @@
 
   .dashboardFixed {
     position: fixed;
+    z-index: 2;
     top: 0;
     width: 100%;
     background-color: white;
@@ -187,7 +188,19 @@
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .future {
+    z-index: 1;
+    opacity: 0.8;
+
+    img,
+    h2,
+    .delete,
+    .dot {
+      opacity: 0.8;
+    }
   }
 
   /*

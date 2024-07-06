@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { formEvent } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
-import { getArrayOfValues } from "../../../utils/utilsDates";
+import { getArrayOfValues } from "../../../utils/utils";
 
 const FilterDate = ({ expenses, expensesCategories }) => {
   const dispatch = useDispatch();

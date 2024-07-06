@@ -10,6 +10,7 @@ import DeletePopUp from "./DeletePopUp";
 import Message from "./Message";
 import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
+import dayjs from "dayjs";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
@@ -45,8 +46,9 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
           amount,
           sharedId,
         } = item;
+        const isFuture = dayjs(startDate).isAfter(dayjs());
         return (
-          <div className="expenseItem" key={id}>
+          <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
             <CategoryIcon category={category} />
             <DescriptionAndDate
               description={description}
