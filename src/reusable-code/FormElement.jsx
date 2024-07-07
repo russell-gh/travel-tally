@@ -14,6 +14,7 @@ const FormElement = ({
   choose,
   list,
   className = [],
+  onKeyDown,
 }) => {
   switch (type) {
     case "text":
@@ -30,6 +31,9 @@ const FormElement = ({
             list={list}
             onChange={(e) => {
               callback(e, id);
+            }}
+            onKeyDown={(e) => {
+              onKeyDown(e, id);
             }}
           />
           {error && <p>{error}</p>}

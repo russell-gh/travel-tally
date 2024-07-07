@@ -22,13 +22,19 @@ const UserName = () => {
         callback={(e) => {
           onChange(e);
         }}
+        //makes it so you can input the username with enter
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            dispatch(saveProfile({ key: "userName", value: e.target.value }));
+          }
+        }}
       />
       <br />
       <Link to="/setupprofile/profilepicture">
         <Button
           className="next"
           text="next"
-          onClick={(e) => {
+          onClick={() => {
             dispatch(saveProfile({ key: "userName", value: value }));
           }}
         />

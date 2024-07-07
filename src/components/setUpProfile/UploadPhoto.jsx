@@ -1,9 +1,8 @@
 import { useState } from "react";
 import FormElement from "../../reusable-code/FormElement";
-import Button from "../../reusable-code/Button";
 import { selectProfilePictureSrc } from "../../redux/onboardingSlice";
-import ProfileCropper from "./ProfileCropper";
 import { useSelector } from "react-redux";
+import StageOfPhoto from "./StagesOfPhoto";
 
 const UploadPhoto = () => {
   const [profilePicture, setProfilePicture] = useState();
@@ -39,16 +38,7 @@ const UploadPhoto = () => {
           callback={onChange}
         />
       )}
-      {profilePicture && !profilePictureSrc && (
-        <ProfileCropper src={profilePicture} />
-      )}
-      {profilePictureSrc && (
-        <img
-          src={profilePictureSrc}
-          alt="profile picture"
-          className="profilePicture"
-        />
-      )}
+      <StageOfPhoto profilePicture={profilePicture} />
     </>
   );
 };

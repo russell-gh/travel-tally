@@ -14,10 +14,12 @@ export const onboardingSlice = createSlice({
       state.user = payload;
     },
     saveProfile: (state, { payload }) => {
-      const { value, key } = payload;
-      console.log(value, key);
-      state.profile[key] = value;
-      console.log(state.profile.userName);
+      if (!payload) {
+        state.profile = {};
+      } else {
+        const { value, key } = payload;
+        state.profile[key] = value;
+      }
     },
   },
 });
