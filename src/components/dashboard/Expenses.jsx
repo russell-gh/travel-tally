@@ -7,7 +7,7 @@ import {
 } from "../../redux/homeSlice";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
-import Message from "./Message";
+import Message from "../../reusable-code/Message";
 import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
 import dayjs from "dayjs";

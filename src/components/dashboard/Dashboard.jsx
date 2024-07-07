@@ -16,7 +16,7 @@ import {
 } from "../../redux/homeSlice";
 import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
-import Message from "./Message";
+import Message from "../../reusable-code/Message";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";

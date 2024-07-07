@@ -13,11 +13,14 @@ export const onboardingSlice = createSlice({
     addUser: (state, { payload }) => {
       state.user = payload;
     },
+    saveProfilePicture: (state, { payload }) => {
+      state.profile.profilePictureSrc = payload;
+    },
   },
 });
 
 export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
 export const selectUser = (state) => state.onboarding.user;
-export const { addTrip, addUser } = onboardingSlice.actions;
+export const { addTrip, addUser, saveProfilePicture } = onboardingSlice.actions;
 
 export default onboardingSlice.reducer;
