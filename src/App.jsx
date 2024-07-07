@@ -49,6 +49,7 @@ const App = () => {
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-expense" element={<AddExpense />} />
+          <Route path="/edit-expense" element={<EditExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
       </main>
