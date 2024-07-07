@@ -1,4 +1,3 @@
-
 import { stringToTimestamp, generateId } from "../components/onboarding/utils";
 
 export function handleData(expense, home, data) {
@@ -98,8 +97,7 @@ export function getThisExpense(expenseList, id) {
   });
   // Create variable for the correct trip
   const thisExpense = expenseList[indexOf];
-  let result = {thisExpense, indexOf};
-  console.log(result, 'GOT INDEX');
+  let result = { thisExpense, indexOf };
+  console.log(result, "GOT INDEX");
   return result;
 }
-

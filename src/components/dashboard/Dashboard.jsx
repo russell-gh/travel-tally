@@ -16,13 +16,15 @@ import Filter from "./filter/Filter";
 import FilterDate from "./filter/FilterDate";
 import Order from "./filter/order";
 import TripInfo from "./TripInfo";
-import "../../css/dashboard.css";
+import "../../css/dashboard.scss";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import {
   selectOrder,
   selectFilter,
   selectFilterDate,
 } from "../../redux/homeSlice";
+
+import {important} from "../../css/dashboard.module.css"
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -91,6 +93,8 @@ const Dashboard = () => {
         </div>
       </div>
       <Expenses filtered={filtered} homeCurrencySymbol={homeCurrencySymbol} />
+      <p className={important}>this should be red</p>
+
     </div>
   );
 };

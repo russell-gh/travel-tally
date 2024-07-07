@@ -3,42 +3,59 @@ import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
-
+import Joi from "joi";
+import { validate } from "./onboarding/validation/validate";
+import "./login.css";
+//=======Displays Login Data================
 const Login = () => {
   const user = useSelector(selectUser);
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
   const trips = useSelector(selectTrips);
   const onInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  console.log(formData, user);
+  // console.log(formData, user);
   const localUser = JSON.parse(localStorage.getItem("user")); // selects "email" part of object. Turns back into object.
-  const onSubmit = (e) => {
-    if (
-      formData.password === localUser.password1 &&
-      formData.email === localUser.email
-    ) {
-      console.log("form submitted", formData);
-      if (trips.length) {
-        redirect("/dashboard");
-      } else redirect("/onboarding");
+
+  //=======Compares Credentials to Local Storage================
+  const onSubmit = async (e) => {
+    const errObj = await validate(formData, "signup");
+    setErrors(errObj);
+    if (errObj.password || errObj.email) {
+      console.log(errObj);
     } else {
-      console.log("wrong email/password");
+      if (
+        formData.password === localUser.password1 &&
+        formData.email === localUser.email
+      ) {
+        console.log("form submitted", user);
+        if (trips.length) {
+          redirect("/dashboard");
+        } else redirect("/onboarding");
+      } else {
+        console.log("wrong email/password");
+      }
     }
   };
 
   return (
-    <div onInput={onInput}>
-      <input type="email" name="email" id="email" placeholder="email" />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="password"
-      />
-      <button onClick={onSubmit}>Login</button>
-    </div>
+    <>
+      <div onInput={onInput}>
+        <input type="email" name="email" id="email" placeholder="email" />
+        <p className="errortext">{errors.email}</p>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="password"
+        />
+        <p className="errortext">{errors.password1}</p>
+        {/*BUG Shows password1 */}
+        <button onClick={onSubmit}>Login</button>
+      </div>
+    </>
   );
 };
 
