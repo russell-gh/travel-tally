@@ -62,18 +62,11 @@ const Onboarding = () => {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  const handleChange = (e, id, value) => {
-    let input;
-    //slider events may send through a fixed value instead of the user selected value
-    if (value) {
-      input = value;
-    } else {
-      input = e.target.value;
-    }
-
+  const handleChange = (e, id) => {
+    let input = e.target.value;
     //if id is a type of budget convert to a number
     if (id.includes("budget")) {
-      input = Number(e.target.value);
+      input = parseInt(e.target.value);
     }
 
     setOnboardingDetails({ ...onboardingDetails, [id]: input });
@@ -136,7 +129,7 @@ const Onboarding = () => {
               id={question.id}
               label={question.label}
               name={question.name}
-              value={onboardingDetails[question.id]}
+              value={onboardingDetails[question.id] ? onboardingDetails[question.id].toString() : onboardingDetails[question.id]}
               options={question.options}
               defaultValue={question.defaultValue}
               error={errors[question.id]}
