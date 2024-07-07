@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
-import Onboarding from "./components/Onboarding/Onboarding";
+import Onboarding from "./components/onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { selectPopUp, setData } from "./redux/homeSlice";
+import { Logo } from "./components/Logo";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const App = () => {
 
   return (
     <>
+    {/* <Logo/> */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
