@@ -20,6 +20,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp />,
+    EditExpense: "EditExpense", //add component here
   };
 
   if (!currencyCodes || !trips) {
@@ -62,6 +63,19 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
               homeCurrencySymbol={homeCurrencySymbol}
               amount={amount}
               currencyCodes={currencyCodes}
+            />
+            <img
+              src="../src/img/edit.svg"
+              alt="edit"
+              className="edit"
+              onClick={() => {
+                dispatch(
+                  togglePopUp({
+                    config: { title: description, id: id, sharedId: sharedId },
+                    component: "EditExpense",
+                  })
+                );
+              }}
             />
             <img
               src="../src/img/delete.svg"

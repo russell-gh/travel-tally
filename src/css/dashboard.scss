@@ -170,7 +170,7 @@
     border: lightgray 2px solid;
     margin-bottom: 3px;
     display: grid;
-    grid-template-columns: 40px 1fr 50px 30px;
+    grid-template-columns: 40px 1fr 50px 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
@@ -185,6 +185,13 @@
   .delete {
     height: 30px;
     cursor: pointer;
+    border-radius: 100%;
+  }
+
+  .edit {
+    height: 30px;
+    cursor: pointer;
+    border-radius: 100%;
   }
 
   .expenseItem h2 {
