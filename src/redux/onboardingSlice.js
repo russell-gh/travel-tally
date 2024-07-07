@@ -16,7 +16,7 @@ export const onboardingSlice = createSlice({
   },
 });
 
-export const selectTrip = (state) => state.onboarding.trips; //or state.trip?
+export const testSelector = (state) => state.onboarding.trips; //renamed to avoid conflicts
 export const selectUser = (state) => state.onboarding.user;
 export const { addTrip, addUser, addPass } = onboardingSlice.actions;
 

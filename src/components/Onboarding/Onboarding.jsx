@@ -3,13 +3,13 @@ import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrip, selectTrip } from "../../redux/onboardingSlice.js";
+import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 
 const Onboarding = () => {
-  const trips = useSelector(selectTrip);
+  const trips = useSelector(testSelector);
 
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
