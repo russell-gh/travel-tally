@@ -4,6 +4,7 @@ import {
   tripSchema,
   signupSchema,
   loginSchema,
+  setUpProfileSchema,
 } from "./schemas";
 
 //pass through form data as obj, schema as string and any callback which needs to occur on successful tests.

@@ -1,30 +1,46 @@
 import Webcam from "react-webcam";
 import { useState } from "react";
 import StageOfPhoto from "./StagesOfPhoto";
+import Message from "../../reusable-code/Message";
+import { useEffect } from "react";
 
 const videoConstraints = {
-  width: 1280,
-  height: 720,
   facingMode: "user",
 };
 
 const TakePhoto = () => {
   const [profilePicture, setProfilePicture] = useState();
+  const [hasPermission, setHasPermission] = useState(null);
 
   const handleCapture = (getScreenshot) => {
     const imageSrc = getScreenshot();
     setProfilePicture(imageSrc);
   };
 
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(() => setHasPermission(true))
+      .catch((error) => {
+        console.error("Error accessing webcam: ", error);
+        setHasPermission(false);
+      });
+  }, []);
+
   return (
-    <>
-      {!profilePicture && (
+    <div className="webcamContainer">
+      {hasPermission === null && (
+        <Message message="Checking for webcam permissions..." />
+      )}
+      {hasPermission === false && (
+        <Message message="Webcam access denied. Please enable it in your browser settings." />
+      )}
+      {hasPermission && !profilePicture && (
         <Webcam
           audio={false}
-          height={720}
           screenshotFormat="image/jpeg"
-          width={1280}
           videoConstraints={videoConstraints}
+          className="webcam"
         >
           {({ getScreenshot }) => (
             <button
@@ -38,7 +54,7 @@ const TakePhoto = () => {
         </Webcam>
       )}
       <StageOfPhoto profilePicture={profilePicture} />
-    </>
+    </div>
   );
 };
 

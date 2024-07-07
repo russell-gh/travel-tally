@@ -37,3 +37,7 @@ export const loginSchema = {
     .required(),
   password: Joi.string().min(8).required(),
 };
+
+export const setUpProfileSchema = {
+  userName: Joi.string().min(5).label("username").required(),
+};
