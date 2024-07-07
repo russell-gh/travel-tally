@@ -3,19 +3,22 @@ import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrip } from "../../redux/onboardingSlice.js";
+import { addTrip, selectTrip } from "../../redux/onboardingSlice.js";
 import { validate } from "./validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 
 const Onboarding = () => {
-  // const trips = useSelector(selectTrips);
-  // console.log(trips)
+  const trips = useSelector(selectTrip);
 
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
-    startDate: "",
-    endDate: "",
+    dates: {
+      startDate: "",
+      endDate: "",
+      startDateIncluded: false,
+      endDateIncluded: false,
+    },
     budgetTotal: 0,
     homeCurrency: "",
     budgetHotel: 0,
@@ -64,6 +67,18 @@ const Onboarding = () => {
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
   const handleChange = (e, id) => {
     let input = e.target.value;
+
+    //if input is a checkbox, assign input to checked
+    if (e.target.type === "checkbox") {
+      input = e.target.checked;
+    } 
+
+        // if ((e.target.id).includes("date")) {console.log("its a date")}
+        if (id.toLowerCase().includes("date")) {
+          setOnboardingDetails({ ...onboardingDetails, dates:{...onboardingDetails.dates, [id]: input} });
+          return;
+        }
+
     //if id is a type of budget convert to a number
     if (id.includes("budget")) {
       input = parseInt(e.target.value);
@@ -93,16 +108,15 @@ const Onboarding = () => {
     const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
-    let startDate = stringToTimestamp(_onboardingDetails.startDate);
-    let endDate = stringToTimestamp(_onboardingDetails.endDate);
+    let startDate = stringToTimestamp(_onboardingDetails.dates.startDate);
+    let endDate = stringToTimestamp(_onboardingDetails.dates.endDate);
 
     //spread existing state and update modified keys
     _onboardingDetails = {
       id: generateId("trip"),
       details: {
         ..._onboardingDetails,
-        startDate,
-        endDate,
+        dates: { startDate, endDate, startDateIncluded, endDateIncluded },
         budgetTotal,
         budgetHotel,
         budgetFood,
@@ -129,7 +143,13 @@ const Onboarding = () => {
               id={question.id}
               label={question.label}
               name={question.name}
-              value={onboardingDetails[question.id] ? onboardingDetails[question.id].toString() : onboardingDetails[question.id]}
+              value={
+                question.id.includes("date")
+                  ? onboardingDetails.dates[question.id]
+                  : question.id.includes("budget")
+                  ? onboardingDetails[question.id].toString()
+                  : onboardingDetails[question.id]
+              }
               options={question.options}
               defaultValue={question.defaultValue}
               error={errors[question.id]}
