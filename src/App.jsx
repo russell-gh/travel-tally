@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import EditExpense from "./components/EditExpense";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
 import Onboarding from "./components/Onboarding/Onboarding";
@@ -38,14 +39,19 @@ const App = () => {
 
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add-expense" element={<AddExpense />} />
-        <Route path="*" element={<p>No page selected</p>} />
-      </Routes>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/add-expense" element={<AddExpense />} />
+          <Route path="/edit-expense" element={<EditExpense />} />
+          <Route path="*" element={<p>No page selected</p>} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 };

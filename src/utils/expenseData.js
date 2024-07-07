@@ -1,4 +1,5 @@
-import { stringToTimestamp, generateId } from "../components/Onboarding/utils";
+
+import { stringToTimestamp, generateId } from "../components/onboarding/utils";
 
 export function handleData(expense, home, data) {
   let { startDate, endDate, description, category, amount, currency, split } =
@@ -50,16 +51,6 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   return result;
 }
 
-export function getExpenseList(tripID, trips) {
-  const indexOf = trips.findIndex((trip) => {
-    return trip.id === tripID;
-  });
-  console.log(indexOf);
-  // Create variable for the correct trip
-  const thisTrip = trips[indexOf];
-  return thisTrip.expenses;
-}
-
 export function splitExpenseDays(expense) {
   let { startDate, endDate, description, category, amount, currency, split } =
     expense;
@@ -91,3 +82,24 @@ export function splitExpenseDays(expense) {
   }
   return allExpenses;
 }
+
+export function getExpenseList(tripID, trips) {
+  const indexOf = trips.findIndex((trip) => {
+    return trip.id === tripID;
+  });
+  // Create variable for the correct trip
+  const thisTrip = trips[indexOf];
+  return thisTrip.expenses;
+}
+
+export function getThisExpense(expenseList, id) {
+  const indexOf = expenseList.findIndex((expense) => {
+    return expense.id === id;
+  });
+  // Create variable for the correct trip
+  const thisExpense = expenseList[indexOf];
+  let result = {thisExpense, indexOf};
+  console.log(result, 'GOT INDEX');
+  return result;
+}
+

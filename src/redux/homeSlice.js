@@ -87,6 +87,15 @@ export const homeSlice = createSlice({
         state.trips[indexOf].expenses.push(result);
       }
     },
+
+    deleteToEdit: (state, { payload }) => {
+      console.log('HIT IT')
+      const {expenseIndex} = payload
+      //get index of the current trip
+      const indexTrip = getIndex(state.trips, state.selectedTripId);
+      // delete expense
+      state.trips[indexTrip].expenses.splice(expenseIndex, 1);
+    }
   },
 });
 
@@ -96,6 +105,7 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
+  deleteToEdit,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
