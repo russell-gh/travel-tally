@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { trips: [], user: [], pass: [] };
+const initialState = { trips: [], user: [], pass: [], profile: {} };
 
 export const onboardingSlice = createSlice({
   name: "onboarding",
@@ -13,14 +13,20 @@ export const onboardingSlice = createSlice({
     addUser: (state, { payload }) => {
       state.user = payload;
     },
-    saveProfilePicture: (state, { payload }) => {
-      state.profile.profilePictureSrc = payload;
+    saveProfile: (state, { payload }) => {
+      const { value, key } = payload;
+      console.log(value, key);
+      state.profile[key] = value;
+      console.log(state.profile.userName);
     },
   },
 });
 
 export const selectTrip = (state) => state.onboarding.trip; //or state.trip?
 export const selectUser = (state) => state.onboarding.user;
-export const { addTrip, addUser, saveProfilePicture } = onboardingSlice.actions;
+export const selectProfilePictureSrc = (state) =>
+  state.onboarding.profile.profilePictureSrc;
+export const selectUserName = (state) => state.onboarding.profile.userName;
+export const { addTrip, addUser, saveProfile } = onboardingSlice.actions;
 
 export default onboardingSlice.reducer;
