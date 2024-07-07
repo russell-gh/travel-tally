@@ -71,10 +71,23 @@
     justify-content: center;
     align-items: baseline;
     gap: 10px;
-  }
 
-  .containerTitle p {
-    color: green;
+    .travellingTitle {
+      color: green;
+    }
+
+    .profile {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+
+      .profilePicture {
+        height: 40px;
+        border-radius: 100%;
+        margin: 0px auto;
+        display: block;
+      }
+    }
   }
 
   .containerBudgetWhilst {
