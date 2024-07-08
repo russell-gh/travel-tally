@@ -10,12 +10,16 @@ const BudgetInfo = ({
   startDate,
   endDate,
   expensesArray,
+  actualStartDate,
+  actualEndDate,
 }) => {
   // converts and calculates days traveling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
   const stillTravelling =
     dayjs().isBefore(endDate) && startDate.isBefore(dayjs());
+  const amountOfBudgetDays =
+    dayjs(actualEndDate).diff(dayjs(actualStartDate), "day") + 1;
   const amountOfDays = endDate.diff(startDate, "day") + 1;
 
   ("containerBudget");
@@ -36,9 +40,7 @@ const BudgetInfo = ({
           expensesArray={expensesArray}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
-          amountOfDays={amountOfDays}
-          startDate={startDate}
-          endDate={endDate}
+          amountOfBudgetDays={amountOfBudgetDays}
         />
       )}
       <TripInfo

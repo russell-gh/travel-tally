@@ -23,11 +23,9 @@ const Title = ({ destination, startDate, endDate }) => {
     <div>
       <div className="containerTitle">
         <h1>{destination}</h1>
-        <p>
-          {dayjs().isBefore(endDate) && startDate.isBefore(dayjs()) && (
-            <Message message="Travelling" className="travellingTitle" />
-          )}
-        </p>
+        {dayjs().isBefore(endDate) && startDate.isBefore(dayjs()) && (
+          <Message message="Travelling" className="travellingTitle" />
+        )}
         <div className="profile">
           {profilePictureSrc && (
             <img

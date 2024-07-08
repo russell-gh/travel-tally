@@ -14,14 +14,16 @@ const BudgetPerDay = ({
   expensesArray,
   homeCurrencySymbol,
   details,
-  amountOfDays,
+  amountOfBudgetDays,
 }) => {
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
-
   const budget = getBudget(details, filter);
-  const budgetPerDay = addDecimals((budget * 100) / amountOfDays);
-  const data = getSpendPerDay((budget * 100) / amountOfDays, expensesArray);
+  const budgetPerDay = addDecimals((budget * 100) / amountOfBudgetDays);
+  const data = getSpendPerDay(
+    (budget * 100) / amountOfBudgetDays,
+    expensesArray
+  );
   const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
   const difference = addDecimals(
     budgetPerDay * 100 - selectedDay.totalSpendPerDay

@@ -10,10 +10,9 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Netherlands",
-      "startDate": 1719356400000,
-      "endDate": 1721343600000,
-
       "dates": {
+        "startDate": 1719356400000,
+        "endDate": 1721343600000,
         "startDateIncluded": true,
         "endDateIncluded": false
       }
@@ -749,8 +748,12 @@
       "budgetOther": 5000,
       "homeCurrency": "GBP",
       "destination": "Thailand",
-      "startDate": 1720911600000,
-      "endDate": 1721343600000
+      "dates": {
+        "startDate": 1720911600000,
+        "endDate": 1721343600000,
+        "startDateIncluded": true,
+        "endDateIncluded": false
+      }
     },
     "expenses": [
       {

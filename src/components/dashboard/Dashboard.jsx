@@ -20,6 +20,7 @@ import Message from "../../reusable-code/Message";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -33,14 +34,20 @@ const Dashboard = () => {
     return <Message message="Loading.." />;
   }
 
-  const index = getIndex(trips, selectedTripId, "id");
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
-  const { destination, homeCurrencySymbol, startDate, endDate } = details;
+  const { destination, homeCurrencySymbol, dates } = details;
+  const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
+  const actualStartDate = !startDateIncluded ? startDate + 86400000 : startDate;
+  const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
   let _expenses = [...trip.expenses].reverse();
 
   const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
-  let expensesArray = createExpensesArray(expensesCategories, details); //should this be in a useEffect?
+  let expensesArray = createExpensesArray(
+    expensesCategories,
+    actualStartDate,
+    actualEndDate
+  ); //should this be in a useEffect?
   const filtered = getSortedandFiltered(
     _expenses,
     order,
@@ -64,13 +71,13 @@ const Dashboard = () => {
           startDate={startDate}
           endDate={endDate}
           expensesArray={expensesArray}
+          actualStartDate={actualStartDate}
+          actualEndDate={actualEndDate}
         />
         <ControlsAddExpense />
         <ControlsExpenses
           expensesCategories={expensesCategories}
           expenses={expenses}
-          startDate={startDate}
-          endDate={endDate}
         />
       </div>
       <Expenses

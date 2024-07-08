@@ -1,9 +1,7 @@
 import dayjs from "dayjs";
 import { unixToDate } from "./utilsDates";
 
-export const createExpensesArray = (expenses, details) => {
-  const { startDate, endDate } = details;
-
+export const createExpensesArray = (expenses, startDate, endDate) => {
   // calculate days of trip
   const startDateTrip = dayjs(startDate);
   const endDateTrip = dayjs(endDate);
