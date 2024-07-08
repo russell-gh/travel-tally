@@ -1,13 +1,7 @@
 import dayjs from "dayjs";
-import { addDecimals } from "../../utils/utils";
 import StillTravellingInfo from "./StillTravellingInfo";
 
-const TripInfo = ({ startDate, endDate, details }) => {
-  // converts and calculates days traveling
-  startDate = dayjs(startDate);
-  endDate = dayjs(endDate);
-  const amountOfDays = endDate.diff(startDate, "day");
-
+const TripInfo = ({ startDate, endDate, details, amountOfDays }) => {
   return (
     <div className="tripInfo">
       <p>Travel time: {amountOfDays} days</p>
@@ -18,7 +12,6 @@ const TripInfo = ({ startDate, endDate, details }) => {
           amountOfDays={amountOfDays}
         />
       )}
-      {/* checks if today is during the traveltime and creates extra info in case of true */}
     </div>
   );
 };

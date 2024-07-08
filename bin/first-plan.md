@@ -42,4 +42,4 @@ In my head it's like this:
 Daily budget: $80.00
 Spend today: $60.00
 Left of todays budget: $20.00
-Overall: -$30.00 --> don't know how to call this. It is what you have spend to much or left from the previous days on your daily budget.
+Overall: -$30.00 --> don't know how to call this. It is what you have spend to much or left from the previous days on your daily budget
