@@ -19,6 +19,5 @@ export const getCurrentTrip = (trips, id) => {
 
 //send type as string (e.g. "trip", "user", expenses")
 export const generateId = (type) => {
-  return `_${type}_${nanoid()}`
-}
-
+  return `_${type}_${nanoid()}`;
+};

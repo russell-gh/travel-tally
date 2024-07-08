@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
-import Onboarding from "./components/Onboarding/Onboarding";
+import Onboarding from "./components/onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { selectPopUp, setData } from "./redux/homeSlice";
@@ -12,6 +12,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
+import { Logo } from "./components/Logo";
 
 const App = () => {
   const dispatch = useDispatch();
