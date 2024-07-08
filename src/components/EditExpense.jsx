@@ -9,6 +9,7 @@ import {
   selectSelectedTripId,
   selectTrips,
   deleteToEdit,
+  addExpenseData,
 } from "../redux/homeSlice";
 
 export const EditExpense = () => {
@@ -18,7 +19,7 @@ export const EditExpense = () => {
   const trips = useSelector(selectTrips);
   let [loaded, setLoaded] = useState(false);
   let [formData, setFormData] = useState({
-    startDate: new Date().toLocaleDateString("en-CA"),
+    date: new Date().toLocaleDateString("en-CA"),
     // endDate: new Date().toLocaleDateString("en-CA"),
     split: false,
     category: "Food",
@@ -41,21 +42,27 @@ export const EditExpense = () => {
   if (!currencies || !trips) {
     return <p>Loading</p>;
   }
-  console.log(formData);
 
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const setThisExpense = () => {
     let expenses = getExpenseList(tripID, trips);
     let result = getThisExpense(expenses, id);
-    setFormData((formData = { ...result.thisExpense }));
+    const copy = JSON.parse(JSON.stringify(result.thisExpense))
     let date = new Date(formData.date).toLocaleDateString("en-CA");
-    console.log(date);
+    let newAmount = copy.amount.fromValue;
+    let currency = copy.amount.fromCurrency;
+    copy.date = date;
+    copy.currency = currency;
+    copy.amount = newAmount /100;
+    copy.endDate = date;
+    setFormData(copy);
+    dispatch(deleteToEdit(result.indexOf));
   };
 
   if (loaded === false) {
     setThisExpense();
-    setLoaded((loaded = true));
+    setLoaded(true);
   }
   const dataInput = (e) => {
     // getValidationResult();
@@ -63,14 +70,7 @@ export const EditExpense = () => {
     let value = e.target.value;
     if (value === "true") value = true;
     if (value === "false") value = false;
-    if (target === "amount") {
-      let newAmount = { ...formData };
-      // newAmount.amount.fromValue = value;
-      console.log(newAmount);
-      // setFormData({ newAmount });
-    } else {
-      setFormData({ ...formData, [target]: value });
-    }
+    setFormData({ ...formData, [target]: value });
   };
   // const getValidationResult = async () => {
   //   if (!Object.values(formData).length) {
@@ -88,8 +88,7 @@ export const EditExpense = () => {
     // }
     if (formData.description && formData.amount) {
       console.log(formData, "pass");
-      dispatch(deleteToEdit(result.indexOf));
-      // dispatch(addExpenseData(formData));
+      dispatch(addExpenseData(formData));
     } else {
       console.log("FAIL FINAL");
       return;
@@ -117,7 +116,7 @@ export const EditExpense = () => {
   //       return <></>;
   //     }
   //   };
-
+console.log(formData,'pre return, formData')
   return (
     <>
       <div className="editContainer">
@@ -125,8 +124,8 @@ export const EditExpense = () => {
           <FormElement
             type={"date"}
             label={"Date"}
-            name={"startDate"}
-            value={formData.startDate}
+            name={"date"}
+            value={formData.date}
             id={"datePicker"}
             callback={dataInput}
           />
@@ -171,7 +170,7 @@ export const EditExpense = () => {
             name={"amount"}
             id={"expenseAmount"}
             minValue={0}
-            value={formData.amount.fromValue}
+            value={formData.amount}
             error={errors["amount"]}
             callback={dataInput}
           />
@@ -179,7 +178,7 @@ export const EditExpense = () => {
             type={"select"}
             name={"currency"}
             id={"currencySelectExpense"}
-            value={formData.amount.fromCurrency}
+            value={formData.currency}
             options={currency}
             callback={dataInput}
           />
