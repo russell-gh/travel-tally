@@ -13,6 +13,7 @@ const FormElement = ({
   value,
   choose,
   list,
+  placeholder,
   className = [],
   onKeyDown,
 }) => {
@@ -29,6 +30,7 @@ const FormElement = ({
             name={name}
             value={value}
             list={list}
+            placeholder={placeholder}
             onChange={(e) => {
               callback(e, id);
             }}
