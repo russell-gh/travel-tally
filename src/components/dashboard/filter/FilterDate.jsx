@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formEvent, selectTrips } from "../../../redux/homeSlice";
+import { formEvent, selectHideFutureExpenses } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
-import { getArrayOfDates } from "../../../utils/utils";
+import { getArrayOfValues } from "../../../utils/utils";
 
-const FilterDate = () => {
+const FilterDate = ({ expenses, expensesCategories }) => {
   const dispatch = useDispatch();
-  const trip = useSelector(selectTrips);
+  const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
-  if (!trip) {
+  if (!expenses || !expensesCategories) {
     return;
   }
 
-  const expenses = trip[0].expenses;
+  let arrDates = getArrayOfValues(expenses, "startDate", hideFutureExpenses);
+  let arrDatesCategories = getArrayOfValues(expensesCategories, "startDate");
 
-  let arrDates = getArrayOfDates(expenses, "date");
+  if (!arrDatesCategories) {
+    return;
+  }
 
   arrDates = arrDates.map((item) => {
     return { key: item, value: item, name: item };
@@ -25,6 +28,7 @@ const FilterDate = () => {
         type="select"
         id="filterDate"
         name="filterDate"
+        className={arrDatesCategories}
         callback={(e) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}

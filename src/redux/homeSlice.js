@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
-import { getCurrencySymbol, getIndex } from "../utils/utils";
+import { getIndex } from "../utils/utils";
+import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
 
@@ -42,13 +43,31 @@ export const homeSlice = createSlice({
       }
       saveStore("homeSlice", state);
     },
-    deleteExpense: (state) => {
+    deleteExpense: (state, { payload }) => {
       //get index of the current trip
-      const indexTrip = getIndex(state.trips, state.selectedTripId);
-      //get index of clicked expense
-      const index = getIndex(state.trips[indexTrip].expenses, state.popUp.id);
-      // delete expense
-      state.trips[indexTrip].expenses.splice(index, 1);
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+      const expenses = state.trips[indexTrip].expenses;
+
+      if (!payload) {
+        //get index of clicked expense
+        const index = getIndex(expenses, state.popUp.id, "id");
+        // delete expense
+        expenses.splice(index, 1);
+      }
+
+      //get indexes of all items with sharedId
+      if (payload === "all") {
+        let indexes = [];
+        for (let i = 0; i < expenses.length; i++) {
+          if (expenses[i].sharedId === state.popUp.sharedId) {
+            indexes.push(i);
+          }
+        }
+
+        //delete the expenses
+        expenses.splice(indexes[0], indexes.length);
+      }
+
       //set popUp to empty so popUp disappears
       state.popUp = {};
       saveStore("homeSlice", state);
@@ -60,16 +79,27 @@ export const homeSlice = createSlice({
       }
 
       const { config, component } = payload;
-      const { id, title } = config;
+      const { id, title, sharedId } = config;
       state.popUp.showPopUp = !state.popUp.showPopUp;
       state.popUp.id = id;
+      state.popUp.sharedId = sharedId;
       state.popUp.title = title;
       state.popUp.component = component;
       saveStore("homeSlice", state);
     },
     formEvent: (state, { payload }) => {
       state[payload.id] = payload.value;
+
       saveStore("homeSlice", state);
+
+
+      // resets the filters when switching between trips
+      if (payload.id === "selectedTripId") {
+        state.filter = "Show All";
+        state.order = "Newest first";
+        state.filterDate = "All Dates";
+      }
+
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
@@ -95,6 +125,9 @@ export const homeSlice = createSlice({
       }
       saveStore("homeSlice", state);
     },
+    toggleHideFutureExpenses: (state, { payload }) => {
+      state.hideFutureExpenses = payload;
+    },
   },
 });
 
@@ -104,6 +137,7 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
+  toggleHideFutureExpenses,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
@@ -119,5 +153,7 @@ export const selectCurrencyRates = (state) => state.home.currencyRates;
 export const selectCurrencyNames = (state) => state.home.currencyNames;
 export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
+export const selectHideFutureExpenses = (state) =>
+  state.home.hideFutureExpenses;
 
 export default homeSlice.reducer;

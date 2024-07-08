@@ -28,12 +28,16 @@ export const signupSchema = {
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password1: Joi.string().min(8).required(),
-  password2: Joi.string().min(8).required(),
+  password: Joi.string().min(8).required(),
+  passwordConfirm: Joi.string().min(8).required(),
 };
 export const loginSchema = {
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
   password: Joi.string().min(8).required(),
+};
+
+export const setUpProfileSchema = {
+  userName: Joi.string().min(5).label("username").required(),
 };

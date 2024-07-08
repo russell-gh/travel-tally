@@ -11,6 +11,7 @@ import { selectPopUp, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
+import SetUpProfile from "./components/setUpProfile/SetUpProfile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/setupprofile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-expense" element={<AddExpense />} />

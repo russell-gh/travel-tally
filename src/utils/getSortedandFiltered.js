@@ -1,15 +1,22 @@
-import { unixToDate } from "./utils";
+import { unixToDate } from "./utilsDates";
+import dayjs from "dayjs";
 
-export const getSortedandFiltered = (data, order, filter, filterDate) => {
+export const getSortedandFiltered = (
+  data,
+  order,
+  filter,
+  filterDate,
+  hideFutureExpenses
+) => {
   let filtered = [...data];
 
   // select
   switch (order) {
     case "Newest first":
       filtered.sort((a, b) => {
-        if (a.date < b.date) {
+        if (a.startDate < b.startDate) {
           return 1;
-        } else if (a.date > b.date) {
+        } else if (a.startDate > b.startDate) {
           return -1;
         }
         return 0;
@@ -40,6 +47,31 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
       break;
   }
 
+  filtered = filterCategories(filtered, filter);
+
+  //filterDate
+  if (filterDate === "All Dates") {
+    ("everything stays the same");
+  } else {
+    filtered = filtered.filter((item) => {
+      return unixToDate(item.startDate) === filterDate;
+    });
+    if (filtered.length === 0) {
+      console.log("Something went wrong with filtering the date");
+    }
+  }
+
+  //toggle show future expenses
+  if (hideFutureExpenses === true) {
+    filtered = filtered.filter((item) => {
+      return dayjs(item.startDate).isBefore(dayjs());
+    });
+  }
+
+  return filtered;
+};
+
+export const filterCategories = (data, filter) => {
   //filter
   switch (filter) {
     case "Show All":
@@ -49,7 +81,7 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
     case "Transport":
     case "Hotel":
     case "Other":
-      filtered = filtered.filter((item) => {
+      data = data.filter((item) => {
         return item.category === filter;
       });
       break;
@@ -57,18 +89,5 @@ export const getSortedandFiltered = (data, order, filter, filterDate) => {
       console.log("something went wrong with the filtering");
       break;
   }
-
-  //filterDate
-  if (filterDate === "All Dates") {
-    ("everything stays the same");
-  } else {
-    filtered = filtered.filter((item) => {
-      return unixToDate(item.date) === filterDate;
-    });
-    if (filtered.length === 0) {
-      console.log("Something went wrong with filtering the date");
-    }
-  }
-
-  return filtered;
+  return data;
 };

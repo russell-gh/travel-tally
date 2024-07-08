@@ -1,28 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
-import { deleteExpense, selectPopUp, togglePopUp } from "../../redux/homeSlice";
-import Button from "../../reusable-code/Button";
+import { useSelector } from "react-redux";
+import { selectPopUp } from "../../redux/homeSlice";
+import OneItemDelete from "./OneItemDelete";
+import SharedDelete from "./SharedDelete";
 
 const DeletePopUp = () => {
   const popUp = useSelector(selectPopUp);
-  const dispatch = useDispatch();
 
   if (!popUp) {
     return;
   }
-  const { id, title } = popUp;
+  const { id, title, sharedId } = popUp;
 
   return (
     <div className="deletePopUp">
-      <p>{`Are you sure you want to delete "${title}"?`}</p>
-      <div className="containerBtnPopUp">
-        <Button text="cancel" onClick={() => dispatch(togglePopUp())} />
-        <Button
-          text="delete"
-          onClick={() => {
-            dispatch(deleteExpense());
-          }}
-        />
-      </div>
+      {!sharedId ? (
+        <OneItemDelete title={title} />
+      ) : (
+        <SharedDelete title={title} />
+      )}
     </div>
   );
 };
