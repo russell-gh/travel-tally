@@ -71,13 +71,16 @@ const Onboarding = () => {
     //if input is a checkbox, assign input to checked
     if (e.target.type === "checkbox") {
       input = e.target.checked;
-    } 
+    }
 
-        // if ((e.target.id).includes("date")) {console.log("its a date")}
-        if (id.toLowerCase().includes("date")) {
-          setOnboardingDetails({ ...onboardingDetails, dates:{...onboardingDetails.dates, [id]: input} });
-          return;
-        }
+    // if ((e.target.id).includes("date")) {console.log("its a date")}
+    if (id.toLowerCase().includes("date")) {
+      setOnboardingDetails({
+        ...onboardingDetails,
+        dates: { ...onboardingDetails.dates, [id]: input },
+      });
+      return;
+    }
 
     //if id is a type of budget convert to a number
     if (id.includes("budget")) {
