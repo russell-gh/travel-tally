@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { saveStore, getStore } from "../localStorage";
 
-const initialState = { trips: [], user: [], pass: [] };
 const dataFromDisc = getStore("onboardingSlice");
 const initialState = { trips: [], user: [], pass: [], profile: {} };
 
