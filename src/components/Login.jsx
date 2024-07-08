@@ -29,10 +29,12 @@ const Login = () => {
     Object.keys(errors).length
       ? alert("Form Incomplete!")
       : !(
-          formData.password === localUser.password &&
-          formData.email === localUser.email
+          (
+            formData.password === localUser.password &&
+            formData.email === localUser.email
+          ) //TODO Change to state credentials
         )
-      ? alert("wrong email/password")
+      ? alert("wrong email/password") //TODO Change to toast?
       : trips.length
       ? redirect("/dashboard")
       : redirect("/onboarding");
