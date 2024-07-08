@@ -5,8 +5,8 @@ import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
 import { validate } from "../../validation/validate.js";
-import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
+import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 
 const Onboarding = () => {
   const trips = useSelector(testSelector);
@@ -115,8 +115,8 @@ const Onboarding = () => {
     const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
-    let startDate = stringToTimestamp(_onboardingDetails.dates.startDate);
-    let endDate = stringToTimestamp(_onboardingDetails.dates.endDate);
+    let startDate = stringToUnix(_onboardingDetails.dates.startDate);
+    let endDate = stringToUnix(_onboardingDetails.dates.endDate);
 
     //look into why this fixed it
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;

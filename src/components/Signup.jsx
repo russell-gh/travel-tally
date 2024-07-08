@@ -6,8 +6,8 @@ import Joi from "joi";
 import { validate } from "../validation/validate";
 import { nanoid } from "nanoid";
 import { signupSchema } from "../validation/schemas";
-import { generateId } from "./onboarding/utils";
 import FormElement from "../reusable-code/FormElement";
+import { generateId } from "../utils/utils";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});

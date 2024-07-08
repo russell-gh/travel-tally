@@ -1,10 +1,10 @@
-import { stringToTimestamp, generateId } from "../components/onboarding/utils";
+import { stringToUnix, generateId } from "./utils";
 
 export function handleData(expense, home, data) {
   let { startDate, endDate, description, category, amount, currency, split } =
     expense;
-  let start = stringToTimestamp(expense.startDate);
-  let end = stringToTimestamp(expense.endDate);
+  let start = stringToUnix(expense.startDate);
+  let end = stringToUnix(expense.endDate);
 
   console.log(expense, "inside handle");
 

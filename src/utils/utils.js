@@ -1,5 +1,7 @@
 import { unixToDate } from "./utilsDates";
 import dayjs from "dayjs";
+import { nanoid } from "nanoid";
+
 
 export function getIndex(data, id, key) {
   const indexOf = data.findIndex((item) => {
@@ -89,3 +91,19 @@ export function getArrayOfValues(data, key, hideFutureExpenses) {
 
   return copy;
 }
+
+export const toPennies = (val) => {
+  return val * 100;
+};
+
+export const stringToUnix = (date) => {
+  let _date = date.split("-");
+  _date = new Date(_date[0], _date[1] - 1, _date[2]);
+
+  return _date.getTime();
+};
+
+//send type as string (e.g. "trip", "user", expenses")
+export const generateId = (type) => {
+  return `_${type}_${nanoid()}`;
+};
