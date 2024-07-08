@@ -14,6 +14,8 @@ const FormElement = ({
   choose,
   list,
   placeholder,
+  className = [],
+  onKeyDown,
 }) => {
   switch (type) {
     case "text":
@@ -31,6 +33,9 @@ const FormElement = ({
             placeholder={placeholder}
             onChange={(e) => {
               callback(e, id);
+            }}
+            onKeyDown={(e) => {
+              onKeyDown(e, id);
             }}
           />
           {error && <p>{error}</p>}
@@ -123,7 +128,13 @@ const FormElement = ({
               </option>
             )}
             {options.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option
+                key={option.value}
+                value={option.value}
+                className={
+                  className.includes(option.name) ? "includes" : "excludes"
+                }
+              >
                 {option.name}
               </option>
             ))}

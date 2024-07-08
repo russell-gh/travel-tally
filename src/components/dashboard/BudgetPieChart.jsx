@@ -1,5 +1,5 @@
 import { PieChart } from "@mui/x-charts";
-import { addDecimals } from "../../utils/utils";
+import { addDecimals } from "../../utils/utilsBudget";
 
 const BudgetPieChart = ({ details }) => {
   const {

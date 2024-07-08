@@ -1,21 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  selectPopUp,
   selectSelectedTripId,
+  selectHideFutureExpenses,
   selectTrips,
-  togglePopUp,
 } from "../../redux/homeSlice";
-import Button from "../../reusable-code/Button";
 import { findItem, getIndex } from "../../utils/utils";
-import AddExpense from "../AddExpense";
-import Budget from "./Budget";
 import Expenses from "./Expenses";
-import Image from "./Image";
 import Title from "./Title";
-import Filter from "./filter/Filter";
-import FilterDate from "./filter/FilterDate";
-import Order from "./filter/order";
-import TripInfo from "./TripInfo";
 import "../../css/dashboard.scss";
 import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import {
@@ -23,38 +14,47 @@ import {
   selectFilter,
   selectFilterDate,
 } from "../../redux/homeSlice";
-
-import {important} from "../../css/dashboard.module.css"
+import ControlsExpenses from "./ControlsExpenses";
+import BudgetInfo from "./BudgetInfo";
+import Message from "../../reusable-code/Message";
+import ControlsAddExpense from "./ControlsAddExpense";
+import { createExpensesArray } from "../../utils/createExpensesArray";
+import { filterCategories } from "../../utils/getSortedandFiltered";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
-  const popUp = useSelector(selectPopUp);
   const order = useSelector(selectOrder);
-  const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
-
-  const stringToComponent = { AddExpense: <AddExpense /> };
+  const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
   if (!trips || trips.length === 0) {
-    return <p>Loading...</p>;
+    return <Message message="Loading.." />;
   }
 
-  const index = getIndex(trips, selectedTripId);
   const trip = findItem(trips, selectedTripId);
   const { details, expenses } = trip;
-  const { destination, homeCurrencySymbol, startDate, endDate } = details;
+  const { destination, homeCurrencySymbol, dates } = details;
+  const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
+  const actualStartDate = !startDateIncluded ? startDate + 86400000 : startDate;
+  const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
+  let _expenses = [...trip.expenses].reverse();
 
-  if (expenses.length === 0) {
-    return <p className="mt">You have no expenses yet.</p>;
-  }
-  const _expenses = [...expenses].reverse();
-  const filtered = getSortedandFiltered(_expenses, order, filter, filterDate);
-
-  if (filtered.length === 0) {
-    return <p className="mt">There are no matches</p>;
-  }
+  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
+  let expensesArray = createExpensesArray(
+    expensesCategories,
+    actualStartDate,
+    actualEndDate
+  ); //should this be in a useEffect?
+  const filtered = getSortedandFiltered(
+    _expenses,
+    order,
+    filter,
+    filterDate,
+    hideFutureExpenses
+  );
 
   return (
     <div className="dashboard">
@@ -64,37 +64,27 @@ const Dashboard = () => {
           startDate={startDate}
           endDate={endDate}
         />
-        {/* <Image src={"../src/img/piechart.png"} alt="piechart" /> */}
-        <div className="containerBudget">
-          <Budget
-            expenses={filtered}
-            details={details}
-            homeCurrencySymbol={homeCurrencySymbol}
-          />
-          <TripInfo startDate={startDate} endDate={endDate} details={details} />
-        </div>
-        <Button
-          className="addExpense"
-          text="Add an expense"
-          onClick={() => {
-            dispatch(
-              togglePopUp({
-                config: {},
-                component: "AddExpense",
-              })
-            );
-          }}
+        <BudgetInfo
+          expenses={expensesCategories}
+          details={details}
+          homeCurrencySymbol={homeCurrencySymbol}
+          startDate={startDate}
+          endDate={endDate}
+          expensesArray={expensesArray}
+          actualStartDate={actualStartDate}
+          actualEndDate={actualEndDate}
         />
-        {stringToComponent[popUp.component]}
-        <div className="controlsExpenses">
-          <Filter />
-          <Order />
-          <FilterDate />
-        </div>
+        <ControlsAddExpense />
+        <ControlsExpenses
+          expensesCategories={expensesCategories}
+          expenses={expenses}
+        />
       </div>
-      <Expenses filtered={filtered} homeCurrencySymbol={homeCurrencySymbol} />
-      <p className={important}>this should be red</p>
-
+      <Expenses
+        filtered={filtered}
+        expenses={_expenses}
+        homeCurrencySymbol={homeCurrencySymbol}
+      />
     </div>
   );
 };
