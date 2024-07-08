@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
 import { getCurrencySymbol, getIndex } from "../utils/utils";
 import { initialState } from "./InitialState";
+import { getStore, saveStore } from "../localStorage";
 
+const dataFromDisc = getStore("homeSlice");
+console.log(dataFromDisc);
 export const homeSlice = createSlice({
   name: "home",
-  initialState,
+  initialState: dataFromDisc ? dataFromDisc : initialState,
   reducers: {
     setData: (state, action) => {
       const { text, data } = action.payload;
@@ -37,6 +40,7 @@ export const homeSlice = createSlice({
         state.currencyRates = data;
         state.currencyNames = currencies;
       }
+      saveStore("homeSlice", state);
     },
     deleteExpense: (state) => {
       //get index of the current trip
@@ -47,6 +51,7 @@ export const homeSlice = createSlice({
       state.trips[indexTrip].expenses.splice(index, 1);
       //set popUp to empty so popUp disappears
       state.popUp = {};
+      saveStore("homeSlice", state);
     },
     togglePopUp: (state, { payload }) => {
       if (!payload) {
@@ -60,9 +65,11 @@ export const homeSlice = createSlice({
       state.popUp.id = id;
       state.popUp.title = title;
       state.popUp.component = component;
+      saveStore("homeSlice", state);
     },
     formEvent: (state, { payload }) => {
       state[payload.id] = payload.value;
+      saveStore("homeSlice", state);
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
@@ -86,6 +93,7 @@ export const homeSlice = createSlice({
       } else {
         state.trips[indexOf].expenses.push(result);
       }
+      saveStore("homeSlice", state);
     },
   },
 });
