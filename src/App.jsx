@@ -57,6 +57,7 @@ const App = () => {
         Reset
       </button>
       <Header />
+      <Logo/>
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />

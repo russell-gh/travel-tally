@@ -15,7 +15,7 @@ const FormElement = ({
   list,
   placeholder,
   className = [],
-  onKeyDown,
+  onKeyDown = () => {},
 }) => {
   switch (type) {
     case "text":

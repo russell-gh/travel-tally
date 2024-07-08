@@ -4,7 +4,7 @@ import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
-import { validate } from "./validation/validate.js";
+import { validate } from "../../validation/validate.js";
 import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 

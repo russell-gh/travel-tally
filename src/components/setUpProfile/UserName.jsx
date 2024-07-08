@@ -3,7 +3,7 @@ import FormElement from "../../reusable-code/FormElement";
 import { Link } from "react-router-dom";
 import { saveProfile } from "../../redux/onboardingSlice";
 import { useDispatch } from "react-redux";
-import { setUpProfileSchema } from "../onboarding/validation/schemas";
+import { setUpProfileSchema } from "../../validation/schemas";
 import { useState } from "react";
 import Joi from "joi";
 
