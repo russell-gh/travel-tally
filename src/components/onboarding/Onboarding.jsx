@@ -72,13 +72,18 @@ const Onboarding = () => {
     if (e.target.type === "checkbox") {
       input = e.target.checked;
     }
+    console.log(e.target.type, e.target.id, input);
 
     // if ((e.target.id).includes("date")) {console.log("its a date")}
     if (id.toLowerCase().includes("date")) {
-      setOnboardingDetails({
+      console.log("foundDate");
+      const data = {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [id]: input },
-      });
+      };
+      setOnboardingDetails(data);
+      console.log("hello world", data);
+
       return;
     }
 
@@ -86,7 +91,6 @@ const Onboarding = () => {
     if (id.includes("budget")) {
       input = parseInt(e.target.value);
     }
-
     setOnboardingDetails({ ...onboardingDetails, [id]: input });
   };
 
@@ -96,7 +100,7 @@ const Onboarding = () => {
 
     //if errors exist abort early
     if (Object.keys(errors).length) {
-      return;
+      // return;
     }
 
     let _onboardingDetails = onboardingDetails;
@@ -113,6 +117,10 @@ const Onboarding = () => {
     //turn date strings to date objs and then to timestamps
     let startDate = stringToTimestamp(_onboardingDetails.dates.startDate);
     let endDate = stringToTimestamp(_onboardingDetails.dates.endDate);
+
+    //look into why this fixed it
+    const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
+    const endDateIncluded = _onboardingDetails.dates.endDateIncluded;
 
     //spread existing state and update modified keys
     _onboardingDetails = {
