@@ -49,7 +49,6 @@ const Onboarding = () => {
     setErrors(result);
   };
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
   const ids = [];
   const checkPrimaryFormValidation = (validationResult) => {
@@ -62,10 +61,11 @@ const Onboarding = () => {
       setVisible(true);
     }
   };
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  const handleChange = (e, id) => {
+  //e.target.name is used instead of e.target.id because the MUI sliders do not support id attrs but they do support name. 
+  //(name is equal to id in form elem so works the same)
+  const handleChange = (e) => {
     let input = e.target.value;
 
     //if input is a checkbox, assign input to checked
@@ -73,10 +73,10 @@ const Onboarding = () => {
       input = e.target.checked;
     }
 
-    if (id.toLowerCase().includes("date")) {
+    if (e.target.name.toLowerCase().includes("date")) {
       const data = {
         ...onboardingDetails,
-        dates: { ...onboardingDetails.dates, [id]: input },
+        dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
       setOnboardingDetails(data);
 
@@ -84,10 +84,10 @@ const Onboarding = () => {
     }
 
     //if id is a type of budget convert to a number
-    if (id.includes("budget")) {
+    if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
-    setOnboardingDetails({ ...onboardingDetails, [id]: input });
+    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
