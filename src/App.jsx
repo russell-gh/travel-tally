@@ -10,6 +10,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import { selectPopUp, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
 
 const App = () => {
@@ -21,6 +22,11 @@ const App = () => {
   }, []);
 
   const getApiData = async () => {
+    const homeSlice = getStore("homeSlice");
+    const onboardingSlice = getStore("onboardingSlice");
+    if (homeSlice || onboardingSlice) {
+      return;
+    }
     {
       const { data } = await axios.get(`fakeCurrencies.json`);
       dispatch(setData({ text: "currencies", data: data.rates }));
@@ -41,6 +47,14 @@ const App = () => {
 
   return (
     <>
+      <button
+        onClick={() => {
+          localStorage.clear();
+          location.reload();
+        }}
+      >
+        Reset
+      </button>
       <Header />
       <main>
         <Routes>
