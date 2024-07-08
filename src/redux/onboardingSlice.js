@@ -9,7 +9,6 @@ export const onboardingSlice = createSlice({
   initialState: dataFromDisc ? dataFromDisc : initialState,
   reducers: {
     addTrip: (state, { payload }) => {
-      console.log(payload);
       state.trips.push(payload);
       saveStore("onboardingSlice", state);
     },

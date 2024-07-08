@@ -72,17 +72,13 @@ const Onboarding = () => {
     if (e.target.type === "checkbox") {
       input = e.target.checked;
     }
-    console.log(e.target.type, e.target.id, input);
 
-    // if ((e.target.id).includes("date")) {console.log("its a date")}
     if (id.toLowerCase().includes("date")) {
-      console.log("foundDate");
       const data = {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [id]: input },
       };
       setOnboardingDetails(data);
-      console.log("hello world", data);
 
       return;
     }
@@ -137,9 +133,7 @@ const Onboarding = () => {
       },
     };
 
-    console.log("about to add", _onboardingDetails);
     dispatch(addTrip(_onboardingDetails));
-    console.log(trips);
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs
