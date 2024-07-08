@@ -1,7 +1,9 @@
 import Budget from "./Budget";
-import TripInfo from "./TripInfo";
+import { useState } from "react";
 import BudgetPerDay from "./BudgetPerDay";
 import dayjs from "dayjs";
+import ControlsAddExpense from "./ControlsAddExpense";
+import Button from "../../reusable-code/Button";
 
 const BudgetInfo = ({
   expenses,
@@ -13,6 +15,7 @@ const BudgetInfo = ({
   startDate,
   endDate,
 }) => {
+  const [display, setDisplay] = useState("totalBudget");
   // converts and calculates days traveling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
@@ -21,20 +24,43 @@ const BudgetInfo = ({
   const amountOfBudgetDays =
     dayjs(actualEndDate).diff(dayjs(actualStartDate), "day") + 1;
 
-  ("containerBudget");
+  const changeDisplay = (input) => {
+    setDisplay(input);
+  };
+
   return (
     <div
-      className={
+      className={`containerBudget ${
         stillTravelling ? "containerBudgetWhilst" : "containerBudgetAfter"
-      }
+      }`}
     >
-      <Budget
-        expenses={expenses}
-        details={details}
-        homeCurrencySymbol={homeCurrencySymbol}
-      />
-      {/* if today is during traveltime, daily budget is calculated */}
       {stillTravelling && (
+        <>
+          <Button
+            text="Total budget"
+            className={`totalBudgetBtn ${
+              display === "totalBudget" ? "focus" : ""
+            }`}
+            onClick={() => changeDisplay("totalBudget")}
+          />
+          <Button
+            text="Daily budget"
+            className={`dailyBudgetBtn ${
+              display === "dailyBudget" ? "focus" : ""
+            }`}
+            onClick={() => changeDisplay("dailyBudget")}
+          />
+        </>
+      )}
+      {display === "totalBudget" && (
+        <Budget
+          expenses={expenses}
+          details={details}
+          homeCurrencySymbol={homeCurrencySymbol}
+        />
+      )}
+      {/* if today is during traveltime, daily budget is calculated */}
+      {stillTravelling && display === "dailyBudget" && (
         <BudgetPerDay
           expensesArray={expensesArray}
           details={details}

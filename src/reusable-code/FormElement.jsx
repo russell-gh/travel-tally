@@ -117,6 +117,7 @@ const FormElement = ({
           {label && <label htmlFor={id}>{label}:</label>}
           <select
             name={name}
+            className={className}
             id={id}
             onChange={(e) => {
               callback(e, id);

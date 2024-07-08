@@ -7,18 +7,24 @@ const SharedDelete = ({ title }) => {
   return (
     <>
       <p>{`"${title}" is part of a group. Do you want to delete all or just this expense?`}</p>
-      <div className="containerBtnPopUp">
-        <Button text="cancel" onClick={() => dispatch(togglePopUp())} />
+      <div className="containerBtnPopUpMulti">
         <Button
-          text="delete single expense"
-          onClick={() => {
-            dispatch(deleteExpense());
-          }}
+          text="cancel"
+          className="cancelBtn"
+          onClick={() => dispatch(togglePopUp())}
         />
         <Button
           text="delete all"
+          className="deleteBtn"
           onClick={() => {
             dispatch(deleteExpense("all"));
+          }}
+        />
+        <Button
+          text="delete single expense"
+          className="deleteBtn"
+          onClick={() => {
+            dispatch(deleteExpense());
           }}
         />
       </div>

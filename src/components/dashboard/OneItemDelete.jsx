@@ -8,9 +8,14 @@ const OneItemDelete = ({ title }) => {
     <>
       <p>{`Are you sure you want to delete "${title}"?`}</p>
       <div className="containerBtnPopUp">
-        <Button text="cancel" onClick={() => dispatch(togglePopUp())} />
+        <Button
+          text="cancel"
+          className="cancelBtn"
+          onClick={() => dispatch(togglePopUp())}
+        />
         <Button
           text="delete"
+          className="deleteBtn"
           onClick={() => {
             dispatch(deleteExpense());
           }}

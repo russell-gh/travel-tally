@@ -20,6 +20,7 @@ const FilterTrip = () => {
         type="select"
         id="selectedTripId"
         name="destination"
+        className="dropDownTrips"
         callback={(e) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}

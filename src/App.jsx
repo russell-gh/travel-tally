@@ -12,7 +12,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
-import { Logo } from "./components/Logo";
+import "./css/headerFooter.scss";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,6 @@ const App = () => {
   return (
     <>
       <Header />
-      {/* <Logo/> */}
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />

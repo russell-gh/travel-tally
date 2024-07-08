@@ -1,21 +1,3 @@
-header,
-footer {
-  background-color: #3c43a5;
-  color: white;
-  padding: 5px 10px;
-  ;
-
-  h1 {
-    margin: 0px;
-    color: white;
-  }
-}
-
-header {
-  display: flex;
-  justify-content: space-around;
-}
-
 body {
   margin: 0px;
 }
@@ -40,7 +22,18 @@ body {
   }
 
   .btn {
-    padding: 5px 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #3c43a5;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .dashboardFixed,
+  .expenses {
+    padding: 0px 10px 0px 10px;
   }
 
   /*
@@ -51,38 +44,6 @@ body {
       fixed top
 **************************
 */
-  .dashboardFixed,
-  .expenses {
-    padding: 0px 10px 0px 10px;
-  }
-
-  .containerTop {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-
-  .piechart {
-    height: 150px;
-    margin: 0px auto;
-    display: block;
-  }
-
-  .controlsExpenses {
-    margin-bottom: 10px;
-
-    .addExpense {
-      padding: 5px 20px;
-      display: block;
-    }
-  }
-
-  .addExpense {
-    margin: 5px 0px;
-    width: 100%;
-  }
-
   .dashboardFixed {
     // position: fixed;
     z-index: 2;
@@ -91,6 +52,22 @@ body {
     background-color: white;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
+  }
+
+  //top with dropdown trips and travel time
+  .containerTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .dropDownTrips {
+    border: none;
+
+    option {
+      padding: 10px; //why does this not do anything?
+    }
   }
 
   .containerTrips {
@@ -117,39 +94,93 @@ body {
     }
   }
 
+  .tripInfo {
+    justify-self: flex-end;
+  }
+
+  //container budget
+  .addExpense {
+    background-color: #D6EE79;
+    padding: 15px 10px;
+    align-self: center;
+    justify-self: center;
+    border: none;
+    color: #3c43a5;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .addExpense:hover {
+    background-color: #3c43a5;
+    color: #D6EE79;
+    transition: all 0.3s ease-in-out;
+  }
+
   .containerBudgetWhilst {
     display: grid;
-    padding: 0px 10px;
-    gap: 10px;
-    grid-template-columns: 1fr 0.7fr 0.7fr 1fr;
-    grid-template-rows: 1fr fit-content(100px);
+    gap: 0px 10px 10px 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: fit-content(100px) 1fr fit-content(100px);
 
-    .chartAll {
-      display: inherit;
-      grid-row: 1;
+    .chartAll,
+    .chartDay {
+      grid-row: 2;
       grid-column-start: 1;
       grid-column-end: 3;
       justify-self: center;
     }
+  }
 
-    .chartDay {
-      display: inherit;
-      grid-row: 1;
-      grid-column-start: 3;
-      grid-column-end: 5;
-      justify-self: center;
-    }
+  .totalBudgetBtn,
+  .dailyBudgetBtn {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: black;
+    justify-self: stretch;
+    align-self: stretch;
+    cursor: pointer;
+    border-bottom: #D6EE79 solid 2px;
+    border-radius: 0px;
+  }
+
+  .totalBudgetBtn:hover {
+    border-radius: 12px 0px 0px 0px;
+  }
+
+  .dailyBudgetBtn:hover {
+    border-radius: 0px 12px 0px 0px;
+  }
+
+  .focus {
+    background-color: #D6EE79;
+  }
+
+  .containerBottomRowGrid {
+    display: flex;
+    justify-content: space-between;
+    grid-row: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 10px
+  }
+
+  .containerBudget {
+    border: #D6EE79 solid 2px;
+    padding: 0px;
+    margin-bottom: 10px;
+    border-radius: 15px;
   }
 
   .containerBudgetAfter {
     display: grid;
-    padding: 0px 10px;
     gap: 10px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr fit-content(100px);
+    margin-bottom: 10px;
 
     .chartAll {
-      display: inherit;
       grid-row: 1;
       grid-column-start: 1;
       grid-column-end: 3;
@@ -173,19 +204,21 @@ body {
     font-weight: bold;
   }
 
-  .tripInfo {
-    justify-self: flex-end;
-  }
-
-  .dayBudget {
-    justify-self: center;
-    grid-row: 2;
-    grid-column-start: 2;
-    grid-column-end: 4;
+  // controls expenses
+  .controlsExpenses {
+    margin-bottom: 10px;
   }
 
   .includes {
     background-color: #BCD2EE;
+  }
+
+  .controlsExpenses {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   /*
@@ -277,27 +310,40 @@ body {
 */
   .deletePopUp {
     position: fixed;
-    background: white;
-    border: red solid 2px;
+    background-color: #D6EE79;
+    border-radius: 14px;
+    border: black solid 2px;
     padding: 10px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 75vw;
+    max-width: 350px;
   }
 
   .deletePopUp p {
     margin-bottom: 10px;
   }
 
-  .containerBtnPopUp {
-    display: flex;
-    justify-content: space-between;
+  .deleteBtn:hover {
+    background-color: rgb(112, 12, 12);
+    transition: background-color 0.3s ease-in-out;
   }
 
-  .controlsExpenses {
+  .cancelBtn:hover {
+    background-color: rgb(27, 126, 40);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .containerBtnPopUp {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .containerBtnPopUpMulti {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px
   }
 }

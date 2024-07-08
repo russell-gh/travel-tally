@@ -9,6 +9,7 @@ import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
 import DailyDifference from "./DailyDifference";
 import CummulativeDifference from "./CummulativeDifference";
+import ControlsAddExpense from "./ControlsAddExpense";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -32,35 +33,37 @@ const BudgetPerDay = ({
   return (
     <>
       <div className="chartDay">
-        <p>Daily budget</p>
         <CategoryGauge
           budget={budgetPerDay}
           spend={addDecimals(selectedDay.totalSpendPerDay)}
         />
       </div>
-      <div className="dayBudget">
-        <p>
-          Budget per day:{" "}
-          <span className="bold">
-            {homeCurrencySymbol}
-            {budgetPerDay}
-          </span>
-        </p>
-        <p>
-          Spend Today:{" "}
-          <span className="bold">
-            {homeCurrencySymbol}
-            {addDecimals(selectedDay.totalSpendPerDay)}
-          </span>
-        </p>
-        <DailyDifference
-          homeCurrencySymbol={homeCurrencySymbol}
-          difference={difference}
-        />
-        <CummulativeDifference
-          homeCurrencySymbol={homeCurrencySymbol}
-          selectedDay={selectedDay}
-        />
+      <div className="containerBottomRowGrid">
+        <div className="dayBudget">
+          <p>
+            Budget per day:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {budgetPerDay}
+            </span>
+          </p>
+          <p>
+            Spend Today:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {addDecimals(selectedDay.totalSpendPerDay)}
+            </span>
+          </p>
+          <DailyDifference
+            homeCurrencySymbol={homeCurrencySymbol}
+            difference={difference}
+          />
+          <CummulativeDifference
+            homeCurrencySymbol={homeCurrencySymbol}
+            selectedDay={selectedDay}
+          />
+        </div>
+        <ControlsAddExpense />
       </div>
     </>
   );

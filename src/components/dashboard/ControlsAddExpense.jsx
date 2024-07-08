@@ -13,7 +13,7 @@ const ControlsAddExpense = () => {
     <>
       <Button
         className="addExpense"
-        text="Add an expense"
+        text="Add expense"
         onClick={() => {
           dispatch(
             togglePopUp({

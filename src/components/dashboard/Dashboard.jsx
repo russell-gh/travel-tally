@@ -17,7 +17,6 @@ import {
 import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
 import Message from "../../reusable-code/Message";
-import ControlsAddExpense from "./ControlsAddExpense";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
 import dayjs from "dayjs";
@@ -75,7 +74,6 @@ const Dashboard = () => {
           actualStartDate={actualStartDate}
           actualEndDate={actualEndDate}
         />
-        <ControlsAddExpense />
         <ControlsExpenses
           expensesCategories={expensesCategories}
           expenses={expenses}
