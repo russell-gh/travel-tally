@@ -63,6 +63,7 @@ const Dashboard = () => {
           destination={destination}
           startDate={startDate}
           endDate={endDate}
+          details={details}
         />
         <BudgetInfo
           expenses={expensesCategories}

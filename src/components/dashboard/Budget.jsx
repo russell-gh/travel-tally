@@ -19,22 +19,50 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
       <div className="chartAll">
         <p>Total budget</p>
         <CategoryGauge budget={budget} spend={totalSpend} />
-        {/* {filter === "Show All" ? (
-          <BudgetPieChart details={details} />
-        ) : (
-          <CategoryGauge budget={budget} spend={totalSpend} />
-        )} */}
       </div>
       <div className="budget">
         <p>
-          Budget: {homeCurrencySymbol}
-          {budget}
+          Budget:{" "}
+          <span className="bold">
+            {homeCurrencySymbol}
+            {budget}
+          </span>
         </p>
         <p>
-          Spend: {homeCurrencySymbol}
-          {totalSpend}
+          Spend:{" "}
+          <span className="bold">
+            {homeCurrencySymbol}
+            {totalSpend}
+          </span>
         </p>
-        {difference < 0 ? (
+        <p
+          className={
+            difference < 0
+              ? "negative"
+              : difference === 0
+              ? "neutral"
+              : "positive"
+          }
+        >
+          {difference < 0 ? (
+            <>
+              Overspend:{" "}
+              <span className="bold">
+                {homeCurrencySymbol}
+                {Math.abs(difference).toFixed(2)}
+              </span>
+            </>
+          ) : (
+            <>
+              Money left:{" "}
+              <span className="bold">
+                {homeCurrencySymbol}
+                {difference}
+              </span>
+            </>
+          )}
+        </p>
+        {/* {difference < 0 ? (
           <p className="negative">
             Overspend: {homeCurrencySymbol}
             {Math.abs(difference).toFixed(2)}
@@ -49,7 +77,7 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
             Money left: {homeCurrencySymbol}
             {difference}
           </p>
-        )}
+        )} */}
       </div>
     </>
   );

@@ -1,3 +1,25 @@
+header,
+footer {
+  background-color: #3c43a5;
+  color: white;
+  padding: 5px 10px;
+  ;
+
+  h1 {
+    margin: 0px;
+    color: white;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+}
+
+body {
+  margin: 0px;
+}
+
 .dashboard {
   /*
 **************************
@@ -17,10 +39,6 @@
     text-align: center;
   }
 
-  .mt {
-    margin-top: 350px;
-  }
-
   .btn {
     padding: 5px 10px;
   }
@@ -38,6 +56,13 @@
     padding: 0px 10px 0px 10px;
   }
 
+  .containerTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
   .piechart {
     height: 150px;
     margin: 0px auto;
@@ -45,6 +70,8 @@
   }
 
   .controlsExpenses {
+    margin-bottom: 10px;
+
     .addExpense {
       padding: 5px 20px;
       display: block;
@@ -57,23 +84,23 @@
   }
 
   .dashboardFixed {
-    position: fixed;
+    // position: fixed;
     z-index: 2;
-    top: 0;
+    // top: 0;
     width: 100%;
     background-color: white;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
   }
 
-  .containerTitle {
+  .containerTrips {
     display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 3px;
 
-    .travellingTitle {
-      color: green;
+    .travellingIcon {
+      width: 30px;
+      margin-top: -6px;
     }
 
     .profile {
@@ -142,6 +169,10 @@
     color: red;
   }
 
+  .bold {
+    font-weight: bold;
+  }
+
   .tripInfo {
     justify-self: flex-end;
   }
@@ -154,7 +185,7 @@
   }
 
   .includes {
-    background-color: rgb(220, 245, 245);
+    background-color: #BCD2EE;
   }
 
   /*
@@ -166,20 +197,44 @@
 **************************
 */
   .expenseItem {
-    padding: 5px;
-    border: lightgray 2px solid;
-    margin-bottom: 3px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #3c43a5;
+    color: white;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: 40px 1fr 50px 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
+
+    .containerDescriptionAndDate {
+      overflow: hidden;
+
+      h2 {
+        font-size: 20px;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+      }
+    }
   }
 
-  .icon {
+  .containerIcon {
+    background-color: #D6EE79;
+    border: 2px solid #D6EE79;
+    border-radius: 100%;
     height: 40px;
-    border: #fcd66f 2px solid;
-    border-radius: 30px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      height: 30px;
+      width: 30px;
+    }
   }
 
   .delete {
@@ -192,10 +247,6 @@
     height: 30px;
     cursor: pointer;
     border-radius: 100%;
-  }
-
-  .expenseItem h2 {
-    font-size: 20px;
   }
 
   .foreignAmount {
@@ -213,14 +264,7 @@
 
   .future {
     z-index: 1;
-    opacity: 0.8;
-
-    img,
-    h2,
-    .delete,
-    .dot {
-      opacity: 0.8;
-    }
+    opacity: 0.7;
   }
 
   /*

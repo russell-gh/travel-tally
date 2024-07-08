@@ -40,12 +40,18 @@ const BudgetPerDay = ({
       </div>
       <div className="dayBudget">
         <p>
-          Budget per day: {homeCurrencySymbol}
-          {budgetPerDay}
+          Budget per day:{" "}
+          <span className="bold">
+            {homeCurrencySymbol}
+            {budgetPerDay}
+          </span>
         </p>
         <p>
-          Spend Today: {homeCurrencySymbol}
-          {addDecimals(selectedDay.totalSpendPerDay)}
+          Spend Today:{" "}
+          <span className="bold">
+            {homeCurrencySymbol}
+            {addDecimals(selectedDay.totalSpendPerDay)}
+          </span>
         </p>
         <DailyDifference
           homeCurrencySymbol={homeCurrencySymbol}

@@ -14,13 +14,19 @@ const CummulativeDifference = ({ homeCurrencySymbol, selectedDay }) => {
       >
         {selectedDay.cumulativeDifference < 0 ? (
           <>
-            Overspend previous days: {homeCurrencySymbol}
-            {Math.abs(selectedDay.cumulativeDifference / 100).toFixed(2)}
+            Overspend previous days:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {Math.abs(selectedDay.cumulativeDifference / 100).toFixed(2)}
+            </span>
           </>
         ) : (
           <>
-            Saved previous days: {homeCurrencySymbol}
-            {addDecimals(selectedDay.cumulativeDifference)}
+            Saved previous days:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {addDecimals(selectedDay.cumulativeDifference)}
+            </span>
           </>
         )}
       </p>

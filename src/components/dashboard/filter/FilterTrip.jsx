@@ -17,7 +17,6 @@ const FilterTrip = () => {
   return (
     <>
       <FormElement
-        label="Trips"
         type="select"
         id="selectedTripId"
         name="destination"

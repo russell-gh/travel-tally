@@ -42,20 +42,8 @@ const App = () => {
     }
   };
 
-  // useEffect(()=> {
-  //   if (popUp) {}
-  // })
-
   return (
     <>
-      <button
-        onClick={() => {
-          localStorage.clear();
-          location.reload();
-        }}
-      >
-        Reset
-      </button>
       <Header />
       {/* <Logo/> */}
       <main>

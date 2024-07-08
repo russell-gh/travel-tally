@@ -12,13 +12,19 @@ const DailyDifference = ({ homeCurrencySymbol, difference }) => {
       >
         {difference < 0 ? (
           <>
-            Overspend: {homeCurrencySymbol}
-            {Math.abs(difference).toFixed(2)}
+            Overspend:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {Math.abs(difference).toFixed(2)}
+            </span>
           </>
         ) : (
           <>
-            Money left: {homeCurrencySymbol}
-            {difference}
+            Money left:{" "}
+            <span className="bold">
+              {homeCurrencySymbol}
+              {difference}
+            </span>
           </>
         )}
       </p>
