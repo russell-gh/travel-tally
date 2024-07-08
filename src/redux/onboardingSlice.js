@@ -24,6 +24,7 @@ export const onboardingSlice = createSlice({
         const { value, key } = payload;
         state.profile[key] = value;
       }
+      saveStore("onboardingSlice", state);
     },
   },
 });
