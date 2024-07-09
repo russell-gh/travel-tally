@@ -2,7 +2,11 @@ import React from "react";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";
-import { getExpenseList, getThisExpense, mergeExpenseDays } from "../utils/expenseData";
+import {
+  getExpenseList,
+  getThisExpense,
+  mergeExpenseDays,
+} from "../utils/expenseData";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyNames,
@@ -14,7 +18,7 @@ import {
 
 export const EditExpense = () => {
   const dispatch = useDispatch();
-  const id = "_expense_y7LAyA6ZBN2t7QRRvieZG";
+  const id = "_expense__tov2co66cPEzf7edQ5gh";
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
@@ -50,9 +54,9 @@ export const EditExpense = () => {
   const setThisExpense = () => {
     let expenses = getExpenseList(tripID, trips);
     setExpenseList(expenses);
-    console.log(expenses, 'EXPENSES');
+    console.log(expenses, "EXPENSES");
     let result = getThisExpense(expenses, id);
-    console.log(result, 'RESULT');
+    console.log(result, "RESULT");
     setIndex(result.indexOf);
     // const copy = JSON.parse(JSON.stringify(mergeExpenseDays(result.thisExpense, expenses)));
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
@@ -68,11 +72,11 @@ export const EditExpense = () => {
 
   useEffect(() => {
     setThisExpense();
-  }, [])
+  }, []);
 
   // if (loaded === false) {
   //   setLoaded(true);
-    
+
   // }
   const dataInput = (e) => {
     // getValidationResult();
@@ -104,32 +108,31 @@ export const EditExpense = () => {
       return;
     }
   };
-    const multiDay = () => {
-      setMulti((multi = !multi));
-      if(multi) {
-        setFormData(mergeExpenseDays(formData, expenseList))
-      } else if (!multi) {
-        setThisExpense()
-      }
-      
-    };
-    const renderMultiDay = () => {
-      if (multi) {
-        return (
-          <FormElement
-            type={"date"}
-            label={"End date"}
-            name={"endDate"}
-            value={formData.endDate}
-            id={"endDatePicker"}
-            error={errors["endDate"]}
-            callback={dataInput}
-          />
-        );
-      } else {
-        return <></>;
-      }
-    };
+  const multiDay = () => {
+    setMulti((multi = !multi));
+    if (multi) {
+      setFormData(mergeExpenseDays(formData, expenseList));
+    } else if (!multi) {
+      setThisExpense();
+    }
+  };
+  const renderMultiDay = () => {
+    if (multi) {
+      return (
+        <FormElement
+          type={"date"}
+          label={"End date"}
+          name={"endDate"}
+          value={formData.endDate}
+          id={"endDatePicker"}
+          error={errors["endDate"]}
+          callback={dataInput}
+        />
+      );
+    } else {
+      return <></>;
+    }
+  };
 
   return (
     <>
@@ -144,13 +147,13 @@ export const EditExpense = () => {
             callback={dataInput}
           />
           {renderMultiDay()}
-        <FormElement
-          type={"checkbox"}
-          label={"Edit all days of this expense"}
-          name={"dateCheck"}
-          id={"dateCheck"}
-          callback={multiDay}
-        />
+          <FormElement
+            type={"checkbox"}
+            label={"Edit all days of this expense"}
+            name={"dateCheck"}
+            id={"dateCheck"}
+            callback={multiDay}
+          />
         </div>
         <FormElement
           type={"text"}
