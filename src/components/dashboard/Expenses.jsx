@@ -14,7 +14,6 @@ import dayjs from "dayjs";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
-  const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
 

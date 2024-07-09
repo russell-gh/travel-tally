@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
@@ -16,28 +16,13 @@ import "./css/headerFooter.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
 import EditExpense from "./components/EditExpense";
+import { animationPopUp } from "./animations";
 
 const App = () => {
   const dispatch = useDispatch();
+  const popUpRef = useRef();
   const popUp = useSelector(selectPopUp);
-  const [_popUp, _setPopUp] = useState("");
-
-  // useEffect(() => {
-  //   if (_popUp && !popUp.component) {
-  //     //animation here
-  //     setTimeout(() => {
-  //       _setPopUp(false);
-  //     }, 100);
-  //   } else {
-  //     _setPopUp(popUp.component);
-  //     console.log(_popUp);
-  //   }
-  // }, [popUp]);
-
-  const stringToComponent = {
-    DeletePopUp: <DeletePopUp />,
-    EditExpense: <EditExpense />, //add component here
-  };
+  const [_popUp, _setPopUp] = useState(null);
 
   useEffect(() => {
     getApiData();
@@ -63,6 +48,27 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    if (_popUp && !popUp.component) {
+      console.log("you get here");
+      animationPopUp(popUpRef.current, "reverse");
+      setTimeout(() => {
+        _setPopUp(false);
+      }, 30000);
+    } else if (popUp.component) {
+      _setPopUp(popUp);
+      animationPopUp(popUpRef.current);
+      console.log(_popUp);
+    }
+  }, [popUp]);
+
+  const stringToComponent = {
+    DeletePopUp: <DeletePopUp popUp={_popUp} />,
+    EditExpense: <EditExpense />,
+  };
+
+  console.log(_popUp);
+
   return (
     <>
       <Header />
@@ -72,12 +78,14 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/setupprofile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard popUp={_popUp} />} />
           <Route path="/add-expense" element={<AddExpense />} />
           <Route path="/edit-expense" element={<EditExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
-        {stringToComponent[popUp.component]}
+        <div ref={popUpRef} className="PopUpContainer">
+          {_popUp && stringToComponent[_popUp.component]}
+        </div>
       </main>
       <Footer />
     </>
