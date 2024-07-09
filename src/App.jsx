@@ -58,7 +58,7 @@ const App = () => {
         Reset
       </button>
       <Header />
-      <Logo/>
+      {/* <Logo/> */}
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />

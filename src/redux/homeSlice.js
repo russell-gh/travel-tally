@@ -130,12 +130,14 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
-      console.log('HIT IT')
+      console.log('HIT IT', payload)
       const {expenseIndex} = payload
       //get index of the current trip
-      const indexTrip = getIndex(state.trips, state.selectedTripId);
+      const indexTrip = getIndex(state.trips, state.selectedTripId, 'id');
+      console.log('Attempted', indexTrip)
       // delete expense
       state.trips[indexTrip].expenses.splice(expenseIndex, 1);
+      
     }
   },
 });

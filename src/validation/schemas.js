@@ -18,7 +18,7 @@ export const tripSchema = {
   };
 
 export const expenseSchema = {
-  startDate: Joi.date(),
+  date: Joi.date(),
   endDate: Joi.date(),
   description: Joi.string().min(3).max(58).required(),
   category: Joi.string().required(),

@@ -17,7 +17,7 @@ export const EditExpense = () => {
   const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
-  let [loaded, setLoaded] = useState(false);
+  let [index, setIndex] = useState(0);
   let [formData, setFormData] = useState({
     date: new Date().toLocaleDateString("en-CA"),
     // endDate: new Date().toLocaleDateString("en-CA"),
@@ -46,8 +46,12 @@ export const EditExpense = () => {
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const setThisExpense = () => {
+    console.log('set expense')
     let expenses = getExpenseList(tripID, trips);
+    console.log(expenses, 'EXPENSES');
     let result = getThisExpense(expenses, id);
+    console.log(result, 'RESULT');
+    setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense))
     let date = new Date(formData.date).toLocaleDateString("en-CA");
     let newAmount = copy.amount.fromValue;
@@ -57,13 +61,18 @@ export const EditExpense = () => {
     copy.amount = newAmount /100;
     copy.endDate = date;
     setFormData(copy);
-    dispatch(deleteToEdit(result.indexOf));
+    
+    console.log('post dispatch')
   };
 
-  if (loaded === false) {
+  useEffect(() => {
     setThisExpense();
-    setLoaded(true);
-  }
+  }, [])
+
+  // if (loaded === false) {
+  //   setLoaded(true);
+    
+  // }
   const dataInput = (e) => {
     // getValidationResult();
     let target = e.target.name;
@@ -87,7 +96,8 @@ export const EditExpense = () => {
     //   return;
     // }
     if (formData.description && formData.amount) {
-      console.log(formData, "pass");
+
+      dispatch(deleteToEdit(index));
       dispatch(addExpenseData(formData));
     } else {
       console.log("FAIL FINAL");
@@ -116,7 +126,7 @@ export const EditExpense = () => {
   //       return <></>;
   //     }
   //   };
-console.log(formData,'pre return, formData')
+// console.log(formData,'pre return, formData')
   return (
     <>
       <div className="editContainer">
