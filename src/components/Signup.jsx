@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 import { signupSchema } from "./onboarding/validation/schemas";
 import { generateId } from "./onboarding/utils";
 import FormElement from "../reusable-code/FormElement";
+import Button from "../reusable-code/Button";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -70,7 +71,7 @@ const Signup = () => {
         placeholder="confirm new password"
       />
       <p className="errortext">{errors.passwordConfirm}</p>
-      <button onClick={onSubmit}>Sign Up</button>
+      <Button onClick={onSubmit} text="Sign Up" />
     </div>
   );
 };

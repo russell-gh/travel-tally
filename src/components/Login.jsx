@@ -6,6 +6,7 @@ import { selectTrips } from "../redux/homeSlice";
 import Joi from "joi";
 import { validate } from "./onboarding/validation/validate";
 import "./login.css";
+import "../css/app.css";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 //=======Displays Login Data================
@@ -21,8 +22,8 @@ const Login = () => {
     setErrors(errObj);
     console.log(errors, formData);
   };
-  // console.log(formData, user);
-  const localUser = JSON.parse(localStorage.getItem("user")); // selects "email" part of object. Turns back into object.
+
+  const localUser = JSON.parse(localStorage.getItem("user"));
   //=======Compares Credentials to Local Storage================
   const onSubmit = async (e) => {
     console.log(errors, formData);
