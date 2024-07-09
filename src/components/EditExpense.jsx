@@ -10,11 +10,13 @@ import {
   selectTrips,
   deleteToEdit,
   addExpenseData,
+  selectPopUp,
 } from "../redux/homeSlice";
 
 export const EditExpense = () => {
   const dispatch = useDispatch();
-  const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
+  const popUp = useSelector(selectPopUp);
+  // const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [loaded, setLoaded] = useState(false);
@@ -47,14 +49,14 @@ export const EditExpense = () => {
 
   const setThisExpense = () => {
     let expenses = getExpenseList(tripID, trips);
-    let result = getThisExpense(expenses, id);
-    const copy = JSON.parse(JSON.stringify(result.thisExpense))
+    let result = getThisExpense(expenses, popUp.id);
+    const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = new Date(formData.date).toLocaleDateString("en-CA");
     let newAmount = copy.amount.fromValue;
     let currency = copy.amount.fromCurrency;
     copy.date = date;
     copy.currency = currency;
-    copy.amount = newAmount /100;
+    copy.amount = newAmount / 100;
     copy.endDate = date;
     setFormData(copy);
     dispatch(deleteToEdit(result.indexOf));
@@ -116,7 +118,7 @@ export const EditExpense = () => {
   //       return <></>;
   //     }
   //   };
-console.log(formData,'pre return, formData')
+  console.log(formData, "pre return, formData");
   return (
     <>
       <div className="editContainer">

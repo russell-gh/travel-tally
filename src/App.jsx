@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import EditExpense from "./components/EditExpense";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
 import Onboarding from "./components/onboarding/Onboarding";
@@ -16,6 +15,7 @@ import SetUpProfile from "./components/setUpProfile/SetUpProfile";
 import "./css/headerFooter.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
+import EditExpense from "./components/EditExpense";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const App = () => {
       //animation here
       setTimeout(() => {
         _setPopUp(false);
-      }, 3000);
+      }, 100);
     } else {
       _setPopUp(popUp.component);
       console.log(_popUp);
@@ -36,7 +36,7 @@ const App = () => {
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp />,
-    EditExpense: "EditExpense", //add component here
+    EditExpense: <EditExpense />, //add component here
   };
 
   useEffect(() => {
