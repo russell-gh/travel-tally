@@ -22,17 +22,17 @@ const App = () => {
   const popUp = useSelector(selectPopUp);
   const [_popUp, _setPopUp] = useState("");
 
-  useEffect(() => {
-    if (_popUp && !popUp.component) {
-      //animation here
-      setTimeout(() => {
-        _setPopUp(false);
-      }, 100);
-    } else {
-      _setPopUp(popUp.component);
-      console.log(_popUp);
-    }
-  }, [popUp]);
+  // useEffect(() => {
+  //   if (_popUp && !popUp.component) {
+  //     //animation here
+  //     setTimeout(() => {
+  //       _setPopUp(false);
+  //     }, 100);
+  //   } else {
+  //     _setPopUp(popUp.component);
+  //     console.log(_popUp);
+  //   }
+  // }, [popUp]);
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp />,
@@ -77,7 +77,7 @@ const App = () => {
           <Route path="/edit-expense" element={<EditExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
-        {stringToComponent[_popUp]}
+        {stringToComponent[popUp.component]}
       </main>
       <Footer />
     </>
