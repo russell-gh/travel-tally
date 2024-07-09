@@ -2,7 +2,7 @@ export const Header = () => {
   return (
     <header>
       <div className="logo"></div>
-      <h1>Holidough</h1>
+      <h1>holiDough</h1>
     </header>
   );
 };
