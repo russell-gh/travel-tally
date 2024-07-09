@@ -11,11 +11,13 @@ const SharedDelete = ({ title }) => {
         <Button
           text="cancel"
           className="cancelBtn"
+          animation={true}
           onClick={() => dispatch(togglePopUp())}
         />
         <Button
           text="delete all"
           className="deleteBtn"
+          animation={true}
           onClick={() => {
             dispatch(deleteExpense("all"));
           }}
@@ -23,6 +25,7 @@ const SharedDelete = ({ title }) => {
         <Button
           text="delete single expense"
           className="deleteBtn"
+          animation={true}
           onClick={() => {
             dispatch(deleteExpense());
           }}

@@ -2,7 +2,6 @@ import Budget from "./Budget";
 import { useState } from "react";
 import BudgetPerDay from "./BudgetPerDay";
 import dayjs from "dayjs";
-import ControlsAddExpense from "./ControlsAddExpense";
 import Button from "../../reusable-code/Button";
 
 const BudgetInfo = ({

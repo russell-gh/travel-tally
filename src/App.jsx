@@ -13,10 +13,30 @@ import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
 import "./css/headerFooter.scss";
+import DeletePopUp from "./components/dashboard/DeletePopUp";
+import { useState } from "react";
 
 const App = () => {
   const dispatch = useDispatch();
   const popUp = useSelector(selectPopUp);
+  const [_popUp, _setPopUp] = useState("");
+
+  useEffect(() => {
+    if (_popUp && !popUp.component) {
+      //animation here
+      setTimeout(() => {
+        _setPopUp(false);
+      }, 3000);
+    } else {
+      _setPopUp(popUp.component);
+      console.log(_popUp);
+    }
+  }, [popUp]);
+
+  const stringToComponent = {
+    DeletePopUp: <DeletePopUp />,
+    EditExpense: "EditExpense", //add component here
+  };
 
   useEffect(() => {
     getApiData();
@@ -55,6 +75,7 @@ const App = () => {
           <Route path="/add-expense" element={<AddExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
+        {stringToComponent[_popUp]}
       </main>
       <Footer />
     </>

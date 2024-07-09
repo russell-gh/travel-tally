@@ -11,11 +11,13 @@ const OneItemDelete = ({ title }) => {
         <Button
           text="cancel"
           className="cancelBtn"
+          animation={true}
           onClick={() => dispatch(togglePopUp())}
         />
         <Button
           text="delete"
           className="deleteBtn"
+          animation={true}
           onClick={() => {
             dispatch(deleteExpense());
           }}

@@ -92,14 +92,12 @@ export const homeSlice = createSlice({
 
       saveStore("homeSlice", state);
 
-
       // resets the filters when switching between trips
       if (payload.id === "selectedTripId") {
         state.filter = "Show All";
         state.order = "Newest first";
         state.filterDate = "All Dates";
       }
-
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup

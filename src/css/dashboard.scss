@@ -2,6 +2,68 @@ body {
   margin: 0px;
 }
 
+/*
+**************************
+     delete pop-up
+**************************
+*/
+.deletePopUp {
+  position: fixed;
+  background-color: #D6EE79;
+  border-radius: 14px;
+  border: black solid 2px;
+  padding: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vw;
+  max-width: 350px;
+
+  p {
+    margin-bottom: 10px;
+    margin-top: 0px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #3c43a5;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+}
+
+.deleteBtn:hover {
+  background-color: rgb(112, 12, 12);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cancelBtn:hover {
+  background-color: rgb(27, 126, 40);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.containerBtnPopUp {
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerBtnPopUpMulti {
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: 180px;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0px auto;
+}
+
+
+/*
+************END***********
+*/
+
 .dashboard {
   /*
 **************************
@@ -34,6 +96,14 @@ body {
   .dashboardFixed,
   .expenses {
     padding: 0px 10px 0px 10px;
+  }
+
+  .ripples {
+    background-color: transparent;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    // z-index: 10;
   }
 
   /*
@@ -222,7 +292,7 @@ body {
   }
 
   .includes {
-    background-color: #BCD2EE;
+    background-color: #ddf18970;
   }
 
   .controlsExpenses {
@@ -317,62 +387,13 @@ body {
 */
   /*
 **************************
-     delete pop-up
-**************************
-*/
-  .deletePopUp {
-    position: fixed;
-    background-color: #D6EE79;
-    border-radius: 14px;
-    border: black solid 2px;
-    padding: 10px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 75vw;
-    max-width: 350px;
-  }
-
-  .deletePopUp p {
-    margin-bottom: 10px;
-  }
-
-  .deleteBtn:hover {
-    background-color: rgb(112, 12, 12);
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  .cancelBtn:hover {
-    background-color: rgb(27, 126, 40);
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  .containerBtnPopUp {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .containerBtnPopUpMulti {
-    display: flex;
-    flex-direction: column-reverse;
-    max-width: 180px;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin: 0px auto;
-  }
-}
-
-/*
-************END***********
-*/
-/*
-**************************
      media queries
 **************************
 */
-@media (min-width: 445px) {
-  .containerBtnPopUpMulti {
-    justify-content: space-around;
-    gap: 10px
+  @media (min-width: 445px) {
+    .containerBtnPopUpMulti {
+      justify-content: space-around;
+      gap: 10px
+    }
   }
 }
