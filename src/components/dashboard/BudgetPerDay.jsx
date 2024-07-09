@@ -7,7 +7,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
-import DailyDifference from "./DailyDifference";
+import DailyDifference from "./Difference";
 import CummulativeDifference from "./CummulativeDifference";
 import ControlsAddExpense from "./ControlsAddExpense";
 
@@ -40,19 +40,15 @@ const BudgetPerDay = ({
       </div>
       <div className="containerBottomRowGrid">
         <div className="dayBudget">
-          <p>
-            Budget per day:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {budgetPerDay}
-            </span>
+          <p>Budget per day: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {budgetPerDay}
           </p>
-          <p>
-            Spend Today:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {addDecimals(selectedDay.totalSpendPerDay)}
-            </span>
+          <p>Spend Today: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {addDecimals(selectedDay.totalSpendPerDay)}
           </p>
           <DailyDifference
             homeCurrencySymbol={homeCurrencySymbol}

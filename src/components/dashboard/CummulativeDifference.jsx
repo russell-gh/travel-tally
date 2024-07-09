@@ -3,33 +3,33 @@ import { addDecimals } from "../../utils/utilsBudget";
 const CummulativeDifference = ({ homeCurrencySymbol, selectedDay }) => {
   return (
     <>
-      <p
-        className={
-          selectedDay.cumulativeDifference > 0
-            ? "positive"
-            : selectedDay.cumulativeDifference === 0
-            ? "neutral"
-            : "negative"
-        }
-      >
-        {selectedDay.cumulativeDifference < 0 ? (
-          <>
-            Overspend previous days:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {Math.abs(selectedDay.cumulativeDifference / 100).toFixed(2)}
-            </span>
-          </>
-        ) : (
-          <>
-            Saved previous days:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {addDecimals(selectedDay.cumulativeDifference)}
-            </span>
-          </>
-        )}
-      </p>
+      {selectedDay.cumulativeDifference < 0 ? (
+        <>
+          <p className="negative">Previously overspend:</p>
+          <p className="bold negative">
+            {homeCurrencySymbol}
+            {Math.abs(selectedDay.cumulativeDifference / 100).toFixed(2)}
+          </p>
+        </>
+      ) : (
+        <>
+          <p
+            className={
+              selectedDay.cumulativeDifference === 0 ? "neutral" : "positive"
+            }
+          >
+            Previously saved:
+          </p>
+          <p
+            className={`bold ${
+              selectedDay.cumulativeDifference === 0 ? "neutral" : "positive"
+            }`}
+          >
+            {homeCurrencySymbol}
+            {addDecimals(selectedDay.cumulativeDifference)}
+          </p>
+        </>
+      )}
     </>
   );
 };

@@ -145,11 +145,13 @@ body {
     border-radius: 0px;
   }
 
-  .totalBudgetBtn:hover {
+  .totalBudgetBtn:hover,
+  .totalBudgetBtn {
     border-radius: 12px 0px 0px 0px;
   }
 
-  .dailyBudgetBtn:hover {
+  .dailyBudgetBtn:hover,
+  .dailyBudgetBtn {
     border-radius: 0px 12px 0px 0px;
   }
 
@@ -163,7 +165,7 @@ body {
     grid-row: 3;
     grid-column-start: 1;
     grid-column-end: 3;
-    padding: 10px
+    padding: 0px 10px 10px 10px;
   }
 
   .containerBudget {
@@ -188,6 +190,15 @@ body {
     }
   }
 
+  .budget,
+  .dayBudget {
+    display: grid;
+    grid-template-columns: fit-content(200px) fit-content(100px);
+    grid-template-rows: fit-content(100px);
+    gap: 0px 10px;
+
+  }
+
   .positive {
     color: green;
   }
@@ -202,6 +213,7 @@ body {
 
   .bold {
     font-weight: bold;
+    justify-self: flex-end;
   }
 
   // controls expenses
@@ -342,8 +354,25 @@ body {
 
   .containerBtnPopUpMulti {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column-reverse;
+    max-width: 180px;
     flex-wrap: wrap;
+    gap: 5px;
+    margin: 0px auto;
+  }
+}
+
+/*
+************END***********
+*/
+/*
+**************************
+     media queries
+**************************
+*/
+@media (min-width: 445px) {
+  .containerBtnPopUpMulti {
+    justify-content: space-around;
     gap: 10px
   }
 }

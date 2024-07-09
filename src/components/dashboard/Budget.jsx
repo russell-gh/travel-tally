@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
 import ControlsAddExpense from "./ControlsAddExpense";
+import Difference from "./Difference";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const filter = useSelector(selectFilter);
@@ -22,52 +23,24 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
       </div>
       <div className="containerBottomRowGrid">
         <div className="budget">
-          <p>
-            Budget:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {budget}
-            </span>
+          <p>Budget: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {budget}
           </p>
-          <p>
-            Spend:{" "}
-            <span className="bold">
-              {homeCurrencySymbol}
-              {totalSpend}
-            </span>
+          <p>Spend: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {totalSpend}
           </p>
-          <p
-            className={
-              difference < 0
-                ? "negative"
-                : difference === 0
-                ? "neutral"
-                : "positive"
-            }
-          >
-            {difference < 0 ? (
-              <>
-                Overspend:{" "}
-                <span className="bold">
-                  {homeCurrencySymbol}
-                  {Math.abs(difference).toFixed(2)}
-                </span>
-              </>
-            ) : (
-              <>
-                Money left:{" "}
-                <span className="bold">
-                  {homeCurrencySymbol}
-                  {difference}
-                </span>
-              </>
-            )}
-          </p>
+          <Difference
+            homeCurrencySymbol={homeCurrencySymbol}
+            difference={difference}
+          />
         </div>
         <ControlsAddExpense />
       </div>
     </>
   );
 };
-
 export default Budget;
