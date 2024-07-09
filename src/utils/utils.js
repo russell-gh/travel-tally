@@ -1,5 +1,6 @@
 import { unixToDate } from "./utilsDates";
 import dayjs from "dayjs";
+import { colors } from "./config";
 
 export function getIndex(data, id, key) {
   const indexOf = data.findIndex((item) => {
@@ -26,20 +27,6 @@ export function findItem(data, id) {
 
   return item;
 }
-
-// array with colors we like for the app (need to adjust for our colourpallette, need to move to utils and import)
-export const colors = [
-  "#e6194b",
-  "#3cb44b",
-  "#ffe119",
-  "#4363d8",
-  "#f58231",
-  "#911eb4",
-  "#46f0f0",
-  "#f032e6",
-  "#bcf60c",
-  "#fabebe",
-];
 
 export const getColourForSharedId = (arrSharedId, sharedId) => {
   if (arrSharedId.length === 0 || !arrSharedId) {

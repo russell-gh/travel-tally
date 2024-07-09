@@ -14,11 +14,13 @@ import {
   selectTrips,
   deleteToEdit,
   addExpenseData,
+  selectPopUp,
 } from "../redux/homeSlice";
 
 export const EditExpense = () => {
   const dispatch = useDispatch();
-  const id = "_expense__tov2co66cPEzf7edQ5gh";
+  const popUp = useSelector(selectPopUp);
+  // const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
@@ -55,7 +57,7 @@ export const EditExpense = () => {
     let expenses = getExpenseList(tripID, trips);
     setExpenseList(expenses);
     console.log(expenses, "EXPENSES");
-    let result = getThisExpense(expenses, id);
+    let result = getThisExpense(expenses, popUp.id);
     console.log(result, "RESULT");
     setIndex(result.indexOf);
     // const copy = JSON.parse(JSON.stringify(mergeExpenseDays(result.thisExpense, expenses)));
@@ -108,6 +110,7 @@ export const EditExpense = () => {
       return;
     }
   };
+
   const multiDay = () => {
     setMulti((multi = !multi));
     if (multi) {

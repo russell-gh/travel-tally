@@ -7,8 +7,9 @@ import {
 import { useSelector } from "react-redux";
 import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
-import DailyDifference from "./DailyDifference";
+import DailyDifference from "./Difference";
 import CummulativeDifference from "./CummulativeDifference";
+import ControlsAddExpense from "./ControlsAddExpense";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -32,29 +33,33 @@ const BudgetPerDay = ({
   return (
     <>
       <div className="chartDay">
-        <p>Daily budget</p>
         <CategoryGauge
           budget={budgetPerDay}
           spend={addDecimals(selectedDay.totalSpendPerDay)}
         />
       </div>
-      <div className="dayBudget">
-        <p>
-          Budget per day: {homeCurrencySymbol}
-          {budgetPerDay}
-        </p>
-        <p>
-          Spend Today: {homeCurrencySymbol}
-          {addDecimals(selectedDay.totalSpendPerDay)}
-        </p>
-        <DailyDifference
-          homeCurrencySymbol={homeCurrencySymbol}
-          difference={difference}
-        />
-        <CummulativeDifference
-          homeCurrencySymbol={homeCurrencySymbol}
-          selectedDay={selectedDay}
-        />
+      <div className="containerBottomRowGrid">
+        <div className="dayBudget">
+          <p>Budget per day: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {budgetPerDay}
+          </p>
+          <p>Spend Today: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {addDecimals(selectedDay.totalSpendPerDay)}
+          </p>
+          <DailyDifference
+            homeCurrencySymbol={homeCurrencySymbol}
+            difference={difference}
+          />
+          <CummulativeDifference
+            homeCurrencySymbol={homeCurrencySymbol}
+            selectedDay={selectedDay}
+          />
+        </div>
+        <ControlsAddExpense />
       </div>
     </>
   );

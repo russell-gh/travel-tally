@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import EditExpense from "./components/EditExpense";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
 import Onboarding from "./components/onboarding/Onboarding";
@@ -13,11 +12,32 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
-import { Logo } from "./components/Logo";
+import "./css/headerFooter.scss";
+import DeletePopUp from "./components/dashboard/DeletePopUp";
+import { useState } from "react";
+import EditExpense from "./components/EditExpense";
 
 const App = () => {
   const dispatch = useDispatch();
   const popUp = useSelector(selectPopUp);
+  const [_popUp, _setPopUp] = useState("");
+
+  useEffect(() => {
+    if (_popUp && !popUp.component) {
+      //animation here
+      setTimeout(() => {
+        _setPopUp(false);
+      }, 100);
+    } else {
+      _setPopUp(popUp.component);
+      console.log(_popUp);
+    }
+  }, [popUp]);
+
+  const stringToComponent = {
+    DeletePopUp: <DeletePopUp />,
+    EditExpense: <EditExpense />, //add component here
+  };
 
   useEffect(() => {
     getApiData();
@@ -43,22 +63,9 @@ const App = () => {
     }
   };
 
-  // useEffect(()=> {
-  //   if (popUp) {}
-  // })
-
   return (
     <>
-      <button
-        onClick={() => {
-          localStorage.clear();
-          location.reload();
-        }}
-      >
-        Reset
-      </button>
       <Header />
-      {/* <Logo/> */}
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -70,6 +77,7 @@ const App = () => {
           <Route path="/edit-expense" element={<EditExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
+        {stringToComponent[_popUp]}
       </main>
       <Footer />
     </>
