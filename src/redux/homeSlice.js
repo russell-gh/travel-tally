@@ -128,15 +128,19 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
-      console.log('HIT IT', payload)
-      const {expenseIndex} = payload
+      console.log("HIT DELETE", payload);
+      const { expenseIndex } = payload;
       //get index of the current trip
-      const indexTrip = getIndex(state.trips, state.selectedTripId, 'id');
-      console.log('Attempted', indexTrip)
-      // delete expense
-      state.trips[indexTrip].expenses.splice(expenseIndex, 1);
-      
-    }
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+      // If its an array then delete multiple from the first index
+      if (Array.isArray(payload)) {
+        state.trips[indexTrip].expenses.splice(payload[0], payload.length);
+      } else {
+        // Otherwise, delete single expense
+        state.trips[indexTrip].expenses.splice(expenseIndex, 1);
+      }
+      saveStore("homeSlice", state);
+    },
   },
 });
 
