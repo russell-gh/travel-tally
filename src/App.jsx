@@ -13,10 +13,12 @@ import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
 import "./css/headerFooter.scss";
+import "./css/splashPage.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
 import EditExpense from "./components/EditExpense";
 import { animationPopUp } from "./animations";
+import SplashPage from "./components/SplashPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -74,6 +76,7 @@ const App = () => {
       <Header />
       <main>
         <Routes>
+          <Route path="/splash-page" element={<SplashPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/setupprofile/*" element={<SetUpProfile />} />

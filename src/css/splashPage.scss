@@ -1,0 +1,20 @@
+.splashPage {
+  height: 93vh;
+  background-color: #3c43a5;
+
+  padding: 20px;
+
+  .plane {
+    height: 30px;
+    width: 30px;
+  }
+
+  .path {
+    stroke: white;
+    fill: none;
+  }
+
+  .circle {
+    margin: 20px;
+  }
+}
