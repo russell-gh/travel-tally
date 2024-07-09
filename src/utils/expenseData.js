@@ -90,6 +90,38 @@ export function splitExpenseDays(expense) {
   return allExpenses;
 }
 
+export function mergeExpenseDays(expense, allExpenses) {
+let expenseArray = [];
+let newExpense = {};
+
+if (expense.sharedID) {
+ allExpenses.forEach(thisExpense => {  // Finds each expense with matching sharedID
+  if (thisExpense.sharedID) {
+    expenseArray.push(thisExpense);  // Adds all of them to and array 
+    console.log(expenseArray, 'post forEach');
+  }
+ });
+ const total = expenseArray.length;  // Counts how many in array
+ const sorted = expenseArray.sort(function (a, b) {  // Sorts by unix timestamp
+  return a.date - b.date;
+ })
+ const startDate = new Date(expenseArray[0].date).toLocaleDateString("en-CA");   // Gets earliest date from beginning of sorted array
+ const endDate = new Date(expenseArray[expenseArray.length -1].date).toLocaleDateString("en-CA")    // Gets latest date from last index
+ const totalAmount = expenseArray[0].amount.fromValue * total; // Finds the original total of shared expense
+ newExpense = {date: startDate,    // Creates a new object with combined information
+  endDate: endDate,
+  split: expenseArray[0].split,
+  category: expenseArray[0].category,
+  description: expenseArray[0].description,
+  multiDay: true,
+  currency: expenseArray[0].amount.fromCurrency,
+  amount: totalAmount /100}
+ console.log(sorted, total, newExpense, 'sorted');
+}
+console.log(newExpense, 'PRERETURN')
+return newExpense
+}
+
 export function getExpenseList(tripID, trips) {
   const indexOf = trips.findIndex((trip) => {
     return trip.id === tripID;
@@ -105,6 +137,7 @@ export function getThisExpense(expenseList, id) {
   });
   // Create variable for the correct trip
   const thisExpense = expenseList[indexOf];
+  // const multi = mergeExpenseDays(thisExpense, expenseList)
   let result = { thisExpense, indexOf };
   return result;
 }
