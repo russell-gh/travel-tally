@@ -1,59 +1,90 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyCodes,
-  selectFilter,
-  selectFilterDate,
-  selectOrder,
   selectPopUp,
   selectTrips,
   togglePopUp,
 } from "../../redux/homeSlice";
-import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
-import { addDecimals, getCurrencySymbol, unixToDate } from "../../utils/utils";
 import CategoryIcon from "./CategoryIcon";
 import DeletePopUp from "./DeletePopUp";
-import Image from "./Image";
+import Message from "../../reusable-code/Message";
+import DescriptionAndDate from "./DescriptionAndDate";
+import ExpenseAmount from "./ExpenseAmount";
+import dayjs from "dayjs";
 
-const Expenses = ({ filtered, homeCurrencySymbol }) => {
+const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
   const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
 
-  const stringToComponent = { DeletePopUp: <DeletePopUp /> };
+  const stringToComponent = {
+    DeletePopUp: <DeletePopUp />,
+    EditExpense: "EditExpense", //add component here
+  };
 
   if (!currencyCodes || !trips) {
     return;
   }
 
+  if (expenses.length === 0) {
+    return <Message message="You have no expenses yet." className="mt" />;
+  }
+
+  if (filtered.length === 0) {
+    return <Message message="There are no matches" className="mt" />;
+  }
+
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, id, category, date, amount } = item;
+        const {
+          description,
+          id,
+          category,
+          startDate,
+          endDate,
+          amount,
+          sharedId,
+        } = item;
+        const isFuture = dayjs(startDate).isAfter(dayjs());
         return (
-          <div className="expenseItem" key={id}>
+          <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
             <CategoryIcon category={category} />
-            <div>
-              <h2>{description ? description : category}</h2>
-              <p>{unixToDate(date)}</p>
-            </div>
-            <div>
-              <p>
-                {homeCurrencySymbol}
-                {addDecimals(amount.toValue)}
-              </p>
-              <p className="foreignAmount">
-                {getCurrencySymbol(currencyCodes, amount.fromCurrency)}
-                {addDecimals(amount.fromValue)}
-              </p>
-            </div>
-            <Image
-              src="../src/img/delete.svg"
-              alt="delete"
+            <DescriptionAndDate
+              description={description}
+              category={category}
+              startDate={startDate}
+              endDate={endDate}
+              sharedId={sharedId}
+              expenses={expenses}
+            />
+            <ExpenseAmount
+              homeCurrencySymbol={homeCurrencySymbol}
+              amount={amount}
+              currencyCodes={currencyCodes}
+            />
+            <img
+              src="../src/img/edit.svg"
+              alt="edit"
+              className="edit"
               onClick={() => {
                 dispatch(
                   togglePopUp({
-                    config: { title: description, id: id },
+                    config: { title: description, id: id, sharedId: sharedId },
+                    component: "EditExpense",
+                  })
+                );
+              }}
+            />
+            <img
+              src="../src/img/delete.svg"
+              alt="delete"
+              className="delete"
+              onClick={() => {
+                dispatch(
+                  togglePopUp({
+                    config: { title: description, id: id, sharedId: sharedId },
                     component: "DeletePopUp",
                   })
                 );

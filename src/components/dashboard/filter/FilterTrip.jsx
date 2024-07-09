@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { formEvent, selectTrips } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 
-const FilterDate = () => {
+const FilterTrip = () => {
   const dispatch = useDispatch();
   const trips = useSelector(selectTrips);
 
@@ -30,4 +30,4 @@ const FilterDate = () => {
   );
 };
 
-export default FilterDate;
+export default FilterTrip;

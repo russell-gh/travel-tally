@@ -5,12 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import EditExpense from "./components/EditExpense";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
-import Onboarding from "./components/Onboarding/Onboarding";
+import Onboarding from "./components/onboarding/Onboarding";
 import Signup from "./components/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { selectPopUp, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { getStore } from "./localStorage";
+import SetUpProfile from "./components/setUpProfile/SetUpProfile";
+import { Logo } from "./components/Logo";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +24,11 @@ const App = () => {
   }, []);
 
   const getApiData = async () => {
+    const homeSlice = getStore("homeSlice");
+    const onboardingSlice = getStore("onboardingSlice");
+    if (homeSlice || onboardingSlice) {
+      return;
+    }
     {
       const { data } = await axios.get(`fakeCurrencies.json`);
       dispatch(setData({ text: "currencies", data: data.rates }));
@@ -41,11 +49,21 @@ const App = () => {
 
   return (
     <>
+      <button
+        onClick={() => {
+          localStorage.clear();
+          location.reload();
+        }}
+      >
+        Reset
+      </button>
       <Header />
+      <Logo/>
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/setupprofile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-expense" element={<AddExpense />} />
