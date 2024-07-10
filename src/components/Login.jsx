@@ -65,6 +65,7 @@ const Login = () => {
           name="email"
           id="email"
           placeholder="email"
+          className="logsign-input"
         />
 
         <p className="errortext">{errors.email}</p>
@@ -74,6 +75,7 @@ const Login = () => {
           name="password"
           id="password"
           placeholder="password"
+          className="logsign-input"
         />
 
         <p className="errortext">{errors.password}</p>
