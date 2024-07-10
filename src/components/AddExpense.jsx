@@ -101,7 +101,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   return (
     <div className="expenseContainer">
-      <div>
+      <div className="flex">
         <FormElement
           type={"date"}
           label={"Date"}
@@ -110,39 +110,46 @@ export const AddExpense = ({ animatingOut }) => {
           id={"datePicker"}
           callback={dataInput}
         />
-        {renderMultiDay()}
+
+        <div className="multiDayCheckbox">
+          {renderMultiDay()}
+          <FormElement
+            type={"checkbox"}
+            label={"Multiple days"}
+            name={"dateCheck"}
+            id={"dateCheck"}
+            callback={multiDay}
+          />
+        </div>
+      </div>
+      <div className="flex">
         <FormElement
-          type={"checkbox"}
-          label={"Multiple days"}
-          name={"dateCheck"}
-          id={"dateCheck"}
-          callback={multiDay}
+          type={"text"}
+          label={"Description"}
+          name={"description"}
+          id={"expenseDescription"}
+          error={errors["description"]}
+          list={"descriptionOptions"}
+          callback={dataInput}
+        />
+        <datalist id="descriptionOptions">
+          {expenses.map((expense) => {
+            return <option value={expense.description}></option>;
+          })}
+        </datalist>
+      </div>
+      <div className="flex">
+        <FormElement
+          type={"select"}
+          label={"Category"}
+          name={"category"}
+          id={"categorySelectExpense"}
+          options={categories}
+          error={errors["category"]}
+          callback={dataInput}
         />
       </div>
-      <FormElement
-        type={"text"}
-        label={"Description"}
-        name={"description"}
-        id={"expenseDescription"}
-        error={errors["description"]}
-        list={"descriptionOptions"}
-        callback={dataInput}
-      />
-      <datalist id="descriptionOptions">
-        {expenses.map((expense) => {
-          return <option value={expense.description}></option>;
-        })}
-      </datalist>
-      <FormElement
-        type={"select"}
-        label={"Category"}
-        name={"category"}
-        id={"categorySelectExpense"}
-        options={categories}
-        error={errors["category"]}
-        callback={dataInput}
-      />
-      <div>
+      <div className="flex">
         <FormElement
           type={"number"}
           label={"Amount"}
@@ -160,32 +167,34 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
-
-      <FormElement
-        type={"select"}
-        label={"Split"}
-        name={"split"}
-        id={"splitExpense"}
-        options={[
-          { value: false, name: "No" },
-          { value: true, name: "Yes" },
-        ]}
-        callback={dataInput}
-      />
-
-      <Button
-        onClick={handleSubmit}
-        text={"Add"}
-        className={"expenseSubmit"}
-        disabled={animatingOut}
-      />
-      <Button
-        text="Cancel"
-        className="cancelBtn"
-        animation={true}
-        onClick={() => dispatch(togglePopUp())}
-        disabled={animatingOut}
-      />
+      <div className="flex">
+        <FormElement
+          type={"select"}
+          label={"Split"}
+          name={"split"}
+          id={"splitExpense"}
+          options={[
+            { value: false, name: "No" },
+            { value: true, name: "Yes" },
+          ]}
+          callback={dataInput}
+        />
+      </div>
+      <div className="containerBtnPopUp">
+        <Button
+          onClick={handleSubmit}
+          text={"Add"}
+          className={"expenseSubmit"}
+          disabled={animatingOut}
+        />
+        <Button
+          text="Cancel"
+          className="cancelBtn"
+          animation={true}
+          onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
+        />
+      </div>
     </div>
   );
 };

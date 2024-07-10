@@ -7,7 +7,7 @@ import {
   getThisExpense,
   mergeExpenseDays,
 } from "../utils/expenseData";
-import { useDispatch, useSelector, animatingOut } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyNames,
   selectSelectedTripId,
@@ -159,31 +159,35 @@ export const EditExpense = ({ animatingOut }) => {
             callback={multiDay}
           />
         </div>
-        <FormElement
-          type={"text"}
-          label={"Description"}
-          name={"description"}
-          id={"expenseDescription"}
-          error={errors["description"]}
-          value={formData.description}
-          // list={"descriptionOptions"}
-          callback={dataInput}
-        />
+        <div>
+          <FormElement
+            type={"text"}
+            label={"Description"}
+            name={"description"}
+            id={"expenseDescription"}
+            error={errors["description"]}
+            value={formData.description}
+            // list={"descriptionOptions"}
+            callback={dataInput}
+          />
+        </div>
         {/* <datalist id="descriptionOptions">
         {expenses.map((expense) => {
           return <option value={expense.description}></option>;
         })}
       </datalist> */}
-        <FormElement
-          type={"select"}
-          label={"Category"}
-          name={"category"}
-          id={"categorySelectExpense"}
-          value={formData.category}
-          options={categories}
-          error={errors["category"]}
-          callback={dataInput}
-        />
+        <div>
+          <FormElement
+            type={"select"}
+            label={"Category"}
+            name={"category"}
+            id={"categorySelectExpense"}
+            value={formData.category}
+            options={categories}
+            error={errors["category"]}
+            callback={dataInput}
+          />
+        </div>
         <div>
           <FormElement
             type={"number"}
@@ -204,33 +208,36 @@ export const EditExpense = ({ animatingOut }) => {
             callback={dataInput}
           />
         </div>
-
-        <FormElement
-          type={"select"}
-          label={"Split"}
-          name={"split"}
-          value={formData.split}
-          id={"splitExpense"}
-          options={[
-            { value: false, name: "No" },
-            { value: true, name: "Yes" },
-          ]}
-          callback={dataInput}
-        />
-
-        <Button
-          onClick={handleSubmit}
-          text={"Add"}
-          className={"expenseSubmit"}
-          disabled={animatingOut}
-        />
-        <Button
-          text="Cancel"
-          className="cancelBtn"
-          animation={true}
-          onClick={() => dispatch(togglePopUp())}
-          disabled={animatingOut}
-        />
+        <div>
+          <FormElement
+            type={"select"}
+            label={"Split"}
+            name={"split"}
+            value={formData.split}
+            id={"splitExpense"}
+            options={[
+              { value: false, name: "No" },
+              { value: true, name: "Yes" },
+            ]}
+            callback={dataInput}
+          />
+        </div>
+        <div className="containerBtnPopUp">
+          <Button
+            onClick={handleSubmit}
+            text={"Add"}
+            className={"expenseSubmit"}
+            disabled={animatingOut}
+            animation="animation"
+          />
+          <Button
+            text="Cancel"
+            className="cancelBtn"
+            animation={true}
+            onClick={() => dispatch(togglePopUp())}
+            disabled={animatingOut}
+          />
+        </div>
       </div>
     </>
   );

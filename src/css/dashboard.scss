@@ -1,3 +1,18 @@
+/*
+**************************
+            SASS
+**************************
+*/
+$navy: #2e42ac;
+$green: #d6ee79;
+$sage: #d3bb5b84;
+$white: #ffffff;
+$black: #000000;
+$grey: #b3b3b3;
+/*
+************END***********
+*/
+
 body {
   margin: 0px;
 }
@@ -27,7 +42,7 @@ body {
 }
 
 .deletePopUp {
-  background-color: #D6EE79;
+  background-color: $green;
   border-radius: 14px;
   border: black solid 2px;
   padding: 10px;
@@ -47,6 +62,7 @@ body {
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
+    margin: 0px;
   }
 }
 
@@ -55,14 +71,15 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-.cancelBtn:hover {
-  background-color: rgb(27, 126, 40);
-  transition: background-color 0.3s ease-in-out;
-}
+// .cancelBtn:hover {
+//   background-color: rgb(27, 126, 40);
+//   transition: background-color 0.3s ease-in-out;
+// }
 
 .containerBtnPopUp {
   display: flex;
   justify-content: space-around;
+  width: 100%;
 }
 
 .containerBtnPopUpMulti {
