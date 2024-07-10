@@ -21,7 +21,7 @@ import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
 import dayjs from "dayjs";
 
-const Dashboard = () => {
+const Dashboard = ({}) => {
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
   const order = useSelector(selectOrder);

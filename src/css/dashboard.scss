@@ -2,20 +2,35 @@ body {
   margin: 0px;
 }
 
+.ripples {
+  background-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.no-interaction {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /*
 **************************
      delete pop-up
 **************************
 */
-.deletePopUp {
+.popUpContainer {
   position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.deletePopUp {
   background-color: #D6EE79;
   border-radius: 14px;
   border: black solid 2px;
   padding: 10px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 75vw;
   max-width: 350px;
 
@@ -96,14 +111,6 @@ body {
   .dashboardFixed,
   .expenses {
     padding: 0px 10px 0px 10px;
-  }
-
-  .ripples {
-    background-color: transparent;
-    border-radius: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    // z-index: 10;
   }
 
   /*

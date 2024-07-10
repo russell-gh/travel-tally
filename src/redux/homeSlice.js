@@ -75,6 +75,7 @@ export const homeSlice = createSlice({
     togglePopUp: (state, { payload }) => {
       if (!payload) {
         state.popUp = {};
+        saveStore("homeSlice", state);
         return;
       }
 
@@ -128,6 +129,7 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
+
       console.log("HIT DELETE", payload);
       const { expenseIndex } = payload;
       //get index of the current trip

@@ -1,12 +1,3 @@
-//global rules here - the generic stuff
-
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
-
 html {
   font-size: 62.5%;
 }
@@ -18,17 +9,15 @@ body {
   padding: 0;
 }
 
-main {
-  input,
-  button {
-    margin: auto;
-    display: block;
-  }
+main input,
+main button {
+  margin: auto;
+  display: block;
 }
 
 .btn {
-  background-color: $green;
-  color: $navy;
+  background-color: #d6ee79;
+  color: #2e42ac;
   border: none;
   padding: 15px 32px;
   text-align: center;
@@ -38,23 +27,30 @@ main {
 
 input {
   justify-content: center;
-  border-color: $grey;
+  border-color: #b3b3b3;
   border-radius: 8px;
   height: 30px;
-  ::placeholder {
-    color: $grey;
-  }
+}
+input ::-moz-placeholder {
+  color: #b3b3b3;
+}
+input ::placeholder {
+  color: #b3b3b3;
 }
 
 header,
 footer {
-  background-color: $navy;
-  color: $white;
+  background-color: #2e42ac;
+  color: #ffffff;
 }
 
 footer {
   text-align: center;
+<<<<<<< HEAD
+  color: white;
+=======
   bottom: 0;
   position: fixed;
   width: 100%;
-}
+>>>>>>> 90b643b09e0d77d4950a53f380e54753bb4fa79d
+}/*# sourceMappingURL=app.css.map */
