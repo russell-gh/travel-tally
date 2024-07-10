@@ -9,40 +9,156 @@ const SplashPage = () => {
   const planeRef = useRef();
   const pathRef = useRef();
   const lineRef = useRef();
+  const lineRef2 = useRef();
+  const lineRef3 = useRef();
+  const lineRef4 = useRef();
+  const lineRef5 = useRef();
 
   useGSAP(() => {
     const plane = planeRef.current;
     const path = pathRef.current;
+    const line2 = lineRef2.current;
     const line = lineRef.current;
+    const line3 = lineRef3.current;
+    const line4 = lineRef4.current;
+    const line5 = lineRef5.current;
 
     gsap.to(plane, {
-      duration: 15,
-      repeat: 1,
-      ease: "power1.inOut",
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      // ease: "power1.inOut",
       motionPath: {
         path: path,
         align: path,
         autoRotate: true,
+        alignOrigin: [0.5, 0.5],
       },
     });
 
     gsap.to(line, {
-      // Corrected: use line instead of lineRef
-      delay: 0.5,
-      duration: 15,
-      repeat: 1,
-      ease: "power1.inOut",
+      delay: 0.2,
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      visibility: "inherit",
+      // ease: "power1.inOut",
       motionPath: {
         path: path,
         align: path,
         autoRotate: true,
+        alignOrigin: [0.5, 0.5],
       },
     });
+
+    gsap.to(line2, {
+      delay: 0.3,
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      visibility: "inherit",
+      // ease: "power1.inOut",
+      motionPath: {
+        path: path,
+        align: path,
+        autoRotate: true,
+        alignOrigin: [0.5, 0.5],
+      },
+    });
+
+    gsap.to(line3, {
+      delay: 0.4,
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      visibility: "inherit",
+      // ease: "power1.inOut",
+      motionPath: {
+        path: path,
+        align: path,
+        autoRotate: true,
+        alignOrigin: [0.5, 0.5],
+      },
+    });
+
+    gsap.to(line4, {
+      delay: 0.5,
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      visibility: "inherit",
+      // ease: "power1.inOut",
+      motionPath: {
+        path: path,
+        align: path,
+        autoRotate: true,
+        alignOrigin: [0.5, 0.5],
+      },
+    });
+
+    gsap.to(line5, {
+      delay: 0.6,
+      duration: 10,
+      repeat: -1,
+      ease: "none",
+      visibility: "inherit",
+      // ease: "power1.inOut",
+      motionPath: {
+        path: path,
+        align: path,
+        autoRotate: true,
+        alignOrigin: [0.5, 0.5],
+      },
+    });
+
+    // gsap.fromTo(
+    //   path,
+    //   { drawSVG: "0 5%" },
+    //   { duration: 1, drawSVG: "95% 100%" }
+    // );
   }, []);
 
   return (
     <div className="splashPage">
-      <svg
+      <img
+        src="../src/img/plane.png"
+        alt="plane"
+        ref={planeRef}
+        className="plane"
+      />
+      <img
+        src="../src/img/dash.png"
+        alt="line"
+        ref={lineRef}
+        className="line"
+      />
+
+      <img
+        src="../src/img/dash.png"
+        alt="line"
+        ref={lineRef2}
+        className="line"
+      />
+      <img
+        src="../src/img/dash.png"
+        alt="line"
+        ref={lineRef3}
+        className="line"
+      />
+      <img
+        src="../src/img/dash.png"
+        alt="line"
+        ref={lineRef4}
+        className="line"
+      />
+      <img
+        src="../src/img/dash.png"
+        alt="line"
+        ref={lineRef5}
+        className="line"
+      />
+
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -73,7 +189,7 @@ const SplashPage = () => {
         ref={lineRef}
       >
         <path d="M 0 1 H 10" stroke="#D6EE79" strokeWidth="2" />
-      </svg>
+      </svg> */}
 
       <svg
         viewBox="0 0 100 100"
