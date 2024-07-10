@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 
-const Button = ({ onClick, text, className, animation }) => {
+const Button = ({ onClick, text, className, animation, disabled }) => {
   const buttonRef = useRef();
   const ripplesRef = useRef();
 
@@ -51,6 +51,7 @@ const Button = ({ onClick, text, className, animation }) => {
       ref={buttonRef}
       className={`btn ${className}`}
       onClick={handleClick}
+      disabled={disabled}
     >
       {text}
       <span ref={ripplesRef} className="ripples"></span>
