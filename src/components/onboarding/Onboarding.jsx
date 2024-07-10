@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
+import { useDispatch } from "react-redux";
 import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import { getCountryCurrency } from "./onboardingUtils.js";
+import { addTrip } from "../../redux/homeSlice.js";
 
 const Onboarding = () => {
-  const trips = useSelector(testSelector);
 
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
@@ -36,9 +35,8 @@ const Onboarding = () => {
 
   useEffect(() => {
     getCountryCurrency(setCountryCurrency);
-  }, []);
-
-  //set original remaining to total budget
+  }, []); //put await here??
+  // zv-uncommenting while testing
 
   const dispatch = useDispatch();
 
@@ -103,7 +101,7 @@ const Onboarding = () => {
 
     //if errors exist abort early
     if (Object.keys(errors).length) {
-      // return;
+      return;
     }
 
     let _onboardingDetails = onboardingDetails;
@@ -137,10 +135,45 @@ const Onboarding = () => {
         budgetTransport,
         budgetActivities,
         budgetOther,
-      },
+      }, //zv - fake expenses below. delete after
+
+      expenses: [
+        // {
+        //   id: "expense_A2rdJ7nN8kJ3fHA25T4gd",
+        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        //   amount: {
+        //     fromValue: 2000,
+        //     fromCurrency: "EUR",
+        //     toCurrency: "GBP",
+        //     toValue: 2500,
+        //   },
+        //   category: "Food",
+        //   description: "lunch",
+        //   startDate: 1719442800000,
+        //   endDate: 1719442800000,
+        //   completed: true,
+        //   splitBill: false,
+        // },
+        // {
+        //   id: "expense_A3rdJ7nN8kJ3fHA25T4gd",
+        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        //   amount: {
+        //     fromValue: 2000,
+        //     fromCurrency: "EUR",
+        //     toCurrency: "GBP",
+        //     toValue: 2500,
+        //   },
+        //   category: "Food",
+        //   description: "lunch",
+        //   startDate: 1719356400000,
+        //   endDate: 1719356400000,
+        //   completed: true,
+        //   splitBill: false,
+        // },
+      ],
     };
 
-    dispatch(addTrip(_onboardingDetails));
+    dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs

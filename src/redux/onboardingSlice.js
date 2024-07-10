@@ -8,10 +8,6 @@ export const onboardingSlice = createSlice({
   name: "onboarding",
   initialState: dataFromDisc ? dataFromDisc : initialState,
   reducers: {
-    addTrip: (state, { payload }) => {
-      state.trips.push(payload);
-      saveStore("onboardingSlice", state);
-    },
     addUser: (state, { payload }) => {
       state.user = payload;
       saveStore("onboardingSlice", state);
@@ -28,11 +24,10 @@ export const onboardingSlice = createSlice({
   },
 });
 
-export const testSelector = (state) => state.onboarding.trips; //renamed to avoid conflicts
 export const selectUser = (state) => state.onboarding.user;
 export const selectProfilePictureSrc = (state) =>
   state.onboarding.profile.profilePictureSrc;
 export const selectUserName = (state) => state.onboarding.profile.userName;
-export const { addTrip, addUser, saveProfile } = onboardingSlice.actions;
+export const { addUser, saveProfile } = onboardingSlice.actions;
 
 export default onboardingSlice.reducer;
