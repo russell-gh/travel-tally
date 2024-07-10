@@ -15,7 +15,7 @@ import { validate } from "../validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
 
-export const AddExpense = () => {
+export const AddExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
@@ -173,12 +173,18 @@ export const AddExpense = () => {
         callback={dataInput}
       />
 
-      <Button onClick={handleSubmit} text={"Add"} className={"expenseSubmit"} />
+      <Button
+        onClick={handleSubmit}
+        text={"Add"}
+        className={"expenseSubmit"}
+        disabled={animatingOut}
+      />
       <Button
         text="Cancel"
         className="cancelBtn"
         animation={true}
         onClick={() => dispatch(togglePopUp())}
+        disabled={animatingOut}
       />
     </div>
   );

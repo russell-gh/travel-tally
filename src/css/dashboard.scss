@@ -207,8 +207,7 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: fit-content(100px) 1fr fit-content(100px);
 
-    .chartAll,
-    .chartDay {
+    .chart {
       grid-row: 2;
       grid-column-start: 1;
       grid-column-end: 3;
@@ -265,7 +264,7 @@ body {
     grid-template-rows: 1fr fit-content(100px);
     margin-bottom: 10px;
 
-    .chartAll {
+    .chart {
       grid-row: 1;
       grid-column-start: 1;
       grid-column-end: 3;
@@ -298,6 +297,9 @@ body {
     font-weight: bold;
     justify-self: flex-end;
   }
+
+  //chart
+
 
   // controls expenses
   .controlsExpenses {

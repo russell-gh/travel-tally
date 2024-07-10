@@ -4,11 +4,11 @@ import { ReactChart } from "chartjs-react";
 //register all necessary components
 Chart.register(...registerables);
 
-const ChartAll = ({ dataChart }) => {
+const ChartBudget = ({ dataChart }) => {
   return (
     <>
       <ReactChart
-        id="BarChartAll"
+        id="BarChart"
         type="bar"
         data={{
           labels: dataChart[0],
@@ -47,10 +47,10 @@ const ChartAll = ({ dataChart }) => {
             },
           },
         }}
-        height={400}
+        height={300}
       />
     </>
   );
 };
 
-export default ChartAll;
+export default ChartBudget;

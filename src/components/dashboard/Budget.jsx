@@ -8,8 +8,8 @@ import { selectFilter } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
 import ControlsAddExpense from "./ControlsAddExpense";
 import Difference from "./Difference";
-import ChartAll from "./ChartAll";
 import { createDataForCharts } from "../../utils/createDataForCharts";
+import ChartBudget from "./ChartBudget";
 
 const Budget = ({
   expenses,
@@ -29,8 +29,8 @@ const Budget = ({
 
   return (
     <>
-      <div className="chartAll">
-        <ChartAll dataChart={dataChart} />
+      <div className="chart">
+        <ChartBudget dataChart={dataChart} />
         {/* <CategoryGauge budget={budget} spend={totalSpend} /> */}
       </div>
       <div className="containerBottomRowGrid">

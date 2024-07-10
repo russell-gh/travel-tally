@@ -10,8 +10,8 @@ import CategoryGauge from "./CategoryGauge";
 import DailyDifference from "./Difference";
 import CummulativeDifference from "./CummulativeDifference";
 import ControlsAddExpense from "./ControlsAddExpense";
-import ChartAll from "./ChartAll";
 import { createDataForCharts } from "../../utils/createDataForCharts";
+import ChartBudget from "./ChartBudget";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -49,8 +49,8 @@ const BudgetPerDay = ({
 
   return (
     <>
-      <div className="chartDay">
-        <ChartAll dataChart={dataChart} />
+      <div className="chart">
+        <ChartBudget dataChart={dataChart} />
         {/* <CategoryGauge
           budget={budgetPerDay}
           spend={addDecimals(selectedDay.totalSpendPerDay)}

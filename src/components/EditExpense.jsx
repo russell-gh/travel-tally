@@ -7,7 +7,7 @@ import {
   getThisExpense,
   mergeExpenseDays,
 } from "../utils/expenseData";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, animatingOut } from "react-redux";
 import {
   selectCurrencyNames,
   selectSelectedTripId,
@@ -18,7 +18,7 @@ import {
   togglePopUp,
 } from "../redux/homeSlice";
 
-export const EditExpense = () => {
+export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const popUp = useSelector(selectPopUp);
   // const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
@@ -222,12 +222,14 @@ export const EditExpense = () => {
           onClick={handleSubmit}
           text={"Add"}
           className={"expenseSubmit"}
+          disabled={animatingOut}
         />
         <Button
           text="Cancel"
           className="cancelBtn"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
         />
       </div>
     </>

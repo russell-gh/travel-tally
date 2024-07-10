@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import Button from "../../reusable-code/Button";
 import { deleteExpense, togglePopUp } from "../../redux/homeSlice";
 
-const SharedDelete = ({ title }) => {
+const SharedDelete = ({ title, animatedOut }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -13,6 +13,7 @@ const SharedDelete = ({ title }) => {
           className="cancelBtn"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
+          disabled={animatedOut}
         />
         <Button
           text="delete all"
@@ -21,6 +22,7 @@ const SharedDelete = ({ title }) => {
           onClick={() => {
             dispatch(deleteExpense("all"));
           }}
+          disabled={animatedOut}
         />
         <Button
           text="delete single expense"
@@ -29,6 +31,7 @@ const SharedDelete = ({ title }) => {
           onClick={() => {
             dispatch(deleteExpense());
           }}
+          disabled={animatedOut}
         />
       </div>
     </>
