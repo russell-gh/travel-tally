@@ -1,7 +1,113 @@
+body {
+  margin: 0px;
+}
+
+.ripples {
+  background-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.no-interaction {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/*
+**************************
+     delete pop-up
+**************************
+*/
+.popUpContainer {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.deletePopUp {
+  background-color: #D6EE79;
+  border-radius: 14px;
+  border: black solid 2px;
+  padding: 10px;
+  width: 75vw;
+  max-width: 350px;
+}
+.deletePopUp p {
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+.deletePopUp .btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #3c43a5;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.deleteBtn:hover {
+  background-color: rgb(112, 12, 12);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cancelBtn:hover {
+  background-color: rgb(27, 126, 40);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.containerBtnPopUp {
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerBtnPopUpMulti {
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: 180px;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0px auto;
+}
+
+/*
+************END***********
+*/
 .dashboard {
+  /*
+  **************************
+          general
+  **************************
+  */
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
+  /*
+  ************END***********
+  */
+  /*
+  **************************
+        fixed top
+  **************************
+  */
+  /*
+  ************END***********
+  */
+  /*
+  **************************
+          expenses
+  **************************
+  */
+  /*
+  ************END***********
+  */
+  /*
+  **************************
+       media queries
+  **************************
+  */
 }
 .dashboard p,
 .dashboard h1,
@@ -11,112 +117,237 @@
 .dashboard h1 {
   text-align: center;
 }
+.dashboard .btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #3c43a5;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
 .dashboard .dashboardFixed,
 .dashboard .expenses {
   padding: 0px 10px 0px 10px;
 }
-.dashboard .piechart {
-  height: 150px;
-  margin: 0px auto;
-  display: block;
-}
-.dashboard .controlsExpenses .addExpense {
-  padding: 5px 20px;
-  display: block;
-}
-.dashboard .addExpense {
-  margin: 5px 0px;
-  width: 100%;
-}
 .dashboard .dashboardFixed {
-  position: fixed;
-  top: 0;
+  z-index: 2;
   width: 100%;
   background-color: white;
   box-sizing: border-box;
   padding: 10px 10px 0px 10px;
 }
-.dashboard .mt {
-  margin-top: 350px;
-}
-.dashboard .expenseItem {
-  padding: 5px;
-  border: lightgray 2px solid;
-  margin-bottom: 3px;
-  display: grid;
-  grid-template-columns: 40px 1fr 50px 30px;
-  grid-template-rows: 1fr;
-  align-items: center;
-  gap: 10px;
-}
-.dashboard .icon {
-  height: 40px;
-  border: #fcd66f 2px solid;
-  border-radius: 30px;
-}
-.dashboard .delete {
-  height: 30px;
-  cursor: pointer;
-}
-.dashboard .expenseItem h2 {
-  font-size: 20px;
-}
-.dashboard .foreignAmount {
-  font-size: 12px;
-}
-.dashboard .deletePopUp {
-  position: fixed;
-  background: white;
-  border: red solid 2px;
-  padding: 10px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.dashboard .deletePopUp p {
-  margin-bottom: 10px;
-}
-.dashboard .containerBtnPopUp {
+.dashboard .containerTop {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
-.dashboard .btn {
-  padding: 5px 10px;
+.dashboard .dropDownTrips {
+  border: none;
+}
+.dashboard .dropDownTrips option {
+  padding: 10px;
+}
+.dashboard .containerTrips {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+.dashboard .containerTrips .travellingIcon {
+  width: 30px;
+  margin-top: -6px;
+}
+.dashboard .containerTrips .profile {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+.dashboard .containerTrips .profile .profilePicture {
+  height: 40px;
+  border-radius: 100%;
+  margin: 0px auto;
+  display: block;
+}
+.dashboard .tripInfo {
+  justify-self: flex-end;
+}
+.dashboard .addExpense {
+  background-color: #D6EE79;
+  padding: 15px 10px;
+  align-self: center;
+  justify-self: center;
+  border: none;
+  color: #3c43a5;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+.dashboard .addExpense:hover {
+  background-color: #3c43a5;
+  color: #D6EE79;
+  transition: all 0.3s ease-in-out;
+}
+.dashboard .containerBudgetWhilst {
+  display: grid;
+  gap: 0px 10px 10px 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: fit-content(100px) 1fr fit-content(100px);
+}
+.dashboard .containerBudgetWhilst .chartAll,
+.dashboard .containerBudgetWhilst .chartDay {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+.dashboard .totalBudgetBtn,
+.dashboard .dailyBudgetBtn {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: black;
+  justify-self: stretch;
+  align-self: stretch;
+  cursor: pointer;
+  border-bottom: #D6EE79 solid 2px;
+  border-radius: 0px;
+}
+.dashboard .totalBudgetBtn:hover,
+.dashboard .totalBudgetBtn {
+  border-radius: 12px 0px 0px 0px;
+}
+.dashboard .dailyBudgetBtn:hover,
+.dashboard .dailyBudgetBtn {
+  border-radius: 0px 12px 0px 0px;
+}
+.dashboard .focus {
+  background-color: #D6EE79;
+}
+.dashboard .containerBottomRowGrid {
+  display: flex;
+  justify-content: space-between;
+  grid-row: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 0px 10px 10px 10px;
+}
+.dashboard .containerBudget {
+  border: #D6EE79 solid 2px;
+  padding: 0px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+.dashboard .containerBudgetAfter {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr fit-content(100px);
+  margin-bottom: 10px;
+}
+.dashboard .containerBudgetAfter .chartAll {
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+.dashboard .budget,
+.dashboard .dayBudget {
+  display: grid;
+  grid-template-columns: fit-content(200px) fit-content(100px);
+  grid-template-rows: fit-content(100px);
+  gap: 0px 10px;
+}
+.dashboard .positive {
+  color: green;
+}
+.dashboard .neutral {
+  color: orange;
+}
+.dashboard .negative {
+  color: red;
+}
+.dashboard .bold {
+  font-weight: bold;
+  justify-self: flex-end;
+}
+.dashboard .controlsExpenses {
+  margin-bottom: 10px;
+}
+.dashboard .includes {
+  background-color: rgba(221, 241, 137, 0.4392156863);
 }
 .dashboard .controlsExpenses {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
 }
-.dashboard .containerTitle {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
+.dashboard .expenseItem {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #3c43a5;
+  color: white;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 40px 1fr 50px 30px 30px;
+  grid-template-rows: 1fr;
+  align-items: center;
   gap: 10px;
 }
-.dashboard .containerTitle p {
-  color: green;
+.dashboard .expenseItem .containerDescriptionAndDate {
+  overflow: hidden;
 }
-.dashboard .containerBudget {
-  display: grid;
-  padding: 0px 10px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr fit-content(100px);
+.dashboard .expenseItem .containerDescriptionAndDate h2 {
+  font-size: 20px;
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
-.dashboard .chart {
-  display: inherit;
-  grid-row: 1;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  justify-self: center;
+.dashboard .containerIcon {
+  background-color: #D6EE79;
+  border: 2px solid #D6EE79;
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.dashboard .positive {
-  color: green;
+.dashboard .containerIcon .icon {
+  height: 30px;
+  width: 30px;
 }
-.dashboard .negative {
-  color: red;
+.dashboard .delete {
+  height: 30px;
+  cursor: pointer;
+  border-radius: 100%;
 }
-.dashboard .tripInfo {
-  justify-self: flex-end;
+.dashboard .edit {
+  height: 30px;
+  cursor: pointer;
+  border-radius: 100%;
+}
+.dashboard .foreignAmount {
+  font-size: 12px;
+}
+.dashboard .dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+.dashboard .future {
+  z-index: 1;
+  opacity: 0.7;
+}
+@media (min-width: 445px) {
+  .dashboard .containerBtnPopUpMulti {
+    justify-content: space-around;
+    gap: 10px;
+  }
 }/*# sourceMappingURL=dashboard.css.map */

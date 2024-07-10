@@ -1,0 +1,24 @@
+header,
+footer {
+  background-color: #3c43a5;
+  color: white;
+  padding: 5px 10px;
+}
+header h1,
+footer h1 {
+  margin: 0px;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+}
+header .logo {
+  height: 50px;
+  width: 50px;
+}
+header svg {
+  height: 50px;
+  width: 50px;
+}/*# sourceMappingURL=headerFooter.css.map */
