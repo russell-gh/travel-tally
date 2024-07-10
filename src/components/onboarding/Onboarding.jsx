@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
+import Button from "../../reusable-code/Button.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch } from "react-redux";
@@ -58,20 +59,18 @@ const Onboarding = () => {
       return;
     }
     const result = await validate(onboardingDetails, "trip");
-    checkPrimaryFormValidation(result);
+    checkValidation(["destination"], result); //hardcoded - change
     setErrors(result);
   };
 
-  //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
-  const ids = [];
-  const checkPrimaryFormValidation = (validationResult) => {
-    onboardingQuestions.primaryForm.forEach((question) =>
-      ids.push(question.id)
-    );
+  const checkValidation = (idArray, validationResult) => {
     const errorIds = Object.keys(validationResult);
-    const result = ids.some((id) => errorIds.includes(id));
+    console.log(errorIds, idArray);
+    const result = idArray.some((id) => errorIds.includes(id));
     if (!result) {
-      setVisible(true);
+      console.log("all good!");
+    } else {
+      console.log("oh no check agian", validationResult);
     }
   };
 
@@ -163,7 +162,19 @@ const Onboarding = () => {
             callback={handleChange}
             error={errors.destination}
           />
-          ;
+
+          <Button
+            text=">"
+            onClick={() => {
+              e.preventDefault();
+              if (errors.includes("destination")) {
+                console.log("you can proceed");
+              } else {
+                console.log("nope");
+              }
+            }}
+            className={""}
+          />
           <FormElement
             type="date"
             id="startDate"
@@ -223,6 +234,7 @@ const Onboarding = () => {
         {visible && (
           <div>
             {onboardingQuestions.secondaryForm.map((question) => {
+              //get rid of primary form as no longer used? then change this name
               return (
                 <BudgetSlider
                   key={question.id}
