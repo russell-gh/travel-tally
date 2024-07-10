@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { handleData } from "../utils/expenseData";
 import { getIndex } from "../utils/utils";
 import { getCurrencySymbol } from "../utils/utilsBudget";
@@ -11,17 +11,31 @@ export const homeSlice = createSlice({
   name: "home",
   initialState: dataFromDisc ? dataFromDisc : initialState,
   reducers: {
+    addTrip: (state, action) => {
+      state.trips.push(action.payload.data);
+
+      state.selectedTripId = state.trips[state.trips.length - 1].id;
+
+      saveStore("homeSlice", state)
+    },
     setData: (state, action) => {
+      console.log("payload", action.payload);
       const { text, data } = action.payload;
-      state[text] = data; // Dynamically set the state property
+      // Dynamically set the state property
+      // if (text === "trips") {
+      //   state[text].push(data);
+      // } else {
+      state[text] = data;
+      // } //zv
 
       // set selectedTripId
-      if (state.trips) {
+
+      if (state.trips.length) {
         state.selectedTripId = state.trips[state.trips.length - 1].id;
       }
 
       //set homecurrencySymbol inside each trip
-      if (state.trips && state.currencyCodes) {
+      if (state.trips.length && state.currencyCodes) {
         state.trips.map((item, index) => {
           item.details.homeCurrencySymbol = getCurrencySymbol(
             { ...state.currencyCodes },
@@ -154,6 +168,7 @@ export const {
   addExpenseData,
   toggleHideFutureExpenses,
   deleteToEdit,
+  addTrip,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;

@@ -16,7 +16,7 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
     const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
     if (remaining >= e.target.value) {
       setPosition(Number(e.target.value));
-      callback(e, id);
+      callback(e);
     }
   };
 
@@ -27,6 +27,8 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
         <p>0</p>
         <Slider
           value={position}
+          id={id}
+          name={id}
           min={0}
           max={onboardingDetails.budgetTotal}
           valueLabelDisplay="on"

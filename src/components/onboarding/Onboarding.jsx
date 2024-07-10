@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
+import { useDispatch } from "react-redux";
 import { validate } from "../../validation/validate.js";
-import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
+import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
+import { getCountryCurrency } from "./onboardingUtils.js";
+import { addTrip } from "../../redux/homeSlice.js";
+import { useNavigate } from "react-router-dom";
+
 
 const Onboarding = () => {
-  const trips = useSelector(testSelector);
 
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
@@ -31,9 +33,16 @@ const Onboarding = () => {
   const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
 
-  //set original remaining to total budget
+  const [countryCurrency, setCountryCurrency] = useState([]);
+
+  useEffect(() => {
+    getCountryCurrency(setCountryCurrency);
+  }, []); //put await here??
+  // zv-uncommenting while testing
 
   const dispatch = useDispatch();
+
+  const redirect = useNavigate()
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -49,7 +58,6 @@ const Onboarding = () => {
     setErrors(result);
   };
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
   const ids = [];
   const checkPrimaryFormValidation = (validationResult) => {
@@ -62,36 +70,33 @@ const Onboarding = () => {
       setVisible(true);
     }
   };
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  const handleChange = (e, id) => {
+  //e.target.name is used instead of e.target.id because the MUI sliders do not support id attrs but they do support name.
+  //(name is equal to id in form elem so works the same)
+  const handleChange = (e) => {
     let input = e.target.value;
 
     //if input is a checkbox, assign input to checked
     if (e.target.type === "checkbox") {
       input = e.target.checked;
     }
-    console.log(e.target.type, e.target.id, input);
 
-    // if ((e.target.id).includes("date")) {console.log("its a date")}
-    if (id.toLowerCase().includes("date")) {
-      console.log("foundDate");
+    if (e.target.name.toLowerCase().includes("date")) {
       const data = {
         ...onboardingDetails,
-        dates: { ...onboardingDetails.dates, [id]: input },
+        dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
       setOnboardingDetails(data);
-      console.log("hello world", data);
 
       return;
     }
 
     //if id is a type of budget convert to a number
-    if (id.includes("budget")) {
+    if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
-    setOnboardingDetails({ ...onboardingDetails, [id]: input });
+    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
@@ -100,7 +105,7 @@ const Onboarding = () => {
 
     //if errors exist abort early
     if (Object.keys(errors).length) {
-      // return;
+      return;
     }
 
     let _onboardingDetails = onboardingDetails;
@@ -115,8 +120,8 @@ const Onboarding = () => {
     const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
-    let startDate = stringToTimestamp(_onboardingDetails.dates.startDate);
-    let endDate = stringToTimestamp(_onboardingDetails.dates.endDate);
+    let startDate = stringToUnix(_onboardingDetails.dates.startDate);
+    let endDate = stringToUnix(_onboardingDetails.dates.endDate);
 
     //look into why this fixed it
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
@@ -134,12 +139,48 @@ const Onboarding = () => {
         budgetTransport,
         budgetActivities,
         budgetOther,
-      },
+      }, //zv - fake expenses below. delete after
+
+      expenses: [
+        // {
+        //   id: "expense_A2rdJ7nN8kJ3fHA25T4gd",
+        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        //   amount: {
+        //     fromValue: 2000,
+        //     fromCurrency: "EUR",
+        //     toCurrency: "GBP",
+        //     toValue: 2500,
+        //   },
+        //   category: "Food",
+        //   description: "lunch",
+        //   startDate: 1719442800000,
+        //   endDate: 1719442800000,
+        //   completed: true,
+        //   splitBill: false,
+        // },
+        // {
+        //   id: "expense_A3rdJ7nN8kJ3fHA25T4gd",
+        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
+        //   amount: {
+        //     fromValue: 2000,
+        //     fromCurrency: "EUR",
+        //     toCurrency: "GBP",
+        //     toValue: 2500,
+        //   },
+        //   category: "Food",
+        //   description: "lunch",
+        //   startDate: 1719356400000,
+        //   endDate: 1719356400000,
+        //   completed: true,
+        //   splitBill: false,
+        // },
+      ],
     };
 
-    console.log("about to add", _onboardingDetails);
-    dispatch(addTrip(_onboardingDetails));
-    console.log(trips);
+    dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
+    redirect('/dashboard')
+    
+
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs
