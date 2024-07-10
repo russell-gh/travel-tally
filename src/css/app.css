@@ -46,5 +46,11 @@ footer {
 
 footer {
   text-align: center;
+<<<<<<< HEAD
   color: white;
+=======
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+>>>>>>> 90b643b09e0d77d4950a53f380e54753bb4fa79d
 }/*# sourceMappingURL=app.css.map */
