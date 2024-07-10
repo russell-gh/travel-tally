@@ -189,7 +189,6 @@ const Onboarding = () => {
             name="startDateIncluded"
             value={onboardingDetails.dates.startDateIncluded}
             callback={handleChange}
-            error={errors.startDateIncluded} //not needed as not in schema?
           />
           <FormElement
             type="checkbox"
@@ -198,7 +197,6 @@ const Onboarding = () => {
             name="endDateIncluded"
             value={onboardingDetails.dates.endDateIncluded}
             callback={handleChange}
-            error={errors.endDateIncluded} //not needed as not in schema?
           />
           <FormElement
             type="number"
