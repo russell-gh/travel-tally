@@ -15,17 +15,23 @@ const ChartAll = ({ dataChart }) => {
           datasets: [
             {
               label: "spend",
-              backgroundColor: "#D6EE79",
+              backgroundColor: "#D6EE7980",
+              borderColor: "#D6EE79",
+              borderWidth: 2,
               data: dataChart[1],
             },
             {
               label: "left",
-              backgroundColor: "lightgrey",
+              backgroundColor: "#c2c2c280",
+              borderColor: "#c2c2c2",
+              borderWidth: 2,
               data: dataChart[2],
             },
             {
               label: "overspend",
-              backgroundColor: "darkred",
+              backgroundColor: "#99000080",
+              borderColor: "#990000",
+              borderWidth: 2,
               data: dataChart[3],
             },
           ],

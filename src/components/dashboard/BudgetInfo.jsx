@@ -67,6 +67,9 @@ const BudgetInfo = ({
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           amountOfBudgetDays={amountOfBudgetDays}
+          actualEndDate={actualEndDate}
+          actualStartDate={actualStartDate}
+          expenses={expenses}
         />
       )}
     </div>

@@ -11,13 +11,16 @@ import DailyDifference from "./Difference";
 import CummulativeDifference from "./CummulativeDifference";
 import ControlsAddExpense from "./ControlsAddExpense";
 import ChartAll from "./ChartAll";
-import { createDailyDataforCharts } from "../../utils/createDataForCharts";
+import { createDataForCharts } from "../../utils/createDataForCharts";
 
 const BudgetPerDay = ({
   expensesArray,
   homeCurrencySymbol,
   details,
   amountOfBudgetDays,
+  actualEndDate,
+  actualStartDate,
+  expenses,
 }) => {
   console.log(expensesArray);
   const filter = useSelector(selectFilter);
@@ -35,12 +38,19 @@ const BudgetPerDay = ({
   );
   console.log(data);
 
-  createDailyDataforCharts();
+  const dataChart = createDataForCharts(
+    details,
+    expenses,
+    filterDate,
+    actualEndDate,
+    actualStartDate,
+    amountOfBudgetDays
+  );
 
   return (
     <>
       <div className="chartDay">
-        {/* <ChartAll /> */}
+        <ChartAll dataChart={dataChart} />
         {/* <CategoryGauge
           budget={budgetPerDay}
           spend={addDecimals(selectedDay.totalSpendPerDay)}

@@ -2,8 +2,17 @@ import { getBudget } from "../utils/utilsBudget";
 import { filterCategories } from "./getSortedandFiltered";
 import { calculateTotalSpend } from "../utils/utilsBudget";
 import { addDecimals } from "../utils/utilsBudget";
+import { createExpensesArray } from "./createExpensesArray";
+import { getSpendPerDay, getSpendSelectedDay } from "../utils/utilsBudget";
 
-export function createDataForCharts(details, expenses) {
+export function createDataForCharts(
+  details,
+  expenses,
+  filterDate,
+  actualEndDate,
+  actualStartDate,
+  amountOfBudgetDays
+) {
   //create empty array with three empty arrays inside it [[labels], [spend], [left], [overspend]]
   let dataArray = new Array(3).fill(null).map(() => []);
   let totalBudgetArray = [];
@@ -13,18 +22,43 @@ export function createDataForCharts(details, expenses) {
 
   dataArray.unshift(orderOfData); //add labels to data
 
-  //gets the total budget and spend for everything and per category and puts it in arrays
-  orderOfData.forEach((category) => {
-    totalBudgetArray.push(getBudget(details, category));
+  if (!filterDate) {
+    //gets the total budget and spend for everything and per category and puts it in arrays
+    orderOfData.forEach((category) => {
+      totalBudgetArray.push(getBudget(details, category));
 
-    const expensesCategories = filterCategories(expenses, category); // filters expenses on categories so totalspend can be calculated per category
-    const totalSpend =
-      expensesCategories.length === 0
-        ? 0
-        : calculateTotalSpend(expensesCategories);
+      const expensesCategories = filterCategories(expenses, category); // filters expenses on categories so totalspend can be calculated per category
+      const totalSpend =
+        expensesCategories.length === 0
+          ? 0
+          : calculateTotalSpend(expensesCategories);
 
-    spendArray.push(totalSpend);
-  });
+      spendArray.push(totalSpend);
+    });
+  }
+
+  if (filterDate) {
+    //gets the total budget and spend for that day and per category and puts it in arrays
+    orderOfData.forEach((category) => {
+      const budget = getBudget(details, category);
+      const budgetPerDay = addDecimals((budget * 100) / amountOfBudgetDays);
+      totalBudgetArray.push(budgetPerDay);
+
+      const expensesCategories = filterCategories(expenses, category); // filters expenses on categories so totalspend can be calculated per category
+      const expensesArray = createExpensesArray(
+        expensesCategories,
+        actualStartDate,
+        actualEndDate
+      );
+      const data = getSpendPerDay(
+        (budget * 100) / amountOfBudgetDays,
+        expensesArray
+      );
+      const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
+
+      spendArray.push(addDecimals(selectedDay.totalSpendPerDay));
+    });
+  }
 
   //compare the budget and spend to get the difference
   for (let i = 0; i < spendArray.length; i++) {
@@ -45,27 +79,4 @@ export function createDataForCharts(details, expenses) {
   }
 
   return dataArray;
-}
-
-export function createDailyDataforCharts() {
-  let dataArray = new Array(3).fill(null).map(() => []);
-  let totalBudgetArray = [];
-  let spendArray = [];
-
-  const orderOfData = ["Activities", "Food", "Transport", "Hotel", "Other"];
-
-  dataArray.unshift(orderOfData); //add labels to data
-
-  //gets the total budget and spend for that day and per category and puts it in arrays
-  orderOfData.forEach((category) => {
-    totalBudgetArray.push(getBudget(details, category));
-
-    const expensesCategories = filterCategories(expenses, category); // filters expenses on categories so totalspend can be calculated per category
-    const totalSpend =
-      expensesCategories.length === 0
-        ? 0
-        : calculateTotalSpend(expensesCategories);
-
-    spendArray.push(totalSpend);
-  });
 }
