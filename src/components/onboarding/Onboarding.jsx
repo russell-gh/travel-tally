@@ -7,6 +7,7 @@ import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
 import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
+import { getCountryCurrency } from "./onboardingUtils.js";
 
 const Onboarding = () => {
   const trips = useSelector(testSelector);
@@ -30,6 +31,12 @@ const Onboarding = () => {
 
   const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
+
+  const [countryCurrency, setCountryCurrency] = useState([]);
+
+  useEffect(() => {
+    getCountryCurrency(setCountryCurrency);
+  }, []);
 
   //set original remaining to total budget
 
@@ -63,7 +70,7 @@ const Onboarding = () => {
   };
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  //e.target.name is used instead of e.target.id because the MUI sliders do not support id attrs but they do support name. 
+  //e.target.name is used instead of e.target.id because the MUI sliders do not support id attrs but they do support name.
   //(name is equal to id in form elem so works the same)
   const handleChange = (e) => {
     let input = e.target.value;
