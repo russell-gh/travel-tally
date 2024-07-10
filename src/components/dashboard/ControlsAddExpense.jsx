@@ -12,8 +12,9 @@ const ControlsAddExpense = () => {
   return (
     <>
       <Button
+        animation={true}
         className="addExpense"
-        text="Add an expense"
+        text="Add expense"
         onClick={() => {
           dispatch(
             togglePopUp({

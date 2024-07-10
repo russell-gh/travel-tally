@@ -6,13 +6,24 @@ import StageOfPhoto from "./StagesOfPhoto";
 
 const UploadPhoto = () => {
   const [profilePicture, setProfilePicture] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
   const profilePictureSrc = useSelector(selectProfilePictureSrc);
+
   const onChange = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      return console.log("No file");
+      return console.log("No file Selected");
     }
-    console.log(file);
+
+    if (file["type"].split("/")[0] !== "image") {
+      setErrorMessage(
+        "Invalid file type. Please choose a JPEG, PNG or GIF file."
+      );
+      return;
+    }
+
+    setErrorMessage("");
+
     if (profilePicture) {
       setProfilePicture;
     }
@@ -27,16 +38,19 @@ const UploadPhoto = () => {
   return (
     <>
       {!profilePictureSrc && (
-        <FormElement
-          type="file"
-          id="profilePhoto"
-          name="profilePhoto"
-          accept="image/*"
-          label={
-            !profilePicture ? "Choose profile photo" : "Choose another photo"
-          }
-          callback={onChange}
-        />
+        <>
+          <FormElement
+            type="file"
+            id="profilePhoto"
+            name="profilePhoto"
+            accept="image/*"
+            label={
+              !profilePicture ? "Choose profile photo" : "Choose another photo"
+            }
+            callback={onChange}
+          />
+          {errorMessage && <p>{errorMessage}</p>}
+        </>
       )}
       <StageOfPhoto profilePicture={profilePicture} />
     </>

@@ -22,7 +22,7 @@ const DescriptionAndDate = ({
   };
 
   return (
-    <div>
+    <div className="containerDescriptionAndDate">
       <h2>
         {sharedId && <span className="dot" style={dotStyle}></span>}
         {description ? description : category}

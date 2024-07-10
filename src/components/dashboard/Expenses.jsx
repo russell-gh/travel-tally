@@ -14,14 +14,8 @@ import dayjs from "dayjs";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
-  const popUp = useSelector(selectPopUp);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
-
-  const stringToComponent = {
-    DeletePopUp: <DeletePopUp />,
-    EditExpense: "EditExpense", //add component here
-  };
 
   if (!currencyCodes || !trips) {
     return;
@@ -93,7 +87,6 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
           </div>
         );
       })}
-      {stringToComponent[popUp.component]}
     </div>
   );
 };

@@ -75,6 +75,7 @@ export const homeSlice = createSlice({
     togglePopUp: (state, { payload }) => {
       if (!payload) {
         state.popUp = {};
+        saveStore("homeSlice", state);
         return;
       }
 
@@ -92,14 +93,12 @@ export const homeSlice = createSlice({
 
       saveStore("homeSlice", state);
 
-
       // resets the filters when switching between trips
       if (payload.id === "selectedTripId") {
         state.filter = "Show All";
         state.order = "Newest first";
         state.filterDate = "All Dates";
       }
-
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
@@ -130,15 +129,14 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
-      console.log('HIT IT', payload)
-      const {expenseIndex} = payload
+      console.log("HIT IT", payload);
+      const { expenseIndex } = payload;
       //get index of the current trip
-      const indexTrip = getIndex(state.trips, state.selectedTripId, 'id');
-      console.log('Attempted', indexTrip)
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+      console.log("Attempted", indexTrip);
       // delete expense
       state.trips[indexTrip].expenses.splice(expenseIndex, 1);
-      
-    }
+    },
   },
 });
 

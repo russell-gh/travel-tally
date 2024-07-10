@@ -6,6 +6,8 @@ import {
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
 import CategoryGauge from "./CategoryGauge";
+import ControlsAddExpense from "./ControlsAddExpense";
+import Difference from "./Difference";
 
 const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   const filter = useSelector(selectFilter);
@@ -17,42 +19,28 @@ const Budget = ({ expenses, homeCurrencySymbol, details }) => {
   return (
     <>
       <div className="chartAll">
-        <p>Total budget</p>
         <CategoryGauge budget={budget} spend={totalSpend} />
-        {/* {filter === "Show All" ? (
-          <BudgetPieChart details={details} />
-        ) : (
-          <CategoryGauge budget={budget} spend={totalSpend} />
-        )} */}
       </div>
-      <div className="budget">
-        <p>
-          Budget: {homeCurrencySymbol}
-          {budget}
-        </p>
-        <p>
-          Spend: {homeCurrencySymbol}
-          {totalSpend}
-        </p>
-        {difference < 0 ? (
-          <p className="negative">
-            Overspend: {homeCurrencySymbol}
-            {Math.abs(difference).toFixed(2)}
+      <div className="containerBottomRowGrid">
+        <div className="budget">
+          <p>Budget: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {budget}
           </p>
-        ) : difference === 0 ? (
-          <p className="neutral">
-            Money left: {homeCurrencySymbol}
-            {difference}
+          <p>Spend: </p>
+          <p className="bold">
+            {homeCurrencySymbol}
+            {totalSpend}
           </p>
-        ) : (
-          <p className="positive">
-            Money left: {homeCurrencySymbol}
-            {difference}
-          </p>
-        )}
+          <Difference
+            homeCurrencySymbol={homeCurrencySymbol}
+            difference={difference}
+          />
+        </div>
+        <ControlsAddExpense />
       </div>
     </>
   );
 };
-
 export default Budget;
