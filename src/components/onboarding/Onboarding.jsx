@@ -10,9 +10,7 @@ import { getCountryCurrency } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 
-
 const Onboarding = () => {
-
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     dates: {
@@ -35,14 +33,13 @@ const Onboarding = () => {
 
   const [countryCurrency, setCountryCurrency] = useState([]);
 
+  getCountryCurrency("london", 5);
   useEffect(() => {
     getCountryCurrency(setCountryCurrency);
-  }, []); //put await here??
-  // zv-uncommenting while testing
-
+  }, []); 
   const dispatch = useDispatch();
 
-  const redirect = useNavigate()
+  const redirect = useNavigate();
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -123,7 +120,6 @@ const Onboarding = () => {
     let startDate = stringToUnix(_onboardingDetails.dates.startDate);
     let endDate = stringToUnix(_onboardingDetails.dates.endDate);
 
-    //look into why this fixed it
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
     const endDateIncluded = _onboardingDetails.dates.endDateIncluded;
 
@@ -139,48 +135,12 @@ const Onboarding = () => {
         budgetTransport,
         budgetActivities,
         budgetOther,
-      }, //zv - fake expenses below. delete after
-
-      expenses: [
-        // {
-        //   id: "expense_A2rdJ7nN8kJ3fHA25T4gd",
-        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
-        //   amount: {
-        //     fromValue: 2000,
-        //     fromCurrency: "EUR",
-        //     toCurrency: "GBP",
-        //     toValue: 2500,
-        //   },
-        //   category: "Food",
-        //   description: "lunch",
-        //   startDate: 1719442800000,
-        //   endDate: 1719442800000,
-        //   completed: true,
-        //   splitBill: false,
-        // },
-        // {
-        //   id: "expense_A3rdJ7nN8kJ3fHA25T4gd",
-        //   sharedId: "shared_A2rdJ7nN8kJ3fHA25T4gd",
-        //   amount: {
-        //     fromValue: 2000,
-        //     fromCurrency: "EUR",
-        //     toCurrency: "GBP",
-        //     toValue: 2500,
-        //   },
-        //   category: "Food",
-        //   description: "lunch",
-        //   startDate: 1719356400000,
-        //   endDate: 1719356400000,
-        //   completed: true,
-        //   splitBill: false,
-        // },
-      ],
+      },
+      expenses: [],
     };
 
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
-    redirect('/dashboard')
-    
-
+    redirect("/dashboard");
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs

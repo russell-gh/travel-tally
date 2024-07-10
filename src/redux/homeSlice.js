@@ -13,22 +13,13 @@ export const homeSlice = createSlice({
   reducers: {
     addTrip: (state, action) => {
       state.trips.push(action.payload.data);
-
       state.selectedTripId = state.trips[state.trips.length - 1].id;
-
-      saveStore("homeSlice", state)
+      saveStore("homeSlice", state);
     },
-    setData: (state, action) => {
-      console.log("payload", action.payload);
-      const { text, data } = action.payload;
-      // Dynamically set the state property
-      // if (text === "trips") {
-      //   state[text].push(data);
-      // } else {
-      state[text] = data;
-      // } //zv
 
-      // set selectedTripId
+    setData: (state, action) => {
+      const { text, data } = action.payload;
+      state[text] = data;
 
       if (state.trips.length) {
         state.selectedTripId = state.trips[state.trips.length - 1].id;
@@ -143,7 +134,6 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
-
       console.log("HIT DELETE", payload);
       const { expenseIndex } = payload;
       //get index of the current trip
