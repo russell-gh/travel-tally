@@ -9,6 +9,13 @@ import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import { getCountryCurrency } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
+import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
+
+let currencies = [];
+
+for (const key of Object.keys(currencyCodes)) {
+  currencies.push({ value: key, name: key });
+}
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({
@@ -33,10 +40,10 @@ const Onboarding = () => {
 
   const [countryCurrency, setCountryCurrency] = useState([]);
 
-  getCountryCurrency("london", 5);
-  useEffect(() => {
-    getCountryCurrency(setCountryCurrency);
-  }, []); 
+  // getCountryCurrency("london", 5);
+  // useEffect(() => {
+  //   getCountryCurrency(setCountryCurrency);
+  // }, []);
   const dispatch = useDispatch();
 
   const redirect = useNavigate();
@@ -143,44 +150,77 @@ const Onboarding = () => {
     redirect("/dashboard");
   };
 
-  //can we move this to another file? would also have to move handlesubmit and handlechange funcs
-  const createFormSection = (section) => {
-    return (
-      <div>
-        {section.map((question) => {
-          return (
-            <FormElement
-              key={question.id}
-              type={question.type}
-              id={question.id}
-              label={question.label}
-              name={question.name}
-              value={
-                question.id.includes("date")
-                  ? onboardingDetails.dates[question.id]
-                  : question.id.includes("budget")
-                  ? onboardingDetails[question.id].toString()
-                  : onboardingDetails[question.id]
-              }
-              options={question.options}
-              defaultValue={question.defaultValue}
-              error={errors[question.id]}
-              choose={question.choose}
-              onboardingDetails={onboardingDetails}
-              callback={
-                question.type === "button" ? handleSubmit : handleChange
-              }
-            />
-          );
-        })}
-      </div>
-    );
-  };
-
   return (
     <div>
       <form>
-        {createFormSection(onboardingQuestions.primaryForm)}
+        <>
+          <FormElement
+            type="text"
+            id="destination"
+            label="Where are you off to?"
+            name="destination"
+            value={onboardingDetails.destination}
+            callback={handleChange}
+            error={errors.destination}
+          />
+          ;
+          <FormElement
+            type="date"
+            id="startDate"
+            label="Choose the start date of your trip"
+            name="startDate"
+            value={onboardingDetails.dates.startDate}
+            callback={handleChange}
+            error={errors.startDate}
+          />
+          <FormElement
+            type="date"
+            id="endDate"
+            label="Choose the end date of your trip"
+            name="endDate"
+            value={onboardingDetails.dates.endDate}
+            callback={handleChange}
+            error={errors.endDate}
+          />
+          <FormElement
+            type="checkbox"
+            id="startDateIncluded"
+            label="Include first day of trip in budget?"
+            name="startDateIncluded"
+            value={onboardingDetails.dates.startDateIncluded}
+            callback={handleChange}
+            error={errors.startDateIncluded} //not needed as not in schema?
+          />
+          <FormElement
+            type="checkbox"
+            id="endDateIncluded"
+            label="Include last day of trip in budget?"
+            name="endDateIncluded"
+            value={onboardingDetails.dates.endDateIncluded}
+            callback={handleChange}
+            error={errors.endDateIncluded} //not needed as not in schema?
+          />
+          <FormElement
+            type="number"
+            id="budgetTotal"
+            label="What's your total budget for this trip?"
+            name="budgetTotal"
+            value={onboardingDetails.budgetTotal.toString()}
+            callback={handleChange}
+            error={errors.budgetTotal}
+          />
+          <FormElement
+            type="select"
+            id="homeCurrency"
+            label="Please select the currency of the country you live in."
+            name="homeCurrency"
+            choose={true}
+            options={currencies}
+            value={currencies[0].value}
+            callback={handleChange}
+            error={errors.homeCurrency}
+          />
+        </>
 
         {visible && (
           <div>
@@ -197,7 +237,7 @@ const Onboarding = () => {
               );
             })}
 
-            {createFormSection(onboardingQuestions.submit)}
+            <FormElement type="button" callback={handleSubmit} />
           </div>
         )}
       </form>
