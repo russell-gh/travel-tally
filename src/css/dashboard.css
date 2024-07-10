@@ -1,0 +1,122 @@
+.dashboard {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.dashboard p,
+.dashboard h1,
+.dashboard h2 {
+  margin: 0px;
+}
+.dashboard h1 {
+  text-align: center;
+}
+.dashboard .dashboardFixed,
+.dashboard .expenses {
+  padding: 0px 10px 0px 10px;
+}
+.dashboard .piechart {
+  height: 150px;
+  margin: 0px auto;
+  display: block;
+}
+.dashboard .controlsExpenses .addExpense {
+  padding: 5px 20px;
+  display: block;
+}
+.dashboard .addExpense {
+  margin: 5px 0px;
+  width: 100%;
+}
+.dashboard .dashboardFixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 10px 10px 0px 10px;
+}
+.dashboard .mt {
+  margin-top: 350px;
+}
+.dashboard .expenseItem {
+  padding: 5px;
+  border: lightgray 2px solid;
+  margin-bottom: 3px;
+  display: grid;
+  grid-template-columns: 40px 1fr 50px 30px;
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.dashboard .icon {
+  height: 40px;
+  border: #fcd66f 2px solid;
+  border-radius: 30px;
+}
+.dashboard .delete {
+  height: 30px;
+  cursor: pointer;
+}
+.dashboard .expenseItem h2 {
+  font-size: 20px;
+}
+.dashboard .foreignAmount {
+  font-size: 12px;
+}
+.dashboard .deletePopUp {
+  position: fixed;
+  background: white;
+  border: red solid 2px;
+  padding: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.dashboard .deletePopUp p {
+  margin-bottom: 10px;
+}
+.dashboard .containerBtnPopUp {
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard .btn {
+  padding: 5px 10px;
+}
+.dashboard .controlsExpenses {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+.dashboard .containerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+}
+.dashboard .containerTitle p {
+  color: green;
+}
+.dashboard .containerBudget {
+  display: grid;
+  padding: 0px 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr fit-content(100px);
+}
+.dashboard .chart {
+  display: inherit;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+.dashboard .positive {
+  color: green;
+}
+.dashboard .negative {
+  color: red;
+}
+.dashboard .tripInfo {
+  justify-self: flex-end;
+}/*# sourceMappingURL=dashboard.css.map */

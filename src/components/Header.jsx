@@ -3,8 +3,8 @@ import Logo from "./Logo";
 export const Header = () => {
   return (
     <header>
+      <h1>holiDough</h1>
       <Logo />
-      <h1>Holidough</h1>
       <button
         onClick={() => {
           localStorage.clear();
