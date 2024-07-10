@@ -60,16 +60,13 @@ const App = () => {
     } else if (popUp.component) {
       _setPopUp(popUp);
       animationPopUp(popUpRef.current);
-      console.log(_popUp);
     }
   }, [popUp]);
 
   const stringToComponent = {
-    DeletePopUp: <DeletePopUp popUp={_popUp} />,
+    DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
     EditExpense: <EditExpense />,
   };
-
-  console.log(_popUp);
 
   return (
     <>
@@ -79,14 +76,12 @@ const App = () => {
           <Route path="/splash-page" element={<SplashPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/setupprofile/*" element={<SetUpProfile />} />
+          <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard popUp={_popUp} />} />
-          <Route path="/add-expense" element={<AddExpense />} />
-          <Route path="/edit-expense" element={<EditExpense />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
-        <div ref={popUpRef} className="PopUpContainer">
+        <div ref={popUpRef} className="popUpContainer">
           {_popUp && stringToComponent[_popUp.component]}
         </div>
       </main>
