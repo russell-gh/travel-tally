@@ -47,7 +47,7 @@ const Dashboard = ({}) => {
     actualStartDate,
     actualEndDate
   ); //should this be in a useEffect?
-  console.log(destination, homeCurrencySymbol, dates )
+
   const filtered = getSortedandFiltered(
     _expenses,
     order,

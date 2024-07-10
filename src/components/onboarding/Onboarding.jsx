@@ -166,8 +166,7 @@ const Onboarding = () => {
           <Button
             text=">"
             onClick={() => {
-              e.preventDefault();
-              if (errors.includes("destination")) {
+              if (Object.keys(errors).includes("destination")) {
                 console.log("you can proceed");
               } else {
                 console.log("nope");
