@@ -15,6 +15,7 @@ import {
   deleteToEdit,
   addExpenseData,
   selectPopUp,
+  togglePopUp,
 } from "../redux/homeSlice";
 
 export const EditExpense = () => {
@@ -56,9 +57,7 @@ export const EditExpense = () => {
   const setThisExpense = () => {
     let expenses = getExpenseList(tripID, trips);
     setExpenseList(expenses);
-    console.log(expenses, "EXPENSES");
     let result = getThisExpense(expenses, popUp.id);
-    console.log(result, "RESULT");
     setIndex(result.indexOf);
     // const copy = JSON.parse(JSON.stringify(mergeExpenseDays(result.thisExpense, expenses)));
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
@@ -114,7 +113,9 @@ export const EditExpense = () => {
   const multiDay = () => {
     setMulti((multi = !multi));
     if (multi) {
-      setFormData(mergeExpenseDays(formData, expenseList));
+      let result = mergeExpenseDays(formData, expenseList);
+      setFormData(result.newExpense);
+      setIndex(result.indexs);
     } else if (!multi) {
       setThisExpense();
     }
@@ -221,6 +222,12 @@ export const EditExpense = () => {
           onClick={handleSubmit}
           text={"Add"}
           className={"expenseSubmit"}
+        />
+        <Button
+          text="Cancel"
+          className="cancelBtn"
+          animation={true}
+          onClick={() => dispatch(togglePopUp())}
         />
       </div>
     </>

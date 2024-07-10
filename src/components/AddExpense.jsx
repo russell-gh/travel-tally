@@ -6,6 +6,7 @@ import {
   selectCurrencyNames,
   selectSelectedTripId,
   selectTrips,
+  togglePopUp,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
@@ -173,6 +174,12 @@ export const AddExpense = () => {
       />
 
       <Button onClick={handleSubmit} text={"Add"} className={"expenseSubmit"} />
+      <Button
+        text="Cancel"
+        className="cancelBtn"
+        animation={true}
+        onClick={() => dispatch(togglePopUp())}
+      />
     </div>
   );
 };

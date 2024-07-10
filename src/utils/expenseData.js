@@ -45,7 +45,7 @@ export function handleData(expense, home, data) {
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
-  console.log(expense, "beyond func");
+  console.log(expense, "PROCESSED EXPENSE");
 
   return expense;
 }
@@ -67,6 +67,7 @@ export function splitExpenseDays(expense) {
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
+  console.log(days, endDate, date, "JUST BEFORE SPLIT");
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
@@ -86,34 +87,40 @@ export function splitExpenseDays(expense) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
-  console.log(allExpenses, "HERE");
+  console.log(allExpenses, "Handing in split days");
   return allExpenses;
 }
 
 export function mergeExpenseDays(expense, allExpenses) {
   let expenseArray = [];
+  let indexs = [];
   let newExpense = {};
 
   if (expense.sharedID) {
-    allExpenses.forEach((thisExpense) => {
+    allExpenses.forEach((thisExpense, index) => {
       // Finds each expense with matching sharedID
       if (thisExpense.sharedID) {
+        indexs.push(index);
         expenseArray.push(thisExpense); // Adds all of them to and array
-        console.log(expenseArray, "post forEach");
       }
     });
+
     const total = expenseArray.length; // Counts how many in array
     const sorted = expenseArray.sort(function (a, b) {
       // Sorts by unix timestamp
       return a.date - b.date;
     });
+
     const startDate = new Date(expenseArray[0].date).toLocaleDateString(
       "en-CA"
     ); // Gets earliest date from beginning of sorted array
+
     const endDate = new Date(
       expenseArray[expenseArray.length - 1].date
     ).toLocaleDateString("en-CA"); // Gets latest date from last index
+
     const totalAmount = expenseArray[0].amount.fromValue * total; // Finds the original total of shared expense
+
     newExpense = {
       date: startDate, // Creates a new object with combined information
       endDate: endDate,
@@ -122,12 +129,12 @@ export function mergeExpenseDays(expense, allExpenses) {
       description: expenseArray[0].description,
       multiDay: true,
       currency: expenseArray[0].amount.fromCurrency,
-      amount: totalAmount / 100,
+      amount: Math.round(totalAmount) / 100,
     };
     console.log(sorted, total, newExpense, "sorted");
   }
-  console.log(newExpense, "PRERETURN");
-  return newExpense;
+  console.log(newExpense, indexs, "PRERETURN");
+  return { newExpense, indexs };
 }
 
 export function getExpenseList(tripID, trips) {
