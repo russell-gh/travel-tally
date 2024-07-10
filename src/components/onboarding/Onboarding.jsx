@@ -8,6 +8,8 @@ import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import { getCountryCurrency } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
+import { useNavigate } from "react-router-dom";
+
 
 const Onboarding = () => {
 
@@ -39,6 +41,8 @@ const Onboarding = () => {
   // zv-uncommenting while testing
 
   const dispatch = useDispatch();
+
+  const redirect = useNavigate()
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -174,6 +178,9 @@ const Onboarding = () => {
     };
 
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
+    redirect('/dashboard')
+    
+
   };
 
   //can we move this to another file? would also have to move handlesubmit and handlechange funcs
