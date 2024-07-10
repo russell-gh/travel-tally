@@ -2,7 +2,9 @@ import Image from "./Image";
 
 const CategoryIcon = ({ category }) => {
   return (
-    <Image src={`../src/img/${category}.svg`} alt={`${category}Icon icon`} />
+    <div className="containerIcon">
+      <Image src={`../src/img/${category}.svg`} alt={`${category}Icon icon`} />
+    </div>
   );
 };
 

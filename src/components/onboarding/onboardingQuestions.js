@@ -16,14 +16,26 @@ export const onboardingQuestions = {
     {
       type: "date",
       id: "startDate",
-      label: "Choose the start date of your trip.",
+      label: "Choose the start date of your trip",
       name: "startDate",
     },
     {
       type: "date",
       id: "endDate",
-      label: "Choose the end date of your trip.",
+      label: "Choose the end date of your trip",
       name: "endDate",
+    },
+    {
+      type: "checkbox",
+      id: "startDateIncluded",
+      label: "Include first day of trip in budget?",
+      name: "startDateIncluded",
+    },
+    {
+      type: "checkbox",
+      id: "endDateIncluded",
+      label: "Include last day of trip in budget?",
+      name: "endDateIncluded",
     },
     {
       type: "number",

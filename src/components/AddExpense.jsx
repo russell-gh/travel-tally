@@ -10,7 +10,7 @@ import {
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
 import { useState, useEffect } from "react";
-import { validate } from "./onboarding/validation/validate";
+import { validate } from "../validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
 
@@ -21,7 +21,7 @@ export const AddExpense = () => {
   let expenses = getExpenseList(tripID, trips);
   const [formData, setFormData] = useState({
     multiDay: false,
-    startDate: new Date().toLocaleDateString("en-CA"),
+    date: new Date().toLocaleDateString("en-CA"),
     endDate: new Date().toLocaleDateString("en-CA"),
     split: false,
     currency: "GBP",
@@ -104,8 +104,8 @@ export const AddExpense = () => {
         <FormElement
           type={"date"}
           label={"Date"}
-          name={"startDate"}
-          value={formData.startDate}
+          name={"date"}
+          value={formData.date}
           id={"datePicker"}
           callback={dataInput}
         />

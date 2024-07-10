@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { formEvent, selectTrips } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 
-const FilterDate = () => {
+const FilterTrip = () => {
   const dispatch = useDispatch();
   const trips = useSelector(selectTrips);
 
@@ -17,10 +17,10 @@ const FilterDate = () => {
   return (
     <>
       <FormElement
-        label="Trips"
         type="select"
         id="selectedTripId"
         name="destination"
+        className="dropDownTrips"
         callback={(e) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}
@@ -30,4 +30,4 @@ const FilterDate = () => {
   );
 };
 
-export default FilterDate;
+export default FilterTrip;

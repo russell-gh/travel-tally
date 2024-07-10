@@ -1,0 +1,35 @@
+import { unixToDate } from "../../utils/utilsDates";
+import { getArrayOfValues } from "../../utils/utils";
+import { getColourForSharedId } from "../../utils/utils";
+
+const DescriptionAndDate = ({
+  description,
+  category,
+  startDate,
+  endDate,
+  sharedId,
+  expenses,
+}) => {
+  if (!startDate || !endDate) {
+    return;
+  }
+
+  const arrSharedId = getArrayOfValues(expenses, "sharedId");
+
+  //set style with the right colour
+  const dotStyle = {
+    backgroundColor: getColourForSharedId(arrSharedId, sharedId),
+  };
+
+  return (
+    <div className="containerDescriptionAndDate">
+      <h2>
+        {sharedId && <span className="dot" style={dotStyle}></span>}
+        {description ? description : category}
+      </h2>
+      <p>{unixToDate(startDate)}</p>
+    </div>
+  );
+};
+
+export default DescriptionAndDate;

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
 import Joi from "joi";
-import { validate } from "./onboarding/validation/validate";
+import { validate } from "../validation/validate";
 import "./login.css";
 import "../css/app.css";
 import FormElement from "../reusable-code/FormElement";
