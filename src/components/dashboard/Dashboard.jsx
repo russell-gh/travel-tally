@@ -41,7 +41,7 @@ const Dashboard = ({}) => {
   const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
   let _expenses = [...trip.expenses].reverse();
 
-  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
+  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget can be filtered with activities
   let expensesArray = createExpensesArray(
     expensesCategories,
     actualStartDate,
@@ -65,7 +65,8 @@ const Dashboard = ({}) => {
           details={details}
         />
         <BudgetInfo
-          expenses={expensesCategories}
+          expensesCategories={expensesCategories}
+          expenses={_expenses}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           startDate={startDate}
