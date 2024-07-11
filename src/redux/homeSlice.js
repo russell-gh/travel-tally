@@ -110,11 +110,13 @@ export const homeSlice = createSlice({
       // Create variable for the correct trip
       const thisTrip = state.trips[indexOf];
       // Send data to be converted into the preferred format (uses function in expenseData.js)
+      console.log(payload, 'INHOMESLICE')
       let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
         ...state.currencyRates,
       });
+      console.log(result, 'INHOMESLICE, processed')
       // Push data into expenses array
-      if (Array.isArray(result)) {
+      if (Array.isArray(result.expense)) {
         result.forEach((element) => {
           console.log(element);
           state.trips[indexOf].expenses.push(element);

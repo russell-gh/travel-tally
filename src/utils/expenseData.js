@@ -1,7 +1,10 @@
 import { stringToTimestamp, generateId } from "../components/onboarding/utils";
+import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 
-export function handleData(expense, home, data) {
+export function handleData({formData, splitData}, home, data) {
+  console.log(formData, splitData, 'INSIDE HANDLE')
+  const expense = formData;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let start = stringToTimestamp(expense.date);
@@ -20,6 +23,7 @@ export function handleData(expense, home, data) {
     fromCurrency: "",
     toCurrency: { home },
   };
+
 
   // Fills data for amount from input
   newAmount.fromCurrency = currency;
@@ -44,6 +48,10 @@ export function handleData(expense, home, data) {
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
+  // splitData.expenseID = expense.id;
+  // splitData.info = newAmount;
+  // splitData.date = expense.date;
+  splitExpenseBill(splitData, expense);
 
   return expense;
 }

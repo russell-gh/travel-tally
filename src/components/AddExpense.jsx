@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import { validate } from "../validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
+import SplitInput from "./SplitInput";
 
 export const AddExpense = () => {
   const dispatch = useDispatch();
@@ -24,12 +25,14 @@ export const AddExpense = () => {
     multiDay: false,
     date: new Date().toLocaleDateString("en-CA"),
     endDate: new Date().toLocaleDateString("en-CA"),
+    amount: 0,
     split: false,
     currency: "GBP",
     category: "Food",
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
+  const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Food", name: "Food" },
@@ -69,13 +72,16 @@ export const AddExpense = () => {
       return;
     }
     if (formData.description && formData.amount) {
-      console.log(formData, "pass");
-      dispatch(addExpenseData(formData));
+       const result = {formData, splitData} 
+       console.log(result, "pass");
+      dispatch(addExpenseData(result));
     } else {
       console.log("FAIL FINAL");
       return;
     }
   };
+
+  
   const multiDay = () => {
     setMulti((multi = !multi));
     const inverted = !formData.multiDay;
@@ -99,6 +105,30 @@ export const AddExpense = () => {
     }
   };
 
+  let handleAddPerson = () => {
+    setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
+}
+let handleRemovePerson = () => {
+  setSplit(split.splice(split.length -1, 1));
+}
+
+const getSplitData = (data, tag) => {
+  const dataCopy = Array.from(splitData);
+  dataCopy.splice(tag, 1, data);
+  setSplitData(dataCopy);
+  console.log('IM TRYING', data, splitData, dataCopy)
+};
+const [split,setSplit] = useState([<SplitInput amount={formData.amount} tag={0} parentCallback={getSplitData} />])
+  const renderSplit = () => {
+    if(formData.split === true) {
+      return <div>
+        {split}
+        <Button onClick={handleAddPerson} text={"Add Person"} className={"splitAddPerson"} />
+        <Button onClick={handleRemovePerson} text={"Remove Person"} className={"splitRemovePerson"} />
+      </div>
+    }
+  }
+console.log(splitData, 'PRERETURN')
   return (
     <div className="expenseContainer">
       <div>
@@ -172,6 +202,7 @@ export const AddExpense = () => {
         ]}
         callback={dataInput}
       />
+      {renderSplit()}
 
       <Button onClick={handleSubmit} text={"Add"} className={"expenseSubmit"} />
       <Button
