@@ -75,10 +75,6 @@ export const EditExpense = ({ animatingOut }) => {
     setThisExpense();
   }, []);
 
-  // if (loaded === false) {
-  //   setLoaded(true);
-
-  // }
   const dataInput = (e) => {
     // getValidationResult();
     let target = e.target.name;
@@ -114,8 +110,10 @@ export const EditExpense = ({ animatingOut }) => {
     setMulti((multi = !multi));
     if (multi) {
       let result = mergeExpenseDays(formData, expenseList);
-      setFormData(result.newExpense);
-      setIndex(result.indexs);
+      if (result.indexs.length > 1) {
+        setFormData(result.newExpense);
+        setIndex(result.indexs);
+      }
     } else if (!multi) {
       setThisExpense();
     }
