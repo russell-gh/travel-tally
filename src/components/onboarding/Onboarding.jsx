@@ -7,7 +7,10 @@ import { useDispatch } from "react-redux";
 import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
-import { getCountryCurrency } from "./onboardingUtils.js";
+import {
+  checkFormSectionErrors,
+  getCountryCurrency,
+} from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
@@ -36,17 +39,15 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-
-  const [visible, setVisible] = useState(true); //change to false after testing
+  const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
-
   const [countryCurrency, setCountryCurrency] = useState([]);
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
   //   getCountryCurrency(setCountryCurrency);
   // }, []);
+
   const dispatch = useDispatch();
 
   const redirect = useNavigate();
@@ -61,19 +62,7 @@ const Onboarding = () => {
       return;
     }
     const result = await validate(onboardingDetails, "trip");
-    checkValidation(["destination"], result); //hardcoded - change
     setErrors(result);
-  };
-
-  const checkValidation = (idArray, validationResult) => {
-    const errorIds = Object.keys(validationResult);
-    // console.log(errorIds, idArray);
-    const result = idArray.some((id) => errorIds.includes(id));
-    if (!result) {
-      // console.log("all good!");
-    } else {
-      // console.log("oh no check agian", validationResult);
-    }
   };
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
@@ -151,98 +140,88 @@ const Onboarding = () => {
     redirect("/dashboard");
   };
 
+  const formButtonHandler = () => {
+    const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
+    !errorsPresent ? setCurrentFormSection(currentFormSection + 1) : "";
+  };
+
   return (
     <div>
       <form>
-        <>
-          {currentQuestion === 1 && (
-            <FormElement
-              type="text"
-              id="destination"
-              label="Where are you off to?"
-              name="destination"
-              value={onboardingDetails.destination}
-              callback={handleChange}
-              error={errors.destination}
-            />
-          )}
-
-          {currentQuestion === 2 && (
-            <>
-              <FormElement
-                type="date"
-                id="startDate"
-                label="Choose the start date of your trip"
-                name="startDate"
-                value={onboardingDetails.dates.startDate}
-                callback={handleChange}
-                error={errors.startDate}
-              />
-              <FormElement
-                type="date"
-                id="endDate"
-                label="Choose the end date of your trip"
-                name="endDate"
-                value={onboardingDetails.dates.endDate}
-                callback={handleChange}
-                error={errors.endDate}
-              />
-              <FormElement
-                type="checkbox"
-                id="startDateIncluded"
-                label="Include first day of trip in budget?"
-                name="startDateIncluded"
-                value={onboardingDetails.dates.startDateIncluded}
-                callback={handleChange}
-              />
-              <FormElement
-                type="checkbox"
-                id="endDateIncluded"
-                label="Include last day of trip in budget?"
-                name="endDateIncluded"
-                value={onboardingDetails.dates.endDateIncluded}
-                callback={handleChange}
-              />
-            </>
-          )}
-
-          {currentQuestion === 3 && (
-            <>
-              <FormElement
-                type="number"
-                id="budgetTotal"
-                label="What's your total budget for this trip?"
-                name="budgetTotal"
-                value={onboardingDetails.budgetTotal.toString()}
-                callback={handleChange}
-                error={errors.budgetTotal}
-              />
-              <FormElement
-                type="select"
-                id="homeCurrency"
-                label="Please select the currency of the country you live in."
-                name="homeCurrency"
-                choose={true}
-                options={currencies}
-                value={currencies[0].value}
-                callback={handleChange}
-                error={errors.homeCurrency}
-              />
-            </>
-          )}
-          <Button
-            text=">"
-            onClick={() => {
-              if (currentQuestion === 1 && errors.destination) {
-                return;
-              } //create an if statement for each question section
-              setCurrentQuestion(currentQuestion + 1); //send errors and current question to external func
-            }}
-            className={""}
+        {currentFormSection === 1 && (
+          <FormElement
+            type="text"
+            id="destination"
+            label="Where are you off to?"
+            name="destination"
+            value={onboardingDetails.destination}
+            callback={handleChange}
+            error={errors.destination}
           />
-        </>
-
-        {currentQuestion === 5 && (
+        )}
+        {currentFormSection === 2 && (
+          <>
+            <FormElement
+              type="date"
+              id="startDate"
+              label="Choose the start date of your trip"
+              name="startDate"
+              value={onboardingDetails.dates.startDate}
+              callback={handleChange}
+              error={errors.startDate}
+            />
+            <FormElement
+              type="date"
+              id="endDate"
+              label="Choose the end date of your trip"
+              name="endDate"
+              value={onboardingDetails.dates.endDate}
+              callback={handleChange}
+              error={errors.endDate}
+            />
+            <FormElement
+              type="checkbox"
+              id="startDateIncluded"
+              label="Include first day of trip in budget?"
+              name="startDateIncluded"
+              value={onboardingDetails.dates.startDateIncluded}
+              callback={handleChange}
+            />
+            <FormElement
+              type="checkbox"
+              id="endDateIncluded"
+              label="Include last day of trip in budget?"
+              name="endDateIncluded"
+              value={onboardingDetails.dates.endDateIncluded}
+              callback={handleChange}
+            />
+          </>
+        )}
+        {currentFormSection === 3 && (
+          <>
+            <FormElement
+              type="number"
+              id="budgetTotal"
+              label="What's your total budget for this trip?"
+              name="budgetTotal"
+              value={onboardingDetails.budgetTotal.toString()}
+              callback={handleChange}
+              error={errors.budgetTotal}
+            />
+            <FormElement
+              type="select"
+              id="homeCurrency"
+              label="Please select the currency of the country you live in."
+              name="homeCurrency"
+              choose={true}
+              options={currencies}
+              value={currencies[0].value}
+              callback={handleChange}
+              error={errors.homeCurrency}
+            />
+          </>
+        )}
+        {currentFormSection === 4 && (
           <div>
             {onboardingQuestions.secondaryForm.map((question) => {
               //get rid of primary form as no longer used? then change this name
@@ -257,9 +236,13 @@ const Onboarding = () => {
                 />
               );
             })}
-
-            <FormElement type="button" callback={handleSubmit} />
           </div>
+        )}
+        
+        {currentFormSection === 4 ? (
+          <FormElement type="button" callback={handleSubmit} />
+        ) : (
+          <Button text=">" onClick={() => formButtonHandler()}/>
         )}
       </form>
     </div>
