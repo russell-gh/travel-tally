@@ -98,6 +98,7 @@ export const homeSlice = createSlice({
         state.order = "Newest first";
         state.filterDate = "All Dates";
       }
+      saveStore("homeSlice", state);
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
@@ -124,6 +125,7 @@ export const homeSlice = createSlice({
     },
     toggleHideFutureExpenses: (state, { payload }) => {
       state.hideFutureExpenses = payload;
+      saveStore("homeSlice", state);
     },
 
     deleteToEdit: (state, { payload }) => {

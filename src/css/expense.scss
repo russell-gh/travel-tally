@@ -34,12 +34,26 @@ $grey: #b3b3b3;
       margin: 0px;
     }
 
-    .multiDayCheckbox {
+    .multiDayCheckboxContainer {
       flex-basis: 100%;
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+
+      div {
+        text-align: right;
+      }
+
+      label {
+        margin-right: auto;
+      }
 
       #dateCheck {
         height: 13px;
+      }
+
+      #endDatePicker {
+        margin-top: 10px;
       }
     }
   }

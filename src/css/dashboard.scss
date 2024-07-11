@@ -9,6 +9,7 @@ $sage: #d3bb5b84;
 $white: #ffffff;
 $black: #000000;
 $grey: #b3b3b3;
+$blueSachaUsed: #3c43a5;
 /*
 ************END***********
 */
@@ -58,7 +59,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #3c43a5;
+    background-color: $navy;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -119,7 +120,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #3c43a5;
+    background-color: $navy;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -152,6 +153,11 @@ body {
     background-color: white;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
+
+    #hideFutureExpenses {
+      height: auto;
+    }
+
   }
 
   //top with dropdown trips and travel time
@@ -200,12 +206,12 @@ body {
 
   //container budget
   .addExpense {
-    background-color: #D6EE79;
+    background-color: $green;
     padding: 15px 10px;
     align-self: center;
     justify-self: center;
     border: none;
-    color: #3c43a5;
+    color: $navy;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -213,8 +219,8 @@ body {
   }
 
   .addExpense:hover {
-    background-color: #3c43a5;
-    color: #D6EE79;
+    background-color: $navy;
+    color: $green;
     transition: all 0.3s ease-in-out;
   }
 
@@ -240,7 +246,7 @@ body {
     justify-self: stretch;
     align-self: stretch;
     cursor: pointer;
-    border-bottom: #D6EE79 solid 2px;
+    border-bottom: $green solid 2px;
     border-radius: 0px;
   }
 
@@ -255,7 +261,7 @@ body {
   }
 
   .focus {
-    background-color: #D6EE79;
+    background-color: $green;
   }
 
   .containerBottomRowGrid {
@@ -268,7 +274,7 @@ body {
   }
 
   .containerBudget {
-    border: #D6EE79 solid 2px;
+    border: $green solid 2px;
     padding: 0px;
     margin-bottom: 10px;
     border-radius: 15px;
@@ -346,7 +352,7 @@ body {
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
-    background-color: #3c43a5;
+    background-color: $navy;
     color: white;
     margin-bottom: 10px;
     display: grid;
@@ -369,8 +375,8 @@ body {
   }
 
   .containerIcon {
-    background-color: #D6EE79;
-    border: 2px solid #D6EE79;
+    background-color: $green;
+    border: 2px solid $green;
     border-radius: 100%;
     height: 40px;
     width: 40px;

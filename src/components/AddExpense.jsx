@@ -111,15 +111,17 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
 
-        <div className="multiDayCheckbox">
+        <div className="multiDayCheckboxContainer">
+          <div>
+            <FormElement
+              type={"checkbox"}
+              label={!multi && "Multiple days"}
+              name={"dateCheck"}
+              id={"dateCheck"}
+              callback={multiDay}
+            />
+          </div>
           {renderMultiDay()}
-          <FormElement
-            type={"checkbox"}
-            label={"Multiple days"}
-            name={"dateCheck"}
-            id={"dateCheck"}
-            callback={multiDay}
-          />
         </div>
       </div>
       <div className="flex">
@@ -182,16 +184,16 @@ export const AddExpense = ({ animatingOut }) => {
       </div>
       <div className="containerBtnPopUp">
         <Button
-          onClick={handleSubmit}
-          text={"Add"}
-          className={"expenseSubmit"}
-          disabled={animatingOut}
-        />
-        <Button
           text="Cancel"
           className="cancelBtn"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
+        />
+        <Button
+          onClick={handleSubmit}
+          text={"Add"}
+          className={"expenseSubmit"}
           disabled={animatingOut}
         />
       </div>

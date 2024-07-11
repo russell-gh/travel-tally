@@ -8,7 +8,6 @@ const Button = ({ onClick, text, className, animation, disabled }) => {
   const ripplesRef = useRef();
 
   const handleClick = (e) => {
-    console.log(e);
     if (animation) {
       // Trigger GSAP animation on click
       gsap.fromTo(buttonRef.current, { scale: 0.9 }, { scale: 1, duration: 1 });
@@ -29,13 +28,6 @@ const Button = ({ onClick, text, className, animation, disabled }) => {
           opacity: 0,
           duration: 1,
           ease: "power2.out",
-          onStart: () => {
-            console.log(
-              Math.abs(e.target.offsetHeight - e.target.offsetTop),
-              e.target.offsetHeight,
-              e.target.offsetTop
-            );
-          },
         }
       );
     }
