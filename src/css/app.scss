@@ -19,10 +19,11 @@ body {
 }
 
 main {
+
   input,
   button {
     margin: auto;
-    display: block;
+    display: block; // should this be block? It is making the layout for checkbox weird, where the label is underneath the checkbox
   }
 }
 
@@ -41,6 +42,7 @@ input {
   border-color: $grey;
   border-radius: 8px;
   height: 30px;
+
   ::placeholder {
     color: $grey;
   }

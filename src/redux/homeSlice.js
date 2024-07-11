@@ -6,7 +6,6 @@ import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
 
 const dataFromDisc = getStore("homeSlice");
-console.log(dataFromDisc);
 export const homeSlice = createSlice({
   name: "home",
   initialState: dataFromDisc ? dataFromDisc : initialState,
@@ -113,6 +112,7 @@ export const homeSlice = createSlice({
         state.order = "Newest first";
         state.filterDate = "All Dates";
       }
+      saveStore("homeSlice", state);
     },
     addExpenseData: (state, { payload }) => {
       // Close expense popup
@@ -130,7 +130,6 @@ export const homeSlice = createSlice({
       // Push data into expenses array
       if (Array.isArray(result)) {
         result.forEach((element) => {
-          console.log(element);
           state.trips[indexOf].expenses.push(element);
         });
       } else {
@@ -140,10 +139,10 @@ export const homeSlice = createSlice({
     },
     toggleHideFutureExpenses: (state, { payload }) => {
       state.hideFutureExpenses = payload;
+      saveStore("homeSlice", state);
     },
 
     deleteToEdit: (state, { payload }) => {
-
       console.log("HIT DELETE", payload);
       const { expenseIndex } = payload;
       //get index of the current trip

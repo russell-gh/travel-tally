@@ -65,7 +65,8 @@ const App = () => {
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
-    EditExpense: <EditExpense />,
+    EditExpense: <EditExpense animatingOut={!popUp.component} />,
+    AddExpense: <AddExpense animatingOut={!popUp.component} />,
   };
 
   return (

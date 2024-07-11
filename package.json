@@ -29,6 +29,8 @@
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.3",
+    "chartjs-react": "^4.2.1",
     "dayjs": "^1.11.11",
     "gsap": "^3.12.5",
     "joi": "^17.13.3",
