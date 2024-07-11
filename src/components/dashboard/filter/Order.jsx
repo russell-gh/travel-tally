@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
-import { formEvent } from "../../../redux/homeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { formEvent, selectOrder } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 
 const Sort = () => {
   const dispatch = useDispatch();
+  const order = useSelector(selectOrder);
 
   return (
     <div className="dropdown order">
@@ -11,6 +12,7 @@ const Sort = () => {
         type="select"
         id="order"
         name="order"
+        value={order}
         callback={(e) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}

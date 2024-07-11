@@ -1,9 +1,14 @@
-import { useDispatch } from "react-redux";
-import { formEvent } from "../../../redux/homeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  formEvent,
+  selectFilter,
+  selectSelectedTripId,
+} from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 
 const Filter = () => {
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
 
   return (
     <div className="dropdown filter">
@@ -11,6 +16,7 @@ const Filter = () => {
         type="select"
         id="filter"
         name="filter"
+        value={filter}
         callback={(e) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}
