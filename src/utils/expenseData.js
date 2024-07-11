@@ -1,12 +1,11 @@
 import { stringToTimestamp, generateId } from "../components/onboarding/utils";
+import { unixToDate } from "./utilsDates";
 
 export function handleData(expense, home, data) {
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let start = stringToTimestamp(expense.date);
   let end = stringToTimestamp(expense.endDate);
-
-  console.log(expense, "inside handle");
 
   // Wipes any existing id's if the expense is being edited
   if (expense.id) {
@@ -45,7 +44,6 @@ export function handleData(expense, home, data) {
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
-  console.log(expense, "PROCESSED EXPENSE");
 
   return expense;
 }
@@ -63,11 +61,10 @@ export function splitExpenseDays(expense) {
   let { fromValue, toValue } = amount;
   let allExpenses = [];
   delete expense.multiDay;
-  const days = (endDate - date) / 1000 / 60 / 60 / 24;
+  const days = (endDate - date) / 1000 / 60 / 60 / 24 + 1;
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
-  console.log(days, endDate, date, "JUST BEFORE SPLIT");
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
@@ -87,7 +84,6 @@ export function splitExpenseDays(expense) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
-  console.log(allExpenses, "Handing in split days");
   return allExpenses;
 }
 
@@ -99,7 +95,7 @@ export function mergeExpenseDays(expense, allExpenses) {
   if (expense.sharedID) {
     allExpenses.forEach((thisExpense, index) => {
       // Finds each expense with matching sharedID
-      if (thisExpense.sharedID) {
+      if (thisExpense.sharedID === expense.sharedID) {
         indexs.push(index);
         expenseArray.push(thisExpense); // Adds all of them to and array
       }
@@ -111,13 +107,10 @@ export function mergeExpenseDays(expense, allExpenses) {
       return a.date - b.date;
     });
 
-    const startDate = new Date(expenseArray[0].date).toLocaleDateString(
-      "en-CA"
-    ); // Gets earliest date from beginning of sorted array
-
-    const endDate = new Date(
+    const startDate = unixToDateReversed(expenseArray[0].date); // Gets earliest date from beginning of sorted array
+    const endDate = unixToDateReversed(
       expenseArray[expenseArray.length - 1].date
-    ).toLocaleDateString("en-CA"); // Gets latest date from last index
+    ); // Gets latest date from last index
 
     const totalAmount = expenseArray[0].amount.fromValue * total; // Finds the original total of shared expense
 
@@ -131,9 +124,7 @@ export function mergeExpenseDays(expense, allExpenses) {
       currency: expenseArray[0].amount.fromCurrency,
       amount: Math.round(totalAmount) / 100,
     };
-    console.log(sorted, total, newExpense, "sorted");
   }
-  console.log(newExpense, indexs, "PRERETURN");
   return { newExpense, indexs };
 }
 
@@ -155,4 +146,27 @@ export function getThisExpense(expenseList, id) {
   // const multi = mergeExpenseDays(thisExpense, expenseList)
   let result = { thisExpense, indexOf };
   return result;
+}
+
+export function unixToDateReversed(unix) {
+  if (!unix) {
+    console.log("error finding unix");
+    return;
+  }
+
+  const date = new Date(unix);
+  var yyyy = date.getFullYear().toString();
+  var mm = (date.getMonth() + 1).toString();
+  var dd = date.getDate().toString();
+
+  var mmChars = mm.split("");
+  var ddChars = dd.split("");
+
+  return (
+    yyyy +
+    "-" +
+    (mmChars[1] ? mm : "0" + mmChars[0]) +
+    "-" +
+    (ddChars[1] ? dd : "0" + ddChars[0])
+  );
 }
