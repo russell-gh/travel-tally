@@ -19,7 +19,7 @@ const Signup = () => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData(_formData);
     const errObj = await validate(_formData, "signup");
-    //BUG Errors displayed are one step behind
+    //BUG Error Timing is ugly
     setErrors(errObj);
   };
   const user = useSelector((state) => state.user);

@@ -19,11 +19,14 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const trips = useSelector(selectTrips);
   const onInput = async (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value }); //BUG Why is state not synced?
-    const errObj = await validate(formData, "login");
+    const _formData = { ...formData, [e.target.id]: e.target.value };
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData(_formData);
+    const errObj = await validate(_formData, "login");
     setErrors(errObj);
     console.log(errors, formData);
   };
+  //BUG Error Timing is ugly
 
   const localUser = JSON.parse(localStorage.getItem("user"));
 
