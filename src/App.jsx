@@ -12,7 +12,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
-import "./css/headerFooter.scss";
+import "./css/app.scss";
 import "./css/splashPage.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";

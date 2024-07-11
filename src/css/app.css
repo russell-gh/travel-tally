@@ -15,19 +15,6 @@ main button {
   display: block;
 }
 
-.btn {
-  background-color: #d6ee79;
-  color: #235b89;
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-  border-radius: 8px;
-  font-size: 16px;
-}
-.btn :hover {
-  background-color: rgba(215, 238, 121, 0.8235294118);
-}
-
 input {
   justify-content: center;
   border-color: #b3b3b3;
@@ -41,13 +28,48 @@ input ::placeholder {
   color: #b3b3b3;
 }
 
+.btn {
+  background-color: #d6ee79;
+  color: #235b89;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.btn :hover {
+  background-color: rgba(135, 150, 75, 0.8235294118);
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+}
+header .logo {
+  height: 50px;
+  width: 50px;
+}
+
 header,
 footer {
   background-color: #235b89;
   color: #ffffff;
 }
+header h1,
+footer h1 {
+  margin: 0px;
+  color: white;
+}
 
 footer {
   text-align: center;
   color: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+svg {
+  height: 50px;
+  width: 50px;
 }/*# sourceMappingURL=app.css.map */

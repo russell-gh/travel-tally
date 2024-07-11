@@ -1,8 +1,6 @@
-//global rules here - the generic stuff
-
 $navy: #235b89;
 $green: #d6ee79;
-$darker-green: #d7ee79d2;
+$darker-green: #87964bd2;
 $sage: #d3bb5b84;
 $white: #ffffff;
 $black: #000000;
@@ -28,6 +26,16 @@ main {
   }
 }
 
+input {
+  justify-content: center;
+  border-color: $grey;
+  border-radius: 8px;
+  height: 30px;
+  ::placeholder {
+    color: $grey;
+  }
+}
+
 .btn {
   background-color: $green;
   color: $navy;
@@ -41,13 +49,13 @@ main {
   }
 }
 
-input {
-  justify-content: center;
-  border-color: $grey;
-  border-radius: 8px;
-  height: 30px;
-  ::placeholder {
-    color: $grey;
+header {
+  display: flex;
+  justify-content: space-around;
+
+  .logo {
+    height: 50px;
+    width: 50px;
   }
 }
 
@@ -55,9 +63,21 @@ header,
 footer {
   background-color: $navy;
   color: $white;
+  h1 {
+    margin: 0px;
+    color: white;
+  }
 }
 
 footer {
   text-align: center;
   color: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+svg {
+  height: 50px;
+  width: 50px;
 }
