@@ -118,6 +118,7 @@ const FormElement = ({
           <select
             name={name}
             className={className}
+            defaultValue={value}
             id={id}
             onChange={(e) => {
               callback(e, id);

@@ -14,7 +14,7 @@ const DeletePopUp = ({ popUp, animatingOut }) => {
       {!sharedId ? (
         <OneItemDelete title={title} animatingOut={animatingOut} />
       ) : (
-        <SharedDelete title={title} />
+        <SharedDelete title={title} animatingOut={animatingOut} />
       )}
     </div>
   );

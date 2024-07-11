@@ -50,13 +50,14 @@ const App = () => {
     }
   };
 
+  const closePopUp = () => {
+    _setPopUp(false);
+  };
+
   useEffect(() => {
     if (_popUp && !popUp.component) {
       console.log("you get here");
-      animationPopUp(popUpRef.current, "reverse");
-      setTimeout(() => {
-        _setPopUp(false);
-      }, 30000);
+      animationPopUp(popUpRef.current, "reverse", closePopUp);
     } else if (popUp.component) {
       _setPopUp(popUp);
       animationPopUp(popUpRef.current);
@@ -65,7 +66,8 @@ const App = () => {
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
-    EditExpense: <EditExpense />,
+    EditExpense: <EditExpense animatingOut={!popUp.component} />,
+    AddExpense: <AddExpense animatingOut={!popUp.component} />,
   };
 
   return (

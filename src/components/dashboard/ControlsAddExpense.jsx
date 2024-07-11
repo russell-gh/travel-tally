@@ -7,7 +7,6 @@ import { togglePopUp } from "../../redux/homeSlice";
 const ControlsAddExpense = () => {
   const popUp = useSelector(selectPopUp);
   const dispatch = useDispatch();
-  const stringToComponent = { AddExpense: <AddExpense /> };
 
   return (
     <>
@@ -24,7 +23,6 @@ const ControlsAddExpense = () => {
           );
         }}
       />
-      {stringToComponent[popUp.component]}
     </>
   );
 };

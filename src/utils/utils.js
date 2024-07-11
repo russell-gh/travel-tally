@@ -1,6 +1,7 @@
 import { unixToDate } from "./utilsDates";
 import dayjs from "dayjs";
 import { colors } from "./config";
+import { nanoid } from "nanoid";
 
 export function getIndex(data, id, key) {
   const indexOf = data.findIndex((item) => {
@@ -38,23 +39,26 @@ export const getColourForSharedId = (arrSharedId, sharedId) => {
 };
 
 export function getArrayOfValues(data, key, hideFutureExpenses) {
-  let copy = [...data];
+  if (!data) {
+    return;
+  }
 
+  let copy = [...data];
   //hides future dates if checked
-  if (key === "startDate" && hideFutureExpenses === true) {
+  if (key === "date" && hideFutureExpenses === true) {
     copy = copy.filter((item) => {
-      return dayjs(item.startDate).isBefore(dayjs());
+      console.log(item);
+      return dayjs(item.date).isBefore(dayjs());
     });
   }
   //makes an array of the dates
   copy = copy.map((item) => {
     return item[key];
   });
-
   // removes duplicates
   copy = [...new Set(copy)];
 
-  if (key === "startDate") {
+  if (key === "date") {
     // get dates in right order
     copy.sort((a, b) => {
       if (a < b) {
@@ -76,3 +80,19 @@ export function getArrayOfValues(data, key, hideFutureExpenses) {
 
   return copy;
 }
+
+export const toPennies = (val) => {
+  return val * 100;
+};
+
+export const stringToUnix = (date) => {
+  let _date = date.split("-");
+  _date = new Date(_date[0], _date[1] - 1, _date[2]);
+
+  return _date.getTime();
+};
+
+//send type as string (e.g. "trip", "user", expenses")
+export const generateId = (type) => {
+  return `_${type}_${nanoid()}`;
+};

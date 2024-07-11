@@ -1,6 +1,6 @@
 import gsap from "gsap";
 
-export function animationPopUp(ref, reverse) {
+export function animationPopUp(ref, reverse, closePopUp) {
   if (!ref) return;
 
   const animation = gsap.fromTo(
@@ -9,6 +9,9 @@ export function animationPopUp(ref, reverse) {
     {
       scale: 1,
       duration: 0.8,
+      onReverseComplete: () => {
+        closePopUp();
+      },
     }
   );
 

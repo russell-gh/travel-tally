@@ -19,7 +19,6 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "../../reusable-code/Message";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
-import dayjs from "dayjs";
 
 const Dashboard = ({}) => {
   const trips = useSelector(selectTrips);
@@ -41,12 +40,16 @@ const Dashboard = ({}) => {
   const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
   let _expenses = [...trip.expenses].reverse();
 
-  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget ca be filtered with activities
+  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget can be filtered with activities
   let expensesArray = createExpensesArray(
     expensesCategories,
     actualStartDate,
     actualEndDate
   ); //should this be in a useEffect?
+<<<<<<< HEAD
+=======
+
+>>>>>>> onboarding
   const filtered = getSortedandFiltered(
     _expenses,
     order,
@@ -54,7 +57,6 @@ const Dashboard = ({}) => {
     filterDate,
     hideFutureExpenses
   );
-
   return (
     <div className="dashboard">
       <div className="dashboardFixed">
@@ -65,7 +67,8 @@ const Dashboard = ({}) => {
           details={details}
         />
         <BudgetInfo
-          expenses={expensesCategories}
+          expensesCategories={expensesCategories}
+          expenses={_expenses}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           startDate={startDate}

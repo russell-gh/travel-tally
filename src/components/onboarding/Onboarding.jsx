@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
+import Button from "../../reusable-code/Button.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrip, testSelector } from "../../redux/onboardingSlice.js";
+import { useDispatch } from "react-redux";
 import { validate } from "../../validation/validate.js";
-import { toPennies, stringToTimestamp, generateId } from "./utils.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
+import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
+import { getCountryCurrency } from "./onboardingUtils.js";
+import { addTrip } from "../../redux/homeSlice.js";
+import { useNavigate } from "react-router-dom";
+import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
+
+let currencies = [];
+
+for (const key of Object.keys(currencyCodes)) {
+  currencies.push({ value: key, name: key });
+}
 
 const Onboarding = () => {
-  const trips = useSelector(testSelector);
-
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     dates: {
@@ -28,16 +36,24 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
+  const [currentQuestion, setCurrentQuestion] = useState(1);
+
   const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
 
-  //set original remaining to total budget
+  const [countryCurrency, setCountryCurrency] = useState([]);
 
+  // getCountryCurrency("london", 5);
+  // useEffect(() => {
+  //   getCountryCurrency(setCountryCurrency);
+  // }, []);
   const dispatch = useDispatch();
+
+  const redirect = useNavigate();
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
-    getValidationResult();
+    getValidationResult(); //pass through id to validate here?
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
@@ -45,53 +61,47 @@ const Onboarding = () => {
       return;
     }
     const result = await validate(onboardingDetails, "trip");
-    checkPrimaryFormValidation(result);
+    checkValidation(["destination"], result); //hardcoded - change
     setErrors(result);
   };
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  //check if all fields in the primary form are validated and if true set visible to true in order to display secondary form
-  const ids = [];
-  const checkPrimaryFormValidation = (validationResult) => {
-    onboardingQuestions.primaryForm.forEach((question) =>
-      ids.push(question.id)
-    );
+  const checkValidation = (idArray, validationResult) => {
     const errorIds = Object.keys(validationResult);
-    const result = ids.some((id) => errorIds.includes(id));
+    // console.log(errorIds, idArray);
+    const result = idArray.some((id) => errorIds.includes(id));
     if (!result) {
-      setVisible(true);
+      // console.log("all good!");
+    } else {
+      // console.log("oh no check agian", validationResult);
     }
   };
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //store input in state on every change. if the id is a type of budget, convert to a number before store in state
-  const handleChange = (e, id) => {
+  //e.target.name is used instead of e.target.id because the MUI sliders do not support id attrs but they do support name.
+  //(name is equal to id in form elem so works the same)
+  const handleChange = (e) => {
     let input = e.target.value;
 
     //if input is a checkbox, assign input to checked
     if (e.target.type === "checkbox") {
       input = e.target.checked;
     }
-    console.log(e.target.type, e.target.id, input);
 
-    // if ((e.target.id).includes("date")) {console.log("its a date")}
-    if (id.toLowerCase().includes("date")) {
-      console.log("foundDate");
+    if (e.target.name.toLowerCase().includes("date")) {
       const data = {
         ...onboardingDetails,
-        dates: { ...onboardingDetails.dates, [id]: input },
+        dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
       setOnboardingDetails(data);
-      console.log("hello world", data);
 
       return;
     }
 
     //if id is a type of budget convert to a number
-    if (id.includes("budget")) {
+    if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
-    setOnboardingDetails({ ...onboardingDetails, [id]: input });
+    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
@@ -100,7 +110,7 @@ const Onboarding = () => {
 
     //if errors exist abort early
     if (Object.keys(errors).length) {
-      // return;
+      return;
     }
 
     let _onboardingDetails = onboardingDetails;
@@ -115,10 +125,9 @@ const Onboarding = () => {
     const budgetOther = toPennies(_onboardingDetails.budgetOther);
 
     //turn date strings to date objs and then to timestamps
-    let startDate = stringToTimestamp(_onboardingDetails.dates.startDate);
-    let endDate = stringToTimestamp(_onboardingDetails.dates.endDate);
+    let startDate = stringToUnix(_onboardingDetails.dates.startDate);
+    let endDate = stringToUnix(_onboardingDetails.dates.endDate);
 
-    //look into why this fixed it
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
     const endDateIncluded = _onboardingDetails.dates.endDateIncluded;
 
@@ -135,55 +144,108 @@ const Onboarding = () => {
         budgetActivities,
         budgetOther,
       },
+      expenses: [],
     };
 
-    console.log("about to add", _onboardingDetails);
-    dispatch(addTrip(_onboardingDetails));
-    console.log(trips);
-  };
-
-  //can we move this to another file? would also have to move handlesubmit and handlechange funcs
-  const createFormSection = (section) => {
-    return (
-      <div>
-        {section.map((question) => {
-          return (
-            <FormElement
-              key={question.id}
-              type={question.type}
-              id={question.id}
-              label={question.label}
-              name={question.name}
-              value={
-                question.id.includes("date")
-                  ? onboardingDetails.dates[question.id]
-                  : question.id.includes("budget")
-                  ? onboardingDetails[question.id].toString()
-                  : onboardingDetails[question.id]
-              }
-              options={question.options}
-              defaultValue={question.defaultValue}
-              error={errors[question.id]}
-              choose={question.choose}
-              onboardingDetails={onboardingDetails}
-              callback={
-                question.type === "button" ? handleSubmit : handleChange
-              }
-            />
-          );
-        })}
-      </div>
-    );
+    dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
+    redirect("/dashboard");
   };
 
   return (
     <div>
       <form>
-        {createFormSection(onboardingQuestions.primaryForm)}
+        <>
+          {currentQuestion === 1 && (
+            <FormElement
+              type="text"
+              id="destination"
+              label="Where are you off to?"
+              name="destination"
+              value={onboardingDetails.destination}
+              callback={handleChange}
+              error={errors.destination}
+            />
+          )}
 
-        {visible && (
+          {currentQuestion === 2 && (
+            <>
+              <FormElement
+                type="date"
+                id="startDate"
+                label="Choose the start date of your trip"
+                name="startDate"
+                value={onboardingDetails.dates.startDate}
+                callback={handleChange}
+                error={errors.startDate}
+              />
+              <FormElement
+                type="date"
+                id="endDate"
+                label="Choose the end date of your trip"
+                name="endDate"
+                value={onboardingDetails.dates.endDate}
+                callback={handleChange}
+                error={errors.endDate}
+              />
+              <FormElement
+                type="checkbox"
+                id="startDateIncluded"
+                label="Include first day of trip in budget?"
+                name="startDateIncluded"
+                value={onboardingDetails.dates.startDateIncluded}
+                callback={handleChange}
+              />
+              <FormElement
+                type="checkbox"
+                id="endDateIncluded"
+                label="Include last day of trip in budget?"
+                name="endDateIncluded"
+                value={onboardingDetails.dates.endDateIncluded}
+                callback={handleChange}
+              />
+            </>
+          )}
+
+          {currentQuestion === 3 && (
+            <>
+              <FormElement
+                type="number"
+                id="budgetTotal"
+                label="What's your total budget for this trip?"
+                name="budgetTotal"
+                value={onboardingDetails.budgetTotal.toString()}
+                callback={handleChange}
+                error={errors.budgetTotal}
+              />
+              <FormElement
+                type="select"
+                id="homeCurrency"
+                label="Please select the currency of the country you live in."
+                name="homeCurrency"
+                choose={true}
+                options={currencies}
+                value={currencies[0].value}
+                callback={handleChange}
+                error={errors.homeCurrency}
+              />
+            </>
+          )}
+          <Button
+            text=">"
+            onClick={() => {
+              if (currentQuestion === 1 && errors.destination) {
+                return;
+              } //create an if statement for each question section
+              setCurrentQuestion(currentQuestion + 1); //send errors and current question to external func
+            }}
+            className={""}
+          />
+        </>
+
+        {currentQuestion === 5 && (
           <div>
             {onboardingQuestions.secondaryForm.map((question) => {
+              //get rid of primary form as no longer used? then change this name
               return (
                 <BudgetSlider
                   key={question.id}
@@ -196,7 +258,7 @@ const Onboarding = () => {
               );
             })}
 
-            {createFormSection(onboardingQuestions.submit)}
+            <FormElement type="button" callback={handleSubmit} />
           </div>
         )}
       </form>
