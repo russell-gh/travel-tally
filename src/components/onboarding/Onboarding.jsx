@@ -39,7 +39,7 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-  const [currentFormSection, setCurrentFormSection] = useState(1);
+  const [currentFormSection, setCurrentFormSection] = useState(3);
   const [errors, setErrors] = useState({});
   const [countryCurrency, setCountryCurrency] = useState([]);
 
