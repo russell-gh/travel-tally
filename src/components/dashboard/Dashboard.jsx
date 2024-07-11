@@ -19,7 +19,6 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "../../reusable-code/Message";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
-import dayjs from "dayjs";
 
 const Dashboard = ({}) => {
   const trips = useSelector(selectTrips);
@@ -47,7 +46,6 @@ const Dashboard = ({}) => {
     actualStartDate,
     actualEndDate
   ); //should this be in a useEffect?
-  console.log(destination, homeCurrencySymbol, dates )
   const filtered = getSortedandFiltered(
     _expenses,
     order,

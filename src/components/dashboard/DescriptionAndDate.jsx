@@ -5,12 +5,11 @@ import { getColourForSharedId } from "../../utils/utils";
 const DescriptionAndDate = ({
   description,
   category,
-  startDate,
-  endDate,
+  date,
   sharedId,
   expenses,
 }) => {
-  if (!startDate || !endDate) {
+  if (!date) {
     return;
   }
 
@@ -27,7 +26,7 @@ const DescriptionAndDate = ({
         {sharedId && <span className="dot" style={dotStyle}></span>}
         {description ? description : category}
       </h2>
-      <p>{unixToDate(startDate)}</p>
+      <p>{unixToDate(date)}</p>
     </div>
   );
 };

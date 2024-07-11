@@ -32,24 +32,15 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const {
-          description,
-          id,
-          category,
-          startDate,
-          endDate,
-          amount,
-          sharedId,
-        } = item;
-        const isFuture = dayjs(startDate).isAfter(dayjs());
+        const { description, id, category, date, amount, sharedId } = item;
+        const isFuture = dayjs(date).isAfter(dayjs());
         return (
           <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
             <CategoryIcon category={category} />
             <DescriptionAndDate
               description={description}
               category={category}
-              startDate={startDate}
-              endDate={endDate}
+              date={date}
               sharedId={sharedId}
               expenses={expenses}
             />
