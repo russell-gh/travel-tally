@@ -46,6 +46,10 @@ const Dashboard = ({}) => {
     actualStartDate,
     actualEndDate
   ); //should this be in a useEffect?
+<<<<<<< HEAD
+=======
+
+>>>>>>> onboarding
   const filtered = getSortedandFiltered(
     _expenses,
     order,
