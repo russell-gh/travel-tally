@@ -11,21 +11,22 @@ import Button from "../reusable-code/Button";
 import { generateId } from "../utils/utils";
 
 const Signup = () => {
+  //Sends Errors + Creds to State
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
   const onInput = async (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
     const errObj = await validate(formData, "signup");
+    //BUG Errors displayed are one step behind
     setErrors(errObj);
   };
-  // console.log(formData);
-
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const redirect = useNavigate();
-
-  //======Validates credentials============
+  //==========================================
+  //=========Validates credentials============
+  //==========================================
   const onSubmit = async (e) => {
     const errObj = await validate(formData, "signup");
     setErrors(errObj);
@@ -39,7 +40,7 @@ const Signup = () => {
       console.log(formData);
       redirect("/login");
     } else {
-      console.log("passwords don't match", formData); //TODO Change to toast/alert?
+      alert("passwords don't match", formData); //TODO Change to toast/alert?
     }
   };
 

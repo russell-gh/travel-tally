@@ -9,7 +9,9 @@ import "./login.css";
 import "../css/app.css";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
+//==========================================
 //=======Displays Login Data================
+//==========================================
 const Login = () => {
   const user = useSelector(selectUser);
   const redirect = useNavigate();
@@ -24,7 +26,10 @@ const Login = () => {
   };
 
   const localUser = JSON.parse(localStorage.getItem("user"));
-  //=======Compares Credentials to Local Storage================
+
+  //============================================
+  //====Compares Credentials to Local Storage===
+  //============================================
   const onSubmit = async (e) => {
     console.log(errors, formData);
     Object.keys(errors).length
@@ -39,21 +44,6 @@ const Login = () => {
       : trips.length
       ? redirect("/dashboard")
       : redirect("/onboarding");
-    // if (errors.password || errors.email) {
-    //   console.log(errors);
-    // } else {
-    //   if (
-    //     formData.password === localUser.password &&
-    //     formData.email === localUser.email
-    //   ) {
-    //     console.log("form submitted", user);
-    //     if (trips.length) {
-    //       redirect("/dashboard");
-    //     } else redirect("/onboarding");
-    //   } else {
-    //     console.log("wrong email/password");
-    //   }
-    // }
   };
 
   return (
