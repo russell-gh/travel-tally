@@ -36,6 +36,8 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
+  const [currentQuestion, setCurrentQuestion] = useState(1);
+
   const [visible, setVisible] = useState(true); //change to false after testing
   const [errors, setErrors] = useState({});
 
@@ -153,84 +155,94 @@ const Onboarding = () => {
     <div>
       <form>
         <>
-          <FormElement
-            type="text"
-            id="destination"
-            label="Where are you off to?"
-            name="destination"
-            value={onboardingDetails.destination}
-            callback={handleChange}
-            error={errors.destination}
-          />
+          {currentQuestion === 1 && (
+            <FormElement
+              type="text"
+              id="destination"
+              label="Where are you off to?"
+              name="destination"
+              value={onboardingDetails.destination}
+              callback={handleChange}
+              error={errors.destination}
+            />
+          )}
 
+          {currentQuestion === 2 && (
+            <>
+              <FormElement
+                type="date"
+                id="startDate"
+                label="Choose the start date of your trip"
+                name="startDate"
+                value={onboardingDetails.dates.startDate}
+                callback={handleChange}
+                error={errors.startDate}
+              />
+              <FormElement
+                type="date"
+                id="endDate"
+                label="Choose the end date of your trip"
+                name="endDate"
+                value={onboardingDetails.dates.endDate}
+                callback={handleChange}
+                error={errors.endDate}
+              />
+              <FormElement
+                type="checkbox"
+                id="startDateIncluded"
+                label="Include first day of trip in budget?"
+                name="startDateIncluded"
+                value={onboardingDetails.dates.startDateIncluded}
+                callback={handleChange}
+              />
+              <FormElement
+                type="checkbox"
+                id="endDateIncluded"
+                label="Include last day of trip in budget?"
+                name="endDateIncluded"
+                value={onboardingDetails.dates.endDateIncluded}
+                callback={handleChange}
+              />
+            </>
+          )}
+
+          {currentQuestion === 3 && (
+            <>
+              <FormElement
+                type="number"
+                id="budgetTotal"
+                label="What's your total budget for this trip?"
+                name="budgetTotal"
+                value={onboardingDetails.budgetTotal.toString()}
+                callback={handleChange}
+                error={errors.budgetTotal}
+              />
+              <FormElement
+                type="select"
+                id="homeCurrency"
+                label="Please select the currency of the country you live in."
+                name="homeCurrency"
+                choose={true}
+                options={currencies}
+                value={currencies[0].value}
+                callback={handleChange}
+                error={errors.homeCurrency}
+              />
+            </>
+          )}
           <Button
             text=">"
             onClick={() => {
-              if (Object.keys(errors).includes("destination")) {
-                console.log("nope");
-              } else {
-                console.log("proceed");
-              }
+              if (currentQuestion === 1 && errors.destination) {
+                return;
+              } //create an if statement for each question section
+              setCurrentQuestion(currentQuestion + 1); //send errors and current question to external func
             }}
             className={""}
           />
-          <FormElement
-            type="date"
-            id="startDate"
-            label="Choose the start date of your trip"
-            name="startDate"
-            value={onboardingDetails.dates.startDate}
-            callback={handleChange}
-            error={errors.startDate}
-          />
-          <FormElement
-            type="date"
-            id="endDate"
-            label="Choose the end date of your trip"
-            name="endDate"
-            value={onboardingDetails.dates.endDate}
-            callback={handleChange}
-            error={errors.endDate}
-          />
-          <FormElement
-            type="checkbox"
-            id="startDateIncluded"
-            label="Include first day of trip in budget?"
-            name="startDateIncluded"
-            value={onboardingDetails.dates.startDateIncluded}
-            callback={handleChange}
-          />
-          <FormElement
-            type="checkbox"
-            id="endDateIncluded"
-            label="Include last day of trip in budget?"
-            name="endDateIncluded"
-            value={onboardingDetails.dates.endDateIncluded}
-            callback={handleChange}
-          />
-          <FormElement
-            type="number"
-            id="budgetTotal"
-            label="What's your total budget for this trip?"
-            name="budgetTotal"
-            value={onboardingDetails.budgetTotal.toString()}
-            callback={handleChange}
-            error={errors.budgetTotal}
-          />
-          <FormElement
-            type="select"
-            id="homeCurrency"
-            label="Please select the currency of the country you live in."
-            name="homeCurrency"
-            choose={true}
-            options={currencies}
-            value={currencies[0].value}
-            callback={handleChange}
-            error={errors.homeCurrency}
-          />
         </>
 
-        {visible && (
+        {currentQuestion === 5 && (
           <div>
             {onboardingQuestions.secondaryForm.map((question) => {
               //get rid of primary form as no longer used? then change this name
