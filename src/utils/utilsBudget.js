@@ -78,7 +78,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
     if (filterDate === "All Dates") {
       const now = unixToDate(new Date());
       const index = data.findIndex((item) => {
-        return unixToDate(item.startDate) === now;
+        return unixToDate(item.date) === now;
       });
       if (index !== -1) {
         date = data[index];
@@ -93,7 +93,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
       }
     } else {
       const index = data.findIndex((item) => {
-        return unixToDate(item.startDate) === filterDate;
+        return unixToDate(item.date) === filterDate;
       });
       if (index !== -1) {
         date = data[index];
@@ -123,7 +123,7 @@ export function getClosestCumulativeDifference(data, filterDate) {
   for (let i = 1; i < 50; i++) {
     let previousDate = filterDateDayJs.subtract(i, "day");
     index = data.findIndex((item) => {
-      return unixToDate(item.startDate) === unixToDate(previousDate);
+      return unixToDate(item.date) === unixToDate(previousDate);
     });
     if (index !== -1) {
       break;
@@ -139,7 +139,7 @@ export function getSpendPerDay(budgetPerDay, data) {
   let arr = filteredData.map((Arr) =>
     Arr.map((item) => ({
       amount: item.amount.toValue,
-      startDate: item.startDate,
+      date: item.date,
     }))
   );
 
@@ -158,14 +158,14 @@ export function getSpendPerDay(budgetPerDay, data) {
     const difference = budgetPerDay - totalSpendPerDay;
     const cumulativeDifferenceForDay = cumulativeDifference;
     cumulativeDifference += difference;
-    const startDate = values[0].startDate; // Assuming all items in the same day have the same startDate
+    const date = values[0].date; // Assuming all items in the same day have the same startDate
 
     arrValues.push({
       totalSpendPerDay,
       budgetPerDay,
       difference,
       cumulativeDifference: cumulativeDifferenceForDay,
-      startDate: startDate,
+      date: date,
     });
   });
 
