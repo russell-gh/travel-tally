@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
@@ -22,7 +21,7 @@ const Login = () => {
     setFormData(_formData);
     const errObj = await validate(_formData, "login");
     setErrors(errObj);
-    console.log(errors, formData);
+    // console.log(errors, formData);
   };
   //BUG Error Timing is ugly
 
