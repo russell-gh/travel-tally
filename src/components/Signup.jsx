@@ -16,8 +16,9 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
 
   const onInput = async (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-    const errObj = await validate(formData, "signup");
+    const _formData = { ...formData, [e.target.id]: e.target.value };
+    setFormData(_formData);
+    const errObj = await validate(_formData, "signup");
     //BUG Errors displayed are one step behind
     setErrors(errObj);
   };
