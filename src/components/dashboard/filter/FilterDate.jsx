@@ -11,8 +11,8 @@ const FilterDate = ({ expenses, expensesCategories }) => {
     return;
   }
 
-  let arrDates = getArrayOfValues(expenses, "startDate", hideFutureExpenses);
-  let arrDatesCategories = getArrayOfValues(expensesCategories, "startDate");
+  let arrDates = getArrayOfValues(expenses, "date", hideFutureExpenses);
+  let arrDatesCategories = getArrayOfValues(expensesCategories, "date");
 
   if (!arrDatesCategories) {
     return;

@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { colors } from "./config";
 import { nanoid } from "nanoid";
 
-
 export function getIndex(data, id, key) {
   const indexOf = data.findIndex((item) => {
     return item[key] === id;
@@ -40,23 +39,26 @@ export const getColourForSharedId = (arrSharedId, sharedId) => {
 };
 
 export function getArrayOfValues(data, key, hideFutureExpenses) {
-  let copy = [...data];
+  if (!data) {
+    return;
+  }
 
+  let copy = [...data];
   //hides future dates if checked
-  if (key === "startDate" && hideFutureExpenses === true) {
+  if (key === "date" && hideFutureExpenses === true) {
     copy = copy.filter((item) => {
-      return dayjs(item.startDate).isBefore(dayjs());
+      console.log(item);
+      return dayjs(item.date).isBefore(dayjs());
     });
   }
   //makes an array of the dates
   copy = copy.map((item) => {
     return item[key];
   });
-
   // removes duplicates
   copy = [...new Set(copy)];
 
-  if (key === "startDate") {
+  if (key === "date") {
     // get dates in right order
     copy.sort((a, b) => {
       if (a < b) {

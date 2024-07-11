@@ -14,9 +14,9 @@ export const getSortedandFiltered = (
   switch (order) {
     case "Newest first":
       filtered.sort((a, b) => {
-        if (a.startDate < b.startDate) {
+        if (a.date < b.date) {
           return 1;
-        } else if (a.startDate > b.startDate) {
+        } else if (a.date > b.date) {
           return -1;
         }
         return 0;
@@ -54,7 +54,7 @@ export const getSortedandFiltered = (
     ("everything stays the same");
   } else {
     filtered = filtered.filter((item) => {
-      return unixToDate(item.startDate) === filterDate;
+      return unixToDate(item.date) === filterDate;
     });
     if (filtered.length === 0) {
       console.log("Something went wrong with filtering the date");
@@ -64,7 +64,7 @@ export const getSortedandFiltered = (
   //toggle show future expenses
   if (hideFutureExpenses === true) {
     filtered = filtered.filter((item) => {
-      return dayjs(item.startDate).isBefore(dayjs());
+      return dayjs(item.date).isBefore(dayjs());
     });
   }
 
