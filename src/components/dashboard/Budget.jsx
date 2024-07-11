@@ -10,6 +10,7 @@ import ControlsAddExpense from "./ControlsAddExpense";
 import Difference from "./Difference";
 import { createDataForCharts } from "../../utils/createDataForCharts";
 import ChartBudget from "./ChartBudget";
+import { useMemo } from "react";
 
 const Budget = ({
   expenses,
@@ -18,7 +19,10 @@ const Budget = ({
   expensesCategories,
 }) => {
   const filter = useSelector(selectFilter);
-  const dataChart = createDataForCharts(details, expenses);
+
+  const dataChart = useMemo(() => {
+    return createDataForCharts(details, expenses);
+  }, [details, expenses]);
 
   const totalSpend =
     expensesCategories.length === 0

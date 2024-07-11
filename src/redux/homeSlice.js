@@ -15,10 +15,9 @@ export const homeSlice = createSlice({
 
       state.selectedTripId = state.trips[state.trips.length - 1].id;
 
-      saveStore("homeSlice", state)
+      saveStore("homeSlice", state);
     },
     setData: (state, action) => {
-      console.log("payload", action.payload);
       const { text, data } = action.payload;
       // Dynamically set the state property
       // if (text === "trips") {
