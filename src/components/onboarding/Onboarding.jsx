@@ -51,7 +51,7 @@ const Onboarding = () => {
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
-    getValidationResult();
+    getValidationResult(); //pass through id to validate here?
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
@@ -65,12 +65,12 @@ const Onboarding = () => {
 
   const checkValidation = (idArray, validationResult) => {
     const errorIds = Object.keys(validationResult);
-    console.log(errorIds, idArray);
+    // console.log(errorIds, idArray);
     const result = idArray.some((id) => errorIds.includes(id));
     if (!result) {
-      console.log("all good!");
+      // console.log("all good!");
     } else {
-      console.log("oh no check agian", validationResult);
+      // console.log("oh no check agian", validationResult);
     }
   };
 
@@ -167,9 +167,9 @@ const Onboarding = () => {
             text=">"
             onClick={() => {
               if (Object.keys(errors).includes("destination")) {
-                console.log("you can proceed");
-              } else {
                 console.log("nope");
+              } else {
+                console.log("proceed");
               }
             }}
             className={""}
