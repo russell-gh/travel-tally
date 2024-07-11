@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="login">
+      <div className="loginInput">
         <FormElement
           callback={onInput}
           type="email"
