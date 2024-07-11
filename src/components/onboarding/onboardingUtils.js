@@ -1,12 +1,12 @@
 import axios from "axios";
 import { API_KEY } from "./secrets";
 
-export const getCountryCurrency = async (city, limit) => {
+export const getCountryFromCity  = async (city) => {
   try {
     const { data } = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${API_KEY}`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
     );
-    console.log(data);
+    return data.country;
   } catch (error) {
     console.log(error);
   }

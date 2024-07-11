@@ -9,7 +9,7 @@ import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import {
   checkFormSectionErrors,
-  getCountryCurrency,
+  getCountryFromCity,
 } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,6 @@ const Onboarding = () => {
   // }, []);
 
   const dispatch = useDispatch();
-
   const redirect = useNavigate();
 
   //run state through validate function everytime input is changed.
@@ -142,7 +141,18 @@ const Onboarding = () => {
 
   const formButtonHandler = () => {
     const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
+
+    if (currentFormSection === 1 && !errorsPresent) {
+      getDestinationCurrency(onboardingDetails.destination);
+    }
     !errorsPresent ? setCurrentFormSection(currentFormSection + 1) : "";
+  };
+  const getDestinationCurrency = (city) => {
+    //create data list from city-country data 
+    //if city in data list, select country
+    //if not call below api
+    //use res from chosen method to call second api
+    const country = getCountryFromCity(city);
   };
 
   return (
@@ -238,11 +248,11 @@ const Onboarding = () => {
             })}
           </div>
         )}
-        
+
         {currentFormSection === 4 ? (
           <FormElement type="button" callback={handleSubmit} />
         ) : (
-          <Button text=">" onClick={() => formButtonHandler()}/>
+          <Button text=">" onClick={() => formButtonHandler()} />
         )}
       </form>
     </div>
