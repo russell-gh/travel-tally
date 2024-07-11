@@ -2,7 +2,7 @@ import { Slider, Stack, styled } from "@mui/material";
 import { useState } from "react";
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
-  width: 600,
+  width: 250,
   height: 10,
   "& .MuiSlider-rail": {
     backgroundColor:'#d6ee79',
@@ -15,16 +15,19 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
   },
   "& .MuiSlider-thumb": {
     color: "#235b89",
+    height:30,
+    width:30
   },
   "& .MuiSlider-valueLabelOpen": {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: 600,
     color: "#235b89",
     backgroundColor:"#d6ee79",
     height: 40,
     width:30,
     borderRadius: "50%",
-    top: -15
+    top: -15,
+    padding: "5px 10px"
   },
 }));
 
