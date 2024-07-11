@@ -8,6 +8,8 @@ const Button = ({ onClick, text, className, animation, disabled }) => {
   const ripplesRef = useRef();
 
   const handleClick = (e) => {
+    e.preventDefault();
+    console.log(e);
     if (animation) {
       // Trigger GSAP animation on click
       gsap.fromTo(buttonRef.current, { scale: 0.9 }, { scale: 1, duration: 1 });
@@ -42,7 +44,7 @@ const Button = ({ onClick, text, className, animation, disabled }) => {
     <button
       ref={buttonRef}
       className={`btn ${className}`}
-      onClick={handleClick}
+      onClick={(e)=>handleClick(e)}
       disabled={disabled}
     >
       {text}
