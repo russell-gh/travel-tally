@@ -1,14 +1,16 @@
 import Button from "../../reusable-code/Button";
 import FormElement from "../../reusable-code/FormElement";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { saveProfile } from "../../redux/onboardingSlice";
 import { useDispatch } from "react-redux";
 import { setUpProfileSchema } from "../../validation/schemas";
 import { useState } from "react";
 import Joi from "joi";
+import { useNavigate } from "react-router-dom";
 
 const UserName = () => {
   const dispatch = useDispatch();
+  const redirect = useNavigate();
   const [error, setError] = useState("");
   const [value, setValue] = useState("");
 
@@ -30,7 +32,7 @@ const UserName = () => {
   };
 
   return (
-    <>
+    <div className="setUserNameContainer">
       <FormElement
         type="text"
         label="Username"
@@ -48,20 +50,18 @@ const UserName = () => {
         }}
         error={error}
       />
-      <br />
-      <Link to={error ? "#" : "/setupprofile/profilepicture"}>
-        <Button
-          className="next"
-          text="next"
-          onClick={() => {
-            if (!error) {
-              dispatch(saveProfile({ key: "userName", value: value }));
-            }
-          }}
-          disabled={!!error}
-        />
-      </Link>
-    </>
+      <Button
+        className="next"
+        text="next"
+        onClick={() => {
+          if (!error) {
+            dispatch(saveProfile({ key: "userName", value: value }));
+          }
+          redirect("/setup-profile/profilepicture");
+        }}
+        disabled={!!error}
+      />
+    </div>
   );
 };
 

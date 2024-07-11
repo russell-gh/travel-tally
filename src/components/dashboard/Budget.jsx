@@ -5,7 +5,6 @@ import {
 } from "../../utils/utilsBudget";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
-import CategoryGauge from "./CategoryGauge";
 import ControlsAddExpense from "./ControlsAddExpense";
 import Difference from "./Difference";
 import { createDataForCharts } from "../../utils/createDataForCharts";
@@ -21,6 +20,7 @@ const Budget = ({
   const filter = useSelector(selectFilter);
 
   const dataChart = useMemo(() => {
+    console.log("usememo datachart total");
     return createDataForCharts(details, expenses);
   }, [details, expenses]);
 
@@ -31,12 +31,13 @@ const Budget = ({
   const budget = getBudget(details, filter);
   const difference = addDecimals(budget * 100 - totalSpend * 100);
 
+  const component = useMemo(() => {
+    return <ChartBudget dataChart={dataChart} />;
+  }, [dataChart]);
+
   return (
     <>
-      <div className="chart">
-        <ChartBudget dataChart={dataChart} />
-        {/* <CategoryGauge budget={budget} spend={totalSpend} /> */}
-      </div>
+      <div className="chart">{component}</div>
       <div className="containerBottomRowGrid">
         <div className="budget">
           <p>Budget: </p>

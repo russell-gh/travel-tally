@@ -6,12 +6,12 @@ import {
 } from "../../utils/utilsBudget";
 import { useSelector } from "react-redux";
 import { selectFilter, selectFilterDate } from "../../redux/homeSlice";
-import CategoryGauge from "./CategoryGauge";
 import DailyDifference from "./Difference";
 import CummulativeDifference from "./CummulativeDifference";
 import ControlsAddExpense from "./ControlsAddExpense";
 import { createDataForCharts } from "../../utils/createDataForCharts";
 import ChartBudget from "./ChartBudget";
+import { useMemo } from "react";
 
 const BudgetPerDay = ({
   expensesArray,
@@ -22,7 +22,6 @@ const BudgetPerDay = ({
   actualStartDate,
   expenses,
 }) => {
-  console.log(expensesArray);
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
 
@@ -36,26 +35,33 @@ const BudgetPerDay = ({
   const difference = addDecimals(
     budgetPerDay * 100 - selectedDay.totalSpendPerDay
   );
-  console.log(data);
 
-  const dataChart = createDataForCharts(
+  const dataChart = useMemo(() => {
+    console.log("usememo datachart daily");
+    return createDataForCharts(
+      details,
+      expenses,
+      filterDate,
+      actualEndDate,
+      actualStartDate,
+      amountOfBudgetDays
+    );
+  }, [
     details,
     expenses,
     filterDate,
     actualEndDate,
     actualStartDate,
-    amountOfBudgetDays
-  );
+    amountOfBudgetDays,
+  ]);
+
+  const component = useMemo(() => {
+    return <ChartBudget dataChart={dataChart} />;
+  }, [dataChart]);
 
   return (
     <>
-      <div className="chart">
-        <ChartBudget dataChart={dataChart} />
-        {/* <CategoryGauge
-          budget={budgetPerDay}
-          spend={addDecimals(selectedDay.totalSpendPerDay)}
-        /> */}
-      </div>
+      <div className="chart">{component}</div>
       <div className="containerBottomRowGrid">
         <div className="dayBudget">
           <p>Budget per day: </p>

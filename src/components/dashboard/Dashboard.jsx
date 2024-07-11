@@ -19,8 +19,11 @@ import BudgetInfo from "./BudgetInfo";
 import Message from "../../reusable-code/Message";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { filterCategories } from "../../utils/getSortedandFiltered";
+import { useMemo } from "react";
 
-const Dashboard = ({}) => {
+const Dashboard = () => {
+  console.log("dashboard reloaded");
+
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
   const order = useSelector(selectOrder);
@@ -32,28 +35,49 @@ const Dashboard = ({}) => {
     return <Message message="Loading.." />;
   }
 
-  const trip = findItem(trips, selectedTripId);
+  const trip = useMemo(() => {
+    console.log("useMemo trip");
+    return findItem(trips, selectedTripId);
+  }, [trips, selectedTripId]);
+
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, dates } = details;
   const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
-  const actualStartDate = !startDateIncluded ? startDate + 86400000 : startDate;
-  const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
-  let _expenses = [...trip.expenses].reverse();
 
-  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget can be filtered with activities
-  let expensesArray = createExpensesArray(
-    expensesCategories,
-    actualStartDate,
-    actualEndDate
-  ); //should this be in a useEffect?
+  const actualStartDate = useMemo(() => {
+    return !startDateIncluded ? startDate + 86400000 : startDate;
+  }, [startDateIncluded, startDate]);
+  const actualEndDate = useMemo(() => {
+    return !endDateIncluded ? endDate - 86400000 : endDate;
+  }, [endDateIncluded, endDate]);
 
-  const filtered = getSortedandFiltered(
-    _expenses,
-    order,
-    filter,
-    filterDate,
-    hideFutureExpenses
-  );
+  let _expenses = useMemo(() => {
+    console.log("useMemo _expenses");
+    return [...trip.expenses].reverse();
+  }, [trip.expenses]);
+
+  const expensesCategories = useMemo(() => {
+    return filterCategories(expenses, filter);
+  }, [expenses, filter]); // filters expenses on activities so daily budget can be filtered with activities
+
+  let expensesArray = useMemo(() => {
+    return createExpensesArray(
+      expensesCategories,
+      actualStartDate,
+      actualEndDate
+    );
+  }, [expensesCategories, actualStartDate, actualEndDate]); //should this be in a useEffect?
+
+  const filtered = useMemo(() => {
+    return getSortedandFiltered(
+      _expenses,
+      order,
+      filter,
+      filterDate,
+      hideFutureExpenses
+    );
+  }, [_expenses, order, filter, filterDate, hideFutureExpenses]);
+
   return (
     <div className="dashboard">
       <div className="dashboardFixed">

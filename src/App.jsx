@@ -56,7 +56,6 @@ const App = () => {
 
   useEffect(() => {
     if (_popUp && !popUp.component) {
-      console.log("you get here");
       animationPopUp(popUpRef.current, "reverse", closePopUp);
     } else if (popUp.component) {
       _setPopUp(popUp);
@@ -80,7 +79,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard popUp={_popUp} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
         <div ref={popUpRef} className="popUpContainer">

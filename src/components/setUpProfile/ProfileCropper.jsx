@@ -5,7 +5,7 @@ import Button from "../../reusable-code/Button";
 import { saveProfile } from "../../redux/onboardingSlice";
 import { useDispatch } from "react-redux";
 
-const ProfileCropper = ({ src }) => {
+const ProfileCropper = ({ src, handleCapture }) => {
   const cropperRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -25,19 +25,33 @@ const ProfileCropper = ({ src }) => {
     <>
       <Cropper
         src={src}
-        style={{ height: 400, width: "100%" }}
+        style={{ height: "auto", width: "auto" }}
         initialAspectRatio={1 / 1}
         guides={true}
         crop={onCrop}
         ref={cropperRef}
       />
-      <Button
-        className="upload"
-        text="upload"
-        onClick={() => {
-          dispatch(saveProfile({ key: "profilePictureSrc", value: onCrop() }));
-        }}
-      />
+
+      <div className="setUpProfileBtnContainer">
+        {handleCapture && (
+          <Button
+            className="retakeBtn"
+            text="retake"
+            onClick={() => {
+              handleCapture();
+            }}
+          />
+        )}
+        <Button
+          className="uploadBtn"
+          text="upload"
+          onClick={() => {
+            dispatch(
+              saveProfile({ key: "profilePictureSrc", value: onCrop() })
+            );
+          }}
+        />
+      </div>
     </>
   );
 };

@@ -107,7 +107,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {label && <label htmlFor={id}>{label}:</label>}
+          {label && <label htmlFor={id}>{label}</label>}
           {error && <p>{error}</p>}
         </>
       );
