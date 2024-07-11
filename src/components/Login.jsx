@@ -3,7 +3,6 @@ import { selectUser } from "../redux/onboardingSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
-import Joi from "joi";
 import { validate } from "../validation/validate";
 import "../css/login.css";
 import "../css/app.css";
@@ -13,7 +12,6 @@ import Button from "../reusable-code/Button";
 //=======Displays Login Data================
 //==========================================
 const Login = () => {
-  const user = useSelector(selectUser);
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
