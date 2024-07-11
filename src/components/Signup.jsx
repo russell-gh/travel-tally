@@ -38,9 +38,9 @@ const Signup = () => {
       dispatch(addUser(formData));
       localStorage.setItem("user", JSON.stringify(formData));
       console.log(formData);
-      redirect("/login");
+      redirect("/login"); //TODO Change to SetupProfile
     } else {
-      alert("passwords don't match", formData); //TODO Change to toast/alert?
+      alert("passwords don't match", formData);
     }
   };
 

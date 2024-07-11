@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
 import Joi from "joi";
 import { validate } from "../validation/validate";
-import "./login.css";
+import "../css/login.css";
 import "../css/app.css";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
@@ -40,7 +40,7 @@ const Login = () => {
             formData.email === localUser.email
           ) //TODO Change to state credentials
         )
-      ? alert("wrong email/password") //TODO Change to toast?
+      ? alert("wrong email/password")
       : trips.length
       ? redirect("/dashboard")
       : redirect("/onboarding");
@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <>
-      <div>
+      <div className="login">
         <FormElement
           callback={onInput}
           type="email"

@@ -15,4 +15,10 @@ header .logo {
 header svg {
   height: 50px;
   width: 50px;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }/*# sourceMappingURL=headerFooter.css.map */
