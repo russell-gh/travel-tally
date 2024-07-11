@@ -20,7 +20,6 @@ const Budget = ({
   const filter = useSelector(selectFilter);
 
   const dataChart = useMemo(() => {
-    console.log("usememo datachart total");
     return createDataForCharts(details, expenses);
   }, [details, expenses]);
 

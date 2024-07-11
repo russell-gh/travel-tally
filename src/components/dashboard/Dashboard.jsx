@@ -22,8 +22,6 @@ import { filterCategories } from "../../utils/getSortedandFiltered";
 import { useMemo } from "react";
 
 const Dashboard = () => {
-  console.log("dashboard reloaded");
-
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
   const order = useSelector(selectOrder);
@@ -36,7 +34,6 @@ const Dashboard = () => {
   }
 
   const trip = useMemo(() => {
-    console.log("useMemo trip");
     return findItem(trips, selectedTripId);
   }, [trips, selectedTripId]);
 
@@ -52,7 +49,6 @@ const Dashboard = () => {
   }, [endDateIncluded, endDate]);
 
   let _expenses = useMemo(() => {
-    console.log("useMemo _expenses");
     return [...trip.expenses].reverse();
   }, [trip.expenses]);
 

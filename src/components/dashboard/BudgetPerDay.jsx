@@ -37,7 +37,6 @@ const BudgetPerDay = ({
   );
 
   const dataChart = useMemo(() => {
-    console.log("usememo datachart daily");
     return createDataForCharts(
       details,
       expenses,
