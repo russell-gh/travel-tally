@@ -1,0 +1,1362 @@
+[
+    {
+      "Capital City": "Kabul",
+      "Country": "Afghanistan",
+      "3-Letter Code": "AFG",
+      "2-Letter Code": "AF",
+      "Currency Code": "AFN"
+    },
+    {
+      "Capital City": "Tirana",
+      "Country": "Albania",
+      "3-Letter Code": "ALB",
+      "2-Letter Code": "AL",
+      "Currency Code": "ALL"
+    },
+    {
+      "Capital City": "Algiers",
+      "Country": "Algeria",
+      "3-Letter Code": "DZA",
+      "2-Letter Code": "DZ",
+      "Currency Code": "DZD"
+    },
+    {
+      "Capital City": "Andorra la Vella",
+      "Country": "Andorra",
+      "3-Letter Code": "AND",
+      "2-Letter Code": "AD",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Luanda",
+      "Country": "Angola",
+      "3-Letter Code": "AGO",
+      "2-Letter Code": "AO",
+      "Currency Code": "AOA"
+    },
+    {
+      "Capital City": "Saint John's",
+      "Country": "Antigua and Barbuda",
+      "3-Letter Code": "ATG",
+      "2-Letter Code": "AG",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Buenos Aires",
+      "Country": "Argentina",
+      "3-Letter Code": "ARG",
+      "2-Letter Code": "AR",
+      "Currency Code": "ARS"
+    },
+    {
+      "Capital City": "Yerevan",
+      "Country": "Armenia",
+      "3-Letter Code": "ARM",
+      "2-Letter Code": "AM",
+      "Currency Code": "AMD"
+    },
+    {
+      "Capital City": "Canberra",
+      "Country": "Australia",
+      "3-Letter Code": "AUS",
+      "2-Letter Code": "AU",
+      "Currency Code": "AUD"
+    },
+    {
+      "Capital City": "Vienna",
+      "Country": "Austria",
+      "3-Letter Code": "AUT",
+      "2-Letter Code": "AT",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Baku",
+      "Country": "Azerbaijan",
+      "3-Letter Code": "AZE",
+      "2-Letter Code": "AZ",
+      "Currency Code": "AZN"
+    },
+    {
+      "Capital City": "Nassau",
+      "Country": "Bahamas",
+      "3-Letter Code": "BHS",
+      "2-Letter Code": "BS",
+      "Currency Code": "BSD"
+    },
+    {
+      "Capital City": "Manama",
+      "Country": "Bahrain",
+      "3-Letter Code": "BHR",
+      "2-Letter Code": "BH",
+      "Currency Code": "BHD"
+    },
+    {
+      "Capital City": "Dhaka",
+      "Country": "Bangladesh",
+      "3-Letter Code": "BGD",
+      "2-Letter Code": "BD",
+      "Currency Code": "BDT"
+    },
+    {
+      "Capital City": "Bridgetown",
+      "Country": "Barbados",
+      "3-Letter Code": "BRB",
+      "2-Letter Code": "BB",
+      "Currency Code": "BBD"
+    },
+    {
+      "Capital City": "Minsk",
+      "Country": "Belarus",
+      "3-Letter Code": "BLR",
+      "2-Letter Code": "BY",
+      "Currency Code": "BYN"
+    },
+    {
+      "Capital City": "Brussels",
+      "Country": "Belgium",
+      "3-Letter Code": "BEL",
+      "2-Letter Code": "BE",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Belmopan",
+      "Country": "Belize",
+      "3-Letter Code": "BLZ",
+      "2-Letter Code": "BZ",
+      "Currency Code": "BZD"
+    },
+    {
+      "Capital City": "Porto-Novo",
+      "Country": "Benin",
+      "3-Letter Code": "BEN",
+      "2-Letter Code": "BJ",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Thimphu",
+      "Country": "Bhutan",
+      "3-Letter Code": "BTN",
+      "2-Letter Code": "BT",
+      "Currency Code": "BTN"
+    },
+    {
+      "Capital City": "Sucre",
+      "Country": "Bolivia",
+      "3-Letter Code": "BOL",
+      "2-Letter Code": "BO",
+      "Currency Code": "BOB"
+    },
+    {
+      "Capital City": "Sarajevo",
+      "Country": "Bosnia and Herzegovina",
+      "3-Letter Code": "BIH",
+      "2-Letter Code": "BA",
+      "Currency Code": "BAM"
+    },
+    {
+      "Capital City": "Gaborone",
+      "Country": "Botswana",
+      "3-Letter Code": "BWA",
+      "2-Letter Code": "BW",
+      "Currency Code": "BWP"
+    },
+    {
+      "Capital City": "Brasília",
+      "Country": "Brazil",
+      "3-Letter Code": "BRA",
+      "2-Letter Code": "BR",
+      "Currency Code": "BRL"
+    },
+    {
+      "Capital City": "Bandar Seri Begawan",
+      "Country": "Brunei",
+      "3-Letter Code": "BRN",
+      "2-Letter Code": "BN",
+      "Currency Code": "BND"
+    },
+    {
+      "Capital City": "Sofia",
+      "Country": "Bulgaria",
+      "3-Letter Code": "BGR",
+      "2-Letter Code": "BG",
+      "Currency Code": "BGN"
+    },
+    {
+      "Capital City": "Ouagadougou",
+      "Country": "Burkina Faso",
+      "3-Letter Code": "BFA",
+      "2-Letter Code": "BF",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Gitega",
+      "Country": "Burundi",
+      "3-Letter Code": "BDI",
+      "2-Letter Code": "BI",
+      "Currency Code": "BIF"
+    },
+    {
+      "Capital City": "Praia",
+      "Country": "Cabo Verde",
+      "3-Letter Code": "CPV",
+      "2-Letter Code": "CV",
+      "Currency Code": "CVE"
+    },
+    {
+      "Capital City": "Phnom Penh",
+      "Country": "Cambodia",
+      "3-Letter Code": "KHM",
+      "2-Letter Code": "KH",
+      "Currency Code": "KHR"
+    },
+    {
+      "Capital City": "Yaoundé",
+      "Country": "Cameroon",
+      "3-Letter Code": "CMR",
+      "2-Letter Code": "CM",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "Ottawa",
+      "Country": "Canada",
+      "3-Letter Code": "CAN",
+      "2-Letter Code": "CA",
+      "Currency Code": "CAD"
+    },
+    {
+      "Capital City": "Bangui",
+      "Country": "Central African Republic",
+      "3-Letter Code": "CAF",
+      "2-Letter Code": "CF",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "N'Djamena",
+      "Country": "Chad",
+      "3-Letter Code": "TCD",
+      "2-Letter Code": "TD",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "Santiago",
+      "Country": "Chile",
+      "3-Letter Code": "CHL",
+      "2-Letter Code": "CL",
+      "Currency Code": "CLP"
+    },
+    {
+      "Capital City": "Beijing",
+      "Country": "China",
+      "3-Letter Code": "CHN",
+      "2-Letter Code": "CN",
+      "Currency Code": "CNY"
+    },
+    {
+      "Capital City": "Bogotá",
+      "Country": "Colombia",
+      "3-Letter Code": "COL",
+      "2-Letter Code": "CO",
+      "Currency Code": "COP"
+    },
+    {
+      "Capital City": "Moroni",
+      "Country": "Comoros",
+      "3-Letter Code": "COM",
+      "2-Letter Code": "KM",
+      "Currency Code": "KMF"
+    },
+    {
+      "Capital City": "Kinshasa",
+      "Country": "Congo, Democratic Republic",
+      "3-Letter Code": "COD",
+      "2-Letter Code": "CD",
+      "Currency Code": "CDF"
+    },
+    {
+      "Capital City": "Brazzaville",
+      "Country": "Congo, Republic of",
+      "3-Letter Code": "COG",
+      "2-Letter Code": "CG",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "San José",
+      "Country": "Costa Rica",
+      "3-Letter Code": "CRI",
+      "2-Letter Code": "CR",
+      "Currency Code": "CRC"
+    },
+    {
+      "Capital City": "Zagreb",
+      "Country": "Croatia",
+      "3-Letter Code": "HRV",
+      "2-Letter Code": "HR",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Havana",
+      "Country": "Cuba",
+      "3-Letter Code": "CUB",
+      "2-Letter Code": "CU",
+      "Currency Code": "CUP"
+    },
+    {
+      "Capital City": "Nicosia",
+      "Country": "Cyprus",
+      "3-Letter Code": "CYP",
+      "2-Letter Code": "CY",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Prague",
+      "Country": "Czech Republic",
+      "3-Letter Code": "CZE",
+      "2-Letter Code": "CZ",
+      "Currency Code": "CZK"
+    },
+    {
+      "Capital City": "Copenhagen",
+      "Country": "Denmark",
+      "3-Letter Code": "DNK",
+      "2-Letter Code": "DK",
+      "Currency Code": "DKK"
+    },
+    {
+      "Capital City": "Djibouti (city)",
+      "Country": "Djibouti",
+      "3-Letter Code": "DJI",
+      "2-Letter Code": "DJ",
+      "Currency Code": "DJF"
+    },
+    {
+      "Capital City": "Roseau",
+      "Country": "Dominica",
+      "3-Letter Code": "DMA",
+      "2-Letter Code": "DM",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Santo Domingo",
+      "Country": "Dominican Republic",
+      "3-Letter Code": "DOM",
+      "2-Letter Code": "DO",
+      "Currency Code": "DOP"
+    },
+    {
+      "Capital City": "Quito",
+      "Country": "Ecuador",
+      "3-Letter Code": "ECU",
+      "2-Letter Code": "EC",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Cairo",
+      "Country": "Egypt",
+      "3-Letter Code": "EGY",
+      "2-Letter Code": "EG",
+      "Currency Code": "EGP"
+    },
+    {
+      "Capital City": "San Salvador",
+      "Country": "El Salvador",
+      "3-Letter Code": "SLV",
+      "2-Letter Code": "SV",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Malabo",
+      "Country": "Equatorial Guinea",
+      "3-Letter Code": "GNQ",
+      "2-Letter Code": "GQ",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "Asmara",
+      "Country": "Eritrea",
+      "3-Letter Code": "ERI",
+      "2-Letter Code": "ER",
+      "Currency Code": "ERN"
+    },
+    {
+      "Capital City": "Tallinn",
+      "Country": "Estonia",
+      "3-Letter Code": "EST",
+      "2-Letter Code": "EE",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Mbabane (administrative), Lobamba (royal)",
+      "Country": "Eswatini",
+      "3-Letter Code": "SWZ",
+      "2-Letter Code": "SZ",
+      "Currency Code": "SZL"
+    },
+    {
+      "Capital City": "Addis Ababa",
+      "Country": "Ethiopia",
+      "3-Letter Code": "ETH",
+      "2-Letter Code": "ET",
+      "Currency Code": "ETB"
+    },
+    {
+      "Capital City": "Suva",
+      "Country": "Fiji",
+      "3-Letter Code": "FJI",
+      "2-Letter Code": "FJ",
+      "Currency Code": "FJD"
+    },
+    {
+      "Capital City": "Helsinki",
+      "Country": "Finland",
+      "3-Letter Code": "FIN",
+      "2-Letter Code": "FI",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Paris",
+      "Country": "France",
+      "3-Letter Code": "FRA",
+      "2-Letter Code": "FR",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Libreville",
+      "Country": "Gabon",
+      "3-Letter Code": "GAB",
+      "2-Letter Code": "GA",
+      "Currency Code": "XAF"
+    },
+    {
+      "Capital City": "Banjul",
+      "Country": "Gambia",
+      "3-Letter Code": "GMB",
+      "2-Letter Code": "GM",
+      "Currency Code": "GMD"
+    },
+    {
+      "Capital City": "Tbilisi",
+      "Country": "Georgia",
+      "3-Letter Code": "GEO",
+      "2-Letter Code": "GE",
+      "Currency Code": "GEL"
+    },
+    {
+      "Capital City": "Berlin",
+      "Country": "Germany",
+      "3-Letter Code": "DEU",
+      "2-Letter Code": "DE",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Accra",
+      "Country": "Ghana",
+      "3-Letter Code": "GHA",
+      "2-Letter Code": "GH",
+      "Currency Code": "GHS"
+    },
+    {
+      "Capital City": "Athens",
+      "Country": "Greece",
+      "3-Letter Code": "GRC",
+      "2-Letter Code": "GR",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "St. George's",
+      "Country": "Grenada",
+      "3-Letter Code": "GRD",
+      "2-Letter Code": "GD",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Guatemala City",
+      "Country": "Guatemala",
+      "3-Letter Code": "GTM",
+      "2-Letter Code": "GT",
+      "Currency Code": "GTQ"
+    },
+    {
+      "Capital City": "Conakry",
+      "Country": "Guinea",
+      "3-Letter Code": "GIN",
+      "2-Letter Code": "GN",
+      "Currency Code": "GNF"
+    },
+    {
+      "Capital City": "Bissau",
+      "Country": "Guinea-Bissau",
+      "3-Letter Code": "GNB",
+      "2-Letter Code": "GW",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Georgetown",
+      "Country": "Guyana",
+      "3-Letter Code": "GUY",
+      "2-Letter Code": "GY",
+      "Currency Code": "GYD"
+    },
+    {
+      "Capital City": "Port-au-Prince",
+      "Country": "Haiti",
+      "3-Letter Code": "HTI",
+      "2-Letter Code": "HT",
+      "Currency Code": "HTG"
+    },
+    {
+      "Capital City": "Tegucigalpa",
+      "Country": "Honduras",
+      "3-Letter Code": "HND",
+      "2-Letter Code": "HN",
+      "Currency Code": "HNL"
+    },
+    {
+      "Capital City": "Budapest",
+      "Country": "Hungary",
+      "3-Letter Code": "HUN",
+      "2-Letter Code": "HU",
+      "Currency Code": "HUF"
+    },
+    {
+      "Capital City": "Reykjavik",
+      "Country": "Iceland",
+      "3-Letter Code": "ISL",
+      "2-Letter Code": "IS",
+      "Currency Code": "ISK"
+    },
+    {
+      "Capital City": "New Delhi",
+      "Country": "India",
+      "3-Letter Code": "IND",
+      "2-Letter Code": "IN",
+      "Currency Code": "INR"
+    },
+    {
+      "Capital City": "Jakarta",
+      "Country": "Indonesia",
+      "3-Letter Code": "IDN",
+      "2-Letter Code": "ID",
+      "Currency Code": "IDR"
+    },
+    {
+      "Capital City": "Tehran",
+      "Country": "Iran",
+      "3-Letter Code": "IRN",
+      "2-Letter Code": "IR",
+      "Currency Code": "IRR"
+    },
+    {
+      "Capital City": "Baghdad",
+      "Country": "Iraq",
+      "3-Letter Code": "IRQ",
+      "2-Letter Code": "IQ",
+      "Currency Code": "IQD"
+    },
+    {
+      "Capital City": "Dublin",
+      "Country": "Ireland",
+      "3-Letter Code": "IRL",
+      "2-Letter Code": "IE",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Jerusalem",
+      "Country": "Israel",
+      "3-Letter Code": "ISR",
+      "2-Letter Code": "IL",
+      "Currency Code": "ILS"
+    },
+    {
+      "Capital City": "Rome",
+      "Country": "Italy",
+      "3-Letter Code": "ITA",
+      "2-Letter Code": "IT",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Kingston",
+      "Country": "Jamaica",
+      "3-Letter Code": "JAM",
+      "2-Letter Code": "JM",
+      "Currency Code": "JMD"
+    },
+    {
+      "Capital City": "Tokyo",
+      "Country": "Japan",
+      "3-Letter Code": "JPN",
+      "2-Letter Code": "JP",
+      "Currency Code": "JPY"
+    },
+    {
+      "Capital City": "Amman",
+      "Country": "Jordan",
+      "3-Letter Code": "JOR",
+      "2-Letter Code": "JO",
+      "Currency Code": "JOD"
+    },
+    {
+      "Capital City": "Nur-Sultan",
+      "Country": "Kazakhstan",
+      "3-Letter Code": "KAZ",
+      "2-Letter Code": "KZ",
+      "Currency Code": "KZT"
+    },
+    {
+      "Capital City": "Nairobi",
+      "Country": "Kenya",
+      "3-Letter Code": "KEN",
+      "2-Letter Code": "KE",
+      "Currency Code": "KES"
+    },
+    {
+      "Capital City": "South Tarawa",
+      "Country": "Kiribati",
+      "3-Letter Code": "KIR",
+      "2-Letter Code": "KI",
+      "Currency Code": "AUD"
+    },
+    {
+      "Capital City": "Pyongyang",
+      "Country": "Korea, North",
+      "3-Letter Code": "PRK",
+      "2-Letter Code": "KP",
+      "Currency Code": "KPW"
+    },
+    {
+      "Capital City": "Seoul",
+      "Country": "Korea, South",
+      "3-Letter Code": "KOR",
+      "2-Letter Code": "KR",
+      "Currency Code": "KRW"
+    },
+    {
+      "Capital City": "Pristina",
+      "Country": "Kosovo",
+      "3-Letter Code": "XKX",
+      "2-Letter Code": "XK",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Kuwait City",
+      "Country": "Kuwait",
+      "3-Letter Code": "KWT",
+      "2-Letter Code": "KW",
+      "Currency Code": "KWD"
+    },
+    {
+      "Capital City": "Bishkek",
+      "Country": "Kyrgyzstan",
+      "3-Letter Code": "KGZ",
+      "2-Letter Code": "KG",
+      "Currency Code": "KGS"
+    },
+    {
+      "Capital City": "Vientiane",
+      "Country": "Laos",
+      "3-Letter Code": "LAO",
+      "2-Letter Code": "LA",
+      "Currency Code": "LAK"
+    },
+    {
+      "Capital City": "Riga",
+      "Country": "Latvia",
+      "3-Letter Code": "LVA",
+      "2-Letter Code": "LV",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Beirut",
+      "Country": "Lebanon",
+      "3-Letter Code": "LBN",
+      "2-Letter Code": "LB",
+      "Currency Code": "LBP"
+    },
+    {
+      "Capital City": "Maseru",
+      "Country": "Lesotho",
+      "3-Letter Code": "LSO",
+      "2-Letter Code": "LS",
+      "Currency Code": "LSL"
+    },
+    {
+      "Capital City": "Monrovia",
+      "Country": "Liberia",
+      "3-Letter Code": "LBR",
+      "2-Letter Code": "LR",
+      "Currency Code": "LRD"
+    },
+    {
+      "Capital City": "Tripoli",
+      "Country": "Libya",
+      "3-Letter Code": "LBY",
+      "2-Letter Code": "LY",
+      "Currency Code": "LYD"
+    },
+    {
+      "Capital City": "Vaduz",
+      "Country": "Liechtenstein",
+      "3-Letter Code": "LIE",
+      "2-Letter Code": "LI",
+      "Currency Code": "CHF"
+    },
+    {
+      "Capital City": "Vilnius",
+      "Country": "Lithuania",
+      "3-Letter Code": "LTU",
+      "2-Letter Code": "LT",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Luxembourg (city)",
+      "Country": "Luxembourg",
+      "3-Letter Code": "LUX",
+      "2-Letter Code": "LU",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Antananarivo",
+      "Country": "Madagascar",
+      "3-Letter Code": "MDG",
+      "2-Letter Code": "MG",
+      "Currency Code": "MGA"
+    },
+    {
+      "Capital City": "Lilongwe",
+      "Country": "Malawi",
+      "3-Letter Code": "MWI",
+      "2-Letter Code": "MW",
+      "Currency Code": "MWK"
+    },
+    {
+      "Capital City": "Kuala Lumpur",
+      "Country": "Malaysia",
+      "3-Letter Code": "MYS",
+      "2-Letter Code": "MY",
+      "Currency Code": "MYR"
+    },
+    {
+      "Capital City": "Malé",
+      "Country": "Maldives",
+      "3-Letter Code": "MDV",
+      "2-Letter Code": "MV",
+      "Currency Code": "MVR"
+    },
+    {
+      "Capital City": "Bamako",
+      "Country": "Mali",
+      "3-Letter Code": "MLI",
+      "2-Letter Code": "ML",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Valletta",
+      "Country": "Malta",
+      "3-Letter Code": "MLT",
+      "2-Letter Code": "MT",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Majuro",
+      "Country": "Marshall Islands",
+      "3-Letter Code": "MHL",
+      "2-Letter Code": "MH",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Nouakchott",
+      "Country": "Mauritania",
+      "3-Letter Code": "MRT",
+      "2-Letter Code": "MR",
+      "Currency Code": "MRU"
+    },
+    {
+      "Capital City": "Port Louis",
+      "Country": "Mauritius",
+      "3-Letter Code": "MUS",
+      "2-Letter Code": "MU",
+      "Currency Code": "MUR"
+    },
+    {
+      "Capital City": "Mexico City",
+      "Country": "Mexico",
+      "3-Letter Code": "MEX",
+      "2-Letter Code": "MX",
+      "Currency Code": "MXN"
+    },
+    {
+      "Capital City": "Palikir",
+      "Country": "Micronesia",
+      "3-Letter Code": "FSM",
+      "2-Letter Code": "FM",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Chisinau",
+      "Country": "Moldova",
+      "3-Letter Code": "MDA",
+      "2-Letter Code": "MD",
+      "Currency Code": "MDL"
+    },
+    {
+      "Capital City": "Monaco (city-state)",
+      "Country": "Monaco",
+      "3-Letter Code": "MCO",
+      "2-Letter Code": "MC",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Ulaanbaatar",
+      "Country": "Mongolia",
+      "3-Letter Code": "MNG",
+      "2-Letter Code": "MN",
+      "Currency Code": "MNT"
+    },
+    {
+      "Capital City": "Podgorica",
+      "Country": "Montenegro",
+      "3-Letter Code": "MNE",
+      "2-Letter Code": "ME",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Rabat",
+      "Country": "Morocco",
+      "3-Letter Code": "MAR",
+      "2-Letter Code": "MA",
+      "Currency Code": "MAD"
+    },
+    {
+      "Capital City": "Maputo",
+      "Country": "Mozambique",
+      "3-Letter Code": "MOZ",
+      "2-Letter Code": "MZ",
+      "Currency Code": "MZN"
+    },
+    {
+      "Capital City": "Nay Pyi Taw",
+      "Country": "Myanmar",
+      "3-Letter Code": "MMR",
+      "2-Letter Code": "MM",
+      "Currency Code": "MMK"
+    },
+    {
+      "Capital City": "Windhoek",
+      "Country": "Namibia",
+      "3-Letter Code": "NAM",
+      "2-Letter Code": "NA",
+      "Currency Code": "NAD"
+    },
+    {
+      "Capital City": "Yaren (de facto)",
+      "Country": "Nauru",
+      "3-Letter Code": "NRU",
+      "2-Letter Code": "NR",
+      "Currency Code": "AUD"
+    },
+    {
+      "Capital City": "Kathmandu",
+      "Country": "Nepal",
+      "3-Letter Code": "NPL",
+      "2-Letter Code": "NP",
+      "Currency Code": "NPR"
+    },
+    {
+      "Capital City": "Amsterdam",
+      "Country": "Netherlands",
+      "3-Letter Code": "NLD",
+      "2-Letter Code": "NL",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Wellington",
+      "Country": "New Zealand",
+      "3-Letter Code": "NZL",
+      "2-Letter Code": "NZ",
+      "Currency Code": "NZD"
+    },
+    {
+      "Capital City": "Managua",
+      "Country": "Nicaragua",
+      "3-Letter Code": "NIC",
+      "2-Letter Code": "NI",
+      "Currency Code": "NIO"
+    },
+    {
+      "Capital City": "Niamey",
+      "Country": "Niger",
+      "3-Letter Code": "NER",
+      "2-Letter Code": "NE",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Abuja",
+      "Country": "Nigeria",
+      "3-Letter Code": "NGA",
+      "2-Letter Code": "NG",
+      "Currency Code": "NGN"
+    },
+    {
+      "Capital City": "Skopje",
+      "Country": "North Macedonia",
+      "3-Letter Code": "MKD",
+      "2-Letter Code": "MK",
+      "Currency Code": "MKD"
+    },
+    {
+      "Capital City": "Oslo",
+      "Country": "Norway",
+      "3-Letter Code": "NOR",
+      "2-Letter Code": "NO",
+      "Currency Code": "NOK"
+    },
+    {
+      "Capital City": "Muscat",
+      "Country": "Oman",
+      "3-Letter Code": "OMN",
+      "2-Letter Code": "OM",
+      "Currency Code": "OMR"
+    },
+    {
+      "Capital City": "Islamabad",
+      "Country": "Pakistan",
+      "3-Letter Code": "PAK",
+      "2-Letter Code": "PK",
+      "Currency Code": "PKR"
+    },
+    {
+      "Capital City": "Ngerulmud",
+      "Country": "Palau",
+      "3-Letter Code": "PLW",
+      "2-Letter Code": "PW",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Panama City",
+      "Country": "Panama",
+      "3-Letter Code": "PAN",
+      "2-Letter Code": "PA",
+      "Currency Code": "PAB"
+    },
+    {
+      "Capital City": "Port Moresby",
+      "Country": "Papua New Guinea",
+      "3-Letter Code": "PNG",
+      "2-Letter Code": "PG",
+      "Currency Code": "PGK"
+    },
+    {
+      "Capital City": "Asunción",
+      "Country": "Paraguay",
+      "3-Letter Code": "PRY",
+      "2-Letter Code": "PY",
+      "Currency Code": "PYG"
+    },
+    {
+      "Capital City": "Lima",
+      "Country": "Peru",
+      "3-Letter Code": "PER",
+      "2-Letter Code": "PE",
+      "Currency Code": "PEN"
+    },
+    {
+      "Capital City": "Manila",
+      "Country": "Philippines",
+      "3-Letter Code": "PHL",
+      "2-Letter Code": "PH",
+      "Currency Code": "PHP"
+    },
+    {
+      "Capital City": "Warsaw",
+      "Country": "Poland",
+      "3-Letter Code": "POL",
+      "2-Letter Code": "PL",
+      "Currency Code": "PLN"
+    },
+    {
+      "Capital City": "Lisbon",
+      "Country": "Portugal",
+      "3-Letter Code": "PRT",
+      "2-Letter Code": "PT",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Doha",
+      "Country": "Qatar",
+      "3-Letter Code": "QAT",
+      "2-Letter Code": "QA",
+      "Currency Code": "QAR"
+    },
+    {
+      "Capital City": "Bucharest",
+      "Country": "Romania",
+      "3-Letter Code": "ROU",
+      "2-Letter Code": "RO",
+      "Currency Code": "RON"
+    },
+    {
+      "Capital City": "Moscow",
+      "Country": "Russia",
+      "3-Letter Code": "RUS",
+      "2-Letter Code": "RU",
+      "Currency Code": "RUB"
+    },
+    {
+      "Capital City": "Kigali",
+      "Country": "Rwanda",
+      "3-Letter Code": "RWA",
+      "2-Letter Code": "RW",
+      "Currency Code": "RWF"
+    },
+    {
+      "Capital City": "Basseterre",
+      "Country": "Saint Kitts and Nevis",
+      "3-Letter Code": "KNA",
+      "2-Letter Code": "KN",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Castries",
+      "Country": "Saint Lucia",
+      "3-Letter Code": "LCA",
+      "2-Letter Code": "LC",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Kingstown",
+      "Country": "Saint Vincent and the Grenadines",
+      "3-Letter Code": "VCT",
+      "2-Letter Code": "VC",
+      "Currency Code": "XCD"
+    },
+    {
+      "Capital City": "Apia",
+      "Country": "Samoa",
+      "3-Letter Code": "WSM",
+      "2-Letter Code": "WS",
+      "Currency Code": "WST"
+    },
+    {
+      "Capital City": "San Marino (city-state)",
+      "Country": "San Marino",
+      "3-Letter Code": "SMR",
+      "2-Letter Code": "SM",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "São Tomé",
+      "Country": "São Tomé and Príncipe",
+      "3-Letter Code": "STP",
+      "2-Letter Code": "ST",
+      "Currency Code": "STN"
+    },
+    {
+      "Capital City": "Riyadh",
+      "Country": "Saudi Arabia",
+      "3-Letter Code": "SAU",
+      "2-Letter Code": "SA",
+      "Currency Code": "SAR"
+    },
+    {
+      "Capital City": "Dakar",
+      "Country": "Senegal",
+      "3-Letter Code": "SEN",
+      "2-Letter Code": "SN",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Belgrade",
+      "Country": "Serbia",
+      "3-Letter Code": "SRB",
+      "2-Letter Code": "RS",
+      "Currency Code": "RSD"
+    },
+    {
+      "Capital City": "Victoria",
+      "Country": "Seychelles",
+      "3-Letter Code": "SYC",
+      "2-Letter Code": "SC",
+      "Currency Code": "SCR"
+    },
+    {
+      "Capital City": "Freetown",
+      "Country": "Sierra Leone",
+      "3-Letter Code": "SLE",
+      "2-Letter Code": "SL",
+      "Currency Code": "SLL"
+    },
+    {
+      "Capital City": "Singapore (city-state)",
+      "Country": "Singapore",
+      "3-Letter Code": "SGP",
+      "2-Letter Code": "SG",
+      "Currency Code": "SGD"
+    },
+    {
+      "Capital City": "Bratislava",
+      "Country": "Slovakia",
+      "3-Letter Code": "SVK",
+      "2-Letter Code": "SK",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Ljubljana",
+      "Country": "Slovenia",
+      "3-Letter Code": "SVN",
+      "2-Letter Code": "SI",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Honiara",
+      "Country": "Solomon Islands",
+      "3-Letter Code": "SLB",
+      "2-Letter Code": "SB",
+     
+  
+   "Currency Code": "SBD"
+    },
+    {
+      "Capital City": "Mogadishu",
+      "Country": "Somalia",
+      "3-Letter Code": "SOM",
+      "2-Letter Code": "SO",
+      "Currency Code": "SOS"
+    },
+    {
+      "Capital City": "Pretoria (administrative); Cape Town (legislative); Bloemfontein (judicial)",
+      "Country": "South Africa",
+      "3-Letter Code": "ZAF",
+      "2-Letter Code": "ZA",
+      "Currency Code": "ZAR"
+    },
+    {
+      "Capital City": "Juba",
+      "Country": "South Sudan",
+      "3-Letter Code": "SSD",
+      "2-Letter Code": "SS",
+      "Currency Code": "SSP"
+    },
+    {
+      "Capital City": "Madrid",
+      "Country": "Spain",
+      "3-Letter Code": "ESP",
+      "2-Letter Code": "ES",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Colombo (commercial); Sri Jayawardenepura Kotte (legislative)",
+      "Country": "Sri Lanka",
+      "3-Letter Code": "LKA",
+      "2-Letter Code": "LK",
+      "Currency Code": "LKR"
+    },
+    {
+      "Capital City": "Khartoum",
+      "Country": "Sudan",
+      "3-Letter Code": "SDN",
+      "2-Letter Code": "SD",
+      "Currency Code": "SDG"
+    },
+    {
+      "Capital City": "Paramaribo",
+      "Country": "Suriname",
+      "3-Letter Code": "SUR",
+      "2-Letter Code": "SR",
+      "Currency Code": "SRD"
+    },
+    {
+      "Capital City": "Stockholm",
+      "Country": "Sweden",
+      "3-Letter Code": "SWE",
+      "2-Letter Code": "SE",
+      "Currency Code": "SEK"
+    },
+    {
+      "Capital City": "Bern",
+      "Country": "Switzerland",
+      "3-Letter Code": "CHE",
+      "2-Letter Code": "CH",
+      "Currency Code": "CHF"
+    },
+    {
+      "Capital City": "Damascus",
+      "Country": "Syria",
+      "3-Letter Code": "SYR",
+      "2-Letter Code": "SY",
+      "Currency Code": "SYP"
+    },
+    {
+      "Capital City": "Taipei",
+      "Country": "Taiwan",
+      "3-Letter Code": "TWN",
+      "2-Letter Code": "TW",
+      "Currency Code": "TWD"
+    },
+    {
+      "Capital City": "Dushanbe",
+      "Country": "Tajikistan",
+      "3-Letter Code": "TJK",
+      "2-Letter Code": "TJ",
+      "Currency Code": "TJS"
+    },
+    {
+      "Capital City": "Dodoma",
+      "Country": "Tanzania",
+      "3-Letter Code": "TZA",
+      "2-Letter Code": "TZ",
+      "Currency Code": "TZS"
+    },
+    {
+      "Capital City": "Bangkok",
+      "Country": "Thailand",
+      "3-Letter Code": "THA",
+      "2-Letter Code": "TH",
+      "Currency Code": "THB"
+    },
+    {
+      "Capital City": "Lomé",
+      "Country": "Togo",
+      "3-Letter Code": "TGO",
+      "2-Letter Code": "TG",
+      "Currency Code": "XOF"
+    },
+    {
+      "Capital City": "Nukuʻalofa",
+      "Country": "Tonga",
+      "3-Letter Code": "TON",
+      "2-Letter Code": "TO",
+      "Currency Code": "TOP"
+    },
+    {
+      "Capital City": "Port of Spain",
+      "Country": "Trinidad and Tobago",
+      "3-Letter Code": "TTO",
+      "2-Letter Code": "TT",
+      "Currency Code": "TTD"
+    },
+    {
+      "Capital City": "Tunis",
+      "Country": "Tunisia",
+      "3-Letter Code": "TUN",
+      "2-Letter Code": "TN",
+      "Currency Code": "TND"
+    },
+    {
+      "Capital City": "Ankara",
+      "Country": "Turkey",
+      "3-Letter Code": "TUR",
+      "2-Letter Code": "TR",
+      "Currency Code": "TRY"
+    },
+    {
+      "Capital City": "Ashgabat",
+      "Country": "Turkmenistan",
+      "3-Letter Code": "TKM",
+      "2-Letter Code": "TM",
+      "Currency Code": "TMT"
+    },
+    {
+      "Capital City": "Funafuti",
+      "Country": "Tuvalu",
+      "3-Letter Code": "TUV",
+      "2-Letter Code": "TV",
+      "Currency Code": "AUD"
+    },
+    {
+      "Capital City": "Kampala",
+      "Country": "Uganda",
+      "3-Letter Code": "UGA",
+      "2-Letter Code": "UG",
+      "Currency Code": "UGX"
+    },
+    {
+      "Capital City": "Kyiv",
+      "Country": "Ukraine",
+      "3-Letter Code": "UKR",
+      "2-Letter Code": "UA",
+      "Currency Code": "UAH"
+    },
+    {
+      "Capital City": "Abu Dhabi",
+      "Country": "United Arab Emirates",
+      "3-Letter Code": "ARE",
+      "2-Letter Code": "AE",
+      "Currency Code": "AED"
+    },
+    {
+      "Capital City": "London",
+      "Country": "United Kingdom",
+      "3-Letter Code": "GBR",
+      "2-Letter Code": "GB",
+      "Currency Code": "GBP"
+    },
+    {
+      "Capital City": "Washington, D.C.",
+      "Country": "United States of America",
+      "3-Letter Code": "USA",
+      "2-Letter Code": "US",
+      "Currency Code": "USD"
+    },
+    {
+      "Capital City": "Montevideo",
+      "Country": "Uruguay",
+      "3-Letter Code": "URY",
+      "2-Letter Code": "UY",
+      "Currency Code": "UYU"
+    },
+    {
+      "Capital City": "Tashkent",
+      "Country": "Uzbekistan",
+      "3-Letter Code": "UZB",
+      "2-Letter Code": "UZ",
+      "Currency Code": "UZS"
+    },
+    {
+      "Capital City": "Port Vila",
+      "Country": "Vanuatu",
+      "3-Letter Code": "VUT",
+      "2-Letter Code": "VU",
+      "Currency Code": "VUV"
+    },
+    {
+      "Capital City": "Vatican City (city-state)",
+      "Country": "Vatican City",
+      "3-Letter Code": "VAT",
+      "2-Letter Code": "VA",
+      "Currency Code": "EUR"
+    },
+    {
+      "Capital City": "Caracas",
+      "Country": "Venezuela",
+      "3-Letter Code": "VEN",
+      "2-Letter Code": "VE",
+      "Currency Code": "VES"
+    },
+    {
+      "Capital City": "Hanoi",
+      "Country": "Vietnam",
+      "3-Letter Code": "VNM",
+      "2-Letter Code": "VN",
+      "Currency Code": "VND"
+    },
+    {
+      "Capital City": "Sanaa",
+      "Country": "Yemen",
+      "3-Letter Code": "YEM",
+      "2-Letter Code": "YE",
+      "Currency Code": "YER"
+    },
+    {
+      "Capital City": "Lusaka",
+      "Country": "Zambia",
+      "3-Letter Code": "ZMB",
+      "2-Letter Code": "ZM",
+      "Currency Code": "ZMW"
+    },
+    {
+      "Capital City": "Harare",
+      "Country": "Zimbabwe",
+      "3-Letter Code": "ZWE",
+      "2-Letter Code": "ZW",
+      "Currency Code": "ZWL"
+    }
+  ]

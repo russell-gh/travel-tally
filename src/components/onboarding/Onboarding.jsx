@@ -3,7 +3,7 @@ import FormElement from "../../reusable-code/FormElement.jsx";
 import Button from "../../reusable-code/Button.jsx";
 import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
@@ -14,6 +14,7 @@ import {
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
+import { selectCountries } from "../../redux/homeSlice.js";
 
 let currencies = [];
 
@@ -39,7 +40,7 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-  const [currentFormSection, setCurrentFormSection] = useState(3);
+  const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
   const [countryCurrency, setCountryCurrency] = useState([]);
 
@@ -51,9 +52,11 @@ const Onboarding = () => {
   const dispatch = useDispatch();
   const redirect = useNavigate();
 
+  const countries = useSelector(selectCountries);
+
   //run state through validate function everytime input is changed.
   useEffect(() => {
-    getValidationResult(); //pass through id to validate here?
+    getValidationResult(); 
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
@@ -148,7 +151,7 @@ const Onboarding = () => {
     !errorsPresent ? setCurrentFormSection(currentFormSection + 1) : "";
   };
   const getDestinationCurrency = (city) => {
-    //create data list from city-country data 
+    //create data list from city-country data
     //if city in data list, select country
     //if not call below api
     //use res from chosen method to call second api
@@ -159,15 +162,23 @@ const Onboarding = () => {
     <div>
       <form>
         {currentFormSection === 1 && (
-          <FormElement
-            type="text"
-            id="destination"
-            label="Where are you off to?"
-            name="destination"
-            value={onboardingDetails.destination}
-            callback={handleChange}
-            error={errors.destination}
-          />
+          <>
+            <FormElement
+              type="text"
+              id="destination"
+              label="Where are you off to?"
+              name="destination"
+              value={onboardingDetails.destination}
+              callback={handleChange}
+              error={errors.destination}
+              list={"cities"}
+            />
+            <datalist id="cities">
+              {countries.map((country) => {
+                return <option value={country["Capital City"]}></option>;
+              })}
+            </datalist>
+          </>
         )}
         {currentFormSection === 2 && (
           <>

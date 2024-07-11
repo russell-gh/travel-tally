@@ -48,6 +48,10 @@ const App = () => {
       const { data } = await axios.get(`fakeExpenseData.json`);
       dispatch(setData({ text: "trips", data }));
     }
+    {
+      const { data } = await axios.get(`countryInfo.json`);
+      dispatch(setData({ text: "countries", data }));
+    }
   };
 
   useEffect(() => {

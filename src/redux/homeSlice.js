@@ -18,6 +18,7 @@ export const homeSlice = createSlice({
     },
 
     setData: (state, action) => {
+      console.log(action.payload)
       const { text, data } = action.payload;
       state[text] = data;
 
@@ -176,5 +177,7 @@ export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
 export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
+export const selectCountries = (state) => state.home.countries;
+
 
 export default homeSlice.reducer;
