@@ -99,13 +99,13 @@ export const AddExpense = ({ animatingOut }) => {
       return <></>;
     }
   };
-  const createDataList = () => {
-    expenses.map((expense) => {
-      return <option value={expense.description}></option>;
-    });
-    datalist = [...new Set(expenses)];
-    return datalist;
-  };
+
+  //getting datalist
+  let datalist = expenses.map((expenses) => {
+    return expenses.description;
+  });
+  datalist = [...new Set(datalist)];
+  datalist = datalist.filter((description) => description.trim() !== "");
 
   return (
     <div className="expenseContainer">
@@ -142,7 +142,11 @@ export const AddExpense = ({ animatingOut }) => {
           list={"descriptionOptions"}
           callback={dataInput}
         />
-        <datalist id="descriptionOptions">{createDataList}</datalist>
+        <datalist id="descriptionOptions">
+          {datalist.map((expense, index) => {
+            return <option key={index} value={expense}></option>;
+          })}
+        </datalist>
       </div>
       <div className="flex">
         <FormElement
