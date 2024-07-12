@@ -5,7 +5,6 @@ import { ReactChart } from "chartjs-react";
 Chart.register(...registerables);
 
 const ChartBudget = ({ dataChart }) => {
-  console.log(JSON.stringify(dataChart).length);
   return (
     <>
       <ReactChart

@@ -32,9 +32,10 @@ export const AddExpense = ({ animatingOut }) => {
   let [multi, setMulti] = useState(false);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
+    { value: "Activities", name: "Activities" },
     { value: "Food", name: "Food" },
-    { value: "Accomodation", name: "Accomodation" },
-    { value: "Travel", name: "Travel" },
+    { value: "Transport", name: "Transport" },
+    { value: "Hotel", name: "Hotel" },
     { value: "Other", name: "Other" },
   ];
 
@@ -98,6 +99,13 @@ export const AddExpense = ({ animatingOut }) => {
       return <></>;
     }
   };
+  const createDataList = () => {
+    expenses.map((expense) => {
+      return <option value={expense.description}></option>;
+    });
+    datalist = [...new Set(expenses)];
+    return datalist;
+  };
 
   return (
     <div className="expenseContainer">
@@ -134,11 +142,7 @@ export const AddExpense = ({ animatingOut }) => {
           list={"descriptionOptions"}
           callback={dataInput}
         />
-        <datalist id="descriptionOptions">
-          {expenses.map((expense) => {
-            return <option value={expense.description}></option>;
-          })}
-        </datalist>
+        <datalist id="descriptionOptions">{createDataList}</datalist>
       </div>
       <div className="flex">
         <FormElement

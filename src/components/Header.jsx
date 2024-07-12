@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import Profile from "./setUpProfile/Profile";
 
 export const Header = () => {
   return (
@@ -13,6 +14,7 @@ export const Header = () => {
       >
         Reset
       </button>
+      <Profile />
     </header>
   );
 };

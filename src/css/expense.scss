@@ -23,6 +23,10 @@ $grey: #b3b3b3;
   border: black solid 2px;
   font-size: 16px; // made smaller for easier styling
 
+  #currencySelectExpense {
+    margin-left: auto;
+  }
+
   .flex {
     display: flex;
     justify-content: space-between;
@@ -58,8 +62,6 @@ $grey: #b3b3b3;
     }
   }
 
-
-
   input,
   label {
     display: inline;
@@ -68,6 +70,12 @@ $grey: #b3b3b3;
   .btn {
     background-color: $navy;
     color: white
+  }
+
+  @media (min-width: 376px) {
+    #currencySelectExpense {
+      margin-left: 0px;
+    }
   }
 
   @media (min-width: 480px) {

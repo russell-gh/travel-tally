@@ -47,7 +47,6 @@ export function getArrayOfValues(data, key, hideFutureExpenses) {
   //hides future dates if checked
   if (key === "date" && hideFutureExpenses === true) {
     copy = copy.filter((item) => {
-      console.log(item);
       return dayjs(item.date).isBefore(dayjs());
     });
   }

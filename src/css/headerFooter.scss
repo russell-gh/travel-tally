@@ -24,6 +24,21 @@ header {
     height: 50px;
     width: 50px;
   }
+
+  .profile {
+    .profilePicture {
+      height: 30px;
+      border-radius: 100%;
+      margin: 0px auto;
+      display: block;
+    }
+
+    p {
+      margin: 0px;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
 }
 
 // footer {

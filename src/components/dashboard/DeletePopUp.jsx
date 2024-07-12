@@ -2,8 +2,6 @@ import OneItemDelete from "./OneItemDelete";
 import SharedDelete from "./SharedDelete";
 
 const DeletePopUp = ({ popUp, animatingOut }) => {
-  console.log(animatingOut);
-
   if (!popUp) {
     return;
   }
