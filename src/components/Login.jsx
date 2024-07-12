@@ -43,7 +43,7 @@ const Login = () => {
       ? alert("wrong email/password")
       : trips.length
       ? redirect("/dashboard")
-      : redirect("/onboarding");
+      : redirect("/setup-profile");
   };
 
   return (
