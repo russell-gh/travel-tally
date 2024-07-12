@@ -27,7 +27,7 @@ const SplashPage = () => {
       duration: 10,
       repeat: -1,
       ease: "none",
-      // ease: "power1.inOut",
+      ease: "power1.inOut",
       motionPath: {
         path: path,
         align: path,
@@ -37,10 +37,10 @@ const SplashPage = () => {
     });
 
     gsap.to(line, {
-      delay: 0.2,
+      delay: 0.3,
       duration: 10,
       repeat: -1,
-      ease: "none",
+      ease: "power1.inOut",
       visibility: "inherit",
       // ease: "power1.inOut",
       motionPath: {
@@ -52,10 +52,10 @@ const SplashPage = () => {
     });
 
     gsap.to(line2, {
-      delay: 0.3,
+      delay: 0.5,
       duration: 10,
       repeat: -1,
-      ease: "none",
+      ease: "power1.inOut",
       visibility: "inherit",
       // ease: "power1.inOut",
       motionPath: {
@@ -67,10 +67,10 @@ const SplashPage = () => {
     });
 
     gsap.to(line3, {
-      delay: 0.4,
+      delay: 0.7,
       duration: 10,
       repeat: -1,
-      ease: "none",
+      ease: "power1.inOut",
       visibility: "inherit",
       // ease: "power1.inOut",
       motionPath: {
@@ -82,10 +82,10 @@ const SplashPage = () => {
     });
 
     gsap.to(line4, {
-      delay: 0.5,
+      delay: 0.9,
       duration: 10,
       repeat: -1,
-      ease: "none",
+      ease: "power1.inOut",
       visibility: "inherit",
       // ease: "power1.inOut",
       motionPath: {
@@ -97,10 +97,10 @@ const SplashPage = () => {
     });
 
     gsap.to(line5, {
-      delay: 0.6,
+      delay: 1.1,
       duration: 10,
       repeat: -1,
-      ease: "none",
+      ease: "power1.inOut",
       visibility: "inherit",
       // ease: "power1.inOut",
       motionPath: {
