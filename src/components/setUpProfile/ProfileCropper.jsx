@@ -36,6 +36,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
         {handleCapture && (
           <Button
             className="retakeBtn"
+            animation={true}
             text="retake"
             onClick={() => {
               handleCapture();
@@ -44,6 +45,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
         )}
         <Button
           className="uploadBtn"
+          animation={true}
           text="upload"
           onClick={() => {
             dispatch(

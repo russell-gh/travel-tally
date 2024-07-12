@@ -15,6 +15,7 @@ const ProfilePhoto = () => {
       <div className="setProfilePhotoContainer">
         <Button
           text="Take Photo"
+          animation={true}
           className={`takePhotoBtn ${
             photoChoice === "takePhoto" ? "focus" : ""
           }`}
@@ -22,6 +23,7 @@ const ProfilePhoto = () => {
         />
         <Button
           text="Upload Photo"
+          animation={true}
           className={`uploadPhotoBtn ${
             photoChoice === "uploadPhoto" ? "focus" : ""
           }`}

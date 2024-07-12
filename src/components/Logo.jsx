@@ -17,6 +17,7 @@ export const Logo = () => {
             {" "}
             <g
               data-name="container"
+              id="container"
               data="container_num:15"
               fill="#D6EE79"
               transform="translate(134.48000000000002,109.04331536605723) scale(2.6208)"
@@ -36,6 +37,7 @@ export const Logo = () => {
             </g>
             <g
               data-name="icon"
+              id="icon"
               fill="#4831D4"
               data="id:5141277"
               transform="translate(158.76364579792045,134.87781645048054) scale(0.16026244822505542)"

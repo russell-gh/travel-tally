@@ -70,7 +70,7 @@ const Login = () => {
 
         <p className="errortext">{errors.password}</p>
 
-        <Button onClick={onSubmit} text="Login" />
+        <Button onClick={onSubmit} text="Login" animation={true} />
       </div>
     </>
   );

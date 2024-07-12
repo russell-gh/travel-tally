@@ -203,6 +203,7 @@ export const AddExpense = ({ animatingOut }) => {
           text={"Add"}
           className={"expenseSubmit"}
           disabled={animatingOut}
+          animation={true}
         />
       </div>
     </div>

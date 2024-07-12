@@ -56,7 +56,7 @@ const Onboarding = () => {
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
-    getValidationResult(); 
+    getValidationResult();
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
@@ -263,7 +263,11 @@ const Onboarding = () => {
         {currentFormSection === 4 ? (
           <FormElement type="button" callback={handleSubmit} />
         ) : (
-          <Button text=">" onClick={() => formButtonHandler()} />
+          <Button
+            text=">"
+            onClick={() => formButtonHandler()}
+            animation={true}
+          />
         )}
       </form>
     </div>

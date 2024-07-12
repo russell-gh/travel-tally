@@ -70,7 +70,7 @@ const Signup = () => {
         placeholder="confirm new password"
       />
       <p className="errortext">{errors.passwordConfirm}</p>
-      <Button onClick={onSubmit} text="Sign Up" />
+      <Button onClick={onSubmit} text="Sign Up" animation={true} />
     </div>
   );
 };
