@@ -18,7 +18,6 @@ export const homeSlice = createSlice({
     },
 
     setData: (state, action) => {
-      console.log(action.payload)
       const { text, data } = action.payload;
       state[text] = data;
 
