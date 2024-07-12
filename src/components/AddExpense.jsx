@@ -32,9 +32,10 @@ export const AddExpense = ({ animatingOut }) => {
   let [multi, setMulti] = useState(false);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
+    { value: "Activities", name: "Activities" },
     { value: "Food", name: "Food" },
-    { value: "Accomodation", name: "Accomodation" },
-    { value: "Travel", name: "Travel" },
+    { value: "Transport", name: "Transport" },
+    { value: "Hotel", name: "Hotel" },
     { value: "Other", name: "Other" },
   ];
 

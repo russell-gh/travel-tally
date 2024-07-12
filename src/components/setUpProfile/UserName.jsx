@@ -14,11 +14,6 @@ const UserName = () => {
   const [error, setError] = useState("");
   const [value, setValue] = useState("");
 
-  // let value = "";
-  // const onChange = (e) => {
-  //   value = e.target.value;
-  // };
-
   const validate = (value) => {
     const { error } = setUpProfileSchema.userName.validate(value);
     return error ? error.details[0].message : null;
@@ -29,6 +24,16 @@ const UserName = () => {
     setValue(value);
     const errorMessage = validate(value);
     setError(errorMessage);
+  };
+
+  const onClick = () => {
+    const errorMessage = validate(value);
+    if (errorMessage) {
+      setError(errorMessage);
+    } else {
+      dispatch(saveProfile({ key: "userName", value }));
+      redirect("/setup-profile/profilepicture");
+    }
   };
 
   return (
@@ -53,12 +58,7 @@ const UserName = () => {
       <Button
         className="next"
         text="next"
-        onClick={() => {
-          if (!error) {
-            dispatch(saveProfile({ key: "userName", value: value }));
-          }
-          redirect("/setup-profile/profilepicture");
-        }}
+        onClick={onClick}
         disabled={!!error}
       />
     </div>

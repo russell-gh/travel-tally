@@ -3,23 +3,23 @@ import {
   selectSelectedTripId,
   selectHideFutureExpenses,
   selectTrips,
+  selectOrder,
+  selectFilter,
+  selectFilterDate,
 } from "../../redux/homeSlice";
 import { findItem, getIndex } from "../../utils/utils";
 import Expenses from "./Expenses";
 import Title from "./Title";
 import "../../css/dashboard.scss";
-import { getSortedandFiltered } from "../../utils/getSortedandFiltered";
 import {
-  selectOrder,
-  selectFilter,
-  selectFilterDate,
-} from "../../redux/homeSlice";
+  getSortedandFiltered,
+  filterCategories,
+} from "../../utils/getSortedandFiltered";
 import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
-import Message from "../../reusable-code/Message";
 import { createExpensesArray } from "../../utils/createExpensesArray";
-import { filterCategories } from "../../utils/getSortedandFiltered";
 import { useMemo } from "react";
+import SplashPage from "../SplashPage";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -30,12 +30,14 @@ const Dashboard = () => {
   const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
   if (!trips || trips.length === 0) {
-    return <Message message="Loading.." />;
+    return <SplashPage />;
   }
 
-  const trip = useMemo(() => {
-    return findItem(trips, selectedTripId);
-  }, [trips, selectedTripId]);
+  // const trip = useMemo(() => {
+  //   return findItem(trips, selectedTripId);
+  // }, [trips, selectedTripId]);
+
+  const trip = findItem(trips, selectedTripId);
 
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, dates } = details;
