@@ -176,7 +176,7 @@ const Onboarding = () => {
             />
             <datalist id="cities">
               {countries.map((country) => {
-                return <option value={country["Capital City"]}></option>;
+                return <option key={country["Capital City"]} value={country["Capital City"]}></option>;
               })}
             </datalist>
           </>

@@ -1,0 +1,21 @@
+//CHANGE TO IMPORT VARS
+$teal: #235b89;
+$green: #d6ee79;
+$darker-green: #87964bd2;
+$sage: #d3bb5b84;
+$white: #ffffff;
+$black: #000000;
+$grey: #b3b3b3;
+
+@mixin flex {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.onboarding {
+    @include flex;
+    height: 90vh; //change once app has height
+    border: 1px solid red;
+    
+}
+
