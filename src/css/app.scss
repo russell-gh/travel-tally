@@ -19,6 +19,7 @@ body {
 }
 
 main {
+
   input,
   button {
     margin: auto;
@@ -46,6 +47,7 @@ input {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+
   :hover {
     background-color: $darker-green; //TODO Check works
   }
@@ -59,12 +61,30 @@ header {
     height: 50px;
     width: 50px;
   }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+
+    p {
+      margin: 0px;
+      font-size: 14px;
+    }
+
+    .profilePicture {
+      width: 30px;
+      border-radius: 100%;
+    }
+  }
 }
 
 header,
 footer {
   background-color: $teal;
   color: $white;
+
   h1 {
     margin: 0px;
     color: white;
