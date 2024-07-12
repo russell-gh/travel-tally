@@ -15,8 +15,9 @@ $blueSachaUsed: #3c43a5;
 */
 
 .setUpProfile {
+  width: 95%;
   max-width: 810px;
-  margin: 20px auto 0px auto;
+  margin: 60px auto 60px auto;
 
   p {
     margin: 0px;
@@ -30,10 +31,14 @@ $blueSachaUsed: #3c43a5;
 
   .setUserNameContainer {
     display: flex;
+    position: absolute;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     margin: 0px auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     label {
       width: 177px;
@@ -86,12 +91,10 @@ $blueSachaUsed: #3c43a5;
       background-color: rgba(255, 255, 255, 0);
       border: none;
       width: 100%;
+      height: 100%;
       color: black;
-      justify-self: stretch;
-      align-self: stretch;
       cursor: pointer;
       border-bottom: $green solid 2px;
-      border-radius: 0px;
     }
 
     .takePhotoBtn:hover,
@@ -172,3 +175,19 @@ $blueSachaUsed: #3c43a5;
 ************END***********
 */
 }
+
+/*
+**************************
+     profile picture
+**************************
+*/
+
+@media (min-width: 500px) {
+  .setUpProfile {
+    width: 80%;
+  }
+}
+
+/*
+************END***********
+*/

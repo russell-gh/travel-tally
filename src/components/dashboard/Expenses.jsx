@@ -22,11 +22,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   }
 
   if (expenses.length === 0) {
-    return <Message message="You have no expenses yet." className="mt" />;
+    return <Message message="You have no expenses yet." className="message" />;
   }
 
   if (filtered.length === 0) {
-    return <Message message="There are no matches" className="mt" />;
+    return <Message message="There are no matches" className="message" />;
   }
 
   return (

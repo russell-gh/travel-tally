@@ -34,6 +34,14 @@ const BudgetInfo = ({
         stillTravelling ? "containerBudgetWhilst" : "containerBudgetAfter"
       }`}
     >
+      {!stillTravelling && (
+        <Budget
+          expenses={expenses}
+          expensesCategories={expensesCategories}
+          details={details}
+          homeCurrencySymbol={homeCurrencySymbol}
+        />
+      )}
       {stillTravelling && (
         <>
           <Button
