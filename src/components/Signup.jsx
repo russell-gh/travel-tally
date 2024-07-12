@@ -2,30 +2,29 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/onboardingSlice";
 import { useNavigate } from "react-router-dom";
-import Joi from "joi";
 import { validate } from "../validation/validate";
-import { nanoid } from "nanoid";
-import { signupSchema } from "../validation/schemas";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 import { generateId } from "../utils/utils";
 
 const Signup = () => {
+  //Sends Errors + Creds to State
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
   const onInput = async (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-    const errObj = await validate(formData, "signup");
+    const _formData = { ...formData, [e.target.id]: e.target.value };
+    setFormData(_formData);
+    const errObj = await validate(_formData, "signup");
+    //BUG Error Timing is ugly
     setErrors(errObj);
   };
-  // console.log(formData);
-
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const redirect = useNavigate();
-
-  //======Validates credentials============
+  //==========================================
+  //=========Validates credentials============
+  //==========================================
   const onSubmit = async (e) => {
     const errObj = await validate(formData, "signup");
     setErrors(errObj);
@@ -37,14 +36,14 @@ const Signup = () => {
       dispatch(addUser(formData));
       localStorage.setItem("user", JSON.stringify(formData));
       console.log(formData);
-      redirect("/login");
+      redirect("/login"); //TODO Change to SetupProfile
     } else {
-      console.log("passwords don't match", formData); //TODO Change to toast/alert?
+      alert("passwords don't match", formData);
     }
   };
 
   return (
-    <div onInput={onInput}>
+    <div onInput={onInput} className="loginInput">
       <FormElement
         callback={onInput}
         type="email"
