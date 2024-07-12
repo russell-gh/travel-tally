@@ -38,7 +38,7 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
               text="Finish"
               animation={true}
               onClick={() => {
-                redirect("/dashboard");
+                redirect("/onboarding");
               }}
             />
           </div>
