@@ -16,6 +16,13 @@ $grey: #b3b3b3;
     @include flex;
     height: 90vh; //change once app has height
     border: 1px solid red;
-    
+    text-align:center
 }
 
+input[type="text"] {
+    border: 1px solid $grey
+}
+
+.validationError {
+    color:$teal
+}

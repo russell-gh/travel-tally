@@ -15,6 +15,7 @@ import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
 import { selectCountries } from "../../redux/homeSlice.js";
+import '../../css/onboarding.scss'
 
 let currencies = [];
 
@@ -160,7 +161,7 @@ const Onboarding = () => {
   };
 
   return (
-    <div>
+    <div className="onboarding">
       <form>
         {currentFormSection === 1 && (
           <>
