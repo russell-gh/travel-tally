@@ -136,6 +136,7 @@ const Onboarding = () => {
         budgetOther,
       },
       expenses: [],
+      splits: []
     };
 
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
