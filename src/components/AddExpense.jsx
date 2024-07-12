@@ -128,7 +128,7 @@ const [split,setSplit] = useState([<SplitInput amount={formData.amount} tag={0} 
       </div>
     }
   }
-console.log(splitData, 'PRERETURN')
+  
   return (
     <div className="expenseContainer">
       <div>

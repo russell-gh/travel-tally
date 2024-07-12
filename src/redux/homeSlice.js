@@ -114,25 +114,33 @@ export const homeSlice = createSlice({
       let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
         ...state.currencyRates,
       });
-      console.log(result, 'INHOMESLICE, processed')
+      let expense = result.expense || result.allExpenses;
+      let billSplit = result.billSplit
+      console.log(expense, billSplit, 'INHOMESLICE, processed')
       // Push data into expenses array
-      if (Array.isArray(result.expense)) {
-        result.forEach((element) => {
-          console.log(element);
+      if (Array.isArray(expense)) {
+        expense.forEach((element) => {
           state.trips[indexOf].expenses.push(element);
         });
       } else {
-        state.trips[indexOf].expenses.push(result);
+        state.trips[indexOf].expenses.push(expense);
+      }
+      // Push data to split array
+      if (Array.isArray(billSplit)) {
+        billSplit.forEach((element) => {
+          state.trips[indexOf].splits.push(element);
+        });
+      } else {
+        state.trips[indexOf].splits.push(billSplit);
       }
       saveStore("homeSlice", state);
     },
+
     toggleHideFutureExpenses: (state, { payload }) => {
       state.hideFutureExpenses = payload;
     },
 
     deleteToEdit: (state, { payload }) => {
-
-      console.log("HIT DELETE", payload);
       const { expenseIndex } = payload;
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
@@ -156,6 +164,7 @@ export const {
   addExpenseData,
   toggleHideFutureExpenses,
   deleteToEdit,
+  addSplitData,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;

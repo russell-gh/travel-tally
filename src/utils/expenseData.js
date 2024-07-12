@@ -5,6 +5,7 @@ import { unixToDate } from "./utilsDates";
 export function handleData({formData, splitData}, home, data) {
   console.log(formData, splitData, 'INSIDE HANDLE')
   const expense = formData;
+  let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let start = stringToTimestamp(expense.date);
@@ -24,7 +25,6 @@ export function handleData({formData, splitData}, home, data) {
     toCurrency: { home },
   };
 
-
   // Fills data for amount from input
   newAmount.fromCurrency = currency;
   newAmount.toCurrency = home;
@@ -42,18 +42,15 @@ export function handleData({formData, splitData}, home, data) {
   expense.date = start;
   expense.endDate = end;
   if (expense.multiDay === true) {
-    let allExpenses = splitExpenseDays(expense);
+    let allExpenses = splitExpenseDays({expense, splitData});
     return allExpenses;
   }
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
-  // splitData.expenseID = expense.id;
-  // splitData.info = newAmount;
-  // splitData.date = expense.date;
-  splitExpenseBill(splitData, expense);
+  billSplit = splitExpenseBill(splitData, expense);
 
-  return expense;
+  return {expense, billSplit};
 }
 
 export function convertCurrency(fromValue, fromCurrency, data) {
@@ -63,16 +60,19 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   return result;
 }
 
-export function splitExpenseDays(expense) {
+export function splitExpenseDays({expense, splitData}) {
+  console.log(expense, splitData, 'inside split expense');
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let { fromValue, toValue } = amount;
   let allExpenses = [];
+  let billSplit;
   delete expense.multiDay;
   const days = (endDate - date) / 1000 / 60 / 60 / 24 + 1;
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
+  billSplit = splitExpenseBill(splitData, expense);
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
@@ -92,7 +92,7 @@ export function splitExpenseDays(expense) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
-  return allExpenses;
+  return {allExpenses, billSplit};
 }
 
 export function mergeExpenseDays(expense, allExpenses) {

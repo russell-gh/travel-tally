@@ -3,7 +3,7 @@ import FormElement from '../reusable-code/FormElement';
 import { useState } from 'react';
 
 const SplitInput = ({amount, tag, parentCallback}) => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({ paid: false
       });
 
     const dataInput = (e) => {
@@ -18,8 +18,6 @@ const SplitInput = ({amount, tag, parentCallback}) => {
     
         setFormData({ ...formData, [target]: value });
         parentCallback(formData, tag);
-        console.log(formData, 'Component')
-        
       };
     return <>
     <FormElement
