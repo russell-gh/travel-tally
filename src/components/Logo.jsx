@@ -1,7 +1,13 @@
 export const Logo = () => {
   return (
     <div className="logo" style={{ backgroundColor: "#235b89" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div
           className="less_scale_preview_class"
           style={{ transform: "scale(1.2)" }}
@@ -38,7 +44,8 @@ export const Logo = () => {
             <g
               data-name="icon"
               id="icon"
-              fill="#4831D4"
+              fill="#235b89"
+              // old colour"#4831D4"
               data="id:5141277"
               transform="translate(158.76364579792045,134.87781645048054) scale(0.16026244822505542)"
             >

@@ -19,7 +19,6 @@ import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { useMemo } from "react";
-import SplashPage from "../SplashPage";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -29,36 +28,46 @@ const Dashboard = () => {
   const filterDate = useSelector(selectFilterDate);
   const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
-  if (!trips || trips.length === 0) {
-    return <SplashPage />;
-  }
-
-  const trip = findItem(trips, selectedTripId);
+  const trip = useMemo(() => {
+    return findItem(trips, selectedTripId);
+  }, [trips, selectedTripId]);
 
   const { details, expenses } = trip;
   const { destination, homeCurrencySymbol, dates } = details;
   const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
 
-  const actualStartDate = !startDateIncluded ? startDate + 86400000 : startDate;
-  const actualEndDate = !endDateIncluded ? endDate - 86400000 : endDate;
+  const actualStartDate = useMemo(() => {
+    return !startDateIncluded ? startDate + 86400000 : startDate;
+  }, [startDateIncluded, startDate]);
+  const actualEndDate = useMemo(() => {
+    return !endDateIncluded ? endDate - 86400000 : endDate;
+  }, [endDateIncluded, endDate]);
 
-  let _expenses = [...trip.expenses].reverse();
+  let _expenses = useMemo(() => {
+    return [...trip.expenses].reverse();
+  }, [trip.expenses]);
 
-  const expensesCategories = filterCategories(expenses, filter); // filters expenses on activities so daily budget can be filtered with activities
+  const expensesCategories = useMemo(() => {
+    return filterCategories(expenses, filter);
+  }, [expenses, filter]); // filters expenses on activities so daily budget can be filtered with activities
 
-  let expensesArray = createExpensesArray(
-    expensesCategories,
-    actualStartDate,
-    actualEndDate
-  );
+  let expensesArray = useMemo(() => {
+    return createExpensesArray(
+      expensesCategories,
+      actualStartDate,
+      actualEndDate
+    );
+  }, [expensesCategories, actualStartDate, actualEndDate]);
 
-  const filtered = getSortedandFiltered(
-    _expenses,
-    order,
-    filter,
-    filterDate,
-    hideFutureExpenses
-  );
+  const filtered = useMemo(() => {
+    return getSortedandFiltered(
+      _expenses,
+      order,
+      filter,
+      filterDate,
+      hideFutureExpenses
+    );
+  }, [_expenses, order, filter, filterDate, hideFutureExpenses]);
 
   return (
     <div className="dashboard">

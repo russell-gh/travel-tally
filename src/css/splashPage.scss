@@ -1,7 +1,37 @@
+$teal: #235b89;
+
 .splashPage {
-  height: 93vh;
-  background-color: #3c43a5;
+  height: calc(100vh - 82px); //why does this not work?
+  background-color: $teal;
   padding: 50px;
+  position: relative;
+
+  .animationContainer {
+    width: 100%;
+    max-width: 500px;
+    /* or any max width you desire */
+    margin: 0 auto;
+  }
+
+  .logoContainer {
+    position: absolute;
+    top: 122px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48%;
+    height: auto;
+    aspect-ratio: 1/1;
+
+    .logo {
+      width: 100%;
+      height: 100%;
+
+      div {
+        width: 100%;
+        height: 100%
+      }
+    }
+  }
 
   .plane {
     height: 30px;
@@ -16,9 +46,11 @@
   }
 
   .path {
-    // stroke: white;
+    stroke: white;
     fill: none;
-
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .circle {

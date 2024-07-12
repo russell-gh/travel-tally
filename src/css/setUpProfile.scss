@@ -16,6 +16,8 @@ $blueSachaUsed: #3c43a5;
 
 .setUpProfile {
   margin-top: 20px;
+  max-width: 810px;
+  margin: 20px auto 0px auto;
 
   p {
     margin: 0px;
@@ -64,6 +66,7 @@ $blueSachaUsed: #3c43a5;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: fitContent(50px) 3fr;
+    max-width: 800px;
 
     .photoDisplayContainer {
       grid-row: 2;

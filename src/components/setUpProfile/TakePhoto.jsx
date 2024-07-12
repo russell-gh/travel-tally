@@ -54,6 +54,7 @@ const TakePhoto = () => {
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
           className="webcam"
+          style={{ maxWidth: 835 }}
         >
           {({ getScreenshot }) => (
             <button

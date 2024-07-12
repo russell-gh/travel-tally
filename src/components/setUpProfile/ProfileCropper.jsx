@@ -25,7 +25,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
     <>
       <Cropper
         src={src}
-        style={{ height: "auto", width: "auto" }}
+        style={{ height: "auto", width: "auto", maxWidth: 835 }}
         initialAspectRatio={1 / 1}
         guides={true}
         crop={onCrop}
