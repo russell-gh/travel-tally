@@ -176,5 +176,7 @@ export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
 export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
+export const selectCountries = (state) => state.home.countries;
+
 
 export default homeSlice.reducer;
