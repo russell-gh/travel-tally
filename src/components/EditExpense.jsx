@@ -17,11 +17,14 @@ import {
   addExpenseData,
   selectPopUp,
   togglePopUp,
+  selectSplitData,
+  setSplitData,
 } from "../redux/homeSlice";
 import SplitInput from "./SplitInput";
 
 export const EditExpense = () => {
   const dispatch = useDispatch();
+  const splitData = useSelector(selectSplitData);
   const popUp = useSelector(selectPopUp);
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
@@ -72,12 +75,12 @@ export const EditExpense = () => {
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
     setFormData(copy);
-    if(copy.split === true) {
-      if(result.thisExpense.sharedID) {
-        setThisSplit(thisTrip.splits, result.thisExpense.sharedID)
+    if (copy.split === true) {
+      if (result.thisExpense.sharedID) {
+        setThisSplit(thisTrip.splits, result.thisExpense.sharedID);
       } else {
-      setThisSplit(thisTrip.splits, result.thisExpense.id)
-    }
+        setThisSplit(thisTrip.splits, result.thisExpense.id);
+      }
     }
   };
 
@@ -86,10 +89,10 @@ export const EditExpense = () => {
   }, []);
 
   const setThisSplit = (splits, id) => {
-    let result = getThisSplit(splits, id)
+    let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
     copy.forEach((thisSplit) => {
-      delete thisSplit.currency
+      delete thisSplit.currency;
       delete thisSplit.date;
       delete thisSplit.expenseID;
       delete thisSplit.id;
@@ -97,7 +100,7 @@ export const EditExpense = () => {
       delete thisSplit.totalExpense;
     });
     setTheseSplits(copy);
-    console.log(result, copy, 'set this 2');
+    console.log(result, copy, "set this 2");
   };
 
   const dataInput = (e) => {
@@ -123,8 +126,8 @@ export const EditExpense = () => {
     //   return;
     // }
     if (formData.description && formData.amount) {
-      const data = {formData, theseSplits} 
-      const indexs = {index, splitIndex}
+      const data = { formData, theseSplits };
+      const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
     } else {
@@ -162,33 +165,52 @@ export const EditExpense = () => {
       return <></>;
     }
   };
-let handleAddPerson = () => {
-  setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
-}
-let handleRemovePerson = () => {
-  setSplit(split.splice(split.length -1, 1));
-}
+  let handleAddPerson = () => {
+    setSplit([
+      ...split,
+      <SplitInput
+        amount={formData.amount}
+        tag={split.length}
+        parentCallback={getSplitData}
+      />,
+    ]);
+  };
+  let handleRemovePerson = () => {
+    setTheseSplits(theseSplits.splice(theseSplits.length - 1, 1));
+  };
 
-const getSplitData = (data, tag) => {
-  const dataCopy = Array.from(theseSplits);
-  dataCopy.splice(tag, 1, data);
-  setTheseSplits(dataCopy);
-  console.log('IM TRYING', data, theseSplits, dataCopy)
-};
+  const getSplitData = (data, tag) => {
+    dispatch(setSplitData({ data, tag }));
+  };
 
   const renderSplit = () => {
-    if(formData.split === true) {
-      return <div>
-        {theseSplits.map(function(split, index) {
-          return (
-            <SplitInput amount={formData.amount} tag={index} parentCallback={getSplitData} data={split}/>
-          )
-        })}
-        <Button onClick={handleAddPerson} text={"Add Person"} className={"splitAddPerson"} />
-        <Button onClick={handleRemovePerson} text={"Remove Person"} className={"splitRemovePerson"} />
-      </div>
+    if (formData.split === true) {
+      return (
+        <div>
+          {theseSplits.map(function (split, index) {
+            return (
+              <SplitInput
+                amount={formData.amount}
+                tag={index}
+                parentCallback={getSplitData}
+                data={split}
+              />
+            );
+          })}
+          <Button
+            onClick={handleAddPerson}
+            text={"Add Person"}
+            className={"splitAddPerson"}
+          />
+          <Button
+            onClick={handleRemovePerson}
+            text={"Remove Person"}
+            className={"splitRemovePerson"}
+          />
+        </div>
+      );
     }
-  }
+  };
 
   return (
     <>

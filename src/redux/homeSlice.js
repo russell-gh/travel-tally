@@ -114,7 +114,7 @@ export const homeSlice = createSlice({
         ...state.currencyRates,
       });
       let expense = result.expense || result.allExpenses;
-      let billSplit = result.billSplit
+      let billSplit = result.billSplit;
       // Push data into expenses array
       if (Array.isArray(expense)) {
         expense.forEach((element) => {
@@ -147,7 +147,10 @@ export const homeSlice = createSlice({
       // If its an array then delete multiple from the first index
       // Expense index first
       if (Array.isArray(expenseIndex)) {
-        state.trips[indexTrip].expenses.splice(expenseIndex[0], expenseIndex.length);
+        state.trips[indexTrip].expenses.splice(
+          expenseIndex[0],
+          expenseIndex.length
+        );
       } else {
         // Otherwise, delete single expense
         state.trips[indexTrip].expenses.splice(expenseIndex, 1);
@@ -159,15 +162,17 @@ export const homeSlice = createSlice({
         // Otherwise, delete single expense
         state.trips[indexTrip].splits.splice(splitIndex, 1);
       }
+      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
+      state.splitData = [];
       saveStore("homeSlice", state);
     },
-    setSplitData: (state, {payload}) => {
-      if (state.splitData.length === 0 ) {
+    setSplitData: (state, { payload }) => {
+      if (state.splitData.length === 0) {
         state.splitData.push(payload.data);
       } else {
         state.splitData[payload.tag] = payload.data;
       }
-    }
+    },
   },
 });
 

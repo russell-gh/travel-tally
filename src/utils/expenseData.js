@@ -2,8 +2,8 @@ import { stringToTimestamp, generateId } from "../components/onboarding/utils";
 import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 
-export function handleData({formData, splitData}, home, data) {
-  console.log(formData, splitData, 'INSIDE HANDLE')
+export function handleData({ formData, splitData }, home, data) {
+  console.log(formData, splitData, "INSIDE HANDLE");
   const expense = formData;
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
@@ -42,7 +42,7 @@ export function handleData({formData, splitData}, home, data) {
   expense.date = start;
   expense.endDate = end;
   if (expense.multiDay === true) {
-    let allExpenses = splitExpenseDays({expense, splitData});
+    let allExpenses = splitExpenseDays({ expense, splitData });
     return allExpenses;
   }
   delete expense.multiDay;
@@ -50,7 +50,7 @@ export function handleData({formData, splitData}, home, data) {
   expense.id = generateId("expense");
   billSplit = splitExpenseBill(splitData, expense);
 
-  return {expense, billSplit};
+  return { expense, billSplit };
 }
 
 export function convertCurrency(fromValue, fromCurrency, data) {
@@ -60,8 +60,8 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   return result;
 }
 
-export function splitExpenseDays({expense, splitData}) {
-  console.log(expense, splitData, 'inside split expense');
+export function splitExpenseDays({ expense, splitData }) {
+  console.log(expense, splitData, "inside split expense");
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let { fromValue, toValue } = amount;
@@ -92,7 +92,7 @@ export function splitExpenseDays({expense, splitData}) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
-  return {allExpenses, billSplit};
+  return { allExpenses, billSplit };
 }
 
 export function mergeExpenseDays(expense, allExpenses) {
@@ -142,8 +142,6 @@ export function getExpenseList(tripID, trips) {
   });
   // Create variable for the correct trip
   const thisTrip = trips[indexOf];
-  // const expenses = thisTrip.expenses
-  // const splits = thisTrip.splits
   return thisTrip;
 }
 
@@ -157,10 +155,9 @@ export function getThisExpense(expenseList, id) {
   return result;
 }
 
-
 export function getThisSplit(splitList, id) {
   let allSplits = [];
-  let allIndexs = []
+  let allIndexs = [];
 
   splitList.forEach((thisSplit, index) => {
     // Finds each split with matching ID
@@ -170,10 +167,9 @@ export function getThisSplit(splitList, id) {
     }
   });
 
-  const result = {allSplits, allIndexs};
+  const result = { allSplits, allIndexs };
 
   return result;
-
 }
 
 export function unixToDateReversed(unix) {

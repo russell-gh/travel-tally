@@ -75,8 +75,8 @@ export const AddExpense = () => {
       return;
     }
     if (formData.description && formData.amount) {
-       const result = {formData, splitData} 
-       console.log(result, "pass");
+      const result = { formData, splitData };
+      console.log(result, "pass");
       dispatch(addExpenseData(result));
     } else {
       console.log("FAIL FINAL");
@@ -84,7 +84,6 @@ export const AddExpense = () => {
     }
   };
 
-  
   const multiDay = () => {
     setMulti((multi = !multi));
     const inverted = !formData.multiDay;
@@ -108,35 +107,51 @@ export const AddExpense = () => {
     }
   };
 
-let handleAddPerson = () => {
-  setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
-  // const dataCopy = Array.from(splitData);
-  // dataCopy.push({paid: false});
-  // setSplitData(dataCopy);
-  // console.log(dataCopy, splitData, "ADDING")
-}
-let handleRemovePerson = () => {
-  setSplit(split.splice(split.length -1, 1));
-}
+  let handleAddPerson = () => {
+    setSplit([
+      ...split,
+      <SplitInput
+        amount={formData.amount}
+        tag={split.length}
+        parentCallback={getSplitData}
+      />,
+    ]);
+  };
+  let handleRemovePerson = () => {
+    setSplit(split.splice(split.length - 1, 1));
+  };
 
-const getSplitData = (data, tag) => {
-  console.log(data, tag, splitData, typeof tag)
-  dispatch(setSplitData({data, tag}));
-  
-  // console.log('IM TRYING', data, splitData, dataCopy, tag)
-};
-console.log(splitData);
-const [split,setSplit] = useState([<SplitInput amount={formData.amount} tag={0} parentCallback={getSplitData} />])
+  const getSplitData = (data, tag) => {
+    dispatch(setSplitData({ data, tag }));
+  };
+
+  const [split, setSplit] = useState([
+    <SplitInput
+      amount={formData.amount}
+      tag={0}
+      parentCallback={getSplitData}
+    />,
+  ]);
   const renderSplit = () => {
-    if(formData.split === true) {
-      return <div>
-        {split}
-        <Button onClick={handleAddPerson} text={"Add Person"} className={"splitAddPerson"} />
-        <Button onClick={handleRemovePerson} text={"Remove Person"} className={"splitRemovePerson"} />
-      </div>
+    if (formData.split === true) {
+      return (
+        <div>
+          {split}
+          <Button
+            onClick={handleAddPerson}
+            text={"Add Person"}
+            className={"splitAddPerson"}
+          />
+          <Button
+            onClick={handleRemovePerson}
+            text={"Remove Person"}
+            className={"splitRemovePerson"}
+          />
+        </div>
+      );
     }
-  }
-  
+  };
+
   return (
     <div className="expenseContainer">
       <div>
