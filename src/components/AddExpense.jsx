@@ -7,6 +7,8 @@ import {
   selectSelectedTripId,
   selectTrips,
   togglePopUp,
+  setSplitData,
+  selectSplitData,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
@@ -17,6 +19,7 @@ import { getExpenseList } from "../utils/expenseData";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = () => {
+  const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
@@ -32,7 +35,7 @@ export const AddExpense = () => {
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
-  const [splitData, setSplitData] = useState([])
+  // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Food", name: "Food" },
@@ -63,7 +66,7 @@ export const AddExpense = () => {
     }
     const result = await validate(formData, "expense");
     setErrors(result); //result returns promise
-    console.log(errors);
+    // console.log(errors);
   };
 
   const handleSubmit = () => {
@@ -105,19 +108,24 @@ export const AddExpense = () => {
     }
   };
 
-  let handleAddPerson = () => {
-    setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
+let handleAddPerson = () => {
+  setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
+  // const dataCopy = Array.from(splitData);
+  // dataCopy.push({paid: false});
+  // setSplitData(dataCopy);
+  // console.log(dataCopy, splitData, "ADDING")
 }
 let handleRemovePerson = () => {
   setSplit(split.splice(split.length -1, 1));
 }
 
 const getSplitData = (data, tag) => {
-  const dataCopy = Array.from(splitData);
-  dataCopy.splice(tag, 1, data);
-  setSplitData(dataCopy);
-  console.log('IM TRYING', data, splitData, dataCopy)
+  console.log(data, tag, splitData, typeof tag)
+  dispatch(setSplitData({data, tag}));
+  
+  // console.log('IM TRYING', data, splitData, dataCopy, tag)
 };
+console.log(splitData);
 const [split,setSplit] = useState([<SplitInput amount={formData.amount} tag={0} parentCallback={getSplitData} />])
   const renderSplit = () => {
     if(formData.split === true) {

@@ -161,6 +161,13 @@ export const homeSlice = createSlice({
       }
       saveStore("homeSlice", state);
     },
+    setSplitData: (state, {payload}) => {
+      if (state.splitData.length === 0 ) {
+        state.splitData.push(payload.data);
+      } else {
+        state.splitData[payload.tag] = payload.data;
+      }
+    }
   },
 });
 
@@ -173,6 +180,7 @@ export const {
   toggleHideFutureExpenses,
   deleteToEdit,
   addSplitData,
+  setSplitData,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
@@ -190,5 +198,6 @@ export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
 export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
+export const selectSplitData = (state) => state.home.splitData;
 
 export default homeSlice.reducer;
