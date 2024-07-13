@@ -110,13 +110,11 @@ export const homeSlice = createSlice({
       // Create variable for the correct trip
       const thisTrip = state.trips[indexOf];
       // Send data to be converted into the preferred format (uses function in expenseData.js)
-      console.log(payload, 'INHOMESLICE')
       let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
         ...state.currencyRates,
       });
       let expense = result.expense || result.allExpenses;
       let billSplit = result.billSplit
-      console.log(expense, billSplit, 'INHOMESLICE, processed')
       // Push data into expenses array
       if (Array.isArray(expense)) {
         expense.forEach((element) => {
@@ -141,15 +139,25 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
-      const { expenseIndex } = payload;
+      // const { expenseIndex } = payload;
+      const expenseIndex = payload.index;
+      const splitIndex = payload.splitIndex;
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       // If its an array then delete multiple from the first index
-      if (Array.isArray(payload)) {
-        state.trips[indexTrip].expenses.splice(payload[0], payload.length);
+      // Expense index first
+      if (Array.isArray(expenseIndex)) {
+        state.trips[indexTrip].expenses.splice(expenseIndex[0], expenseIndex.length);
       } else {
         // Otherwise, delete single expense
         state.trips[indexTrip].expenses.splice(expenseIndex, 1);
+      }
+      // Split index next
+      if (Array.isArray(expenseIndex)) {
+        state.trips[indexTrip].splits.splice(splitIndex[0], splitIndex.length);
+      } else {
+        // Otherwise, delete single expense
+        state.trips[indexTrip].splits.splice(splitIndex, 1);
       }
       saveStore("homeSlice", state);
     },

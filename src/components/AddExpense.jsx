@@ -20,7 +20,7 @@ export const AddExpense = () => {
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
-  let expenses = getExpenseList(tripID, trips);
+  let expenses = getExpenseList(tripID, trips).expenses;
   const [formData, setFormData] = useState({
     multiDay: false,
     date: new Date().toLocaleDateString("en-CA"),

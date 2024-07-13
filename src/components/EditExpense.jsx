@@ -6,6 +6,7 @@ import {
   getExpenseList,
   getThisExpense,
   mergeExpenseDays,
+  getThisSplit,
 } from "../utils/expenseData";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,17 +18,16 @@ import {
   selectPopUp,
   togglePopUp,
 } from "../redux/homeSlice";
+import SplitInput from "./SplitInput";
 
 export const EditExpense = () => {
   const dispatch = useDispatch();
   const popUp = useSelector(selectPopUp);
-  // const id = "expense_D2rdJ7nN8kJ3fHA25T4gd";
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
   let [formData, setFormData] = useState({
     date: new Date().toLocaleDateString("en-CA"),
-    // endDate: new Date().toLocaleDateString("en-CA"),
     split: false,
     category: "Food",
     description: "test",
@@ -41,6 +41,9 @@ export const EditExpense = () => {
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
+  let [splitList, setSplitList] = useState([]);
+  let [theseSplits, setTheseSplits] = useState([]);
+  let [splitIndex, setSplitIndexs] = useState([]);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Food", name: "Food" },
@@ -55,11 +58,11 @@ export const EditExpense = () => {
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const setThisExpense = () => {
-    let expenses = getExpenseList(tripID, trips);
-    setExpenseList(expenses);
-    let result = getThisExpense(expenses, popUp.id);
+    let thisTrip = getExpenseList(tripID, trips);
+    setExpenseList(thisTrip.expenses);
+    setSplitList(thisTrip.splits);
+    let result = getThisExpense(thisTrip.expenses, popUp.id);
     setIndex(result.indexOf);
-    // const copy = JSON.parse(JSON.stringify(mergeExpenseDays(result.thisExpense, expenses)));
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = new Date(formData.date).toLocaleDateString("en-CA");
     let newAmount = copy.amount.fromValue;
@@ -69,11 +72,33 @@ export const EditExpense = () => {
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
     setFormData(copy);
+    if(copy.split === true) {
+      if(result.thisExpense.sharedID) {
+        setThisSplit(thisTrip.splits, result.thisExpense.sharedID)
+      } else {
+      setThisSplit(thisTrip.splits, result.thisExpense.id)
+    }
+    }
   };
 
   useEffect(() => {
     setThisExpense();
   }, []);
+
+  const setThisSplit = (splits, id) => {
+    let result = getThisSplit(splits, id)
+    const copy = JSON.parse(JSON.stringify(result.allSplits));
+    copy.forEach((thisSplit) => {
+      delete thisSplit.currency
+      delete thisSplit.date;
+      delete thisSplit.expenseID;
+      delete thisSplit.id;
+      delete thisSplit.description;
+      delete thisSplit.totalExpense;
+    });
+    setTheseSplits(copy);
+    console.log(result, copy, 'set this 2');
+  };
 
   const dataInput = (e) => {
     // getValidationResult();
@@ -98,8 +123,10 @@ export const EditExpense = () => {
     //   return;
     // }
     if (formData.description && formData.amount) {
-      dispatch(deleteToEdit(index));
-      dispatch(addExpenseData(formData));
+      const data = {formData, theseSplits} 
+      const indexs = {index, splitIndex}
+      dispatch(deleteToEdit(indexs));
+      dispatch(addExpenseData(data));
     } else {
       console.log("FAIL FINAL");
       return;
@@ -135,6 +162,33 @@ export const EditExpense = () => {
       return <></>;
     }
   };
+let handleAddPerson = () => {
+  setSplit([...split,<SplitInput amount={formData.amount} tag={split.length} parentCallback={getSplitData} />]);
+}
+let handleRemovePerson = () => {
+  setSplit(split.splice(split.length -1, 1));
+}
+
+const getSplitData = (data, tag) => {
+  const dataCopy = Array.from(theseSplits);
+  dataCopy.splice(tag, 1, data);
+  setTheseSplits(dataCopy);
+  console.log('IM TRYING', data, theseSplits, dataCopy)
+};
+
+  const renderSplit = () => {
+    if(formData.split === true) {
+      return <div>
+        {theseSplits.map(function(split, index) {
+          return (
+            <SplitInput amount={formData.amount} tag={index} parentCallback={getSplitData} data={split}/>
+          )
+        })}
+        <Button onClick={handleAddPerson} text={"Add Person"} className={"splitAddPerson"} />
+        <Button onClick={handleRemovePerson} text={"Remove Person"} className={"splitRemovePerson"} />
+      </div>
+    }
+  }
 
   return (
     <>
@@ -215,6 +269,8 @@ export const EditExpense = () => {
           ]}
           callback={dataInput}
         />
+
+        {renderSplit()}
 
         <Button
           onClick={handleSubmit}

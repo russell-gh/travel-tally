@@ -142,7 +142,9 @@ export function getExpenseList(tripID, trips) {
   });
   // Create variable for the correct trip
   const thisTrip = trips[indexOf];
-  return thisTrip.expenses;
+  // const expenses = thisTrip.expenses
+  // const splits = thisTrip.splits
+  return thisTrip;
 }
 
 export function getThisExpense(expenseList, id) {
@@ -151,9 +153,27 @@ export function getThisExpense(expenseList, id) {
   });
   // Create variable for the correct trip
   const thisExpense = expenseList[indexOf];
-  // const multi = mergeExpenseDays(thisExpense, expenseList)
   let result = { thisExpense, indexOf };
   return result;
+}
+
+
+export function getThisSplit(splitList, id) {
+  let allSplits = [];
+  let allIndexs = []
+
+  splitList.forEach((thisSplit, index) => {
+    // Finds each split with matching ID
+    if (thisSplit.expenseID === id) {
+      allSplits.push(thisSplit);
+      allIndexs.push(index); // Adds all of them to and array
+    }
+  });
+
+  const result = {allSplits, allIndexs};
+
+  return result;
+
 }
 
 export function unixToDateReversed(unix) {

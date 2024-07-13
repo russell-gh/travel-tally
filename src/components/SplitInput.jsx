@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormElement from '../reusable-code/FormElement';
 import { useState } from 'react';
 
-const SplitInput = ({amount, tag, parentCallback}) => {
+const SplitInput = ({amount, tag, parentCallback, data}) => {
     const [formData, setFormData] = useState({ paid: false
       });
+
+      useEffect(() => {
+        if(data) {
+          setFormData(data);
+        }
+      }, []);
 
     const dataInput = (e) => {
         let target = e.target.name;
@@ -15,16 +21,19 @@ const SplitInput = ({amount, tag, parentCallback}) => {
         } else {
             value = e.target.value;
         }
-    
+        let input ={...formData, [target]: value }
+        // setFormData({ ...formData, [target]: value });
         setFormData({ ...formData, [target]: value });
-        parentCallback(formData, tag);
+        parentCallback(input, tag);
       };
+      
     return <>
     <FormElement
         type={"text"}
         label={"Name"}
         name={'name'}
         id={'nameSplit' + tag}
+        value={formData.name}
         // error={errors["description"]}
         // list={"descriptionOptions"}
         callback={dataInput}
@@ -36,6 +45,7 @@ const SplitInput = ({amount, tag, parentCallback}) => {
           id={`splitAmount` + tag}
           minValue={0}
           maxValue={amount}
+          value={formData.amount}
         //   error={errors["amount"]}
           callback={dataInput}
         />
@@ -44,6 +54,7 @@ const SplitInput = ({amount, tag, parentCallback}) => {
           label={"Paid"}
           name={`paid`}
           id={`paidCheck` + tag}
+          value={formData.paid}
           callback={dataInput}
         />
       
