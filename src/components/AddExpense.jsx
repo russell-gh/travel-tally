@@ -136,18 +136,20 @@ export const AddExpense = ({ animatingOut }) => {
   const renderSplit = () => {
     if (formData.split === true) {
       return (
-        <div>
+        <div className="flex">
           {split}
-          <Button
-            onClick={handleAddPerson}
-            text={"Add Person"}
-            className={"splitAddPerson"}
-          />
-          <Button
-            onClick={handleRemovePerson}
-            text={"Remove Person"}
-            className={"splitRemovePerson"}
-          />
+          <div className="containerBtnPopUp">
+            <Button
+              onClick={handleAddPerson}
+              text={"Add Person"}
+              className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleRemovePerson}
+              text={"Remove Person"}
+              className={"splitRemovePerson"}
+            />
+          </div>
         </div>
       );
     }
