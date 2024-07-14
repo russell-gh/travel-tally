@@ -1,7 +1,11 @@
+import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
 
-export function handleData(expense, home, data) {
+export function handleData({ formData, splitData }, home, data) {
+  const expense = formData;
+  let splits = JSON.parse(JSON.stringify(splitData));
+  let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let start = stringToUnix(expense.date);
@@ -30,6 +34,10 @@ export function handleData(expense, home, data) {
   // Converts currency if neccesary
   if (currency != home) {
     newAmount.toValue = convertCurrency(newAmount.fromValue, currency, data);
+
+    splits.forEach((bill) => {
+      bill.converted = convertCurrency(bill.amount, currency, data);
+    });
   }
 
   // Tidies object up, adds unique id and unix time
@@ -38,14 +46,16 @@ export function handleData(expense, home, data) {
   expense.date = start;
   expense.endDate = end;
   if (expense.multiDay === true) {
-    let allExpenses = splitExpenseDays(expense);
+    // If it's a multiday expense, it gets sent to be split
+    let allExpenses = splitExpenseDays({ expense, splits });
     return allExpenses;
   }
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
+  billSplit = splitExpenseBill(splits, expense, data);
 
-  return expense;
+  return { expense, billSplit };
 }
 
 export function convertCurrency(fromValue, fromCurrency, data) {
@@ -55,16 +65,19 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   return result;
 }
 
-export function splitExpenseDays(expense) {
+export function splitExpenseDays({ expense, splitData }) {
+  console.log(expense, splitData, "inside split expense");
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let { fromValue, toValue } = amount;
   let allExpenses = [];
+  let billSplit;
   delete expense.multiDay;
   const days = (endDate - date) / 1000 / 60 / 60 / 24 + 1;
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
+  billSplit = splitExpenseBill(splitData, expense);
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
@@ -84,7 +97,7 @@ export function splitExpenseDays(expense) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
-  return allExpenses;
+  return { allExpenses, billSplit };
 }
 
 export function mergeExpenseDays(expense, allExpenses) {
@@ -134,7 +147,7 @@ export function getExpenseList(tripID, trips) {
   });
   // Create variable for the correct trip
   const thisTrip = trips[indexOf];
-  return thisTrip.expenses;
+  return thisTrip;
 }
 
 export function getThisExpense(expenseList, id) {
@@ -143,8 +156,24 @@ export function getThisExpense(expenseList, id) {
   });
   // Create variable for the correct trip
   const thisExpense = expenseList[indexOf];
-  // const multi = mergeExpenseDays(thisExpense, expenseList)
   let result = { thisExpense, indexOf };
+  return result;
+}
+
+export function getThisSplit(splitList, id) {
+  let allSplits = [];
+  let allIndexs = [];
+
+  splitList.forEach((thisSplit, index) => {
+    // Finds each split with matching ID
+    if (thisSplit.expenseID === id) {
+      allSplits.push(thisSplit);
+      allIndexs.push(index); // Adds all of them to and array
+    }
+  });
+
+  const result = { allSplits, allIndexs };
+
   return result;
 }
 
