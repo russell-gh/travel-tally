@@ -17,6 +17,12 @@ import {
   selectPopUp,
   togglePopUp,
 } from "../redux/homeSlice";
+import {
+  getActualEndDate,
+  getActualStartDate,
+  getDateForForm,
+} from "../utils/utilsDates";
+import { findItem } from "../utils/utils";
 
 export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
@@ -137,6 +143,14 @@ export const EditExpense = ({ animatingOut }) => {
     }
   };
 
+  //calculating start and enddate of trip
+  const trip = findItem(trips, tripID);
+  const { details } = trip;
+  const { startDateIncluded, endDateIncluded, startDate, endDate } =
+    details.dates;
+  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
+  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
   return (
     <div className="editContainer">
       <div className="flex">
@@ -147,6 +161,8 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.date}
           id={"datePicker"}
           callback={dataInput}
+          minDate={getDateForForm(actualStartDate)}
+          maxDate={getDateForForm(actualEndDate)}
         />
         <div className="multiDayCheckboxContainer">
           <div>
@@ -234,7 +250,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
         <Button
           onClick={handleSubmit}
-          text={"Add"}
+          text={"Edit"}
           className={"expenseSubmit"}
           disabled={animatingOut}
           animation="animation"

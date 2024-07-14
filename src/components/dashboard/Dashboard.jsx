@@ -19,6 +19,7 @@ import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { useMemo } from "react";
+import { getActualEndDate, getActualStartDate } from "../../utils/utilsDates";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -37,10 +38,10 @@ const Dashboard = () => {
   const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
 
   const actualStartDate = useMemo(() => {
-    return !startDateIncluded ? startDate + 86400000 : startDate;
+    return getActualStartDate(startDateIncluded, startDate);
   }, [startDateIncluded, startDate]);
   const actualEndDate = useMemo(() => {
-    return !endDateIncluded ? endDate - 86400000 : endDate;
+    return getActualEndDate(endDateIncluded, endDate);
   }, [endDateIncluded, endDate]);
 
   let _expenses = useMemo(() => {

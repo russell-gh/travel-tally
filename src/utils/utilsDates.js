@@ -28,3 +28,21 @@ export function includesFutureExpenses(data) {
   });
   return includesFutureExpenses;
 }
+
+export const getActualStartDate = (startDateIncluded, startDate) => {
+  return !startDateIncluded ? startDate + 86400000 : startDate;
+};
+export const getActualEndDate = (endDateIncluded, endDate) => {
+  return !endDateIncluded ? endDate - 86400000 : endDate;
+};
+
+export function getDateForForm(unix) {
+  let date = new Date(unix);
+  let formattedDate =
+    date.getFullYear() +
+    "-" +
+    (date.getMonth() + 1).toString().padStart(2, "0") +
+    "-" +
+    date.getDate().toString().padStart(2, "0");
+  return formattedDate;
+}
