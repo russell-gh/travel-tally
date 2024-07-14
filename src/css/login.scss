@@ -1,9 +1,9 @@
 @import "variables";
 
 .errortext {
-  color: $darker-green;
+  color: $red;
 }
-from .loginInput {
+.loginInput {
   position: absolute;
   top: 50%;
   left: 50%;
