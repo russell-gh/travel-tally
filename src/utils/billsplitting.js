@@ -1,5 +1,6 @@
 import React from "react";
 import { generateId } from "./utils";
+import { convertCurrency } from "./expenseData";
 
 export function splitExpenseBill(splitData, expense) {
   if (!splitData) {
@@ -9,19 +10,25 @@ export function splitExpenseBill(splitData, expense) {
   let allSplits = [];
 
   splitData.forEach((bill) => {
+    let newAmount = {
+      fromValue: Number(bill.amount * 100),
+      toValue: Number(bill.converted * 100),
+      fromCurrency: expense.amount.fromCurrency,
+      toCurrency: expense.amount.toCurrency,
+    };
+
     const formatted = {
-      amount: Number(bill.amount * 100),
+      amount: newAmount,
       name: bill.name,
       paid: bill.paid,
       expenseID: expense.id || expense.sharedID,
       id: generateId("billSplit"),
       description: expense.description,
       date: expense.date,
-      totalExpense: expense.amount.fromValue,
-      currency: expense.amount.fromCurrency,
     };
     allSplits.push(formatted);
   });
 
+  console.log(allSplits, "ALLSPLITS");
   return allSplits;
 }

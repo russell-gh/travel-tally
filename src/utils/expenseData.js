@@ -3,8 +3,8 @@ import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
 
 export function handleData({ formData, splitData }, home, data) {
-  console.log(formData, splitData, "INSIDE HANDLE");
   const expense = formData;
+  let splits = JSON.parse(JSON.stringify(splitData));
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
@@ -34,6 +34,10 @@ export function handleData({ formData, splitData }, home, data) {
   // Converts currency if neccesary
   if (currency != home) {
     newAmount.toValue = convertCurrency(newAmount.fromValue, currency, data);
+
+    splits.forEach((bill) => {
+      bill.converted = convertCurrency(bill.amount, currency, data);
+    });
   }
 
   // Tidies object up, adds unique id and unix time
@@ -42,13 +46,14 @@ export function handleData({ formData, splitData }, home, data) {
   expense.date = start;
   expense.endDate = end;
   if (expense.multiDay === true) {
-    let allExpenses = splitExpenseDays({ expense, splitData });
+    // If it's a multiday expense, it gets sent to be split
+    let allExpenses = splitExpenseDays({ expense, splits });
     return allExpenses;
   }
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
-  billSplit = splitExpenseBill(splitData, expense);
+  billSplit = splitExpenseBill(splits, expense, data);
 
   return { expense, billSplit };
 }

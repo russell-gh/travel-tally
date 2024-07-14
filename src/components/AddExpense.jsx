@@ -231,26 +231,6 @@ export const AddExpense = ({ animatingOut }) => {
         />
       </div>
 
-      <FormElement
-        type={"select"}
-        label={"Split"}
-        name={"split"}
-        id={"splitExpense"}
-        options={[
-          { value: false, name: "No" },
-          { value: true, name: "Yes" },
-        ]}
-        callback={dataInput}
-      />
-      {renderSplit()}
-
-      <Button onClick={handleSubmit} text={"Add"} className={"expenseSubmit"} />
-      <Button
-        text="Cancel"
-        className="cancelBtn"
-        animation={true}
-        onClick={() => dispatch(togglePopUp())}
-      />
       <div className="flex">
         <FormElement
           type={"select"}
@@ -264,6 +244,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
+      {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
