@@ -10,6 +10,9 @@ import Button from "../reusable-code/Button";
 //==========================================
 //=======Displays Login Data================
 //==========================================
+//TODOTODOTODOTODO
+//Error Timing
+//Validation Error (Zahra?)
 const Login = () => {
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
@@ -23,8 +26,6 @@ const Login = () => {
     setErrors(errObj);
     // console.log(errors, formData);
   };
-  //BUG Error Timing is ugly
-
   const localUser = JSON.parse(localStorage.getItem("user"));
 
   //============================================
