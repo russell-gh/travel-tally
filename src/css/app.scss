@@ -1,6 +1,6 @@
 $teal: #235b89;
 $green: #d6ee79;
-$darker-green: #87964bd2;
+$darker-green: #c8de6f;
 $sage: #d3bb5b84;
 $white: #ffffff;
 $black: #000000;
@@ -9,7 +9,6 @@ $grey: #b3b3b3;
 // Export Variables
 // Font
 // Dropdown
-// Footer Smaller
 //Fix Hover
 
 html {
@@ -52,7 +51,7 @@ input {
   font-size: 16px;
   cursor: pointer;
   :hover {
-    background-color: $darker-green; //TODO Check works
+    background: $darker-green; //TODO Check works
   }
 }
 
@@ -64,6 +63,10 @@ header {
     height: 50px;
     width: 50px;
   }
+}
+
+.btn:hover {
+  background-color: $darker-green;
 }
 
 header,
