@@ -146,7 +146,7 @@ const FormElement = ({
       );
     case "button":
       return (
-        <button type="submit" onClick={(e) => callback(e)}>
+        <button className={className} type="submit" onClick={(e) => callback(e)}>
           Submit
         </button>
       );
