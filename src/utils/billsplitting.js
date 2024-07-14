@@ -1,5 +1,5 @@
 import React from "react";
-import { generateId } from "../components/onboarding/utils";
+import { generateId } from "./utils";
 
 export function splitExpenseBill(splitData, expense) {
   if (!splitData) {

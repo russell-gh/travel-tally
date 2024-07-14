@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTrips } from "../redux/homeSlice";
 import { validate } from "../validation/validate";
-import "../css/login.css";
-import "../css/app.css";
+import "../css/login.scss";
+import "../css/app.scss";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 //==========================================
