@@ -108,6 +108,8 @@ export const homeSlice = createSlice({
     addExpenseData: (state, { payload }) => {
       // Close expense popup
       state.popUp = {};
+      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
+      state.splitData = [];
       // Find index of trip from id
       const indexOf = state.trips.findIndex((trip) => {
         return trip.id === state.selectedTripId;
@@ -118,34 +120,64 @@ export const homeSlice = createSlice({
       let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
         ...state.currencyRates,
       });
+      let expense = result.expense || result.allExpenses;
+      let billSplit = result.billSplit;
       // Push data into expenses array
-      if (Array.isArray(result)) {
-        result.forEach((element) => {
+      if (Array.isArray(expense)) {
+        expense.forEach((element) => {
           state.trips[indexOf].expenses.push(element);
         });
       } else {
-        state.trips[indexOf].expenses.push(result);
+        state.trips[indexOf].expenses.push(expense);
+      }
+      // Push data to split array
+      if (Array.isArray(billSplit)) {
+        billSplit.forEach((element) => {
+          state.trips[indexOf].splits.push(element);
+        });
+      } else {
+        state.trips[indexOf].splits.push(billSplit);
       }
       saveStore("homeSlice", state);
     },
+
     toggleHideFutureExpenses: (state, { payload }) => {
       state.hideFutureExpenses = payload;
       saveStore("homeSlice", state);
     },
 
     deleteToEdit: (state, { payload }) => {
-      console.log("HIT DELETE", payload);
-      const { expenseIndex } = payload;
+      // const { expenseIndex } = payload;
+      const expenseIndex = payload.index;
+      const splitIndex = payload.splitIndex;
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       // If its an array then delete multiple from the first index
-      if (Array.isArray(payload)) {
-        state.trips[indexTrip].expenses.splice(payload[0], payload.length);
+      // Expense index first
+      if (Array.isArray(expenseIndex)) {
+        state.trips[indexTrip].expenses.splice(
+          expenseIndex[0],
+          expenseIndex.length
+        );
       } else {
         // Otherwise, delete single expense
         state.trips[indexTrip].expenses.splice(expenseIndex, 1);
       }
+      // Split index next
+      if (Array.isArray(expenseIndex)) {
+        state.trips[indexTrip].splits.splice(splitIndex[0], splitIndex.length);
+      } else {
+        // Otherwise, delete single expense
+        state.trips[indexTrip].splits.splice(splitIndex, 1);
+      }
       saveStore("homeSlice", state);
+    },
+    setSplitData: (state, { payload }) => {
+      if (state.splitData.length === 0) {
+        state.splitData.push(payload.data);
+      } else {
+        state.splitData[payload.tag] = payload.data;
+      }
     },
   },
 });
@@ -158,6 +190,8 @@ export const {
   addExpenseData,
   toggleHideFutureExpenses,
   deleteToEdit,
+  addSplitData,
+  setSplitData,
   addTrip,
 } = homeSlice.actions;
 
@@ -176,7 +210,7 @@ export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
 export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
+export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
-
 
 export default homeSlice.reducer;

@@ -7,6 +7,8 @@ import {
   selectSelectedTripId,
   selectTrips,
   togglePopUp,
+  setSplitData,
+  selectSplitData,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
@@ -20,22 +22,26 @@ import {
   getDateForForm,
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
+import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
+  const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
-  let expenses = getExpenseList(tripID, trips);
+  let expenses = getExpenseList(tripID, trips).expenses;
   const [formData, setFormData] = useState({
     multiDay: false,
     date: new Date().toLocaleDateString("en-CA"),
     endDate: new Date().toLocaleDateString("en-CA"),
+    amount: 0,
     split: false,
     currency: "GBP",
     category: "Food",
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
+  // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -76,7 +82,7 @@ export const AddExpense = ({ animatingOut }) => {
     }
     const result = await validate(formData, "expense");
     setErrors(result); //result returns promise
-    console.log(errors);
+    // console.log(errors);
   };
 
   const handleSubmit = () => {
@@ -85,13 +91,15 @@ export const AddExpense = ({ animatingOut }) => {
       return;
     }
     if (formData.description && formData.amount) {
-      console.log(formData, "pass");
-      dispatch(addExpenseData(formData));
+      const result = { formData, splitData };
+      console.log(result, "pass");
+      dispatch(addExpenseData(result));
     } else {
       console.log("FAIL FINAL");
       return;
     }
   };
+
   const multiDay = () => {
     setMulti((multi = !multi));
     const inverted = !formData.multiDay;
@@ -112,6 +120,53 @@ export const AddExpense = ({ animatingOut }) => {
       );
     } else {
       return <></>;
+    }
+  };
+
+  let handleAddPerson = () => {
+    setSplit([
+      ...split,
+      <SplitInput
+        amount={formData.amount}
+        tag={split.length}
+        parentCallback={getSplitData}
+      />,
+    ]);
+  };
+  let handleRemovePerson = () => {
+    setSplit(split.splice(split.length - 1, 1));
+  };
+
+  const getSplitData = (data, tag) => {
+    dispatch(setSplitData({ data, tag }));
+  };
+
+  const [split, setSplit] = useState([
+    <SplitInput
+      amount={formData.amount}
+      tag={0}
+      parentCallback={getSplitData}
+    />,
+  ]);
+  const renderSplit = () => {
+    if (formData.split === true) {
+      return (
+        <div className="flex">
+          {split}
+          <div className="containerBtnPopUp">
+            <Button
+              onClick={handleAddPerson}
+              text={"Add Person"}
+              className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleRemovePerson}
+              text={"Remove Person"}
+              className={"splitRemovePerson"}
+            />
+          </div>
+        </div>
+      );
     }
   };
 
@@ -202,6 +257,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
+
       <div className="flex">
         <FormElement
           type={"select"}
@@ -215,6 +271,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
+      {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
