@@ -60,11 +60,7 @@ export const AddExpense = ({ animatingOut }) => {
   const dataInput = (e) => {
     let target = e.target.name;
     let value;
-    if (e.target.name === "amount") {
-      value = Number(e.target.value);
-    } else {
-      value = e.target.value;
-    }
+    value = e.target.value;
     console.log(typeof value);
     if (value === "true") value = true;
     if (value === "false") value = false;

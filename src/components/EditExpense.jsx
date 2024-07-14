@@ -111,21 +111,24 @@ export const EditExpense = ({ animatingOut }) => {
   };
 
   const dataInput = (e) => {
-    // getValidationResult();
     let target = e.target.name;
     let value = e.target.value;
     if (value === "true") value = true;
     if (value === "false") value = false;
     setFormData({ ...formData, [target]: value });
   };
-  // const getValidationResult = async () => {
-  //   if (!Object.values(formData).length) {
-  //     return;
-  //   }
-  //   const result = await validate(formData, "expense");
-  //   setErrors(result); //result returns promise
-  //   console.log(errors);
-  // };
+
+  useEffect(() => {
+    getValidationResult;
+  }, [formData]);
+  const getValidationResult = async () => {
+    if (!Object.values(formData).length) {
+      return;
+    }
+    const result = await validate(formData, "expense");
+    setErrors(result); //result returns promise
+    console.log(errors);
+  };
 
   const handleSubmit = () => {
     // if (Object.keys(errors).length) {
