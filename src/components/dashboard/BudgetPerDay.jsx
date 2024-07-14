@@ -31,7 +31,12 @@ const BudgetPerDay = ({
     (budget * 100) / amountOfBudgetDays,
     expensesArray
   );
-  const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
+
+  const selectedDay = useMemo(() => {
+    console.log(">>>", data);
+    return getSpendSelectedDay(data, filterDate, budgetPerDay);
+  }, [data, filterDate, budgetPerDay]);
+
   const difference = addDecimals(
     budgetPerDay * 100 - selectedDay.totalSpendPerDay
   );

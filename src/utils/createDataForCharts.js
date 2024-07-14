@@ -54,6 +54,7 @@ export function createDataForCharts(
         (budget * 100) / amountOfBudgetDays,
         expensesArray
       );
+      console.log("dataCreateCharts", data);
       const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
 
       spendArray.push(addDecimals(selectedDay.totalSpendPerDay));
