@@ -12,7 +12,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
 import SetUpProfile from "./components/setUpProfile/SetUpProfile";
-import "./css/headerFooter.scss";
+import "./css/app.scss";
 import "./css/splashPage.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
@@ -48,15 +48,19 @@ const App = () => {
       const { data } = await axios.get(`fakeExpenseData.json`);
       dispatch(setData({ text: "trips", data }));
     }
+    {
+      const { data } = await axios.get(`countryInfo.json`);
+      dispatch(setData({ text: "countries", data }));
+    }
+  };
+
+  const closePopUp = () => {
+    _setPopUp(false);
   };
 
   useEffect(() => {
     if (_popUp && !popUp.component) {
-      console.log("you get here");
-      animationPopUp(popUpRef.current, "reverse");
-      setTimeout(() => {
-        _setPopUp(false);
-      }, 30000);
+      animationPopUp(popUpRef.current, "reverse", closePopUp);
     } else if (popUp.component) {
       _setPopUp(popUp);
       animationPopUp(popUpRef.current);
@@ -65,7 +69,8 @@ const App = () => {
 
   const stringToComponent = {
     DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
-    EditExpense: <EditExpense />,
+    EditExpense: <EditExpense animatingOut={!popUp.component} />,
+    AddExpense: <AddExpense animatingOut={!popUp.component} />,
   };
 
   return (
@@ -78,7 +83,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard popUp={_popUp} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<p>No page selected</p>} />
         </Routes>
         <div ref={popUpRef} className="popUpContainer">

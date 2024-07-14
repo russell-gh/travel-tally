@@ -107,7 +107,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {label && <label htmlFor={id}>{label}:</label>}
+          {label && <label htmlFor={id}>{label}</label>}
           {error && <p>{error}</p>}
         </>
       );
@@ -118,6 +118,7 @@ const FormElement = ({
           <select
             name={name}
             className={className}
+            defaultValue={value}
             id={id}
             onChange={(e) => {
               callback(e, id);

@@ -22,7 +22,7 @@ export function getUnixfromDate(str1) {
 export function includesFutureExpenses(data) {
   let includesFutureExpenses;
   data.forEach((item) => {
-    if (dayjs().isBefore(dayjs(item.startDate))) {
+    if (dayjs().isBefore(dayjs(item.date))) {
       includesFutureExpenses = true;
     }
   });

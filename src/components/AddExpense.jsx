@@ -18,7 +18,7 @@ import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
 import SplitInput from "./SplitInput";
 
-export const AddExpense = () => {
+export const AddExpense = ({ animatingOut }) => {
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
@@ -38,9 +38,10 @@ export const AddExpense = () => {
   // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
+    { value: "Activities", name: "Activities" },
     { value: "Food", name: "Food" },
-    { value: "Accomodation", name: "Accomodation" },
-    { value: "Travel", name: "Travel" },
+    { value: "Transport", name: "Transport" },
+    { value: "Hotel", name: "Hotel" },
     { value: "Other", name: "Other" },
   ];
 
@@ -152,9 +153,16 @@ export const AddExpense = () => {
     }
   };
 
+  //getting datalist
+  let datalist = expenses.map((expenses) => {
+    return expenses.description;
+  });
+  datalist = [...new Set(datalist)];
+  datalist = datalist.filter((description) => description.trim() !== "");
+
   return (
     <div className="expenseContainer">
-      <div>
+      <div className="flex">
         <FormElement
           type={"date"}
           label={"Date"}
@@ -163,39 +171,48 @@ export const AddExpense = () => {
           id={"datePicker"}
           callback={dataInput}
         />
-        {renderMultiDay()}
+
+        <div className="multiDayCheckboxContainer">
+          <div>
+            <FormElement
+              type={"checkbox"}
+              label={!multi && "Multiple days"}
+              name={"dateCheck"}
+              id={"dateCheck"}
+              callback={multiDay}
+            />
+          </div>
+          {renderMultiDay()}
+        </div>
+      </div>
+      <div className="flex">
         <FormElement
-          type={"checkbox"}
-          label={"Multiple days"}
-          name={"dateCheck"}
-          id={"dateCheck"}
-          callback={multiDay}
+          type={"text"}
+          label={"Description"}
+          name={"description"}
+          id={"expenseDescription"}
+          error={errors["description"]}
+          list={"descriptionOptions"}
+          callback={dataInput}
+        />
+        <datalist id="descriptionOptions">
+          {datalist.map((expense, index) => {
+            return <option key={index} value={expense}></option>;
+          })}
+        </datalist>
+      </div>
+      <div className="flex">
+        <FormElement
+          type={"select"}
+          label={"Category"}
+          name={"category"}
+          id={"categorySelectExpense"}
+          options={categories}
+          error={errors["category"]}
+          callback={dataInput}
         />
       </div>
-      <FormElement
-        type={"text"}
-        label={"Description"}
-        name={"description"}
-        id={"expenseDescription"}
-        error={errors["description"]}
-        list={"descriptionOptions"}
-        callback={dataInput}
-      />
-      <datalist id="descriptionOptions">
-        {expenses.map((expense) => {
-          return <option value={expense.description}></option>;
-        })}
-      </datalist>
-      <FormElement
-        type={"select"}
-        label={"Category"}
-        name={"category"}
-        id={"categorySelectExpense"}
-        options={categories}
-        error={errors["category"]}
-        callback={dataInput}
-      />
-      <div>
+      <div className="flex">
         <FormElement
           type={"number"}
           label={"Amount"}
@@ -234,6 +251,34 @@ export const AddExpense = () => {
         animation={true}
         onClick={() => dispatch(togglePopUp())}
       />
+      <div className="flex">
+        <FormElement
+          type={"select"}
+          label={"Split"}
+          name={"split"}
+          id={"splitExpense"}
+          options={[
+            { value: false, name: "No" },
+            { value: true, name: "Yes" },
+          ]}
+          callback={dataInput}
+        />
+      </div>
+      <div className="containerBtnPopUp">
+        <Button
+          text="Cancel"
+          className="cancelBtn"
+          animation={true}
+          onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
+        />
+        <Button
+          onClick={handleSubmit}
+          text={"Add"}
+          className={"expenseSubmit"}
+          disabled={animatingOut}
+        />
+      </div>
     </div>
   );
 };

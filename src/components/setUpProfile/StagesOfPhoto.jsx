@@ -1,12 +1,13 @@
 import ProfileCropper from "./ProfileCropper";
 import Button from "../../reusable-code/Button";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveProfile } from "../../redux/onboardingSlice";
 import { selectProfilePictureSrc } from "../../redux/onboardingSlice";
 import { selectUserName } from "../../redux/onboardingSlice";
+import { useNavigate } from "react-router-dom";
 
-const StageOfPhoto = ({ profilePicture }) => {
+const StageOfPhoto = ({ profilePicture, handleCapture }) => {
+  const redirect = useNavigate();
   const profilePictureSrc = useSelector(selectProfilePictureSrc);
   const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const StageOfPhoto = ({ profilePicture }) => {
   return (
     <>
       {profilePicture && !profilePictureSrc && (
-        <ProfileCropper src={profilePicture} />
+        <ProfileCropper src={profilePicture} handleCapture={handleCapture} />
       )}
       {profilePictureSrc && (
         <>
@@ -24,17 +25,21 @@ const StageOfPhoto = ({ profilePicture }) => {
             className="profilePicture"
           />
           <p>Username: {userName}</p>
-          <Link to="/setupprofile">
+          <div className="setUpProfileBtnContainer">
             <Button
               text="Start Over"
               onClick={() => {
                 dispatch(saveProfile());
+                redirect("/setup-profile");
               }}
             />
-          </Link>
-          <Link to="/dashboard">
-            <Button text="Finish" />
-          </Link>
+            <Button
+              text="Finish"
+              onClick={() => {
+                redirect("/dashboard");
+              }}
+            />
+          </div>
         </>
       )}
     </>

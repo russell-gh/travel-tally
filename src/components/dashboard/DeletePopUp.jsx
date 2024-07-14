@@ -2,8 +2,6 @@ import OneItemDelete from "./OneItemDelete";
 import SharedDelete from "./SharedDelete";
 
 const DeletePopUp = ({ popUp, animatingOut }) => {
-  console.log(animatingOut);
-
   if (!popUp) {
     return;
   }
@@ -14,7 +12,7 @@ const DeletePopUp = ({ popUp, animatingOut }) => {
       {!sharedId ? (
         <OneItemDelete title={title} animatingOut={animatingOut} />
       ) : (
-        <SharedDelete title={title} />
+        <SharedDelete title={title} animatingOut={animatingOut} />
       )}
     </div>
   );

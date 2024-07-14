@@ -29,8 +29,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -45,8 +44,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719356400000,
-        "endDate": 1719356400000,
+        "date": 1719356400000,
         "completed": true,
         "splitBill": false
       },
@@ -61,8 +59,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -77,8 +74,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719529200000,
-        "endDate": 1719529200000,
+        "date": 1719529200000,
         "completed": true,
         "splitBill": false
       },
@@ -93,8 +89,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -109,8 +104,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719702000000,
-        "endDate": 1719702000000,
+        "date": 1719702000000,
         "completed": true,
         "splitBill": false
       },
@@ -125,8 +119,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -141,8 +134,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719874800000,
-        "endDate": 1719874800000,
+        "date": 1719874800000,
         "completed": true,
         "splitBill": false
       },
@@ -157,8 +149,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1719961200000,
-        "endDate": 1719961200000,
+        "date": 1719961200000,
         "completed": true,
         "splitBill": false
       },
@@ -173,8 +164,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1720047600000,
-        "endDate": 1720047600000,
+        "date": 1720047600000,
         "completed": true,
         "splitBill": false
       },
@@ -189,8 +179,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1720134000000,
-        "endDate": 1720134000000,
+        "date": 1720134000000,
         "completed": true,
         "splitBill": false
       },
@@ -205,8 +194,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1720220400000,
-        "endDate": 1720220400000,
+        "date": 1720220400000,
         "completed": true,
         "splitBill": false
       },
@@ -221,8 +209,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1720306800000,
-        "endDate": 1720306800000,
+        "date": 1720306800000,
         "completed": true,
         "splitBill": false
       },
@@ -236,8 +223,7 @@
         },
         "category": "Other",
         "description": "dress",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -251,8 +237,7 @@
         },
         "category": "Food",
         "description": "waffle",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -266,8 +251,7 @@
         },
         "category": "Food",
         "description": "",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -281,8 +265,7 @@
         },
         "category": "Activities",
         "description": "movies",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -297,8 +280,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -313,8 +295,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -329,8 +310,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -345,8 +325,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719529200000,
-        "endDate": 1719529200000,
+        "date": 1719529200000,
         "completed": true,
         "splitBill": false
       },
@@ -361,8 +340,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1719356400000,
-        "endDate": 1719356400000,
+        "date": 1719356400000,
         "completed": true,
         "splitBill": false
       },
@@ -377,8 +355,7 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1719961200000,
-        "endDate": 1719961200000,
+        "date": 1719961200000,
         "completed": true,
         "splitBill": false
       },
@@ -393,8 +370,7 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1720220400000,
-        "endDate": 1720220400000,
+        "date": 1720220400000,
         "completed": true,
         "splitBill": false
       },
@@ -409,8 +385,7 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1719961200000,
-        "endDate": 1719961200000,
+        "date": 1719961200000,
         "completed": true,
         "splitBill": false
       },
@@ -425,8 +400,7 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1720047600000,
-        "endDate": 1720047600000,
+        "date": 1720047600000,
         "completed": true,
         "splitBill": false
       },
@@ -440,8 +414,7 @@
         },
         "category": "Transport",
         "description": "train to Utrecht",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -455,8 +428,7 @@
         },
         "category": "Food",
         "description": "coffe and coockie",
-        "startDate": 1719615600000,
-        "endDate": 1719615600000,
+        "date": 1719615600000,
         "completed": true,
         "splitBill": false
       },
@@ -470,8 +442,7 @@
         },
         "category": "Activities",
         "description": "paleis op de dam",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -485,8 +456,7 @@
         },
         "category": "Transport",
         "description": "bus to museum",
-        "startDate": 1719529200000,
-        "endDate": 1719529200000,
+        "date": 1719529200000,
         "completed": true,
         "splitBill": false
       },
@@ -500,8 +470,7 @@
         },
         "category": "Activities",
         "description": "dom museum",
-        "startDate": 1719529200000,
-        "endDate": 1719529200000,
+        "date": 1719529200000,
         "completed": true,
         "splitBill": false
       },
@@ -515,8 +484,7 @@
         },
         "category": "Food",
         "description": "Dinner at square",
-        "startDate": 1719442800000,
-        "endDate": 1719442800000,
+        "date": 1719442800000,
         "completed": true,
         "splitBill": false
       },
@@ -530,8 +498,7 @@
         },
         "category": "Transport",
         "description": "rent bike",
-        "startDate": 1719529200000,
-        "endDate": 1719529200000,
+        "date": 1719529200000,
         "completed": true,
         "splitBill": false
       },
@@ -545,8 +512,7 @@
         },
         "category": "Food",
         "description": "Sandwich",
-        "startDate": 1719874800000,
-        "endDate": 1719874800000,
+        "date": 1719874800000,
         "completed": true,
         "splitBill": false
       },
@@ -560,8 +526,7 @@
         },
         "category": "Other",
         "description": "souvenir",
-        "startDate": 1719874800000,
-        "endDate": 1719874800000,
+        "date": 1719874800000,
         "completed": true,
         "splitBill": false
       },
@@ -575,8 +540,7 @@
         },
         "category": "Food",
         "description": "Italian",
-        "startDate": 1719874800000,
-        "endDate": 1719874800000,
+        "date": 1719874800000,
         "completed": true,
         "splitBill": false
       },
@@ -590,8 +554,7 @@
         },
         "category": "Hotel",
         "description": "hotel The Hague",
-        "startDate": 1719874800000,
-        "endDate": 1719874800000,
+        "date": 1719874800000,
         "completed": true,
         "splitBill": false
       },
@@ -605,8 +568,7 @@
         },
         "category": "Transport",
         "description": "metro",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -620,8 +582,7 @@
         },
         "category": "Food",
         "description": "lunch at beach",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -635,8 +596,7 @@
         },
         "category": "Activities",
         "description": "bungee jumping",
-        "startDate": 1719788400000,
-        "endDate": 1719788400000,
+        "date": 1719788400000,
         "completed": true,
         "splitBill": false
       },
@@ -651,8 +611,7 @@
         },
         "category": "Hotel",
         "description": "hotel Groningen",
-        "startDate": 1720220400000,
-        "endDate": 1720220400000,
+        "date": 1720220400000,
         "completed": true,
         "splitBill": false
       },
@@ -667,8 +626,7 @@
         },
         "category": "Hotel",
         "description": "hotel Groningen",
-        "startDate": 1720306800000,
-        "endDate": 1720306800000,
+        "date": 1720306800000,
         "completed": true,
         "splitBill": false
       },
@@ -683,8 +641,7 @@
         },
         "category": "Hotel",
         "description": "hotel Groningen",
-        "startDate": 1720393200000,
-        "endDate": 1720393200000,
+        "date": 1720393200000,
         "completed": true,
         "splitBill": false
       },
@@ -699,8 +656,7 @@
         },
         "category": "Hotel",
         "description": "hotel Groningen",
-        "startDate": 1720479600000,
-        "endDate": 1720479600000,
+        "date": 1720479600000,
         "completed": true,
         "splitBill": false
       },
@@ -715,8 +671,7 @@
         },
         "category": "Hotel",
         "description": "hotel Groningen",
-        "startDate": 1720566000000,
-        "endDate": 1720566000000,
+        "date": 1720566000000,
         "completed": true,
         "splitBill": false
       },
@@ -730,8 +685,7 @@
         },
         "category": "Transport",
         "description": "train to airport",
-        "startDate": 1721343600000,
-        "endDate": 1721343600000,
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       }
@@ -767,8 +721,7 @@
         },
         "category": "Food",
         "description": "lunch",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -782,8 +735,7 @@
         },
         "category": "Food",
         "description": "waffle",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -797,8 +749,7 @@
         },
         "category": "Food",
         "description": "",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -812,8 +763,7 @@
         },
         "category": "Activities",
         "description": "movies",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -827,8 +777,7 @@
         },
         "category": "Hotel",
         "description": "hotel Amsterdam",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -842,8 +791,7 @@
         },
         "category": "Hotel",
         "description": "hotel Utrecht",
-        "startDate": 1720911600000,
-        "endDate": 1720911600000,
+        "date": 1720911600000,
         "completed": true,
         "splitBill": false
       },
@@ -857,8 +805,7 @@
         },
         "category": "Transport",
         "description": "train to Utrecht",
-        "startDate": 1721084400000,
-        "endDate": 1721084400000,
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
@@ -872,8 +819,7 @@
         },
         "category": "Food",
         "description": "coffe and coockie",
-        "startDate": 1721084400000,
-        "endDate": 1721084400000,
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
@@ -887,8 +833,7 @@
         },
         "category": "Activities",
         "description": "paleis op de dam",
-        "startDate": 1721084400000,
-        "endDate": 1721084400000,
+        "date": 1721084400000,
         "completed": true,
         "splitBill": false
       },
@@ -902,8 +847,7 @@
         },
         "category": "Transport",
         "description": "bus to museum",
-        "startDate": 1721170800000,
-        "endDate": 1721170800000,
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
@@ -917,8 +861,7 @@
         },
         "category": "Activities",
         "description": "dom museum",
-        "startDate": 1721170800000,
-        "endDate": 1721170800000,
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
@@ -932,8 +875,7 @@
         },
         "category": "Food",
         "description": "Dinner at square",
-        "startDate": 1721170800000,
-        "endDate": 1721170800000,
+        "date": 1721170800000,
         "completed": true,
         "splitBill": false
       },
@@ -947,8 +889,7 @@
         },
         "category": "Transport",
         "description": "rent bike",
-        "startDate": 1721257200000,
-        "endDate": 1721257200000,
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
@@ -962,8 +903,7 @@
         },
         "category": "Food",
         "description": "Sandwich",
-        "startDate": 1721257200000,
-        "endDate": 1721257200000,
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
@@ -977,8 +917,7 @@
         },
         "category": "Other",
         "description": "souvenir",
-        "startDate": 1721257200000,
-        "endDate": 1721257200000,
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
@@ -992,8 +931,7 @@
         },
         "category": "Food",
         "description": "Italian",
-        "startDate": 1721257200000,
-        "endDate": 1721257200000,
+        "date": 1721257200000,
         "completed": true,
         "splitBill": false
       },
@@ -1007,8 +945,7 @@
         },
         "category": "Hotel",
         "description": "hotel The Hague",
-        "startDate": 1721343600000,
-        "endDate": 1721343600000,
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
@@ -1022,8 +959,7 @@
         },
         "category": "Transport",
         "description": "metro",
-        "startDate": 1721343600000,
-        "endDate": 1721343600000,
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
@@ -1037,8 +973,7 @@
         },
         "category": "Food",
         "description": "lunch at beach",
-        "startDate": 1721343600000,
-        "endDate": 1721343600000,
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       },
@@ -1052,8 +987,7 @@
         },
         "category": "Activities",
         "description": "bungee jumping",
-        "startDate": 1721343600000,
-        "endDate": 1721343600000,
+        "date": 1721343600000,
         "completed": true,
         "splitBill": false
       }

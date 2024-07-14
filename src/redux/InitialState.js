@@ -1,4 +1,5 @@
 export const initialState = {
+  trips: [],
   popUp: {},
   filter: "Show All",
   order: "Newest first",

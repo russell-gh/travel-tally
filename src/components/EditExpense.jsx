@@ -22,7 +22,7 @@ import {
 } from "../redux/homeSlice";
 import SplitInput from "./SplitInput";
 
-export const EditExpense = () => {
+export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const splitData = useSelector(selectSplitData);
   const popUp = useSelector(selectPopUp);
@@ -49,9 +49,10 @@ export const EditExpense = () => {
   let [splitIndex, setSplitIndexs] = useState([]);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
+    { value: "Activities", name: "Activities" },
     { value: "Food", name: "Food" },
-    { value: "Accomodation", name: "Accomodation" },
-    { value: "Travel", name: "Travel" },
+    { value: "Transport", name: "Transport" },
+    { value: "Hotel", name: "Hotel" },
     { value: "Other", name: "Other" },
   ];
   if (!currencies || !trips) {
@@ -213,26 +214,30 @@ export const EditExpense = () => {
   };
 
   return (
-    <>
-      <div className="editContainer">
-        <div>
-          <FormElement
-            type={"date"}
-            label={"Date"}
-            name={"date"}
-            value={formData.date}
-            id={"datePicker"}
-            callback={dataInput}
-          />
+    <div className="editContainer">
+      <div className="flex">
+        <FormElement
+          type={"date"}
+          label={"Date"}
+          name={"date"}
+          value={formData.date}
+          id={"datePicker"}
+          callback={dataInput}
+        />
+        <div className="multiDayCheckboxContainer">
+          <div>
+            <FormElement
+              type={"checkbox"}
+              label={!multi && "Edit all days of this expense"}
+              name={"dateCheck"}
+              id={"dateCheck"}
+              callback={multiDay}
+            />
+          </div>
           {renderMultiDay()}
-          <FormElement
-            type={"checkbox"}
-            label={"Edit all days of this expense"}
-            name={"dateCheck"}
-            id={"dateCheck"}
-            callback={multiDay}
-          />
         </div>
+      </div>
+      <div className="flex">
         <FormElement
           type={"text"}
           label={"Description"}
@@ -243,11 +248,13 @@ export const EditExpense = () => {
           // list={"descriptionOptions"}
           callback={dataInput}
         />
-        {/* <datalist id="descriptionOptions">
+      </div>
+      {/* <datalist id="descriptionOptions">
         {expenses.map((expense) => {
           return <option value={expense.description}></option>;
         })}
-      </datalist> */}
+        </datalist> */}
+      <div className="flex">
         <FormElement
           type={"select"}
           label={"Category"}
@@ -258,27 +265,28 @@ export const EditExpense = () => {
           error={errors["category"]}
           callback={dataInput}
         />
-        <div>
-          <FormElement
-            type={"number"}
-            label={"Amount"}
-            name={"amount"}
-            id={"expenseAmount"}
-            minValue={0}
-            value={formData.amount}
-            error={errors["amount"]}
-            callback={dataInput}
-          />
-          <FormElement
-            type={"select"}
-            name={"currency"}
-            id={"currencySelectExpense"}
-            value={formData.currency}
-            options={currency}
-            callback={dataInput}
-          />
-        </div>
-
+      </div>
+      <div className="flex">
+        <FormElement
+          type={"number"}
+          label={"Amount"}
+          name={"amount"}
+          id={"expenseAmount"}
+          minValue={0}
+          value={formData.amount}
+          error={errors["amount"]}
+          callback={dataInput}
+        />
+        <FormElement
+          type={"select"}
+          name={"currency"}
+          id={"currencySelectExpense"}
+          value={formData.currency}
+          options={currency}
+          callback={dataInput}
+        />
+      </div>
+      <div className="flex">
         <FormElement
           type={"select"}
           label={"Split"}
@@ -293,20 +301,24 @@ export const EditExpense = () => {
         />
 
         {renderSplit()}
-
-        <Button
-          onClick={handleSubmit}
-          text={"Add"}
-          className={"expenseSubmit"}
-        />
+      </div>
+      <div className="containerBtnPopUp">
         <Button
           text="Cancel"
           className="cancelBtn"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
+        />
+        <Button
+          onClick={handleSubmit}
+          text={"Add"}
+          className={"expenseSubmit"}
+          disabled={animatingOut}
+          animation="animation"
         />
       </div>
-    </>
+    </div>
   );
 };
 

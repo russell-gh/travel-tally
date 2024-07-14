@@ -6,6 +6,7 @@ import Button from "../../reusable-code/Button";
 
 const BudgetInfo = ({
   expenses,
+  expensesCategories,
   details,
   homeCurrencySymbol,
   expensesArray,
@@ -54,6 +55,7 @@ const BudgetInfo = ({
       {display === "totalBudget" && (
         <Budget
           expenses={expenses}
+          expensesCategories={expensesCategories}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
         />
@@ -65,6 +67,9 @@ const BudgetInfo = ({
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           amountOfBudgetDays={amountOfBudgetDays}
+          actualEndDate={actualEndDate}
+          actualStartDate={actualStartDate}
+          expenses={expenses}
         />
       )}
     </div>

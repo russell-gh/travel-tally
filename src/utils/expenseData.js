@@ -1,6 +1,6 @@
-import { stringToTimestamp, generateId } from "../components/onboarding/utils";
 import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
+import { stringToUnix, generateId } from "./utils";
 
 export function handleData({ formData, splitData }, home, data) {
   console.log(formData, splitData, "INSIDE HANDLE");
@@ -8,8 +8,8 @@ export function handleData({ formData, splitData }, home, data) {
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
-  let start = stringToTimestamp(expense.date);
-  let end = stringToTimestamp(expense.endDate);
+  let start = stringToUnix(expense.date);
+  let end = stringToUnix(expense.endDate);
 
   // Wipes any existing id's if the expense is being edited
   if (expense.id) {

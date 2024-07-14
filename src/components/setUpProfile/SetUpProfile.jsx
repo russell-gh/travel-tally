@@ -13,12 +13,6 @@ const SetUpProfile = () => {
   return (
     <div className="setUpProfile">
       {!userName ? <UserName /> : <ProfilePhoto />}
-      {/* <Routes>
-        <Route path="/profilepicture" element={<UploadPhoto />} />
-      </Routes> */}
-      {/* <Routes>
-        <Route path="/takephoto" element={<TakePhoto />} />
-      </Routes> */}
     </div>
   );
 };
