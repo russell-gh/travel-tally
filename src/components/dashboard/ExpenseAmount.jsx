@@ -1,7 +1,23 @@
 import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
 
-const ExpenseAmount = ({ homeCurrencySymbol, amount, currencyCodes }) => {
-  const { fromCurrency, toValue, fromValue } = amount;
+const ExpenseAmount = ({
+  homeCurrencySymbol,
+  amount,
+  currencyCodes,
+  splits,
+  splitBill,
+  expenseId,
+}) => {
+  let { fromCurrency, toValue, fromValue } = amount;
+
+  if (splitBill) {
+    const arrayOfPaidSplits = splits.filter((split) => {
+      return split.expenseID === expenseId && split.paid === true;
+    });
+    arrayOfPaidSplits.forEach((split) => {
+      toValue -= split.amount.toValue;
+    });
+  }
   return (
     <div>
       <p>

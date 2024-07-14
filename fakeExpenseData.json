@@ -733,9 +733,9 @@
           "toValue": 1000
         },
         "name": "Zahra",
-        "paid": false,
-        "expenseID": "expense_A3rdJ7nN8kJ3gHA25T4gd",
-        "id": "billSplit_A2rdJ7nN8kJ3gHA25T4gd",
+        "paid": true,
+        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "id": "billSplit_A3rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
       },
@@ -747,9 +747,9 @@
           "toValue": 1000
         },
         "name": "Jack",
-        "paid": false,
-        "expenseID": "expense_A4rdJ7nN8kJ3gHA25T4gd",
-        "id": "billSplit_A2rdJ7nN8kJ3gHA25T4gd",
+        "paid": true,
+        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "id": "billSplit_A4rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
       },
@@ -762,8 +762,8 @@
         },
         "name": "Russell",
         "paid": false,
-        "expenseID": "expense_A5rdJ7nN8kJ3gHA25T4gd",
-        "id": "billSplit_A2rdJ7nN8kJ3gHA25T4gd",
+        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "id": "billSplit_A5rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
       }

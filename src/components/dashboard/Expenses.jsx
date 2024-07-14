@@ -10,8 +10,9 @@ import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
 import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
+import BillSplitItems from "./BillSplitItems";
 
-const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
+const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
@@ -35,48 +36,67 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
           item;
         const isFuture = dayjs(date).isAfter(dayjs());
         return (
-          <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
-            <CategoryIcon category={category} />
-            <DescriptionAndDate
-              description={description}
-              category={category}
-              date={date}
-              sharedId={sharedId}
-              expenses={expenses}
-            />
-            <div className="containerAmountAndBillSplit">
-              {splitBill && <SplitBillIcon />}
-              <ExpenseAmount
-                homeCurrencySymbol={homeCurrencySymbol}
-                amount={amount}
-                currencyCodes={currencyCodes}
+          <div key={id}>
+            <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
+              <CategoryIcon category={category} />
+              <DescriptionAndDate
+                description={description}
+                category={category}
+                date={date}
+                sharedId={sharedId}
+                expenses={expenses}
+              />
+              <div className="containerAmountAndBillSplit">
+                {splitBill && <SplitBillIcon />}
+                <ExpenseAmount
+                  homeCurrencySymbol={homeCurrencySymbol}
+                  amount={amount}
+                  currencyCodes={currencyCodes}
+                  splitBill={splitBill}
+                  splits={splits}
+                  expenseId={id}
+                />
+              </div>
+              <img
+                src="../src/img/edit.svg"
+                alt="edit"
+                className="edit"
+                onClick={() => {
+                  dispatch(
+                    togglePopUp({
+                      config: {
+                        title: description,
+                        id: id,
+                        sharedId: sharedId,
+                      },
+                      component: "EditExpense",
+                    })
+                  );
+                }}
+              />
+              <img
+                src="../src/img/delete.svg"
+                alt="delete"
+                className="delete"
+                onClick={() => {
+                  dispatch(
+                    togglePopUp({
+                      config: {
+                        title: description,
+                        id: id,
+                        sharedId: sharedId,
+                      },
+                      component: "DeletePopUp",
+                    })
+                  );
+                }}
               />
             </div>
-            <img
-              src="../src/img/edit.svg"
-              alt="edit"
-              className="edit"
-              onClick={() => {
-                dispatch(
-                  togglePopUp({
-                    config: { title: description, id: id, sharedId: sharedId },
-                    component: "EditExpense",
-                  })
-                );
-              }}
-            />
-            <img
-              src="../src/img/delete.svg"
-              alt="delete"
-              className="delete"
-              onClick={() => {
-                dispatch(
-                  togglePopUp({
-                    config: { title: description, id: id, sharedId: sharedId },
-                    component: "DeletePopUp",
-                  })
-                );
-              }}
+            <BillSplitItems
+              expenseId={id}
+              splits={splits}
+              homeCurrencySymbol={homeCurrencySymbol}
+              currencyCodes={currencyCodes}
             />
           </div>
         );

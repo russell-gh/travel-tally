@@ -179,6 +179,12 @@ export const homeSlice = createSlice({
         state.splitData[payload.tag] = payload.data;
       }
     },
+    setPaid: (state, { payload }) => {
+      console.log(payload);
+      const index = getIndex(payload.data, payload.id, "id");
+      console.log(index);
+      state.trips.splits[index].paid = true;
+    },
   },
 });
 
@@ -193,6 +199,7 @@ export const {
   addSplitData,
   setSplitData,
   addTrip,
+  setPaid,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;

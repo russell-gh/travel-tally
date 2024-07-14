@@ -33,7 +33,7 @@ const Dashboard = () => {
     return findItem(trips, selectedTripId);
   }, [trips, selectedTripId]);
 
-  const { details, expenses } = trip;
+  const { details, expenses, splits } = trip;
   const { destination, homeCurrencySymbol, dates } = details;
   const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
 
@@ -99,6 +99,7 @@ const Dashboard = () => {
         filtered={filtered}
         expenses={_expenses}
         homeCurrencySymbol={homeCurrencySymbol}
+        splits={splits}
       />
     </div>
   );
