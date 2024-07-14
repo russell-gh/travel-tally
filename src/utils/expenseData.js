@@ -7,6 +7,9 @@ export function handleData({ formData, splitData }, home, data) {
   let splits = [];
   if (splitData) {
     splits = JSON.parse(JSON.stringify(splitData));
+    splits.forEach((bill) => {
+      bill.amount = bill.amount * 100;
+    });
   }
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
@@ -36,11 +39,15 @@ export function handleData({ formData, splitData }, home, data) {
 
   // Converts currency if neccesary
   if (currency != home) {
-    newAmount.toValue = convertCurrency(newAmount.fromValue, currency, data);
+    newAmount.toValue = Math.round(
+      convertCurrency(newAmount.fromValue, currency, data)
+    );
 
     if (splitData) {
       splits.forEach((bill) => {
-        bill.converted = convertCurrency(bill.amount, currency, data);
+        bill.converted = Math.round(
+          convertCurrency(bill.amount, currency, data)
+        );
       });
     }
   }

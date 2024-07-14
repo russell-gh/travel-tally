@@ -77,6 +77,8 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
     togglePopUp: (state, { payload }) => {
+      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
+      state.splitData = [];
       if (!payload) {
         state.popUp = {};
         saveStore("homeSlice", state);
@@ -165,7 +167,7 @@ export const homeSlice = createSlice({
         state.trips[indexTrip].expenses.splice(expenseIndex, 1);
       }
       // Split index next
-      if (Array.isArray(expenseIndex)) {
+      if (Array.isArray(splitIndex)) {
         state.trips[indexTrip].splits.splice(splitIndex[0], splitIndex.length);
       } else {
         // Otherwise, delete single expense

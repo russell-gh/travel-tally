@@ -90,21 +90,21 @@ export const EditExpense = ({ animatingOut }) => {
   }, []);
 
   const setThisSplit = (splits, id) => {
-    console.log("HIT SETTHISSPLIT");
     let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
     copy.forEach((thisSplit, index) => {
-      thisSplit.amount = thisSplit.fromValue;
+      console.log(thisSplit, "before");
+      thisSplit.amount = thisSplit.amount.fromValue / 100;
       delete thisSplit.date;
       delete thisSplit.expenseID;
       delete thisSplit.id;
       delete thisSplit.description;
       delete thisSplit.totalExpense;
-      console.log(thisSplit, index, "IN LOOP");
       const data = thisSplit;
       const tag = index;
       dispatch(setSplitData({ data, tag }));
     });
+    setSplitIndexs(result.allIndexs);
     setTheseSplits(copy);
   };
 
@@ -131,7 +131,7 @@ export const EditExpense = ({ animatingOut }) => {
     //   return;
     // }
     if (formData.description && formData.amount) {
-      const data = { formData, theseSplits };
+      const data = { formData, splitData };
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
@@ -220,7 +220,7 @@ export const EditExpense = ({ animatingOut }) => {
       );
     }
   };
-
+  console.log(splitIndex, "INDEX");
   return (
     <div className="editContainer">
       <div className="flex">

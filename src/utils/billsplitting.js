@@ -10,8 +10,8 @@ export function splitExpenseBill(splitData, expense) {
 
   splitData.forEach((bill) => {
     let newAmount = {
-      fromValue: Number(bill.amount * 100),
-      toValue: Number(bill.converted * 100),
+      fromValue: Number(bill.amount),
+      toValue: Number(bill.converted),
       fromCurrency: expense.amount.fromCurrency,
       toCurrency: expense.amount.toCurrency,
     };
