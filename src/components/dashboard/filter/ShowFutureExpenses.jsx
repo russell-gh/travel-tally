@@ -6,7 +6,7 @@ const ShowFutureExpenses = () => {
   const dispatch = useDispatch();
 
   return (
-    <>
+    <div className="hideFutureExpenseContainer">
       <FormElement
         type="checkbox"
         id="hideFutureExpenses"
@@ -15,7 +15,7 @@ const ShowFutureExpenses = () => {
           dispatch(toggleHideFutureExpenses(e.target.checked));
         }}
       />
-    </>
+    </div>
   );
 };
 

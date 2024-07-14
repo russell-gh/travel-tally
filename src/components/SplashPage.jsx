@@ -86,10 +86,10 @@ const SplashPage = () => {
     });
   }, []);
 
-  //redirect after one circle with plane
-  // setTimeout(() => {
-  //   setNext(true);
-  // }, 4000);
+  // redirect after one circle with plane
+  setTimeout(() => {
+    setNext(true);
+  }, 4000);
 
   return (
     <>

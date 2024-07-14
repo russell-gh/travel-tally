@@ -37,6 +37,7 @@ body {
 */
 .popUpContainer {
   position: fixed;
+  z-index: 3;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -48,7 +49,7 @@ body {
   border: black solid 2px;
   padding: 10px;
   width: 75vw;
-  max-width: 350px;
+  max-width: 400px;
 
   p {
     margin-bottom: 10px;
@@ -133,7 +134,7 @@ body {
 
   .dashboardFixed,
   .expenses {
-    padding: 0px 10px 0px 10px;
+    padding: 0px 10px 30px 10px;
   }
 
   input,
@@ -161,7 +162,6 @@ body {
   .dashboardFixed {
     z-index: 2;
     width: 100%;
-    background-color: white;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
 
@@ -175,8 +175,9 @@ body {
   .containerTop {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     flex-wrap: wrap;
+    max-width: 740px;
   }
 
   .dropDownTrips {
@@ -278,8 +279,9 @@ body {
   .containerBudget {
     border: $green solid 2px;
     padding: 0px;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     border-radius: 15px;
+    max-width: 500px;
   }
 
   .containerBudgetAfter {
@@ -327,10 +329,6 @@ body {
 
 
   // controls expenses
-  .controlsExpenses {
-    margin-bottom: 10px;
-  }
-
   .includes {
     background-color: #ddf18970;
   }
@@ -341,6 +339,13 @@ body {
     align-items: flex-end;
     gap: 10px;
     flex-wrap: wrap;
+    margin: 0px auto 10px auto;
+    max-width: 512px;
+  }
+
+  .hideFutureExpenseContainer {
+    max-width: 510px;
+    margin: 0px auto;
   }
 
   /*
@@ -356,12 +361,13 @@ body {
     border-radius: 20px;
     background-color: $navy;
     color: white;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     display: grid;
     grid-template-columns: 40px 1fr 50px 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
+    max-width: 500px;
 
     .containerDescriptionAndDate {
       overflow: hidden;
@@ -430,16 +436,52 @@ body {
      media queries
 **************************
 */
-  @media (min-width: 445px) {
-    .containerBtnPopUpMulti {
-      justify-content: space-around;
-      gap: 10px
-    }
-
+  @media (min-width: 450px) {
     .tripInfo {
       p {
         font-size: 16px;
       }
+    }
+  }
+}
+
+@media (min-width: 530px) {
+  .containerBtnPopUpMulti {
+    justify-content: space-around;
+    gap: 10px;
+    flex-flow: nowrap;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .dashboard {
+    display: flex;
+    margin: 20px auto;
+    width: inherit;
+    flex-direction: row-reverse;
+    max-width: 1200px;
+
+    .expenses {
+      flex-basis: 50%;
+    }
+
+    .dashboardFixed {
+      flex-basis: 50%;
+      position: fixed;
+      z-index: 2;
+      top: 70px;
+      left: 3%;
+      width: 45%;
+      max-width: 600px;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .dashboard {
+    .dashboardFixed {
+      left: calc(50vw - 600px);
     }
   }
 }
