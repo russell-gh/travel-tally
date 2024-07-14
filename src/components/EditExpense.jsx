@@ -196,10 +196,11 @@ export const EditExpense = ({ animatingOut }) => {
   const renderSplit = () => {
     if (formData.split === true) {
       return (
-        <div>
+        <>
           {theseSplits.map(function (split, index) {
             return (
               <SplitInput
+                key={index}
                 amount={formData.amount}
                 tag={index}
                 parentCallback={getSplitData}
@@ -207,17 +208,19 @@ export const EditExpense = ({ animatingOut }) => {
               />
             );
           })}
-          <Button
-            onClick={handleAddPerson}
-            text={"Add Person"}
-            className={"splitAddPerson"}
-          />
-          <Button
-            onClick={handleRemovePerson}
-            text={"Remove Person"}
-            className={"splitRemovePerson"}
-          />
-        </div>
+          <div className="containerBtnPopUp">
+            <Button
+              onClick={handleAddPerson}
+              text={"Add Person"}
+              className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleRemovePerson}
+              text={"Remove Person"}
+              className={"splitRemovePerson"}
+            />
+          </div>
+        </>
       );
     }
   };
@@ -318,9 +321,8 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
         />
-
-        {renderSplit()}
       </div>
+      {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"

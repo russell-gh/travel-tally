@@ -39,6 +39,17 @@ $grey: #b3b3b3;
       margin: 0px;
     }
 
+    .paidContainer {
+      flex-basis: 100%;
+      text-align: right;
+      margin-top: 3px;
+      ;
+
+      input {
+        height: 13px;
+      }
+    }
+
     .multiDayCheckboxContainer {
       flex-basis: 100%;
       display: flex;

@@ -61,7 +61,6 @@ export const AddExpense = ({ animatingOut }) => {
     let target = e.target.name;
     let value;
     value = e.target.value;
-    console.log(typeof value);
     if (value === "true") value = true;
     if (value === "false") value = false;
 
@@ -147,7 +146,7 @@ export const AddExpense = ({ animatingOut }) => {
   const renderSplit = () => {
     if (formData.split === true) {
       return (
-        <div className="flex">
+        <>
           {split}
           <div className="containerBtnPopUp">
             <Button
@@ -161,7 +160,7 @@ export const AddExpense = ({ animatingOut }) => {
               className={"splitRemovePerson"}
             />
           </div>
-        </div>
+        </>
       );
     }
   };
