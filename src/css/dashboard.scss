@@ -363,11 +363,17 @@ body {
     color: white;
     margin: 0px auto 10px auto;
     display: grid;
-    grid-template-columns: 40px 1fr 50px 30px 30px;
+    grid-template-columns: 40px 1fr fit-content(70px) 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
     max-width: 500px;
+
+    .containerAmountAndBillSplit {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
 
     .containerDescriptionAndDate {
       overflow: hidden;
@@ -395,6 +401,12 @@ body {
     .icon {
       height: 30px;
       width: 30px;
+    }
+
+    .splitBillIcon {
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
     }
   }
 

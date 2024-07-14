@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyCodes,
-  selectPopUp,
   selectTrips,
   togglePopUp,
 } from "../../redux/homeSlice";
 import CategoryIcon from "./CategoryIcon";
-import DeletePopUp from "./DeletePopUp";
 import Message from "../../reusable-code/Message";
 import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
 import dayjs from "dayjs";
+import SplitBillIcon from "./SplitBillIcon";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   const trips = useSelector(selectTrips);
@@ -32,7 +31,8 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
   return (
     <div className="expenses mt">
       {filtered.map((item) => {
-        const { description, id, category, date, amount, sharedId } = item;
+        const { description, id, category, date, amount, sharedId, splitBill } =
+          item;
         const isFuture = dayjs(date).isAfter(dayjs());
         return (
           <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
@@ -44,11 +44,14 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses }) => {
               sharedId={sharedId}
               expenses={expenses}
             />
-            <ExpenseAmount
-              homeCurrencySymbol={homeCurrencySymbol}
-              amount={amount}
-              currencyCodes={currencyCodes}
-            />
+            <div className="containerAmountAndBillSplit">
+              {splitBill && <SplitBillIcon />}
+              <ExpenseAmount
+                homeCurrencySymbol={homeCurrencySymbol}
+                amount={amount}
+                currencyCodes={currencyCodes}
+              />
+            </div>
             <img
               src="../src/img/edit.svg"
               alt="edit"
