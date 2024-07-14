@@ -4,8 +4,9 @@ import { stringToUnix, generateId } from "./utils";
 
 export function handleData({ formData, splitData }, home, data) {
   const expense = formData;
+  let splits = [];
   if (splitData) {
-    let splits = JSON.parse(JSON.stringify(splitData));
+    splits = JSON.parse(JSON.stringify(splitData));
   }
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =

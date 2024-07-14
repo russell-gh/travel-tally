@@ -90,18 +90,22 @@ export const EditExpense = ({ animatingOut }) => {
   }, []);
 
   const setThisSplit = (splits, id) => {
+    console.log("HIT SETTHISSPLIT");
     let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
-    copy.forEach((thisSplit) => {
-      delete thisSplit.currency;
+    copy.forEach((thisSplit, index) => {
+      thisSplit.amount = thisSplit.fromValue;
       delete thisSplit.date;
       delete thisSplit.expenseID;
       delete thisSplit.id;
       delete thisSplit.description;
       delete thisSplit.totalExpense;
+      console.log(thisSplit, index, "IN LOOP");
+      const data = thisSplit;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
     });
     setTheseSplits(copy);
-    console.log(result, copy, "set this 2");
   };
 
   const dataInput = (e) => {
@@ -167,47 +171,51 @@ export const EditExpense = ({ animatingOut }) => {
     }
   };
   let handleAddPerson = () => {
-    setSplit([
-      ...split,
-      <SplitInput
-        amount={formData.amount}
-        tag={split.length}
-        parentCallback={getSplitData}
-      />,
-    ]);
+    console.log("HIT ADDPERSON");
+    const copy = JSON.parse(JSON.stringify(theseSplits));
+    copy.push({ paid: false });
+    setTheseSplits(copy);
   };
   let handleRemovePerson = () => {
-    setTheseSplits(theseSplits.splice(theseSplits.length - 1, 1));
+    const copy = JSON.parse(JSON.stringify(theseSplits));
+    copy.splice(copy.length - 1, 1);
+    setTheseSplits(copy);
   };
 
   const getSplitData = (data, tag) => {
+    console.log(data, tag);
     dispatch(setSplitData({ data, tag }));
   };
 
   const renderSplit = () => {
+    console.log("HIT render");
     if (formData.split === true) {
       return (
-        <div>
+        <div className="flex">
           {theseSplits.map(function (split, index) {
             return (
-              <SplitInput
-                amount={formData.amount}
-                tag={index}
-                parentCallback={getSplitData}
-                data={split}
-              />
+              <div className="flex">
+                <SplitInput
+                  amount={formData.amount}
+                  tag={index}
+                  parentCallback={getSplitData}
+                  data={split}
+                />
+              </div>
             );
           })}
-          <Button
-            onClick={handleAddPerson}
-            text={"Add Person"}
-            className={"splitAddPerson"}
-          />
-          <Button
-            onClick={handleRemovePerson}
-            text={"Remove Person"}
-            className={"splitRemovePerson"}
-          />
+          <div className="containerBtnPopUp">
+            <Button
+              onClick={handleAddPerson}
+              text={"Add Person"}
+              className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleRemovePerson}
+              text={"Remove Person"}
+              className={"splitRemovePerson"}
+            />
+          </div>
         </div>
       );
     }
@@ -299,9 +307,8 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
         />
-
-        {renderSplit()}
       </div>
+      {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"

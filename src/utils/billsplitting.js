@@ -6,7 +6,6 @@ export function splitExpenseBill(splitData, expense) {
   if (!splitData) {
     return;
   }
-  console.log(splitData, expense, "inside split bill");
   let allSplits = [];
 
   splitData.forEach((bill) => {
@@ -29,6 +28,5 @@ export function splitExpenseBill(splitData, expense) {
     allSplits.push(formatted);
   });
 
-  console.log(allSplits, "ALLSPLITS");
   return allSplits;
 }

@@ -108,8 +108,6 @@ export const homeSlice = createSlice({
     addExpenseData: (state, { payload }) => {
       // Close expense popup
       state.popUp = {};
-      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
-      state.splitData = [];
       // Find index of trip from id
       const indexOf = state.trips.findIndex((trip) => {
         return trip.id === state.selectedTripId;
@@ -138,6 +136,8 @@ export const homeSlice = createSlice({
       } else {
         state.trips[indexOf].splits.push(billSplit);
       }
+      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
+      state.splitData = [];
       saveStore("homeSlice", state);
     },
 
@@ -147,6 +147,7 @@ export const homeSlice = createSlice({
     },
 
     deleteToEdit: (state, { payload }) => {
+      state.splitData = [];
       // const { expenseIndex } = payload;
       const expenseIndex = payload.index;
       const splitIndex = payload.splitIndex;
@@ -173,6 +174,7 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
     setSplitData: (state, { payload }) => {
+      console.log(payload.data, payload.tag, "REDUCER");
       if (state.splitData.length === 0) {
         state.splitData.push(payload.data);
       } else {
