@@ -112,6 +112,7 @@ const Onboarding = () => {
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
     //if errors exist abort early
@@ -136,6 +137,7 @@ const Onboarding = () => {
 
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
     const endDateIncluded = _onboardingDetails.dates.endDateIncluded;
+    console.log("here")
 
     //spread existing state and update modified keys
     _onboardingDetails = {
