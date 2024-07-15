@@ -14,6 +14,7 @@ const BudgetInfo = ({
   actualEndDate,
   startDate,
   endDate,
+  splits,
 }) => {
   const [display, setDisplay] = useState("totalBudget");
   // converts and calculates days traveling
@@ -34,6 +35,15 @@ const BudgetInfo = ({
         stillTravelling ? "containerBudgetWhilst" : "containerBudgetAfter"
       }`}
     >
+      {!stillTravelling && (
+        <Budget
+          expenses={expenses}
+          expensesCategories={expensesCategories}
+          details={details}
+          homeCurrencySymbol={homeCurrencySymbol}
+          splits={splits}
+        />
+      )}
       {stillTravelling && (
         <>
           <Button
@@ -58,6 +68,7 @@ const BudgetInfo = ({
           expensesCategories={expensesCategories}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
+          splits={splits}
         />
       )}
       {/* if today is during traveltime, daily budget is calculated */}
@@ -70,6 +81,7 @@ const BudgetInfo = ({
           actualEndDate={actualEndDate}
           actualStartDate={actualStartDate}
           expenses={expenses}
+          splits={splits}
         />
       )}
     </div>

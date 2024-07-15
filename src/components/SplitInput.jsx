@@ -32,35 +32,41 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
 
   return (
     <>
-      <FormElement
-        type={"text"}
-        label={"Name"}
-        name={"name"}
-        id={"nameSplit" + tag}
-        value={formData.name}
-        // error={errors["description"]}
-        // list={"descriptionOptions"}
-        callback={dataInput}
-      />
-      <FormElement
-        type={"number"}
-        label={"Amount"}
-        name={`amount`}
-        id={`splitAmount` + tag}
-        minValue={0}
-        maxValue={amount}
-        value={formData.amount}
-        //   error={errors["amount"]}
-        callback={dataInput}
-      />
-      <FormElement
-        type={"checkbox"}
-        label={"Paid"}
-        name={`paid`}
-        id={`paidCheck` + tag}
-        value={formData.paid}
-        callback={dataInput}
-      />
+      <div className="flex">
+        <FormElement
+          type={"text"}
+          label={"Name"}
+          name={"name"}
+          id={"nameSplit" + tag}
+          value={formData.name}
+          // error={errors["description"]}
+          // list={"descriptionOptions"}
+          callback={dataInput}
+        />
+      </div>
+      <div className="flex">
+        <FormElement
+          type={"number"}
+          label={"Amount"}
+          name={`amount`}
+          id={`splitAmount` + tag}
+          minValue={0}
+          maxValue={amount}
+          value={formData.amount}
+          //   error={errors["amount"]}
+          callback={dataInput}
+        />
+        <div className="paidContainer">
+          <FormElement
+            type={"checkbox"}
+            label={"Paid"}
+            name={`paid`}
+            id={`paidCheck` + tag}
+            value={formData.paid}
+            callback={dataInput}
+          />
+        </div>
+      </div>
     </>
   );
 };

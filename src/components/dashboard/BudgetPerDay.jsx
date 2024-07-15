@@ -21,6 +21,7 @@ const BudgetPerDay = ({
   actualEndDate,
   actualStartDate,
   expenses,
+  splits,
 }) => {
   const filter = useSelector(selectFilter);
   const filterDate = useSelector(selectFilterDate);
@@ -29,9 +30,14 @@ const BudgetPerDay = ({
   const budgetPerDay = addDecimals((budget * 100) / amountOfBudgetDays);
   const data = getSpendPerDay(
     (budget * 100) / amountOfBudgetDays,
-    expensesArray
+    expensesArray,
+    splits
   );
-  const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
+
+  const selectedDay = useMemo(() => {
+    return getSpendSelectedDay(data, filterDate, budgetPerDay);
+  }, [data, filterDate, budgetPerDay]);
+
   const difference = addDecimals(
     budgetPerDay * 100 - selectedDay.totalSpendPerDay
   );
@@ -40,6 +46,7 @@ const BudgetPerDay = ({
     return createDataForCharts(
       details,
       expenses,
+      splits,
       filterDate,
       actualEndDate,
       actualStartDate,

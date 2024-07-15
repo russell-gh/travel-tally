@@ -2,14 +2,31 @@ import { unixToDate } from "./utilsDates";
 import { getUnixfromDate } from "./utilsDates";
 import dayjs from "dayjs";
 
-export function calculateTotalSpend(expenses) {
+export function calculateTotalSpend(expenses, splits) {
   if (!expenses || expenses.length === 0) {
     return;
   }
+  if (!splits) {
+    return;
+  }
+
+  //calculates only your part of an expense if it is a splitbill
   const _expenses = [...expenses];
   const priceArr = _expenses.map((item) => {
-    return item.amount.toValue;
+    let toValue = item.amount.toValue;
+    if (item.splitBill === true) {
+      const arrayOfSplits = splits.filter((split) => {
+        return split.expenseID === item.id;
+      });
+
+      arrayOfSplits.forEach((split) => {
+        toValue -= split.amount.toValue;
+      });
+    }
+
+    return toValue;
   });
+
   if (priceArr.length !== 0) {
     let totalSpend = priceArr.reduce((acc, value) => {
       return acc + value;
@@ -83,13 +100,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
       if (index !== -1) {
         date = data[index];
       } else {
-        const cumulativeDifference = getClosestCumulativeDifference(data, now);
-        date = {
-          budgetPerDay: data[0].budgetPerDay,
-          cumulativeDifference: cumulativeDifference,
-          totalSpendPerDay: 0,
-          difference: data[0].budgetPerDay,
-        };
+        console.log("something went wrong with finding the right day budget");
       }
     } else {
       const index = data.findIndex((item) => {
@@ -98,16 +109,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
       if (index !== -1) {
         date = data[index];
       } else {
-        const cumulativeDifference = getClosestCumulativeDifference(
-          data,
-          filterDate
-        );
-        date = {
-          budgetPerDay: data[0].budgetPerDay,
-          cumulativeDifference: cumulativeDifference,
-          totalSpendPerDay: 0,
-          difference: data[0].budgetPerDay,
-        };
+        console.log("something went wrong with finding the right day budget");
       }
     }
   }
@@ -115,48 +117,53 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
   return date;
 }
 
-export function getClosestCumulativeDifference(data, filterDate) {
-  const unixFilterDate = getUnixfromDate(filterDate);
-  const filterDateDayJs = dayjs(unixFilterDate);
-
-  let index;
-  for (let i = 1; i < 50; i++) {
-    let previousDate = filterDateDayJs.subtract(i, "day");
-    index = data.findIndex((item) => {
-      return unixToDate(item.date) === unixToDate(previousDate);
-    });
-    if (index !== -1) {
-      break;
+export function getSpendPerDay(budgetPerDay, data, splits) {
+  //if there is only a date in the object it keeps that. If there are also expenses it deletes the date only object.
+  let arr = data.map((array) => {
+    if (!array[0].amount && array.length > 1) {
+      return array.slice(1, array.length);
+    } else if (!array[0].amount && array.length === 1) {
+      return array;
     }
-  }
-  return data[index].cumulativeDifference;
-}
-
-export function getSpendPerDay(budgetPerDay, data) {
-  //take out empty days (a.k.a. empty arrays)
-  let filteredData = data.filter((subArray) => subArray.length > 0);
-
-  let arr = filteredData.map((Arr) =>
-    Arr.map((item) => ({
-      amount: item.amount.toValue,
-      date: item.date,
-    }))
-  );
+  });
 
   // Create array with totalspend, budgetperday, difference and differences from days before
   let cumulativeDifference = 0;
   let arrValues = [];
-
+  let totalSpendPerDay;
   arr.forEach((values) => {
     if (values.length === 0) {
       return;
     }
-    const totalSpendPerDay = values.reduce(
-      (acc, value) => acc + value.amount,
-      0
-    );
+
+    // if there are no expenses for that day
+    if (!values[0].amount) {
+      totalSpendPerDay = 0;
+    }
+
+    // adds all the expensese for the day together. Takes away the billsplits amounts to just show your part
+    if (values[0].amount) {
+      for (const expense of values) {
+        let toValue = expense.amount.toValue;
+        if (expense.splitBill === true) {
+          const arrayOfSplits = splits.filter((split) => {
+            return split.expenseID === expense.id;
+          });
+
+          arrayOfSplits.forEach((split) => {
+            toValue -= split.amount.toValue;
+          });
+          expense.amount.toValue = toValue;
+        }
+      }
+      totalSpendPerDay = values.reduce((acc, value) => {
+        return acc + value.amount.toValue;
+      }, 0); // Initial value of 0 for the accumulator
+    }
+
+    //set the rest of the values
     const difference = budgetPerDay - totalSpendPerDay;
-    const cumulativeDifferenceForDay = cumulativeDifference;
+    const cumulativeDifferencePerDay = cumulativeDifference;
     cumulativeDifference += difference;
     const date = values[0].date; // Assuming all items in the same day have the same startDate
 
@@ -164,7 +171,7 @@ export function getSpendPerDay(budgetPerDay, data) {
       totalSpendPerDay,
       budgetPerDay,
       difference,
-      cumulativeDifference: cumulativeDifferenceForDay,
+      cumulativeDifference: cumulativeDifferencePerDay,
       date: date,
     });
   });

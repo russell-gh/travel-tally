@@ -28,6 +28,7 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
           <div className="setUpProfileBtnContainer">
             <Button
               text="Start Over"
+              animation={true}
               onClick={() => {
                 dispatch(saveProfile());
                 redirect("/setup-profile");
@@ -35,8 +36,9 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
             />
             <Button
               text="Finish"
+              animation={true}
               onClick={() => {
-                redirect("/dashboard");
+                redirect("/onboarding");
               }}
             />
           </div>

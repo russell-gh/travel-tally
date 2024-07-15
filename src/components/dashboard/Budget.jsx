@@ -16,17 +16,18 @@ const Budget = ({
   homeCurrencySymbol,
   details,
   expensesCategories,
+  splits,
 }) => {
   const filter = useSelector(selectFilter);
 
   const dataChart = useMemo(() => {
-    return createDataForCharts(details, expenses);
+    return createDataForCharts(details, expenses, splits);
   }, [details, expenses]);
 
   const totalSpend =
     expensesCategories.length === 0
       ? 0
-      : calculateTotalSpend(expensesCategories);
+      : calculateTotalSpend(expensesCategories, splits);
   const budget = getBudget(details, filter);
   const difference = addDecimals(budget * 100 - totalSpend * 100);
 

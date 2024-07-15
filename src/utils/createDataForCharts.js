@@ -8,6 +8,7 @@ import { getSpendPerDay, getSpendSelectedDay } from "../utils/utilsBudget";
 export function createDataForCharts(
   details,
   expenses,
+  splits,
   filterDate,
   actualEndDate,
   actualStartDate,
@@ -31,7 +32,7 @@ export function createDataForCharts(
       const totalSpend =
         expensesCategories.length === 0
           ? 0
-          : calculateTotalSpend(expensesCategories);
+          : calculateTotalSpend(expensesCategories, splits);
 
       spendArray.push(totalSpend);
     });
@@ -52,7 +53,8 @@ export function createDataForCharts(
       );
       const data = getSpendPerDay(
         (budget * 100) / amountOfBudgetDays,
-        expensesArray
+        expensesArray,
+        splits
       );
       const selectedDay = getSpendSelectedDay(data, filterDate, budgetPerDay);
 

@@ -1,10 +1,10 @@
-import Logo from "./Logo";
+import Logo2 from "./Logo2";
 import Profile from "./setUpProfile/Profile";
 
 export const Header = () => {
   return (
     <header>
-      <Logo />
+      <Logo2 />
       <button
         className="btn"
         onClick={() => {

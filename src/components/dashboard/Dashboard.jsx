@@ -19,7 +19,8 @@ import ControlsExpenses from "./ControlsExpenses";
 import BudgetInfo from "./BudgetInfo";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { useMemo } from "react";
-import SplashPage from "../SplashPage";
+import { getActualEndDate, getActualStartDate } from "../../utils/utilsDates";
+import ExpensesAndSplits from "./ExpensesAndSplits";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -29,25 +30,19 @@ const Dashboard = () => {
   const filterDate = useSelector(selectFilterDate);
   const hideFutureExpenses = useSelector(selectHideFutureExpenses);
 
-  if (!trips || trips.length === 0) {
-    return <SplashPage />;
-  }
+  const trip = useMemo(() => {
+    return findItem(trips, selectedTripId);
+  }, [trips, selectedTripId]);
 
-  // const trip = useMemo(() => {
-  //   return findItem(trips, selectedTripId);
-  // }, [trips, selectedTripId]);
-
-  const trip = findItem(trips, selectedTripId);
-
-  const { details, expenses } = trip;
+  const { details, expenses, splits } = trip;
   const { destination, homeCurrencySymbol, dates } = details;
   const { startDate, endDate, startDateIncluded, endDateIncluded } = dates;
 
   const actualStartDate = useMemo(() => {
-    return !startDateIncluded ? startDate + 86400000 : startDate;
+    return getActualStartDate(startDateIncluded, startDate);
   }, [startDateIncluded, startDate]);
   const actualEndDate = useMemo(() => {
-    return !endDateIncluded ? endDate - 86400000 : endDate;
+    return getActualEndDate(endDateIncluded, endDate);
   }, [endDateIncluded, endDate]);
 
   let _expenses = useMemo(() => {
@@ -64,7 +59,7 @@ const Dashboard = () => {
       actualStartDate,
       actualEndDate
     );
-  }, [expensesCategories, actualStartDate, actualEndDate]); //should this be in a useEffect?
+  }, [expensesCategories, actualStartDate, actualEndDate]);
 
   const filtered = useMemo(() => {
     return getSortedandFiltered(
@@ -95,16 +90,18 @@ const Dashboard = () => {
           expensesArray={expensesArray}
           actualStartDate={actualStartDate}
           actualEndDate={actualEndDate}
+          splits={splits}
         />
         <ControlsExpenses
           expensesCategories={expensesCategories}
           expenses={expenses}
         />
       </div>
-      <Expenses
+      <ExpensesAndSplits
         filtered={filtered}
         expenses={_expenses}
         homeCurrencySymbol={homeCurrencySymbol}
+        splits={splits}
       />
     </div>
   );

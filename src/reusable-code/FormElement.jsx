@@ -16,6 +16,7 @@ const FormElement = ({
   placeholder,
   className = [],
   onKeyDown = () => {},
+  checked,
 }) => {
   switch (type) {
     case "text":
@@ -106,6 +107,7 @@ const FormElement = ({
             onChange={(e) => {
               callback(e, id);
             }}
+            checked={checked}
           />
           {label && <label htmlFor={id}>{label}</label>}
           {error && <p className="validationError">{error}</p>}
