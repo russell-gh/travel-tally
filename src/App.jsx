@@ -78,13 +78,12 @@ const App = () => {
       <Header />
       <main>
         <Routes>
-          <Route path="/splash-page" element={<SplashPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<p>No page selected</p>} />
+          <Route path="*" element={<SplashPage />} />
         </Routes>
         <div ref={popUpRef} className="popUpContainer">
           {_popUp && stringToComponent[_popUp.component]}
