@@ -137,7 +137,6 @@ const Onboarding = () => {
 
     const startDateIncluded = _onboardingDetails.dates.startDateIncluded;
     const endDateIncluded = _onboardingDetails.dates.endDateIncluded;
-    console.log("here")
 
     //spread existing state and update modified keys
     _onboardingDetails = {
