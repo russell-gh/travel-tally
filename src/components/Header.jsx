@@ -4,8 +4,8 @@ import Profile from "./setUpProfile/Profile";
 export const Header = () => {
   return (
     <header>
-      <h1>holiDough</h1>
       <Logo />
+      <h1>holiDough</h1>
       <button
         className="btn"
         onClick={() => {

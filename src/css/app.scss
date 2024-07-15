@@ -59,6 +59,10 @@ header {
     height: 50px;
     width: 50px;
   }
+  h1 {
+    font-size: 2rem;
+    align-self: flex-end;
+  }
 }
 
 .btn:hover {
