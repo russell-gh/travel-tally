@@ -4,7 +4,13 @@ import { stringToUnix, generateId } from "./utils";
 
 export function handleData({ formData, splitData }, home, data) {
   const expense = formData;
-  let splits = JSON.parse(JSON.stringify(splitData));
+  let splits = [];
+  if (splitData) {
+    splits = JSON.parse(JSON.stringify(splitData));
+    splits.forEach((bill) => {
+      bill.amount = bill.amount * 100;
+    });
+  }
   let billSplit;
   let { date, endDate, description, category, amount, currency, split } =
     expense;
@@ -33,11 +39,17 @@ export function handleData({ formData, splitData }, home, data) {
 
   // Converts currency if neccesary
   if (currency != home) {
-    newAmount.toValue = convertCurrency(newAmount.fromValue, currency, data);
+    newAmount.toValue = Math.round(
+      convertCurrency(newAmount.fromValue, currency, data)
+    );
 
-    splits.forEach((bill) => {
-      bill.converted = convertCurrency(bill.amount, currency, data);
-    });
+    if (splitData) {
+      splits.forEach((bill) => {
+        bill.converted = Math.round(
+          convertCurrency(bill.amount, currency, data)
+        );
+      });
+    }
   }
 
   // Tidies object up, adds unique id and unix time
@@ -53,7 +65,9 @@ export function handleData({ formData, splitData }, home, data) {
   delete expense.multiDay;
   delete expense.endDate;
   expense.id = generateId("expense");
-  billSplit = splitExpenseBill(splits, expense, data);
+  if (splitData) {
+    billSplit = splitExpenseBill(splits, expense, data);
+  }
 
   return { expense, billSplit };
 }
@@ -66,7 +80,6 @@ export function convertCurrency(fromValue, fromCurrency, data) {
 }
 
 export function splitExpenseDays({ expense, splitData }) {
-  console.log(expense, splitData, "inside split expense");
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let { fromValue, toValue } = amount;
@@ -77,7 +90,9 @@ export function splitExpenseDays({ expense, splitData }) {
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
-  billSplit = splitExpenseBill(splitData, expense);
+  if (splitData) {
+    billSplit = splitExpenseBill(splitData, expense);
+  }
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {

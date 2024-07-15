@@ -1,0 +1,109 @@
+//CHANGE TO IMPORT VARS
+$teal: #235b89;
+$green: #d6ee79;
+$darker-green: #87964bd2;
+$sage: #d3bb5b84;
+$white: #ffffff;
+$black: #000000;
+$grey: #b3b3b3;
+
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+.onboarding {
+  @include flex;
+  height: 90vh; //change once app has height
+  text-align: center;
+  text-align: center;
+
+  .formSection {
+    margin: 0;
+    @include flex(column);
+    position: relative;
+  }
+
+  label,
+  .budgetSlidersLabel {
+    font-size: 1.7rem;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  .homeCurrency,
+  .formSectionBudgetTotal input {
+    border: 1px solid $grey;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type="text"],
+  input[type="date"] {
+    width: 250px;
+    margin: 1em 0;
+  }
+
+  .budgetTotalSection input[type="number"],
+  .budgetTotalSection select {
+    position: absolute;
+    bottom: 10px;
+  }
+
+  .budgetTotalSection input[type="number"] {
+    left: 55px;
+  }
+
+  .budgetTotalSection select {
+    right: 55px;
+  }
+
+  .validationError {
+    color: $teal;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .checkboxInput {
+    @include flex(row-reverse);
+    margin: 0;
+
+    label {
+      font-size: 1.2rem;
+    }
+  }
+
+  input[type="checkbox"] {
+    margin: 0 0 0 5px;
+  }
+
+  .homeCurrency {
+    height: 35px;
+    width: 80px;
+    border-radius: 8px; //change to var
+  }
+
+  //budget sliders
+  .budgetSlider {
+    @include flex;
+    margin: 0;
+    font-size: 1rem;
+
+    .label {
+      width: 75px;
+    }
+
+    .budgetTotal {
+      margin: 12px 0 0 1em;
+    }
+  }
+
+  .btn {
+    margin-top: 1em;
+  }
+}

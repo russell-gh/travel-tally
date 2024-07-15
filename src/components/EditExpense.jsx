@@ -98,16 +98,20 @@ export const EditExpense = ({ animatingOut }) => {
   const setThisSplit = (splits, id) => {
     let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
-    copy.forEach((thisSplit) => {
-      delete thisSplit.currency;
+    copy.forEach((thisSplit, index) => {
+      console.log(thisSplit, "before");
+      thisSplit.amount = thisSplit.amount.fromValue / 100;
       delete thisSplit.date;
       delete thisSplit.expenseID;
       delete thisSplit.id;
       delete thisSplit.description;
       delete thisSplit.totalExpense;
+      const data = thisSplit;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
     });
+    setSplitIndexs(result.allIndexs);
     setTheseSplits(copy);
-    console.log(result, copy, "set this 2");
   };
 
   const dataInput = (e) => {
@@ -136,7 +140,7 @@ export const EditExpense = ({ animatingOut }) => {
     //   return;
     // }
     if (formData.description && formData.amount) {
-      const data = { formData, theseSplits };
+      const data = { formData, splitData };
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
@@ -176,24 +180,24 @@ export const EditExpense = ({ animatingOut }) => {
     }
   };
   let handleAddPerson = () => {
-    setSplit([
-      ...split,
-      <SplitInput
-        amount={formData.amount}
-        tag={split.length}
-        parentCallback={getSplitData}
-      />,
-    ]);
+    console.log("HIT ADDPERSON");
+    const copy = JSON.parse(JSON.stringify(theseSplits));
+    copy.push({ paid: false });
+    setTheseSplits(copy);
   };
   let handleRemovePerson = () => {
-    setTheseSplits(theseSplits.splice(theseSplits.length - 1, 1));
+    const copy = JSON.parse(JSON.stringify(theseSplits));
+    copy.splice(copy.length - 1, 1);
+    setTheseSplits(copy);
   };
 
   const getSplitData = (data, tag) => {
+    console.log(data, tag);
     dispatch(setSplitData({ data, tag }));
   };
 
   const renderSplit = () => {
+    console.log("HIT render");
     if (formData.split === true) {
       return (
         <>
@@ -232,6 +236,8 @@ export const EditExpense = ({ animatingOut }) => {
     details.dates;
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
   const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
+  console.log(splitIndex, "INDEX");
 
   return (
     <div className="editContainer">

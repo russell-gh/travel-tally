@@ -1,10 +1,16 @@
-.errortext {
-  color: rgb(154, 0, 0);
-}
+@import "variables";
 
+.errortext {
+  color: $red;
+}
 .loginInput {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.signup-text {
+  font-size: 1.3rem;
+  text-align: center;
 }
