@@ -766,6 +766,62 @@
         "id": "billSplit_A5rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
+      },
+      {
+        "amount": {
+          "fromValue": 2500,
+          "fromCurrency": "THB",
+          "toCurrency": "GBP",
+          "toValue": 1000
+        },
+        "name": "Manzi",
+        "paid": false,
+        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "id": "billSplit_A5rdJ7nM8kJ3gHA25T5gd",
+        "description": "lego tour",
+        "date": 1720998000000
+      },
+      {
+        "amount": {
+          "fromValue": 2500,
+          "fromCurrency": "THB",
+          "toCurrency": "GBP",
+          "toValue": 1000
+        },
+        "name": "Zahra",
+        "paid": true,
+        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "id": "billSplit_A5rdJ7nM8kJ3gHA25T6gd",
+        "description": "lego tour",
+        "date": 1720998000000
+      },
+      {
+        "amount": {
+          "fromValue": 2500,
+          "fromCurrency": "THB",
+          "toCurrency": "GBP",
+          "toValue": 1000
+        },
+        "name": "Jack",
+        "paid": true,
+        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "id": "billSplit_A5rdJ7nM8kJ3gHA25T7gd",
+        "description": "lego tour",
+        "date": 1720998000000
+      },
+      {
+        "amount": {
+          "fromValue": 2500,
+          "fromCurrency": "THB",
+          "toCurrency": "GBP",
+          "toValue": 1000
+        },
+        "name": "Russell",
+        "paid": false,
+        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "id": "billSplit_A5rdJ7nM8kJ3gHA25T8gd",
+        "description": "lego tour",
+        "date": 1720998000000
       }
     ],
     "expenses": [
@@ -780,6 +836,20 @@
         "category": "Activities",
         "description": "Day at beach",
         "date": 1720911600000,
+        "completed": true,
+        "splitBill": true
+      },
+      {
+        "id": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "amount": {
+          "fromValue": 12500,
+          "fromCurrency": "THB",
+          "toCurrency": "GBP",
+          "toValue": 5000
+        },
+        "category": "Activities",
+        "description": "lego tour",
+        "date": 1720998000000,
         "completed": true,
         "splitBill": true
       },

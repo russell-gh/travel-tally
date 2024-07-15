@@ -19,7 +19,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
-  const [displaySplit, setDisplaySplit] = useState(false);
+  const [displaySplit, setDisplaySplit] = useState("");
 
   if (!currencyCodes || !trips) {
     return;
@@ -33,8 +33,12 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
     return <Message message="There are no matches" className="message" />;
   }
 
-  const toggleDisplaySplit = () => {
-    setDisplaySplit(!displaySplit);
+  const toggleDisplaySplit = (expenseId) => {
+    if (displaySplit === expenseId) {
+      setDisplaySplit("");
+    } else {
+      setDisplaySplit(expenseId);
+    }
   };
 
   const includesFuture = includesFutureExpenses(expenses);
@@ -59,7 +63,10 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
               />
               <div className="containerAmountAndBillSplit">
                 {splitBill && (
-                  <SplitBillIcon toggleDisplaySplit={toggleDisplaySplit} />
+                  <SplitBillIcon
+                    toggleDisplaySplit={toggleDisplaySplit}
+                    expenseId={id}
+                  />
                 )}
                 <ExpenseAmount
                   homeCurrencySymbol={homeCurrencySymbol}
@@ -105,7 +112,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 }}
               />
             </div>
-            {displaySplit && (
+            {displaySplit === id && (
               <BillSplitItems
                 expenseId={id}
                 splits={splits}

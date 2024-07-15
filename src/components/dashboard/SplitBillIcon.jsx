@@ -1,9 +1,9 @@
-const SplitBillIcon = ({ toggleDisplaySplit }) => {
+const SplitBillIcon = ({ toggleDisplaySplit, expenseId }) => {
   return (
     <div
       className="containerIcon"
       onClick={() => {
-        toggleDisplaySplit();
+        toggleDisplaySplit(expenseId);
       }}
     >
       <img
