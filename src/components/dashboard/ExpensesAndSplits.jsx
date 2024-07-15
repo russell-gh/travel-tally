@@ -17,18 +17,20 @@ const ExpensesAndSplits = ({
 
   return (
     <div className="containerExpensesAndSplits">
-      <div className="tabsExpensesAndSplitsContainer">
-        <Button
-          text="Expenses"
-          className={`expensesBtn ${display === "expenses" ? "focus" : ""}`}
-          onClick={() => changeDisplay("expenses")}
-        />
-        <Button
-          text="Bill splits"
-          className={`billSplitBtn ${display === "billSplit" ? "focus" : ""}`}
-          onClick={() => changeDisplay("billSplit")}
-        />
-      </div>
+      {splits.length > 0 && (
+        <div className="tabsExpensesAndSplitsContainer">
+          <Button
+            text="Expenses"
+            className={`expensesBtn ${display === "expenses" ? "focus" : ""}`}
+            onClick={() => changeDisplay("expenses")}
+          />
+          <Button
+            text="Bill splits"
+            className={`billSplitBtn ${display === "billSplit" ? "focus" : ""}`}
+            onClick={() => changeDisplay("billSplit")}
+          />
+        </div>
+      )}
 
       {display === "expenses" && (
         <Expenses

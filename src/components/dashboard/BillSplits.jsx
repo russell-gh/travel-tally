@@ -1,6 +1,7 @@
 import BillSplitItems from "./BillSplitItems";
 import { useSelector } from "react-redux";
 import { selectCurrencyCodes } from "../../redux/homeSlice";
+import Message from "../../reusable-code/Message";
 
 const BillSplits = ({ splits, homeCurrencySymbol, expenses, filtered }) => {
   const currencyCodes = useSelector(selectCurrencyCodes);
