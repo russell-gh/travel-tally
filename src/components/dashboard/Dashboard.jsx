@@ -20,6 +20,7 @@ import BudgetInfo from "./BudgetInfo";
 import { createExpensesArray } from "../../utils/createExpensesArray";
 import { useMemo } from "react";
 import { getActualEndDate, getActualStartDate } from "../../utils/utilsDates";
+import ExpensesAndSplits from "./ExpensesAndSplits";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -89,13 +90,14 @@ const Dashboard = () => {
           expensesArray={expensesArray}
           actualStartDate={actualStartDate}
           actualEndDate={actualEndDate}
+          splits={splits}
         />
         <ControlsExpenses
           expensesCategories={expensesCategories}
           expenses={expenses}
         />
       </div>
-      <Expenses
+      <ExpensesAndSplits
         filtered={filtered}
         expenses={_expenses}
         homeCurrencySymbol={homeCurrencySymbol}

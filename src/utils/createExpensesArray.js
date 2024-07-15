@@ -2,6 +2,9 @@ import dayjs from "dayjs";
 import { getUnixfromDate, unixToDate } from "./utilsDates";
 
 export const createExpensesArray = (expenses, startDate, endDate) => {
+  //make a copy
+  const _expenses = JSON.parse(JSON.stringify(expenses));
+
   // calculate days of trip
   const startDateTrip = dayjs(startDate);
   const endDateTrip = dayjs(endDate);
@@ -18,7 +21,7 @@ export const createExpensesArray = (expenses, startDate, endDate) => {
   }
 
   // puts same day expenses in the same array
-  expenses.map((item) => {
+  _expenses.map((item) => {
     if (item.date) {
       for (let i = 0; i < amountOfDaysTrip; i++) {
         const date = unixToDate(startDateTrip.add(i, "day"));

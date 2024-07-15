@@ -1,6 +1,11 @@
-const SplitBillIcon = () => {
+const SplitBillIcon = ({ toggleDisplaySplit }) => {
   return (
-    <div className="containerIcon">
+    <div
+      className="containerIcon"
+      onClick={() => {
+        toggleDisplaySplit();
+      }}
+    >
       <img
         src={`../src/img/split-bill.svg`}
         alt={`split bill icon`}

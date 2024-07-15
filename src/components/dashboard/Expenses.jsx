@@ -11,11 +11,13 @@ import ExpenseAmount from "./ExpenseAmount";
 import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
+import { useState } from "react";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
+  const [displaySplit, setDisplaySplit] = useState(false);
 
   if (!currencyCodes || !trips) {
     return;
@@ -28,6 +30,10 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   if (filtered.length === 0) {
     return <Message message="There are no matches" className="message" />;
   }
+
+  const toggleDisplaySplit = () => {
+    setDisplaySplit(!displaySplit);
+  };
 
   return (
     <div className="expenses mt">
@@ -47,7 +53,9 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 expenses={expenses}
               />
               <div className="containerAmountAndBillSplit">
-                {splitBill && <SplitBillIcon />}
+                {splitBill && (
+                  <SplitBillIcon toggleDisplaySplit={toggleDisplaySplit} />
+                )}
                 <ExpenseAmount
                   homeCurrencySymbol={homeCurrencySymbol}
                   amount={amount}
@@ -92,12 +100,15 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 }}
               />
             </div>
-            <BillSplitItems
-              expenseId={id}
-              splits={splits}
-              homeCurrencySymbol={homeCurrencySymbol}
-              currencyCodes={currencyCodes}
-            />
+            {displaySplit && (
+              <BillSplitItems
+                expenseId={id}
+                splits={splits}
+                homeCurrencySymbol={homeCurrencySymbol}
+                currencyCodes={currencyCodes}
+                expenses={expenses}
+              />
+            )}
           </div>
         );
       })}

@@ -448,7 +448,8 @@ body {
      bill splits
 **************************
 */
-  .billSplitItem {
+  .billSplitItem,
+  .billSplitItemInExpenses {
     padding: 10px;
     border-radius: 20px;
     background-color: $green;

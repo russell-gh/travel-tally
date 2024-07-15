@@ -14,6 +14,7 @@ const BudgetInfo = ({
   actualEndDate,
   startDate,
   endDate,
+  splits,
 }) => {
   const [display, setDisplay] = useState("totalBudget");
   // converts and calculates days traveling
@@ -40,6 +41,7 @@ const BudgetInfo = ({
           expensesCategories={expensesCategories}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
+          splits={splits}
         />
       )}
       {stillTravelling && (
@@ -66,6 +68,7 @@ const BudgetInfo = ({
           expensesCategories={expensesCategories}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
+          splits={splits}
         />
       )}
       {/* if today is during traveltime, daily budget is calculated */}
@@ -78,6 +81,7 @@ const BudgetInfo = ({
           actualEndDate={actualEndDate}
           actualStartDate={actualStartDate}
           expenses={expenses}
+          splits={splits}
         />
       )}
     </div>
