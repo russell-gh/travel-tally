@@ -205,15 +205,15 @@ export const EditExpense = ({ animatingOut }) => {
             );
           })}
           <div className="containerBtnPopUp">
-            <Button
-              onClick={handleAddPerson}
-              text={"Add Person"}
-              className={"splitAddPerson"}
+          <Button
+              onClick={handleRemovePerson}
+              text={"-"}
+              className={"splitRemovePerson"}
             />
             <Button
-              onClick={handleRemovePerson}
-              text={"Remove Person"}
-              className={"splitRemovePerson"}
+              onClick={handleAddPerson}
+              text={"+"}
+              className={"splitAddPerson"}
             />
           </div>
         </div>

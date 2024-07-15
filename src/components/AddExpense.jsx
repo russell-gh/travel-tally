@@ -140,14 +140,14 @@ export const AddExpense = ({ animatingOut }) => {
           {split}
           <div className="containerBtnPopUp">
             <Button
-              onClick={handleAddPerson}
-              text={"Add Person"}
-              className={"splitAddPerson"}
+              onClick={handleRemovePerson}
+              text={"-"}
+              className={"splitRemovePerson"}
             />
             <Button
-              onClick={handleRemovePerson}
-              text={"Remove Person"}
-              className={"splitRemovePerson"}
+              onClick={handleAddPerson}
+              text={"+"}
+              className={"splitAddPerson"}
             />
           </div>
         </div>
