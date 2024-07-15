@@ -1,5 +1,5 @@
 //TODOTODOTODOTODOTODO
-// Dropdown
+
 //Logo Bigger
 
 @import "variables";
@@ -19,7 +19,6 @@ body {
 }
 
 main {
-
   input,
   button {
     margin: auto;
@@ -52,13 +51,12 @@ input {
   }
 }
 
-// .btn:hover {
-//   background-color: $darker-green;
-// }
-
 header {
   display: flex;
   justify-content: space-evenly;
+  height: 40px;
+  padding: 0;
+  margin: 0;
 
   .logo {
     height: 50px;
