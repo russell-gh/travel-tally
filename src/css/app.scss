@@ -29,7 +29,7 @@ main {
 input {
   justify-content: center;
   border-color: $grey;
-  border-radius: 8px;
+  border-radius: $border-radius;
   height: 30px;
 
   ::placeholder {
@@ -43,7 +43,7 @@ input {
   border: none;
   padding: 10px 32px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: $border-radius;
   font-size: 16px;
   cursor: pointer;
   &:hover {
