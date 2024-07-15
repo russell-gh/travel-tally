@@ -6,7 +6,7 @@ export const getCountryFromCity  = async (city) => {
     const { data } = await axios.get(
       `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
     );
-    return data.country;
+    return data[0].country;
   } catch (error) {
     console.log(error);
   }
