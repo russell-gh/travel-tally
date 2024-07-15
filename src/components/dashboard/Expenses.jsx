@@ -12,6 +12,8 @@ import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 import { useState } from "react";
+import ShowFutureExpenses from "./filter/ShowFutureExpenses";
+import { includesFutureExpenses } from "../../utils/utilsDates";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
@@ -35,8 +37,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
     setDisplaySplit(!displaySplit);
   };
 
+  const includesFuture = includesFutureExpenses(expenses);
+
   return (
     <div className="expenses mt">
+      {includesFuture && <ShowFutureExpenses />}
       {filtered.map((item) => {
         const { description, id, category, date, amount, sharedId, splitBill } =
           item;

@@ -17,7 +17,7 @@ const ExpensesAndSplits = ({
 
   return (
     <div className="containerExpensesAndSplits">
-      <>
+      <div className="tabsExpensesAndSplitsContainer">
         <Button
           text="Expenses"
           className={`expensesBtn ${display === "expenses" ? "focus" : ""}`}
@@ -28,7 +28,7 @@ const ExpensesAndSplits = ({
           className={`billSplitBtn ${display === "billSplit" ? "focus" : ""}`}
           onClick={() => changeDisplay("billSplit")}
         />
-      </>
+      </div>
 
       {display === "expenses" && (
         <Expenses

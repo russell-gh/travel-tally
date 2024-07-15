@@ -164,11 +164,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
-
-    #hideFutureExpenses {
-      height: auto;
-    }
-
   }
 
   //top with dropdown trips and travel time
@@ -346,6 +341,7 @@ body {
   .hideFutureExpenseContainer {
     max-width: 510px;
     margin: 0px auto;
+    font-size: 16px;
   }
 
   /*
@@ -356,6 +352,12 @@ body {
         expenses
 **************************
 */
+  .expenses {
+    #hideFutureExpenses {
+      height: auto;
+    }
+  }
+
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
@@ -443,6 +445,44 @@ body {
   /*
 ************END***********
 */
+  /*
+**************************
+controls billSplit and Expenses
+**************************
+*/
+
+  .tabsExpensesAndSplitsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 520px;
+    margin: 0px auto 10px auto;
+    border-radius: 15px 15px 0px 0px;
+    border: $navy 2px solid;
+    ;
+
+    .btn {
+      color: black;
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    .focus {
+      color: white;
+      background-color: $navy;
+    }
+
+    .billSplitBtn {
+      border-radius: 0px 11px 0px 0px;
+    }
+
+    .expensesBtn {
+      border-radius: 11px 0px 0px 0px;
+    }
+  }
+
+  /*
+************END***********
+*/
+
   /*
 **************************
      bill splits
