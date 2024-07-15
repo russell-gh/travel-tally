@@ -13,15 +13,8 @@ import {
 } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
-import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
-import { selectCountries } from "../../redux/homeSlice.js";
+import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
-
-let currencies = [];
-
-for (const key of Object.keys(currencyCodes)) {
-  currencies.push({ value: key, name: key });
-}
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({
@@ -44,7 +37,13 @@ const Onboarding = () => {
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
-  const [countryCurrency, setCountryCurrency] = useState([]);
+
+  const currencyCodes = useSelector(selectCurrencyCodes);
+
+  let currencies = [];
+  for (const key of Object.keys(currencyCodes)) {
+    currencies.push({ value: key, name: key });
+  }
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -112,7 +111,6 @@ const Onboarding = () => {
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     //if errors exist abort early
@@ -198,7 +196,7 @@ const Onboarding = () => {
     if (!currencyCode) {
       currencyCode = "";
     }
-    
+
     //add currency code to state
     setOnboardingDetails({
       ...onboardingDetails,
