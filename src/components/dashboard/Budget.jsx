@@ -7,9 +7,14 @@ import { useSelector } from "react-redux";
 import { selectFilter } from "../../redux/homeSlice";
 import ControlsAddExpense from "./ControlsAddExpense";
 import Difference from "./Difference";
-import { createDataForCharts } from "../../utils/createDataForCharts";
+import {
+  createDataForCharts,
+  createDateIncludingOwed,
+} from "../../utils/createDataForCharts";
 import ChartBudget from "./ChartBudget";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import CheckboxChartIncludingOwed from "./CheckboxChartIncludingOwed";
+import ChartIncludingOwed from "./ChartIncludingOwed";
 
 const Budget = ({
   expenses,
@@ -19,10 +24,14 @@ const Budget = ({
   splits,
 }) => {
   const filter = useSelector(selectFilter);
+  const [includeOwed, setIncludeOwed] = useState(false);
 
   const dataChart = useMemo(() => {
     return createDataForCharts(details, expenses, splits);
   }, [details, expenses]);
+  const dataChartIncludingOwed = useMemo(() => {
+    return createDateIncludingOwed(splits, expenses, dataChart);
+  }, [splits, expenses, dataChart]);
 
   const totalSpend =
     expensesCategories.length === 0
@@ -31,13 +40,26 @@ const Budget = ({
   const budget = getBudget(details, filter);
   const difference = addDecimals(budget * 100 - totalSpend * 100);
 
-  const component = useMemo(() => {
+  const chartWithoutOwed = useMemo(() => {
     return <ChartBudget dataChart={dataChart} />;
   }, [dataChart]);
 
+  const chartWithOwed = useMemo(() => {
+    return <ChartIncludingOwed dataChart={dataChartIncludingOwed} />;
+  }, [dataChartIncludingOwed]);
+
+  const toggleIncludeOwed = () => {
+    setIncludeOwed(!includeOwed);
+  };
+
   return (
     <>
-      <div className="chart">{component}</div>
+      <div className="chart">
+        {includeOwed ? chartWithOwed : chartWithoutOwed}
+        {splits.length > 0 && (
+          <CheckboxChartIncludingOwed toggleIncludeOwed={toggleIncludeOwed} />
+        )}
+      </div>
       <div className="containerBottomRowGrid">
         <div className="budget">
           <p>Budget: </p>

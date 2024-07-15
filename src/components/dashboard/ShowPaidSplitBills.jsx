@@ -11,7 +11,7 @@ const ShowPaidSplitBills = () => {
       <FormElement
         type="checkbox"
         id="hidePaidSplits"
-        label="hide paid"
+        label="hide paid splits"
         checked={hidePaidSplitBills}
         callback={(e) => {
           dispatch(

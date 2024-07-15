@@ -341,7 +341,8 @@ body {
   }
 
   .hideFutureExpenseContainer,
-  .hidePaidSplitBills {
+  .hidePaidSplitBills,
+  .checkboxIncludeOwed {
     max-width: 510px;
     margin: 0px auto;
     font-size: 16px;
@@ -350,6 +351,10 @@ body {
       height: auto;
     }
 
+  }
+
+  .checkboxIncludeOwed {
+    margin-bottom: 5px;
   }
 
   /*

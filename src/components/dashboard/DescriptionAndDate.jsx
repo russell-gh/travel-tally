@@ -12,12 +12,13 @@ const DescriptionAndDate = ({
   if (!date) {
     return;
   }
+  let dotStyle;
 
   if (expenses) {
     const arrSharedId = getArrayOfValues(expenses, "sharedId");
 
     //set style with the right colour
-    const dotStyle = {
+    dotStyle = {
       backgroundColor: getColourForSharedId(arrSharedId, sharedId),
     };
   }
