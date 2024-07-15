@@ -20,30 +20,32 @@ const ExpensesAndSplits = ({
       <>
         <Button
           text="Expenses"
-          animation="animation"
           className={`expensesBtn ${display === "expenses" ? "focus" : ""}`}
           onClick={() => changeDisplay("expenses")}
         />
         <Button
           text="Bill splits"
-          animation="animation"
           className={`billSplitBtn ${display === "billSplit" ? "focus" : ""}`}
           onClick={() => changeDisplay("billSplit")}
         />
       </>
 
-      <Expenses
-        filtered={filtered}
-        expenses={expenses}
-        homeCurrencySymbol={homeCurrencySymbol}
-        splits={splits}
-      />
-      <BillSplits
-        splits={splits}
-        homeCurrencySymbol={homeCurrencySymbol}
-        expenses={expenses}
-        filtered={filtered}
-      />
+      {display === "expenses" && (
+        <Expenses
+          filtered={filtered}
+          expenses={expenses}
+          homeCurrencySymbol={homeCurrencySymbol}
+          splits={splits}
+        />
+      )}
+      {display === "billSplit" && (
+        <BillSplits
+          splits={splits}
+          homeCurrencySymbol={homeCurrencySymbol}
+          expenses={expenses}
+          filtered={filtered}
+        />
+      )}
     </div>
   );
 };
