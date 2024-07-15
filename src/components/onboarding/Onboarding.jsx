@@ -54,6 +54,19 @@ const Onboarding = () => {
   const redirect = useNavigate();
 
   const countries = useSelector(selectCountries);
+  let _countries;
+  if (countries) {
+    _countries = JSON.parse(JSON.stringify(countries));
+    _countries = _countries.sort((a, b) => {
+      if (a.capitalCity < b.capitalCity) {
+        return -1;
+      }
+      if (a.capitalCity > b.capitalCity) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
@@ -160,6 +173,8 @@ const Onboarding = () => {
     const country = getCountryFromCity(city);
   };
 
+if (!_countries) {return <p>...Loading</p>}
+
   return (
     <div className="onboarding">
       <form>
@@ -176,11 +191,11 @@ const Onboarding = () => {
               list={"cities"}
             />
             <datalist id="cities">
-              {countries.map((country) => {
+              {_countries.map((country) => {
                 return (
                   <option
-                    key={country["Capital City"]}
-                    value={country["Capital City"]}
+                    key={country["capitalCity"]}
+                    value={country["capitalCity"]}
                   ></option>
                 );
               })}
