@@ -6,6 +6,7 @@ export const Header = () => {
     <header>
       <Logo2 />
       <button
+        className="btn"
         onClick={() => {
           localStorage.clear();
           location.reload();
