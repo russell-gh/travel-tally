@@ -6,13 +6,12 @@ export function splitExpenseBill(splitData, expense) {
   if (!splitData) {
     return;
   }
-  console.log(splitData, expense, "inside split bill");
   let allSplits = [];
 
   splitData.forEach((bill) => {
     let newAmount = {
-      fromValue: Number(bill.amount * 100),
-      toValue: Number(bill.converted * 100),
+      fromValue: Number(bill.amount),
+      toValue: Number(bill.converted),
       fromCurrency: expense.amount.fromCurrency,
       toCurrency: expense.amount.toCurrency,
     };
@@ -29,6 +28,5 @@ export function splitExpenseBill(splitData, expense) {
     allSplits.push(formatted);
   });
 
-  console.log(allSplits, "ALLSPLITS");
   return allSplits;
 }

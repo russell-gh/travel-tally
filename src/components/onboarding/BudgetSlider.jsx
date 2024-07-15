@@ -2,8 +2,8 @@ import { Slider, Stack, styled } from "@mui/material";
 import { useState } from "react";
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
-  width: 250,
-  height: 10,
+  width: 230,
+  height: 8,
   "& .MuiSlider-rail": {
     backgroundColor:'#d6ee79',
     opacity:1,
@@ -15,16 +15,16 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
   },
   "& .MuiSlider-thumb": {
     color: "#235b89",
-    height:30,
-    width:30
+    height:20,
+    width:20,
   },
   "& .MuiSlider-valueLabelOpen": {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 600,
     color: "#235b89",
     backgroundColor:"#d6ee79",
-    height: 40,
-    width:30,
+    height: 20,
+    width:10,
     borderRadius: "50%",
     top: -15,
     padding: "5px 10px"
@@ -51,10 +51,9 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
   };
 
   return (
-    <>
-      <p>{label}</p>
+    <div className="budgetSlider" >
+      <p className="label">{label}</p>
       <Stack direction="row">
-        <p>0</p>
         <StyledSlider
           value={position}
           id={id}
@@ -65,9 +64,9 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
           onChange={positionUpdate}
         />
 
-        <p>{onboardingDetails.budgetTotal}</p>
+        <p className="budgetTotal">{onboardingDetails.budgetTotal}</p>
       </Stack>
-    </>
+    </div>
   );
 };
 
