@@ -7,6 +7,7 @@ export const Header = () => {
       <h1>holiDough</h1>
       <Logo />
       <button
+        className="btn"
         onClick={() => {
           localStorage.clear();
           location.reload();
