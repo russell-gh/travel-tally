@@ -3,13 +3,7 @@
             SASS
 **************************
 */
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
-$blueSachaUsed: #3c43a5;
+@import "variables";
 /*
 ************END***********
 */
@@ -60,7 +54,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -126,7 +120,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -145,7 +139,7 @@ body {
 
   .message {
     margin: 10px;
-    background-color: $navy;
+    background-color: $teal;
     padding: 10px;
     border-radius: 10px;
     color: white;
@@ -211,7 +205,7 @@ body {
     align-self: center;
     justify-self: center;
     border: none;
-    color: $navy;
+    color: $teal;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -219,7 +213,7 @@ body {
   }
 
   .addExpense:hover {
-    background-color: $navy;
+    background-color: $teal;
     color: $green;
     transition: all 0.3s ease-in-out;
   }
@@ -368,7 +362,7 @@ body {
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     margin: 0px auto 10px auto;
     display: grid;
@@ -464,7 +458,7 @@ controls billSplit and Expenses
     max-width: 520px;
     margin: 0px auto 10px auto;
     border-radius: 15px 15px 0px 0px;
-    border: $navy 2px solid;
+    border: $teal 2px solid;
     ;
 
     .btn {
@@ -474,7 +468,7 @@ controls billSplit and Expenses
 
     .focus {
       color: white;
-      background-color: $navy;
+      background-color: $teal;
     }
 
     .billSplitBtn {
