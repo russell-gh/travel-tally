@@ -5,4 +5,6 @@ export const initialState = {
   order: "Newest first",
   filterDate: "All Dates",
   splitData: [],
+  hideFutureExpenses: false,
+  hidePaidSplitBills: false,
 };

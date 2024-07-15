@@ -1,8 +1,8 @@
 import { unixToDate } from "../../utils/utilsDates";
 import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
 import FormElement from "../../reusable-code/FormElement";
-import { useDispatch } from "react-redux";
-import { setPaid } from "../../redux/homeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
 import BillSplitExpense from "./BillSplitExpense";
 
 const BillSplitItems = ({
@@ -15,8 +15,8 @@ const BillSplitItems = ({
   tabBillSplit,
 }) => {
   const dispatch = useDispatch();
+  const hidePaidSplits = useSelector(selectHidePaidSplitBills);
   let arrayOfSplits = splits;
-  // let uniqueExpenseIDs;
 
   if (!expenses) {
     return;
@@ -25,6 +25,12 @@ const BillSplitItems = ({
   if (expenseId) {
     arrayOfSplits = splits.filter((split) => {
       return split.expenseID === expenseId;
+    });
+  }
+
+  if (hidePaidSplits) {
+    arrayOfSplits = arrayOfSplits.filter((split) => {
+      return !split.paid;
     });
   }
 

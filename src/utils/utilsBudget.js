@@ -131,7 +131,6 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
   let cumulativeDifference = 0;
   let arrValues = [];
   let totalSpendPerDay;
-
   arr.forEach((values) => {
     if (values.length === 0) {
       return;
@@ -157,10 +156,9 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
           expense.amount.toValue = toValue;
         }
       }
-      totalSpendPerDay = values.reduce(
-        (acc, value) => acc + value.amount.toValue,
-        0
-      );
+      totalSpendPerDay = values.reduce((acc, value) => {
+        return acc + value.amount.toValue;
+      }, 0); // Initial value of 0 for the accumulator
     }
 
     //set the rest of the values

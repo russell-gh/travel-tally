@@ -149,6 +149,8 @@ body {
     padding: 10px;
     border-radius: 10px;
     color: white;
+    max-width: 500px;
+    margin: 0px auto;
   }
 
   /*
@@ -338,10 +340,16 @@ body {
     max-width: 512px;
   }
 
-  .hideFutureExpenseContainer {
+  .hideFutureExpenseContainer,
+  .hidePaidSplitBills {
     max-width: 510px;
     margin: 0px auto;
     font-size: 16px;
+
+    input {
+      height: auto;
+    }
+
   }
 
   /*
@@ -352,12 +360,6 @@ body {
         expenses
 **************************
 */
-  .expenses {
-    #hideFutureExpenses {
-      height: auto;
-    }
-  }
-
   .expenseItem {
     padding: 10px;
     border-radius: 20px;

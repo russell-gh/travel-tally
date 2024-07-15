@@ -1,8 +1,5 @@
 import FormElement from "../../../reusable-code/FormElement";
-import {
-  selectHideFutureExpenses,
-  toggleHideFutureExpenses,
-} from "../../../redux/homeSlice";
+import { selectHideFutureExpenses, toggleHide } from "../../../redux/homeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ShowFutureExpenses = () => {
@@ -17,7 +14,12 @@ const ShowFutureExpenses = () => {
         label="hide future expenses"
         checked={hideFutureExpenses}
         callback={(e) => {
-          dispatch(toggleHideFutureExpenses(e.target.checked));
+          dispatch(
+            toggleHide({
+              value: e.target.checked,
+              key: "hideFutureExpenses",
+            })
+          );
         }}
       />
     </div>

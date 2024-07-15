@@ -18,8 +18,6 @@ const BillSplitExpense = ({
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
 
-  console.log(">>>", splits);
-
   // if (!expenses) {
   //   return;
   // }
