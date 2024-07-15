@@ -29,7 +29,7 @@ const BillSplitExpense = ({
   }
 
   return (
-    <div>
+    <div className="expenseItem">
       <CategoryIcon category={splitExpense[0].category} />
       <DescriptionAndDate
         description={splitExpense[0].description}
@@ -45,40 +45,14 @@ const BillSplitExpense = ({
         splitBill={false}
         expenseId={expenseID}
       />
-      {/* <img
-                src="../src/img/edit.svg"
-                alt="edit"
-                className="edit"
-                onClick={() => {
-                  dispatch(
-                    togglePopUp({
-                      config: {
-                        title: description,
-                        id: id,
-                        sharedId: sharedId,
-                      },
-                      component: "EditExpense",
-                    })
-                  );
-                }}
-              />
-              <img
-                src="../src/img/delete.svg"
-                alt="delete"
-                className="delete"
-                onClick={() => {
-                  dispatch(
-                    togglePopUp({
-                      config: {
-                        title: description,
-                        id: id,
-                        sharedId: sharedId,
-                      },
-                      component: "DeletePopUp",
-                    })
-                  );
-                }}
-              /> */}
+      <ExpenseAmount
+        homeCurrencySymbol={homeCurrencySymbol}
+        amount={splitExpense[0].amount}
+        currencyCodes={currencyCodes}
+        splitBill={true}
+        expenseId={expenseID}
+        splits={splits}
+      />
     </div>
   );
 };

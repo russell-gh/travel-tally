@@ -15,6 +15,7 @@ const BillSplitItems = ({
 }) => {
   const dispatch = useDispatch();
   let arrayOfSplits = splits;
+  let uniqueExpenseIDs;
 
   if (!expenses) {
     return;
@@ -26,17 +27,26 @@ const BillSplitItems = ({
     });
   }
 
+  // Get unique expenseIDs from splits
+  uniqueExpenseIDs = [
+    ...new Set(
+      arrayOfSplits.map((split) => {
+        return split.expenseID;
+      })
+    ),
+  ];
+
   return (
     <>
       {!expenseId &&
-        arrayOfSplits.map((split, index) => {
-          const { expenseID } = split;
+        uniqueExpenseIDs.map((expenseID) => {
           return (
             <BillSplitExpense
               expenseID={expenseID}
               expenses={expenses}
               filtered={filtered}
-              key={index}
+              key={expenseID}
+              splits={splits}
             />
           );
         })}
@@ -70,15 +80,17 @@ const BillSplitItems = ({
               </p>
             </div>
             {!paid && (
-              <FormElement
-                type="checkbox"
-                label="paid"
-                id="paid"
-                name="paid"
-                callback={() => {
-                  dispatch(setPaid({ data: splits, id: id }));
-                }}
-              />
+              <div className="paidCheckboxContainer">
+                <FormElement
+                  type="checkbox"
+                  label="paid"
+                  id="paid"
+                  name="paid"
+                  callback={() => {
+                    dispatch(setPaid({ data: splits, id: id }));
+                  }}
+                />
+              </div>
             )}
           </div>
         );
