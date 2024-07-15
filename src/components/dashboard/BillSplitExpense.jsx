@@ -5,24 +5,28 @@ import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
 import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
+import BillSplitItems from "./BillSplitItems";
 
 const BillSplitExpense = ({
   filtered,
   homeCurrencySymbol,
   expenses,
   splits,
-  expenseID,
+  expenseId,
+  splitExpense,
 }) => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const dispatch = useDispatch();
 
-  if (!expenses) {
-    return;
-  }
+  console.log(">>>", splits);
 
-  const splitExpense = expenses.filter((expense) => {
-    return expense.id === expenseID;
-  });
+  // if (!expenses) {
+  //   return;
+  // }
+
+  // const splitExpense = expenses.filter((expense) => {
+  //   return expense.id === expenseID;
+  // });
 
   if (!splitExpense) {
     return;
@@ -30,28 +34,35 @@ const BillSplitExpense = ({
 
   return (
     <div className="expenseItem">
-      <CategoryIcon category={splitExpense[0].category} />
+      <CategoryIcon category={splitExpense.category} />
       <DescriptionAndDate
-        description={splitExpense[0].description}
-        category={splitExpense[0].category}
-        date={splitExpense[0].date}
-        sharedId={splitExpense[0].sharedId}
+        description={splitExpense.description}
+        category={splitExpense.category}
+        date={splitExpense.date}
+        sharedId={splitExpense.sharedId}
         expenses={expenses}
       />
       <ExpenseAmount
         homeCurrencySymbol={homeCurrencySymbol}
-        amount={splitExpense[0].amount}
+        amount={splitExpense.amount}
         currencyCodes={currencyCodes}
         splitBill={false}
-        expenseId={expenseID}
+        expenseId={expenseId}
       />
       <ExpenseAmount
         homeCurrencySymbol={homeCurrencySymbol}
-        amount={splitExpense[0].amount}
+        amount={splitExpense.amount}
         currencyCodes={currencyCodes}
         splitBill={true}
-        expenseId={expenseID}
+        expenseId={expenseId}
         splits={splits}
+      />
+      <BillSplitItems
+        expenseId={expenseId}
+        splits={splits}
+        homeCurrencySymbol={homeCurrencySymbol}
+        currencyCodes={currencyCodes}
+        expenses={expenses}
       />
     </div>
   );

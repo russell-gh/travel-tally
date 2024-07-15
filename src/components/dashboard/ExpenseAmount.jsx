@@ -11,10 +11,13 @@ const ExpenseAmount = ({
   if (!amount) {
     return;
   }
-
+  console.log("expesenAmoutn", splits);
   let { fromCurrency, toValue, fromValue } = amount;
 
+  console.log(splitBill, splits);
+
   if (splitBill && splits) {
+    console.log("you get here", expenseId);
     const arrayOfPaidSplits = splits.filter((split) => {
       return split.expenseID === expenseId && split.paid === true;
     });

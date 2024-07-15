@@ -12,10 +12,11 @@ const BillSplitItems = ({
   currencyCodes,
   expenses,
   filtered,
+  tabBillSplit,
 }) => {
   const dispatch = useDispatch();
   let arrayOfSplits = splits;
-  let uniqueExpenseIDs;
+  // let uniqueExpenseIDs;
 
   if (!expenses) {
     return;
@@ -27,36 +28,15 @@ const BillSplitItems = ({
     });
   }
 
-  // Get unique expenseIDs from splits
-  uniqueExpenseIDs = [
-    ...new Set(
-      arrayOfSplits.map((split) => {
-        return split.expenseID;
-      })
-    ),
-  ];
-
   return (
     <>
-      {!expenseId &&
-        uniqueExpenseIDs.map((expenseID) => {
-          return (
-            <BillSplitExpense
-              expenseID={expenseID}
-              expenses={expenses}
-              filtered={filtered}
-              key={expenseID}
-              splits={splits}
-            />
-          );
-        })}
       {arrayOfSplits.map((split) => {
         const { id, amount, paid, description, date, name } = split;
         const { fromCurrency, toValue, fromValue } = amount;
         return (
           <div
             className={`billSplitItem ${
-              expenseId && "billSplitItemInExpenses"
+              !tabBillSplit && "billSplitItemInExpenses"
             }`}
             key={id}
           >
@@ -66,7 +46,7 @@ const BillSplitItems = ({
               className="paidIcon"
             />
             <div className="containerNameAndDate">
-              <h2>{expenseId ? name : description + " - " + name}</h2>
+              <h2>{!tabBillSplit ? name : description + " - " + name}</h2>
               <p>{unixToDate(date)}</p>
             </div>
             <div>
