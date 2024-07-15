@@ -143,8 +143,8 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
 
-    toggleHideFutureExpenses: (state, { payload }) => {
-      state.hideFutureExpenses = payload;
+    toggleHide: (state, { payload }) => {
+      state[payload.key] = payload.value;
       saveStore("homeSlice", state);
     },
 
@@ -183,6 +183,11 @@ export const homeSlice = createSlice({
         state.splitData[payload.tag] = payload.data;
       }
     },
+    setPaid: (state, { payload }) => {
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+      const index = getIndex(payload.data, payload.id, "id");
+      state.trips[indexTrip].splits[index].paid = true;
+    },
   },
 });
 
@@ -192,11 +197,12 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
-  toggleHideFutureExpenses,
+  toggleHide,
   deleteToEdit,
   addSplitData,
   setSplitData,
   addTrip,
+  setPaid,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
@@ -214,6 +220,8 @@ export const selectHomeCurrency = (state) => state.home.homeCurrency;
 export const selectSelectedTripId = (state) => state.home.selectedTripId;
 export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
+export const selectHidePaidSplitBills = (state) =>
+  state.home.hidePaidSplitBills;
 export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
 

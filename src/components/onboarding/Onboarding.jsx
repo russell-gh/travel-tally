@@ -294,7 +294,11 @@ if (!_countries) {return <p>...Loading</p>}
         {currentFormSection === 4 ? (
           <FormElement type="button" className="btn" callback={handleSubmit} />
         ) : (
-          <Button text=">" onClick={() => formButtonHandler()} />
+          <Button
+            text=">"
+            onClick={() => formButtonHandler()}
+            animation={true}
+          />
         )}
       </form>
     </div>

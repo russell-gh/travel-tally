@@ -60,6 +60,7 @@ const UserName = () => {
         text="next"
         onClick={onClick}
         disabled={!!error}
+        animation={true}
       />
     </div>
   );

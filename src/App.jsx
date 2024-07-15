@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
-import Onboarding from "./components/onboarding/Onboarding";
 import Signup from "./components/Signup";
-import Dashboard from "./components/dashboard/Dashboard";
+import Onboarding from "./components/onboarding/Onboarding";
 import { selectPopUp, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -19,6 +18,7 @@ import { useState } from "react";
 import EditExpense from "./components/EditExpense";
 import { animationPopUp } from "./animations";
 import SplashPage from "./components/SplashPage";
+import CheckTrips from "./components/dashboard/CheckTrips";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -82,7 +82,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<CheckTrips />} />
           <Route path="*" element={<SplashPage />} />
         </Routes>
         <div ref={popUpRef} className="popUpContainer">
