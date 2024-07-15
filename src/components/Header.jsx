@@ -5,7 +5,6 @@ export const Header = () => {
   return (
     <header>
       <Logo />
-      <h1>holiDough</h1>
       <button
         className="btn"
         onClick={() => {

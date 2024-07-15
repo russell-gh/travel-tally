@@ -11,7 +11,6 @@ import Button from "../reusable-code/Button";
 //=======Displays Login Data================
 //==========================================
 const Login = () => {
-  const myArr = [1, 2, 3, 4];
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -23,7 +22,6 @@ const Login = () => {
     const errObj = await validate(_formData, "login");
     setErrors(errObj);
     // console.log(errors, formData);
-    console.log(typeof myArr);
   };
   const localUser = JSON.parse(localStorage.getItem("user"));
 

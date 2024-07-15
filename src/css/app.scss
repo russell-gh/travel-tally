@@ -57,15 +57,11 @@ input {
 
 header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 
   .logo {
     height: 50px;
     width: 50px;
-  }
-  h1 {
-    font-size: 2rem;
-    align-self: flex-end;
   }
 }
 
