@@ -9,6 +9,8 @@ import {
   togglePopUp,
   setSplitData,
   selectSplitData,
+  setSplitMax,
+  selectSplitMax,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
@@ -19,6 +21,7 @@ import { getExpenseList } from "../utils/expenseData";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
+  const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
@@ -59,6 +62,7 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "false") value = false;
 
     setFormData({ ...formData, [target]: value });
+    if (target === 'amount') dispatch(setSplitMax({value}));
   };
 
   const getValidationResult = async () => {
@@ -112,7 +116,6 @@ export const AddExpense = ({ animatingOut }) => {
     setSplit([
       ...split,
       <SplitInput
-        amount={formData.amount}
         tag={split.length}
         parentCallback={getSplitData}
       />,
@@ -128,7 +131,6 @@ export const AddExpense = ({ animatingOut }) => {
 
   const [split, setSplit] = useState([
     <SplitInput
-      amount={formData.amount}
       tag={0}
       parentCallback={getSplitData}
     />,

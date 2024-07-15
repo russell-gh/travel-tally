@@ -196,7 +196,7 @@ export const EditExpense = ({ animatingOut }) => {
             return (
               <div className="flex">
                 <SplitInput
-                  amount={formData.amount}
+                  maxAmount={formData.amount}
                   tag={index}
                   parentCallback={getSplitData}
                   data={split}

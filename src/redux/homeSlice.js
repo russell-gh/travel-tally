@@ -79,6 +79,8 @@ export const homeSlice = createSlice({
     togglePopUp: (state, { payload }) => {
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
       state.splitData = [];
+      state.splitMax = 0; 
+      state.splitValues = {values:[], remaining: 999};
       if (!payload) {
         state.popUp = {};
         saveStore("homeSlice", state);
@@ -176,13 +178,27 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
     setSplitData: (state, { payload }) => {
-      console.log(payload.data, payload.tag, "REDUCER");
       if (state.splitData.length === 0) {
         state.splitData.push(payload.data);
       } else {
         state.splitData[payload.tag] = payload.data;
       }
+      saveStore("homeSlice", state);
     },
+    setSplitMax: (state, {payload}) => {
+      state.splitMax = Number(payload.value); // Sets the expense value in the store so it is in the global scope
+      state.splitValues.remaining = state.splitMax;
+    },
+    calculateSplitMax: (state, {payload}) => {
+      if (state.splitValues.values.length === 0) {
+        state.splitValues.values.push(Number(payload.value));
+      } else {
+        state.splitValues.values[payload.tag] = Number(payload.value);
+      }
+      const copy = JSON.parse(JSON.stringify(state.splitValues.values));
+      const total = copy.reduce((a, b) => a + b, 0);
+      state.splitValues.remaining = state.splitMax - total;
+    }
   },
 });
 
@@ -197,6 +213,8 @@ export const {
   addSplitData,
   setSplitData,
   addTrip,
+  setSplitMax,
+  calculateSplitMax,
 } = homeSlice.actions;
 
 export const selectTrips = (state) => state.home.trips;
@@ -216,5 +234,7 @@ export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
 export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
+export const selectSplitMax = (state) => state.home.splitMax;
+export const selectSplitValues = (state) => state.home.splitValues;
 
 export default homeSlice.reducer;
