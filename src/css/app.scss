@@ -46,10 +46,14 @@ input {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  :hover {
+  &:hover {
     background: $darker-green;
   }
 }
+
+// .btn:hover {
+//   background-color: $darker-green;
+// }
 
 header {
   display: flex;
@@ -63,10 +67,6 @@ header {
     font-size: 2rem;
     align-self: flex-end;
   }
-}
-
-.btn:hover {
-  background-color: $darker-green;
 }
 
 header,
