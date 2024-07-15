@@ -107,9 +107,8 @@ body {
     margin: 0px;
   }
 
-  p {
+  * {
     font-size: 16px;
-    ;
   }
 
   h1 {
@@ -343,6 +342,7 @@ body {
 
     input {
       height: auto;
+      margin-right: 3px;
     }
 
   }
@@ -451,6 +451,9 @@ body {
 controls billSplit and Expenses
 **************************
 */
+  .containerExpensesAndSplits {
+    margin: 10px;
+  }
 
   .tabsExpensesAndSplitsContainer {
     display: grid;

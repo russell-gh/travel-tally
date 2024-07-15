@@ -52,7 +52,7 @@ const BillSplitItems = ({
               className="paidIcon"
             />
             <div className="containerNameAndDate">
-              <h2>{!tabBillSplit ? name : description + " - " + name}</h2>
+              <h2>{name}</h2>
               <p>{unixToDate(date)}</p>
             </div>
             <div>
