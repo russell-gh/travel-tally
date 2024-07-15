@@ -38,7 +38,7 @@ const Signup = () => {
       console.log(formData);
       redirect("/login");
     } else {
-      alert("passwords don't match", formData);
+      console.log("passwords don't match", formData);
     }
   };
 

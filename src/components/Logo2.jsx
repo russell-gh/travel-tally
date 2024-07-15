@@ -18,10 +18,10 @@ export const Logo2 = () => {
         viewBox="0 0 400 400"
       >
         <g
-          data-name="container"
+          data-name="container" //outer circle
           data="container_num:15"
           fill="#d3ee49"
-          transform="translate(24.55548387096775,134.48000000000002) scale(2.6208)"
+          transform="translate(24.55548387096775,134.48000000000002) scale(2.4208)"
         >
           <path
             xmlns="http://www.w3.org/2000/svg"
@@ -37,10 +37,10 @@ export const Logo2 = () => {
           ></rect>
         </g>
         <g
-          data-name="icon"
+          data-name="icon" //inner icon
           fill="#4831D4"
           data="id:5141277"
-          transform="translate(48.83912966888818,160.3145010844233) scale(0.16026244822505542)"
+          transform="translate(48.83912966888818,160.3145010844233) scale(0.15026244822505542)"
         >
           <g>
             <path d="M168,356a20,20,0,1,0-20-20A20.023,20.023,0,0,0,168,356Zm0-32a12,12,0,1,1-12,12A12.013,12.013,0,0,1,168,324Z"></path>

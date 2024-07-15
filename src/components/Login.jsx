@@ -31,14 +31,14 @@ const Login = () => {
   const onSubmit = async (e) => {
     console.log(errors, formData);
     Object.keys(errors).length
-      ? alert("Form Incomplete!")
+      ? console.log("Form Incomplete!")
       : !(
           (
             formData.password === localUser.password &&
             formData.email === localUser.email
           ) //TODO Change to state credentials
         )
-      ? alert("wrong email/password")
+      ? console.log("wrong email/password")
       : trips.length
       ? redirect("/dashboard")
       : redirect("/setup-profile");
