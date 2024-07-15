@@ -3,6 +3,10 @@ import { useState } from "react";
 import BudgetPerDay from "./BudgetPerDay";
 import dayjs from "dayjs";
 import Button from "../../reusable-code/Button";
+import { useSelector } from "react-redux";
+import { selectShowBillSplits } from "../../redux/homeSlice";
+import InfoBillSplits from "./InfoBillSplits";
+import { useEffect } from "react";
 
 const BudgetInfo = ({
   expenses,
@@ -17,6 +21,8 @@ const BudgetInfo = ({
   splits,
 }) => {
   const [display, setDisplay] = useState("totalBudget");
+  const showBillSplits = useSelector(selectShowBillSplits);
+
   // converts and calculates days traveling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
@@ -28,6 +34,16 @@ const BudgetInfo = ({
   const changeDisplay = (input) => {
     setDisplay(input);
   };
+
+  // make sure you can only see dailybudget and bill split when you are in the right tab
+  useEffect(() => {
+    if (showBillSplits && display === "dailyBudget") {
+      setDisplay("totalBudget");
+    }
+    if (!showBillSplits && display === "billSplits") {
+      setDisplay("totalBudget");
+    }
+  }, [showBillSplits, display]);
 
   return (
     <div
@@ -53,13 +69,23 @@ const BudgetInfo = ({
             }`}
             onClick={() => changeDisplay("totalBudget")}
           />
-          <Button
-            text="Daily budget"
-            className={`dailyBudgetBtn ${
-              display === "dailyBudget" ? "focus" : ""
-            }`}
-            onClick={() => changeDisplay("dailyBudget")}
-          />
+          {showBillSplits ? (
+            <Button
+              text="Bill splits"
+              className={`billSplitsGraphBtn ${
+                display === "billSplits" ? "focus" : ""
+              }`}
+              onClick={() => changeDisplay("billSplits")}
+            />
+          ) : (
+            <Button
+              text="Daily budget"
+              className={`dailyBudgetBtn ${
+                display === "dailyBudget" ? "focus" : ""
+              }`}
+              onClick={() => changeDisplay("dailyBudget")}
+            />
+          )}
         </>
       )}
       {display === "totalBudget" && (
@@ -69,6 +95,12 @@ const BudgetInfo = ({
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           splits={splits}
+        />
+      )}
+      {display === "billSplits" && (
+        <InfoBillSplits
+          splits={splits}
+          homeCurrencySymbol={homeCurrencySymbol}
         />
       )}
       {/* if today is during traveltime, daily budget is calculated */}

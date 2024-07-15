@@ -232,7 +232,8 @@ body {
   }
 
   .totalBudgetBtn,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     background-color: rgba(255, 255, 255, 0);
     border: none;
     color: black;
@@ -249,7 +250,8 @@ body {
   }
 
   .dailyBudgetBtn:hover,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     border-radius: 0px 12px 0px 0px;
   }
 
@@ -290,7 +292,8 @@ body {
   }
 
   .budget,
-  .dayBudget {
+  .dayBudget,
+  .numbersBillSplits {
     display: grid;
     grid-template-columns: fit-content(200px) fit-content(100px);
     grid-template-rows: fit-content(100px);

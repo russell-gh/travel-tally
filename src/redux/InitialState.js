@@ -1,3 +1,5 @@
+import BillSplits from "../components/dashboard/BillSplits";
+
 export const initialState = {
   trips: [],
   popUp: {},
@@ -7,4 +9,5 @@ export const initialState = {
   splitData: [],
   hideFutureExpenses: false,
   hidePaidSplitBills: false,
+  showBillSplits: false,
 };
