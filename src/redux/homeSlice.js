@@ -180,10 +180,9 @@ export const homeSlice = createSlice({
       }
     },
     setPaid: (state, { payload }) => {
-      console.log(payload);
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const index = getIndex(payload.data, payload.id, "id");
-      console.log(index);
-      state.trips.splits[index].paid = true;
+      state.trips[indexTrip].splits[index].paid = true;
     },
   },
 });

@@ -16,6 +16,7 @@ const ExpenseAmount = ({
     });
     arrayOfPaidSplits.forEach((split) => {
       toValue -= split.amount.toValue;
+      fromValue -= split.amount.fromValue;
     });
   }
   return (
