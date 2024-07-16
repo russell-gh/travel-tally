@@ -37,6 +37,7 @@ const Onboarding = () => {
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
+  const [typed, setTyped] = useState({});
 
   const currencyCodes = useSelector(selectCurrencyCodes);
 
@@ -97,6 +98,7 @@ const Onboarding = () => {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
+      setTyped({...typed, [e.target.name]:true})
       setOnboardingDetails(data);
 
       return;
@@ -106,6 +108,7 @@ const Onboarding = () => {
     if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
+    setTyped({...typed, [e.target.name]:true})
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
@@ -221,6 +224,7 @@ const Onboarding = () => {
               value={onboardingDetails.destination}
               callback={handleChange}
               error={errors.destination}
+              typed={typed.destination}
               list={"cities"}
             />
             <datalist id="cities">
@@ -245,6 +249,7 @@ const Onboarding = () => {
               value={onboardingDetails.dates.startDate}
               callback={handleChange}
               error={errors.startDate}
+              typed={typed.startDate}
             />
             <FormElement
               type="date"
@@ -253,6 +258,7 @@ const Onboarding = () => {
               value={onboardingDetails.dates.endDate}
               callback={handleChange}
               error={errors.endDate}
+              typed={typed.endDate}
             />
             <div className="checkboxInput">
               <FormElement
@@ -288,6 +294,7 @@ const Onboarding = () => {
                 value={onboardingDetails.budgetTotal.toString()}
                 callback={handleChange}
                 error={errors.budgetTotal}
+                typed={typed.budgetTotal}
               />
               <FormElement
                 type="select"
@@ -299,6 +306,7 @@ const Onboarding = () => {
                 value={currencies[0].value}
                 callback={handleChange}
                 error={errors.homeCurrency}
+                typed={typed.homeCurrency}
               />
             </div>
           </div>

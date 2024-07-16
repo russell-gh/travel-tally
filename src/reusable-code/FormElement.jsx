@@ -16,6 +16,7 @@ const FormElement = ({
   placeholder,
   className = [],
   onKeyDown = () => {},
+  typed
 }) => {
   switch (type) {
     case "text":
@@ -38,7 +39,7 @@ const FormElement = ({
               onKeyDown(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "number":
@@ -56,7 +57,7 @@ const FormElement = ({
             min={minValue}
             max={maxValue}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
 
@@ -74,7 +75,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "date":
@@ -92,7 +93,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "checkbox":
@@ -108,7 +109,7 @@ const FormElement = ({
             }}
           />
           {label && <label htmlFor={id}>{label}</label>}
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "select":
@@ -141,7 +142,7 @@ const FormElement = ({
               </option>
             ))}
           </select>
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "button":
