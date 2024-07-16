@@ -34,6 +34,8 @@ const BudgetPerDay = ({
     splits
   );
 
+  console.log(data);
+
   const selectedDay = useMemo(() => {
     return getSpendSelectedDay(data, filterDate, budgetPerDay);
   }, [data, filterDate, budgetPerDay]);

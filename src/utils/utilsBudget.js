@@ -144,12 +144,13 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
     // adds all the expensese for the day together. Takes away the billsplits amounts to just show your part
     if (values[0].amount) {
       for (const expense of values) {
+        console.log(expense);
         let toValue = expense.amount.toValue;
         if (expense.splitBill === true) {
           const arrayOfSplits = splits.filter((split) => {
             return split.expenseID === expense.id;
           });
-
+          console.log(arrayOfSplits);
           arrayOfSplits.forEach((split) => {
             toValue -= split.amount.toValue;
           });
@@ -178,3 +179,46 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
 
   return arrValues;
 }
+
+export function nFormatter(num) {
+  const lookup = [
+    { value: 1, symbol: "", digits: 2 },
+    { value: 1e3, symbol: "k", digits: 1 },
+    { value: 1e6, symbol: "M", digits: 1 },
+    { value: 1e9, symbol: "B", digits: 1 },
+    { value: 1e12, symbol: "T", digits: 1 },
+    { value: 1e15, symbol: "Q", digits: 1 },
+  ];
+
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  const item = lookup.findLast((item) => num >= item.value);
+  return item
+    ? (num / item.value).toFixed(item.digits).concat(item.symbol)
+    : "0";
+}
+
+/*
+ * Tests
+ */
+const tests = [
+  { num: 0, digits: 1 },
+  { num: 12, digits: 1 },
+  { num: 1234, digits: 1 },
+  { num: 12345, digits: 1 },
+  { num: 100000000, digits: 1 },
+  { num: 299792458, digits: 1 },
+  { num: 759878, digits: 1 },
+  { num: 759878, digits: 0 },
+  { num: 123, digits: 1 },
+  { num: 123.456, digits: 1 },
+  { num: 123.456, digits: 2 },
+  { num: 123.456, digits: 4 },
+];
+tests.forEach((test) => {
+  console.log(
+    "nFormatter(%f, %i) = %s",
+    test.num,
+    test.digits,
+    nFormatter(test.num, test.digits)
+  );
+});

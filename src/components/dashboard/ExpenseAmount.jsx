@@ -1,4 +1,8 @@
-import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
+import {
+  addDecimals,
+  getCurrencySymbol,
+  nFormatter,
+} from "../../utils/utilsBudget";
 
 const ExpenseAmount = ({
   homeCurrencySymbol,
@@ -23,6 +27,9 @@ const ExpenseAmount = ({
       fromValue -= split.amount.fromValue;
     });
   }
+
+  fromValue = addDecimals(fromValue);
+
   return (
     <div>
       <p>
@@ -31,7 +38,7 @@ const ExpenseAmount = ({
       </p>
       <p className="foreignAmount">
         {getCurrencySymbol(currencyCodes, fromCurrency)}
-        {addDecimals(fromValue)}
+        {nFormatter(fromValue)}
       </p>
     </div>
   );
