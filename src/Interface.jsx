@@ -16,7 +16,7 @@ import "./css/splashPage.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
 import EditExpense from "./components/EditExpense";
-import { animationPopUp } from "./animations";
+import { animationPopUp } from "./animations/animations";
 import SplashPage from "./components/SplashPage";
 import CheckTrips from "./components/dashboard/CheckTrips";
 import Converter from "./components/Converter";
