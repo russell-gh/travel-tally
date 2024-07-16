@@ -28,7 +28,7 @@ import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
   const [inputValues, setInputValues] = useState([]);
-  const [friendsNo, setFriendsNo] = useState(1);
+  const [friendsNo, setFriendsNo] = useState(0);
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
@@ -128,6 +128,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   const handleAddPerson = () => {
     setFriendsNo(friendsNo + 1);
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -2 }));
   };
 
   const handleRemovePerson = () => {
