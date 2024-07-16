@@ -32,7 +32,7 @@
         "description": "lunch",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A3rdJ7nN8kJ3fHA25T4gd",
@@ -47,7 +47,7 @@
         "description": "lunch",
         "date": 1719356400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A4rdJ7nN8kJ3fHA25T4gd",
@@ -62,7 +62,7 @@
         "description": "lunch",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A5rdJ7nN8kJ3fHA25T4gd",
@@ -77,7 +77,7 @@
         "description": "lunch",
         "date": 1719529200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A6rdJ7nN8kJ3fHA25T4gd",
@@ -92,7 +92,7 @@
         "description": "lunch",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A7rdJ7nN8kJ3fHA25T4gd",
@@ -107,7 +107,7 @@
         "description": "lunch",
         "date": 1719702000000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A8rdJ7nN8kJ3fHA25T4gd",
@@ -122,7 +122,7 @@
         "description": "lunch",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T4gd",
@@ -137,7 +137,7 @@
         "description": "lunch",
         "date": 1719874800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T5gd",
@@ -152,7 +152,7 @@
         "description": "lunch",
         "date": 1719961200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T6gd",
@@ -167,7 +167,7 @@
         "description": "lunch",
         "date": 1720047600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T7gd",
@@ -182,7 +182,7 @@
         "description": "lunch",
         "date": 1720134000000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T8gd",
@@ -197,7 +197,7 @@
         "description": "lunch",
         "date": 1720220400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A9rdJ7nN8kJ3fHA25T9gd",
@@ -212,7 +212,7 @@
         "description": "lunch",
         "date": 1720306800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2sdJ7nN8kJ3fHA25T4gd",
@@ -226,7 +226,7 @@
         "description": "dress",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4ga",
@@ -240,7 +240,7 @@
         "description": "waffle",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gb",
@@ -254,7 +254,7 @@
         "description": "",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gc",
@@ -268,7 +268,7 @@
         "description": "movies",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A1rdJ7nN8kJ3fHA25T4ge",
@@ -283,7 +283,7 @@
         "description": "hotel Amsterdam",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4ge",
@@ -298,7 +298,7 @@
         "description": "hotel Amsterdam",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A3rdJ7nN8kJ3fHA25T4ge",
@@ -313,7 +313,7 @@
         "description": "hotel Amsterdam",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A4rdJ7nN8kJ3fHA25T4ge",
@@ -328,7 +328,7 @@
         "description": "hotel Amsterdam",
         "date": 1719529200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A5rdJ7nN8kJ3fHA25T4ge",
@@ -343,7 +343,7 @@
         "description": "hotel Amsterdam",
         "date": 1719356400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gf",
@@ -358,7 +358,7 @@
         "description": "hotel Utrecht",
         "date": 1719961200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A3rdJ7nN8kJ3fHA25T4gf",
@@ -373,7 +373,7 @@
         "description": "hotel Utrecht",
         "date": 1720220400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A4rdJ7nN8kJ3fHA25T4gf",
@@ -388,7 +388,7 @@
         "description": "hotel Utrecht",
         "date": 1719961200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A5rdJ7nN8kJ3fHA25T4gf",
@@ -403,7 +403,7 @@
         "description": "hotel Utrecht",
         "date": 1720047600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gg",
@@ -417,7 +417,7 @@
         "description": "train to Utrecht",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gh",
@@ -431,7 +431,7 @@
         "description": "coffe and coockie",
         "date": 1719615600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gi",
@@ -445,7 +445,7 @@
         "description": "paleis op de dam",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gj",
@@ -459,7 +459,7 @@
         "description": "bus to museum",
         "date": 1719529200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gk",
@@ -473,7 +473,7 @@
         "description": "dom museum",
         "date": 1719529200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gl",
@@ -487,7 +487,7 @@
         "description": "Dinner at square",
         "date": 1719442800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gm",
@@ -501,7 +501,7 @@
         "description": "rent bike",
         "date": 1719529200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gn",
@@ -515,7 +515,7 @@
         "description": "Sandwich",
         "date": 1719874800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4go",
@@ -529,7 +529,7 @@
         "description": "souvenir",
         "date": 1719874800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gp",
@@ -543,7 +543,7 @@
         "description": "Italian",
         "date": 1719874800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gq",
@@ -557,7 +557,7 @@
         "description": "hotel The Hague",
         "date": 1719874800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gr",
@@ -571,7 +571,7 @@
         "description": "metro",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gs",
@@ -585,7 +585,7 @@
         "description": "lunch at beach",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gt",
@@ -599,7 +599,7 @@
         "description": "bungee jumping",
         "date": 1719788400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A1rdJ7nS8kJ3fHA25T4gf",
@@ -614,7 +614,7 @@
         "description": "hotel Groningen",
         "date": 1720220400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A2rdJ7nS8kJ3fHA25T4gf",
@@ -629,7 +629,7 @@
         "description": "hotel Groningen",
         "date": 1720306800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A3rdJ7nS8kJ3fHA25T4gf",
@@ -644,7 +644,7 @@
         "description": "hotel Groningen",
         "date": 1720393200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A4rdJ7nS8kJ3fHA25T4gf",
@@ -659,7 +659,7 @@
         "description": "hotel Groningen",
         "date": 1720479600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A5rdJ7nS8kJ3fHA25T4gf",
@@ -674,7 +674,7 @@
         "description": "hotel Groningen",
         "date": 1720566000000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_A6rdJ7nS8kJ3fHA25T4gf",
@@ -688,7 +688,7 @@
         "description": "train to airport",
         "date": 1721343600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       }
     ]
   },
@@ -837,7 +837,7 @@
         "description": "Day at beach",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": true
+        "split": true
       },
       {
         "id": "expense_A5rdJ7nM8kJ3gHA25T4gd",
@@ -851,7 +851,7 @@
         "description": "lego tour",
         "date": 1720998000000,
         "completed": true,
-        "splitBill": true
+        "split": true
       },
       {
         "id": "expense_A2rdJ7nN8kJ3fHA25T4gd",
@@ -865,7 +865,7 @@
         "description": "lunch",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_B2rdJ7nN8kJ3fHA25T4gd",
@@ -879,7 +879,7 @@
         "description": "waffle",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_C2rdJ7nN8kJ3fHA25T4gd",
@@ -893,7 +893,7 @@
         "description": "",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_D2rdJ7nN8kJ3fHA25T4gd",
@@ -907,7 +907,7 @@
         "description": "movies",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_E2rdJ7nN8kJ3fHA25T4gd",
@@ -921,7 +921,7 @@
         "description": "hotel Amsterdam",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_F2rdJ7nN8kJ3fHA25T4gd",
@@ -935,7 +935,7 @@
         "description": "hotel Utrecht",
         "date": 1720911600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_H2rdJ7nN8kJ3fHA25T4gd",
@@ -949,7 +949,7 @@
         "description": "train to Utrecht",
         "date": 1721084400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_G2rdJ7nN8kJ3fHA25T4gd",
@@ -963,7 +963,7 @@
         "description": "coffe and coockie",
         "date": 1721084400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_I2rdJ7nN8kJ3fHA25T4gd",
@@ -977,7 +977,7 @@
         "description": "paleis op de dam",
         "date": 1721084400000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_J2rdJ7nN8kJ3fHA25T4gd",
@@ -991,7 +991,7 @@
         "description": "bus to museum",
         "date": 1721170800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_K2rdJ7nN8kJ3fHA25T4gd",
@@ -1005,7 +1005,7 @@
         "description": "dom museum",
         "date": 1721170800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_L2rdJ7nN8kJ3fHA25T4gd",
@@ -1019,7 +1019,7 @@
         "description": "Dinner at square",
         "date": 1721170800000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_M2rdJ7nN8kJ3fHA25T4gd",
@@ -1033,7 +1033,7 @@
         "description": "rent bike",
         "date": 1721257200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_N2rdJ7nN8kJ3fHA25T4gd",
@@ -1047,7 +1047,7 @@
         "description": "Sandwich",
         "date": 1721257200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_O2rdJ7nN8kJ3fHA25T4gd",
@@ -1061,7 +1061,7 @@
         "description": "souvenir",
         "date": 1721257200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_P2rdJ7nN8kJ3fHA25T4gd",
@@ -1075,7 +1075,7 @@
         "description": "Italian",
         "date": 1721257200000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_Q2rdJ7nN8kJ3fHA25T4gd",
@@ -1089,7 +1089,7 @@
         "description": "hotel The Hague",
         "date": 1721343600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_R2rdJ7nN8kJ3fHA25T4gd",
@@ -1103,7 +1103,7 @@
         "description": "metro",
         "date": 1721343600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_S2rdJ7nN8kJ3fHA25T4gd",
@@ -1117,7 +1117,7 @@
         "description": "lunch at beach",
         "date": 1721343600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       },
       {
         "id": "expense_T2rdJ7nN8kJ3fHA25T4gd",
@@ -1131,7 +1131,7 @@
         "description": "bungee jumping",
         "date": 1721343600000,
         "completed": true,
-        "splitBill": false
+        "split": false
       }
     ]
   }

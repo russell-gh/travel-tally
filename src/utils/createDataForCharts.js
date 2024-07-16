@@ -89,7 +89,7 @@ export function createDateIncludingOwed(splits, expenses, chartData) {
 
   // get the expenses that are bill splitting
   const splitBillExpenses = expenses.filter((expense) => {
-    return expense.splitBill;
+    return expense.split;
   });
 
   const orderOfData = ["Activities", "Food", "Transport", "Hotel", "Other"];

@@ -21,6 +21,9 @@ import { createExpensesArray } from "../../utils/createExpensesArray";
 import { useMemo } from "react";
 import { getActualEndDate, getActualStartDate } from "../../utils/utilsDates";
 import ExpensesAndSplits from "./ExpensesAndSplits";
+import { getSpendPerDay } from "../../utils/utilsBudget";
+import { getBudget } from "../../utils/utilsBudget";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   const trips = useSelector(selectTrips);
@@ -54,12 +57,24 @@ const Dashboard = () => {
   }, [expenses, filter]); // filters expenses on activities so daily budget can be filtered with activities
 
   let expensesArray = useMemo(() => {
+    const _expensesCategories = JSON.parse(JSON.stringify(expensesCategories));
     return createExpensesArray(
-      expensesCategories,
+      _expensesCategories,
       actualStartDate,
       actualEndDate
     );
   }, [expensesCategories, actualStartDate, actualEndDate]);
+
+  const budget = getBudget(details, filter);
+  const amountOfBudgetDays =
+    dayjs(actualEndDate).diff(dayjs(actualStartDate), "day") + 1;
+  const dataSpendPerDay = useMemo(() => {
+    return getSpendPerDay(
+      (budget * 100) / amountOfBudgetDays,
+      expensesArray,
+      splits
+    );
+  }, [expensesArray]);
 
   const filtered = useMemo(() => {
     return getSortedandFiltered(
@@ -87,10 +102,11 @@ const Dashboard = () => {
           homeCurrencySymbol={homeCurrencySymbol}
           startDate={startDate}
           endDate={endDate}
-          expensesArray={expensesArray}
+          dataSpendPerDay={dataSpendPerDay}
           actualStartDate={actualStartDate}
           actualEndDate={actualEndDate}
           splits={splits}
+          amountOfBudgetDays={amountOfBudgetDays}
         />
         <ControlsExpenses
           expensesCategories={expensesCategories}
