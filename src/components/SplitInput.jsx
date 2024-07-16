@@ -1,31 +1,6 @@
-import React, { useEffect } from "react";
 import FormElement from "../reusable-code/FormElement";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  calculateSplitMax,
-  selectSplitMax,
-  selectSplitValues,
-} from "../redux/homeSlice";
 
 const SplitInput = ({ tag, parentCallback, data }) => {
-  console.log(data);
-  const splitMax = useSelector(selectSplitMax);
-  const splitValues = useSelector(selectSplitValues);
-  // const dispatch = useDispatch();
-  // const [formData, setFormData] = useState({
-  //   paid: false,
-  //   name: "",
-  //   amount: "",
-  // });
-  let remaining = splitValues.remaining;
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setFormData(data);
-  //   }
-  // }, []);
-
   const dataInput = (e) => {
     let target = e.target.name;
     let value;
@@ -38,12 +13,8 @@ const SplitInput = ({ tag, parentCallback, data }) => {
     if (target === "amount") {
       value = e.target.value;
     }
-    // let input = { ...formData, [target]: value };
-    // // setFormData({ ...formData, [target]: value });
-    // setFormData({ ...formData, [target]: value });
     parentCallback({ ...data, [target]: value }, tag);
   };
-  console.log(remaining);
 
   return (
     <>
@@ -66,7 +37,6 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           name={`amount`}
           id={`splitAmount` + tag}
           minValue={0}
-          maxValue={splitMax}
           value={data && data.amount ? data.amount : ""}
           //   error={errors["amount"]}
           callback={dataInput}
