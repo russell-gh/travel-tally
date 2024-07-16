@@ -8,20 +8,14 @@ import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import {
+  checkBudgetAllocationTotals,
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
 import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
-import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
-import { selectCountries } from "../../redux/homeSlice.js";
+import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
-
-let currencies = [];
-
-for (const key of Object.keys(currencyCodes)) {
-  currencies.push({ value: key, name: key });
-}
 
 const Onboarding = () => {
   const [onboardingDetails, setOnboardingDetails] = useState({
@@ -34,6 +28,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: "",
+    destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
     budgetTransport: 0,
@@ -43,7 +38,14 @@ const Onboarding = () => {
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
-  const [countryCurrency, setCountryCurrency] = useState([]);
+  const [typed, setTyped] = useState({});
+
+  const currencyCodes = useSelector(selectCurrencyCodes);
+
+  let currencies = [];
+  for (const key of Object.keys(currencyCodes)) {
+    currencies.push({ value: key, name: key });
+  }
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -97,8 +99,8 @@ const Onboarding = () => {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
+      setTyped({...typed, [e.target.name]:true})
       setOnboardingDetails(data);
-
       return;
     }
 
@@ -106,13 +108,14 @@ const Onboarding = () => {
     if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
+    setTyped({...typed, [e.target.name]:true})
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
     e.preventDefault();
-
+checkBudgetAllocationTotals(onboardingDetails)
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -158,22 +161,61 @@ const Onboarding = () => {
   };
 
   const formButtonHandler = () => {
-    const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
+    //display errors present for any elems which haven't yet been interacted with (and therefore not displayed)
+    //create func to check errcurrentFormSection
+    
 
+    const errorsPresent = checkFormSectionErrors(currentFormSection, errors); 
+    // setTyped(true); //for all the errs in that section.
+    
+
+    //if section 1 has no errors run the below func on click and pass in destination state.
     if (currentFormSection === 1 && !errorsPresent) {
       getDestinationCurrency(onboardingDetails.destination);
     }
+
+    //if no errors are present, increment state which renders next section
     !errorsPresent ? setCurrentFormSection(currentFormSection + 1) : "";
   };
-  const getDestinationCurrency = (city) => {
-    //create data list from city-country data
-    //if city in data list, select country
-    //if not call below api
-    //use res from chosen method to call second api
-    const country = getCountryFromCity(city);
+
+  const getDestinationCurrency = async (city) => {
+    let currencyCode;
+    let index;
+
+    //check if city passed through is in the hardcoded data.
+    index = _countries.findIndex((country) => {
+      return country.capitalCity.toLowerCase() === city.toLowerCase();
+    });
+
+    //if not in json data, run city through weather api to get iso2 code for country
+    //find index where iso2 code from api matches iso2 code in json data
+    if (index === -1) {
+      const countryFromApi = await getCountryFromCity(city);
+      console.log(countryFromApi);
+      //=======
+      index = _countries.findIndex((c) => {
+        return c.isoCode2 === countryFromApi;
+      });
+    }
+
+    //use index to access currency code
+    currencyCode = _countries[index].currencyCode;
+    console.log(currencyCode);
+
+    if (!currencyCode) {
+      currencyCode = "";
+    }
+
+    //add currency code to state
+    setOnboardingDetails({
+      ...onboardingDetails,
+      destinationCurrency: currencyCode,
+    });
   };
 
-if (!_countries) {return <p>...Loading</p>}
+  if (!_countries) {
+    return <p>...Loading</p>;
+  }
 
   return (
     <div className="onboarding">
@@ -188,6 +230,7 @@ if (!_countries) {return <p>...Loading</p>}
               value={onboardingDetails.destination}
               callback={handleChange}
               error={errors.destination}
+              typed={typed.destination}
               list={"cities"}
             />
             <datalist id="cities">
@@ -212,6 +255,7 @@ if (!_countries) {return <p>...Loading</p>}
               value={onboardingDetails.dates.startDate}
               callback={handleChange}
               error={errors.startDate}
+              typed={typed.startDate}
             />
             <FormElement
               type="date"
@@ -220,6 +264,7 @@ if (!_countries) {return <p>...Loading</p>}
               value={onboardingDetails.dates.endDate}
               callback={handleChange}
               error={errors.endDate}
+              typed={typed.endDate}
             />
             <div className="checkboxInput">
               <FormElement
@@ -255,6 +300,8 @@ if (!_countries) {return <p>...Loading</p>}
                 value={onboardingDetails.budgetTotal.toString()}
                 callback={handleChange}
                 error={errors.budgetTotal}
+                typed={typed.budgetTotal}
+                minValue={0}
               />
               <FormElement
                 type="select"
@@ -266,6 +313,7 @@ if (!_countries) {return <p>...Loading</p>}
                 value={currencies[0].value}
                 callback={handleChange}
                 error={errors.homeCurrency}
+                typed={typed.homeCurrency}
               />
             </div>
           </div>
