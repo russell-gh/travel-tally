@@ -125,8 +125,7 @@ body {
     transition: background-color 0.3s ease-in-out;
   }
 
-  .dashboardFixed,
-  .expenses {
+  .dashboardFixed {
     padding: 0px 10px 30px 10px;
   }
 
@@ -333,7 +332,7 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     margin: 0px auto 10px auto;
-    max-width: 512px;
+    max-width: 500px;
   }
 
   .hideFutureExpenseContainer,
@@ -362,6 +361,26 @@ body {
         expenses
 **************************
 */
+  .expenses {
+    max-width: 500px;
+    margin: 0px auto 50px auto;
+  }
+
+  .expensesSplits,
+  .billSplits,
+  .messageContainer {
+    max-width: 480px;
+    padding: 10px 10px 3px 10px;
+    // background-color: #235b8933;
+    margin: 0px auto 50px auto;
+    border-radius: 0px 0px 12px 12px;
+    border: $teal 2px solid;
+    border-top: none;
+    min-height: 300px;
+  }
+
+
+
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
@@ -462,7 +481,7 @@ controls billSplit and Expenses
   .tabsExpensesAndSplitsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 520px;
+    max-width: 500px;
     margin: 0px auto 0px auto;
     border-radius: 15px 15px 0px 0px;
     border: $teal 2px solid;

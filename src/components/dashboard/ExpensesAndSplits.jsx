@@ -6,6 +6,9 @@ import { toggleDisplay } from "../../redux/homeSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { selectShowBillSplits } from "../../redux/homeSlice";
+import ShowPaidSplitBills from "./ShowPaidSplitBills";
+import { includesFutureExpenses } from "../../utils/utilsDates";
+import ShowFutureExpenses from "./filter/ShowFutureExpenses";
 
 const ExpensesAndSplits = ({
   filtered,
@@ -16,8 +19,17 @@ const ExpensesAndSplits = ({
   const dispatch = useDispatch();
   const showBillSplits = useSelector(selectShowBillSplits);
 
+  const includesFuture = includesFutureExpenses(expenses);
+
   return (
     <div className="containerExpensesAndSplits">
+      {showBillSplits ? (
+        <ShowPaidSplitBills />
+      ) : includesFuture ? (
+        <ShowFutureExpenses />
+      ) : (
+        ""
+      )}
       {splits.length > 0 && (
         <div className="tabsExpensesAndSplitsContainer">
           <Button
@@ -36,7 +48,6 @@ const ExpensesAndSplits = ({
           />
         </div>
       )}
-
       {!showBillSplits && (
         <Expenses
           filtered={filtered}
