@@ -72,6 +72,7 @@ const Interface = () => {
     DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
     EditExpense: <EditExpense animatingOut={!popUp.component} />,
     AddExpense: <AddExpense animatingOut={!popUp.component} />,
+    Converter: <Converter animatingOut={!popUp.component} />,
   };
 
   return (

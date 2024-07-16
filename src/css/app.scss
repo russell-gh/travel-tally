@@ -47,6 +47,7 @@ input {
   border-radius: $border-radius;
   font-size: 16px;
   cursor: pointer;
+
   &:hover {
     background: $darker-green;
   }
@@ -59,6 +60,7 @@ input {
 header {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 
   .logo {
     height: 50px;
