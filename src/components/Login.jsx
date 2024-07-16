@@ -29,7 +29,7 @@ const Login = () => {
   //====Compares Credentials to Local Storage===
   //============================================
   const onSubmit = async (e) => {
-    console.log(errors, formData);
+    console.log(errors, formData, localUser);
     Object.keys(errors).length
       ? console.log("Form Incomplete!")
       : !(
