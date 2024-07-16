@@ -129,19 +129,10 @@ export const AddExpense = ({ animatingOut }) => {
 
   let handleAddPerson = () => {
     setFriendsNo(friendsNo + 1);
-    // setSplit([
-    //   ...split,
-    //   <SplitInput
-    //     tag={split.length}
-    //     parentCallback={getSplitData}
-    //     formData={splitData[split.length]}
-    //   />,
-    // ]);
   };
 
   let handleRemovePerson = () => {
-    // setSplit(split.splice(split.length - 1, 1));
-    dispatch(setSplitData({ data: { amount: 0 }, tag: friendsNo - 1 }));
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
     setFriendsNo(friendsNo - 1);
   };
 
