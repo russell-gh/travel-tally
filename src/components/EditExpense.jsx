@@ -203,13 +203,16 @@ export const EditExpense = ({ animatingOut }) => {
         <>
           {theseSplits.map(function (split, index) {
             return (
-              <SplitInput
-                key={index}
-                amount={formData.amount}
-                tag={index}
-                parentCallback={getSplitData}
-                data={split}
-              />
+
+              <div className="flex">
+                <SplitInput
+                  maxAmount={formData.amount}
+                  tag={index}
+                  parentCallback={getSplitData}
+                  data={split}
+                />
+              </div>
+
             );
           })}
           <div className="containerBtnPopUp">

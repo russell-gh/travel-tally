@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import FormElement from "../reusable-code/FormElement";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { calculateSplitMax, selectSplitMax, selectSplitValues } from "../redux/homeSlice";
 
-const SplitInput = ({ amount, tag, parentCallback, data }) => {
+const SplitInput = ({ tag, parentCallback, data }) => {
+  const splitMax = useSelector(selectSplitMax);
+  const splitValues = useSelector(selectSplitValues);
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     paid: false,
     name: "",
-    amount: 0,
+    amount: "",
   });
+  let remaining = splitValues.remaining;
 
   useEffect(() => {
     if (data) {
@@ -24,14 +30,24 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
     } else {
       value = e.target.value;
     }
+    if (target === 'amount') {
+      if (value > remaining) {
+        value = remaining;
+        dispatch(calculateSplitMax({value, tag}))
+      } else {
+        dispatch(calculateSplitMax({value, tag}))
+      }
+      
+    }
     let input = { ...formData, [target]: value };
     // setFormData({ ...formData, [target]: value });
     setFormData({ ...formData, [target]: value });
     parentCallback(input, tag);
   };
-
+ console.log(remaining);
   return (
     <>
+
       <div className="flex">
         <FormElement
           type={"text"}
@@ -45,17 +61,17 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
         />
       </div>
       <div className="flex">
-        <FormElement
-          type={"number"}
-          label={"Amount"}
-          name={`amount`}
-          id={`splitAmount` + tag}
-          minValue={0}
-          maxValue={amount}
-          value={formData.amount}
-          //   error={errors["amount"]}
-          callback={dataInput}
-        />
+      <FormElement
+        type={"number"}
+        label={"Amount"}
+        name={`amount`}
+        id={`splitAmount` + tag}
+        minValue={0}
+        maxValue={splitMax}
+        value={formData.amount}
+        //   error={errors["amount"]}
+        callback={dataInput}
+      />
         <div className="paidContainer">
           <FormElement
             type={"checkbox"}
@@ -67,6 +83,7 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
           />
         </div>
       </div>
+
     </>
   );
 };
