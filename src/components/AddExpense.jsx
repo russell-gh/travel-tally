@@ -28,7 +28,7 @@ import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
   const [inputValues, setInputValues] = useState([]);
-  const [friendsNo, setFriendsNo] = useState(0);
+  const [friendsNo, setFriendsNo] = useState(1);
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
@@ -126,13 +126,26 @@ export const AddExpense = ({ animatingOut }) => {
     }
   };
 
-  let handleAddPerson = () => {
+  const handleAddPerson = () => {
     setFriendsNo(friendsNo + 1);
   };
 
-  let handleRemovePerson = () => {
+  const handleRemovePerson = () => {
     dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
     setFriendsNo(friendsNo - 1);
+  };
+
+  const handleEvenSplit = () => {
+    const divBy = splitData.length + 1;
+    let each = Number(formData.amount) / divBy;
+    each = Math.round(each * 100) / 100;
+    splitData.forEach((thisSplit, index) => {
+      const copy = JSON.parse(JSON.stringify(thisSplit));
+      copy.amount = each;
+      const data = copy;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
+    });
   };
 
   //handles on form change
@@ -140,10 +153,6 @@ export const AddExpense = ({ animatingOut }) => {
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
-
-  // const [split, setSplit] = useState([
-  //   <SplitInput tag={0} parentCallback={getSplitData} />,
-  // ]);
 
   const renderSplit = () => {
     if (formData.split === true) {
@@ -168,6 +177,11 @@ export const AddExpense = ({ animatingOut }) => {
               onClick={handleAddPerson}
               text={"+"}
               className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleEvenSplit}
+              text={"Evenly"}
+              className={"splitEvenly"}
             />
           </div>
         </>

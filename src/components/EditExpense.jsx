@@ -187,6 +187,18 @@ export const EditExpense = ({ animatingOut }) => {
   let handleRemovePerson = () => {
     dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
   };
+  const handleEvenSplit = () => {
+    const divBy = splitData.length + 1;
+    let each = Number(formData.amount) / divBy;
+    each = Math.round(each * 100) / 100;
+    splitData.forEach((thisSplit, index) => {
+      const copy = JSON.parse(JSON.stringify(thisSplit));
+      copy.amount = each;
+      const data = copy;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
+    });
+  };
 
   const getSplitData = (data, tag) => {
     data.amount = Number(data.amount);
@@ -219,6 +231,11 @@ export const EditExpense = ({ animatingOut }) => {
               onClick={handleRemovePerson}
               text={"Remove Person"}
               className={"splitRemovePerson"}
+            />
+            <Button
+              onClick={handleEvenSplit}
+              text={"Evenly"}
+              className={"splitEvenly"}
             />
           </div>
         </>
