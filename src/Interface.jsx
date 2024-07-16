@@ -19,6 +19,7 @@ import EditExpense from "./components/EditExpense";
 import { animationPopUp } from "./animations";
 import SplashPage from "./components/SplashPage";
 import CheckTrips from "./components/dashboard/CheckTrips";
+import Converter from "./components/Converter";
 
 const Interface = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ const Interface = () => {
           <Route path="/setup-profile/*" element={<SetUpProfile />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<CheckTrips />} />
+          <Route path="/converter" element={<Converter />} />
           <Route path="*" element={<SplashPage />} />
         </Routes>
         <div ref={popUpRef} className="popUpContainer">
