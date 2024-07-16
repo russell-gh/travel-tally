@@ -69,7 +69,7 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "false") value = false;
 
     setFormData({ ...formData, [target]: value });
-    if (target === 'amount') dispatch(setSplitMax({value}));
+    if (target === "amount") dispatch(setSplitMax({ value }));
   };
 
   useEffect(() => {
@@ -127,10 +127,7 @@ export const AddExpense = ({ animatingOut }) => {
   let handleAddPerson = () => {
     setSplit([
       ...split,
-      <SplitInput
-        tag={split.length}
-        parentCallback={getSplitData}
-      />,
+      <SplitInput tag={split.length} parentCallback={getSplitData} />,
     ]);
   };
   let handleRemovePerson = () => {
@@ -142,17 +139,14 @@ export const AddExpense = ({ animatingOut }) => {
   };
 
   const [split, setSplit] = useState([
-    <SplitInput
-      tag={0}
-      parentCallback={getSplitData}
-    />,
+    <SplitInput tag={0} parentCallback={getSplitData} />,
   ]);
   const renderSplit = () => {
     if (formData.split === true) {
       return (
         <>
           {split}
-          <div className="containerBtnPopUp">
+          <div className="containerBtnSplit">
             <Button
               onClick={handleRemovePerson}
               text={"-"}
@@ -274,7 +268,7 @@ export const AddExpense = ({ animatingOut }) => {
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
-          className="cancelBtn"
+          className="cancelBtnExpense"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
           disabled={animatingOut}

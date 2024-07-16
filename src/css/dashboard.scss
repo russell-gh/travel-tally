@@ -44,6 +44,7 @@ body {
   padding: 10px;
   width: 75vw;
   max-width: 400px;
+  font-size: 18px;
 
   p {
     margin-bottom: 10px;
@@ -67,10 +68,10 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-// .cancelBtn:hover {
-//   background-color: rgb(27, 126, 40);
-//   transition: background-color 0.3s ease-in-out;
-// }
+.cancelBtn:hover {
+  background-color: rgb(27, 126, 40);
+  transition: background-color 0.3s ease-in-out;
+}
 
 .containerBtnPopUp {
   display: flex;
@@ -578,9 +579,13 @@ controls billSplit and Expenses
 }
 
 @media (min-width: 1000px) {
+  .noCheckbox {
+    padding-top: 21px;
+  }
+
   .dashboard {
     display: flex;
-    margin: 20px auto;
+    margin: 99px auto 20px auto;
     width: inherit;
     flex-direction: row-reverse;
     max-width: 1200px;
@@ -598,6 +603,14 @@ controls billSplit and Expenses
       width: 45%;
       max-width: 600px;
     }
+  }
+
+  .dashboardHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
   }
 }
 

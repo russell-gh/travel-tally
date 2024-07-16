@@ -22,7 +22,11 @@ const ExpensesAndSplits = ({
   const includesFuture = includesFutureExpenses(expenses);
 
   return (
-    <div className="containerExpensesAndSplits">
+    <div
+      className={`containerExpensesAndSplits ${
+        includesFuture ? "" : "noCheckbox"
+      }`}
+    >
       {showBillSplits ? (
         <ShowPaidSplitBills />
       ) : includesFuture ? (

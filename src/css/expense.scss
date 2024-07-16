@@ -24,6 +24,48 @@ $grey: #b3b3b3;
   font-size: 16px; // made smaller for easier styling
   max-width: 460px;
 
+  .cancelBtnExpense,
+  .expenseSubmit,
+  .splitRemovePerson,
+  .splitAddPerson {
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .splitAddPerson,
+  .splitRemovePerson {
+    padding: 5px 10px;
+    border-radius: 100%;
+    align-self: center;
+    height: 30px;
+    width: 30px;
+  }
+
+  select {
+    height: 30px;
+    padding: 5px;
+  }
+
+  .validationError {
+    color: red;
+  }
+
+  .cancelBtnExpense:hover,
+  .splitRemovePerson:hover {
+    background-color: rgb(112, 12, 12);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .expenseSubmit:hover,
+  .splitAddPerson:hover {
+    background-color: rgb(27, 126, 40);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .containerBtnSplit {
+    display: flex;
+    gap: 10px;
+  }
+
   p {
     margin: 0px;
   }
@@ -44,7 +86,6 @@ $grey: #b3b3b3;
     }
 
     .paidContainer {
-      flex-basis: 100%;
       text-align: right;
       margin-top: 3px;
       ;

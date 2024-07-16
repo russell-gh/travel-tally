@@ -203,7 +203,6 @@ export const EditExpense = ({ animatingOut }) => {
         <>
           {theseSplits.map(function (split, index) {
             return (
-
               <div className="flex">
                 <SplitInput
                   maxAmount={formData.amount}
@@ -212,7 +211,6 @@ export const EditExpense = ({ animatingOut }) => {
                   data={split}
                 />
               </div>
-
             );
           })}
           <div className="containerBtnPopUp">
@@ -335,7 +333,7 @@ export const EditExpense = ({ animatingOut }) => {
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
-          className="cancelBtn"
+          className="cancelBtnExpense"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
           disabled={animatingOut}
