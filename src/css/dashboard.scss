@@ -3,13 +3,7 @@
             SASS
 **************************
 */
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
-$blueSachaUsed: #3c43a5;
+@import "variables";
 /*
 ************END***********
 */
@@ -37,6 +31,7 @@ body {
 */
 .popUpContainer {
   position: fixed;
+  z-index: 3;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -48,7 +43,7 @@ body {
   border: black solid 2px;
   padding: 10px;
   width: 75vw;
-  max-width: 350px;
+  max-width: 400px;
 
   p {
     margin-bottom: 10px;
@@ -59,7 +54,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -112,6 +107,10 @@ body {
     margin: 0px;
   }
 
+  * {
+    font-size: 16px;
+  }
+
   h1 {
     text-align: center;
   }
@@ -120,7 +119,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -128,13 +127,23 @@ body {
 
   .dashboardFixed,
   .expenses {
-    padding: 0px 10px 0px 10px;
+    padding: 0px 10px 30px 10px;
   }
 
   input,
   button {
     display: inline;
     margin: 0px;
+  }
+
+  .message {
+    margin: 10px;
+    background-color: $teal;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    max-width: 500px;
+    margin: 0px auto;
   }
 
   /*
@@ -146,26 +155,19 @@ body {
 **************************
 */
   .dashboardFixed {
-    // position: fixed;
     z-index: 2;
-    // top: 0;
     width: 100%;
-    background-color: white;
     box-sizing: border-box;
     padding: 10px 10px 0px 10px;
-
-    #hideFutureExpenses {
-      height: auto;
-    }
-
   }
 
   //top with dropdown trips and travel time
   .containerTop {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     flex-wrap: wrap;
+    max-width: 740px;
   }
 
   .dropDownTrips {
@@ -189,6 +191,10 @@ body {
 
   .tripInfo {
     justify-self: flex-end;
+
+    p {
+      font-size: 14px;
+    }
   }
 
   //container budget
@@ -198,7 +204,7 @@ body {
     align-self: center;
     justify-self: center;
     border: none;
-    color: $navy;
+    color: $teal;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -206,7 +212,7 @@ body {
   }
 
   .addExpense:hover {
-    background-color: $navy;
+    background-color: $teal;
     color: $green;
     transition: all 0.3s ease-in-out;
   }
@@ -226,7 +232,8 @@ body {
   }
 
   .totalBudgetBtn,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     background-color: rgba(255, 255, 255, 0);
     border: none;
     color: black;
@@ -243,7 +250,8 @@ body {
   }
 
   .dailyBudgetBtn:hover,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     border-radius: 0px 12px 0px 0px;
   }
 
@@ -263,8 +271,9 @@ body {
   .containerBudget {
     border: $green solid 2px;
     padding: 0px;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     border-radius: 15px;
+    max-width: 500px;
   }
 
   .containerBudgetAfter {
@@ -283,7 +292,8 @@ body {
   }
 
   .budget,
-  .dayBudget {
+  .dayBudget,
+  .numbersBillSplits {
     display: grid;
     grid-template-columns: fit-content(200px) fit-content(100px);
     grid-template-rows: fit-content(100px);
@@ -312,10 +322,6 @@ body {
 
 
   // controls expenses
-  .controlsExpenses {
-    margin-bottom: 10px;
-  }
-
   .includes {
     background-color: #ddf18970;
   }
@@ -326,6 +332,26 @@ body {
     align-items: flex-end;
     gap: 10px;
     flex-wrap: wrap;
+    margin: 0px auto 10px auto;
+    max-width: 512px;
+  }
+
+  .hideFutureExpenseContainer,
+  .hidePaidSplitBills,
+  .checkboxIncludeOwed {
+    max-width: 510px;
+    margin: 0px auto;
+    font-size: 16px;
+
+    input {
+      height: auto;
+      margin-right: 3px;
+    }
+
+  }
+
+  .checkboxIncludeOwed {
+    margin-bottom: 5px;
   }
 
   /*
@@ -339,14 +365,21 @@ body {
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
-    margin-bottom: 10px;
+    margin: 0px auto 10px auto;
     display: grid;
-    grid-template-columns: 40px 1fr 50px 30px 30px;
+    grid-template-columns: 40px 1fr minmax(50px, max-content) 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
+    max-width: 500px;
+
+    .containerAmountAndBillSplit {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
 
     .containerDescriptionAndDate {
       overflow: hidden;
@@ -374,6 +407,12 @@ body {
     .icon {
       height: 30px;
       width: 30px;
+    }
+
+    .splitBillIcon {
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
     }
   }
 
@@ -412,13 +451,141 @@ body {
 */
   /*
 **************************
+controls billSplit and Expenses
+**************************
+*/
+  .containerExpensesAndSplits {
+    margin: 10px;
+    flex-basis: 50%;
+  }
+
+  .tabsExpensesAndSplitsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 520px;
+    margin: 0px auto 10px auto;
+    border-radius: 15px 15px 0px 0px;
+    border: $teal 2px solid;
+    ;
+
+    .btn {
+      color: black;
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    .focus {
+      color: white;
+      background-color: $teal;
+    }
+
+    .billSplitBtn {
+      border-radius: 0px 11px 0px 0px;
+    }
+
+    .expensesBtn {
+      border-radius: 11px 0px 0px 0px;
+    }
+  }
+
+  /*
+************END***********
+*/
+
+  /*
+**************************
+     bill splits
+**************************
+*/
+  .billSplitItem,
+  .billSplitItemInExpenses {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: $green;
+    color: black;
+    margin: 0px auto 10px auto;
+    display: grid;
+    grid-template-columns: 40px 1fr minmax(50px, max-content) 30px 30px;
+    grid-template-rows: 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 85%;
+    max-width: 450px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-wrap: nowrap;
+    }
+
+    .paidIcon {
+      height: 40px;
+      width: 40px
+    }
+
+    .paidCheckboxContainer {
+      display: flex;
+      font-size: 16px;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  /*
+************END***********
+*/
+  /*
+**************************
      media queries
 **************************
 */
-  @media (min-width: 445px) {
-    .containerBtnPopUpMulti {
-      justify-content: space-around;
-      gap: 10px
+  @media (min-width: 450px) {
+    .tripInfo {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 530px) {
+  .containerBtnPopUpMulti {
+    justify-content: space-around;
+    gap: 10px;
+    flex-flow: nowrap;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .dashboard {
+    display: flex;
+    margin: 20px auto;
+    width: inherit;
+    flex-direction: row-reverse;
+    max-width: 1200px;
+
+    .expenses {
+      flex-basis: 50%;
+    }
+
+    .dashboardFixed {
+      flex-basis: 50%;
+      position: fixed;
+      z-index: 2;
+      top: 70px;
+      left: 3%;
+      width: 45%;
+      max-width: 600px;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .dashboard {
+    .dashboardFixed {
+      left: calc(50vw - 600px);
     }
   }
 }

@@ -12,13 +12,16 @@ const DescriptionAndDate = ({
   if (!date) {
     return;
   }
+  let dotStyle;
 
-  const arrSharedId = getArrayOfValues(expenses, "sharedId");
+  if (expenses) {
+    const arrSharedId = getArrayOfValues(expenses, "sharedId");
 
-  //set style with the right colour
-  const dotStyle = {
-    backgroundColor: getColourForSharedId(arrSharedId, sharedId),
-  };
+    //set style with the right colour
+    dotStyle = {
+      backgroundColor: getColourForSharedId(arrSharedId, sharedId),
+    };
+  }
 
   return (
     <div className="containerDescriptionAndDate">

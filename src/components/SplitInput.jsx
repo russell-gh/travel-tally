@@ -47,16 +47,20 @@ const SplitInput = ({ tag, parentCallback, data }) => {
  console.log(remaining);
   return (
     <>
-      <FormElement
-        type={"text"}
-        label={"Name"}
-        name={"name"}
-        id={"nameSplit" + tag}
-        value={formData.name}
-        // error={errors["description"]}
-        // list={"descriptionOptions"}
-        callback={dataInput}
-      />
+
+      <div className="flex">
+        <FormElement
+          type={"text"}
+          label={"Name"}
+          name={"name"}
+          id={"nameSplit" + tag}
+          value={formData.name}
+          // error={errors["description"]}
+          // list={"descriptionOptions"}
+          callback={dataInput}
+        />
+      </div>
+      <div className="flex">
       <FormElement
         type={"number"}
         label={"Amount"}
@@ -68,14 +72,18 @@ const SplitInput = ({ tag, parentCallback, data }) => {
         //   error={errors["amount"]}
         callback={dataInput}
       />
-      <FormElement
-        type={"checkbox"}
-        label={"Paid"}
-        name={`paid`}
-        id={`paidCheck` + tag}
-        value={formData.paid}
-        callback={dataInput}
-      />
+        <div className="paidContainer">
+          <FormElement
+            type={"checkbox"}
+            label={"Paid"}
+            name={`paid`}
+            id={`paidCheck` + tag}
+            value={formData.paid}
+            callback={dataInput}
+          />
+        </div>
+      </div>
+
     </>
   );
 };

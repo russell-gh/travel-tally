@@ -25,7 +25,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
     <>
       <Cropper
         src={src}
-        style={{ height: "auto", width: "auto" }}
+        style={{ height: "auto", width: "auto", maxWidth: 835 }}
         initialAspectRatio={1 / 1}
         guides={true}
         crop={onCrop}
@@ -36,6 +36,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
         {handleCapture && (
           <Button
             className="retakeBtn"
+            animation={true}
             text="retake"
             onClick={() => {
               handleCapture();
@@ -44,6 +45,7 @@ const ProfileCropper = ({ src, handleCapture }) => {
         )}
         <Button
           className="uploadBtn"
+          animation={true}
           text="upload"
           onClick={() => {
             dispatch(

@@ -36,7 +36,7 @@ const Signup = () => {
       dispatch(addUser(formData));
       localStorage.setItem("user", JSON.stringify(formData));
       console.log(formData);
-      redirect("/login"); //TODO Change to SetupProfile
+      redirect("/login"); //TODO Change to SetupProfile??
     } else {
       alert("passwords don't match", formData);
     }
@@ -70,7 +70,7 @@ const Signup = () => {
         placeholder="confirm new password"
       />
       <p className="errortext">{errors.passwordConfirm}</p>
-      <Button onClick={onSubmit} text="Sign Up" />
+      <Button onClick={onSubmit} text="Sign Up" animation={true} />
     </div>
   );
 };

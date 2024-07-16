@@ -1,7 +1,35 @@
-import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
+import {
+  addDecimals,
+  getCurrencySymbol,
+  nFormatter,
+} from "../../utils/utilsBudget";
 
-const ExpenseAmount = ({ homeCurrencySymbol, amount, currencyCodes }) => {
-  const { fromCurrency, toValue, fromValue } = amount;
+const ExpenseAmount = ({
+  homeCurrencySymbol,
+  amount,
+  currencyCodes,
+  splits,
+  splitBill,
+  expenseId,
+}) => {
+  if (!amount) {
+    return;
+  }
+
+  let { fromCurrency, toValue, fromValue } = amount;
+
+  if (splitBill && splits) {
+    const arrayOfPaidSplits = splits.filter((split) => {
+      return split.expenseID === expenseId && split.paid === true;
+    });
+    arrayOfPaidSplits.forEach((split) => {
+      toValue -= split.amount.toValue;
+      fromValue -= split.amount.fromValue;
+    });
+  }
+
+  fromValue = addDecimals(fromValue);
+
   return (
     <div>
       <p>
@@ -10,7 +38,7 @@ const ExpenseAmount = ({ homeCurrencySymbol, amount, currencyCodes }) => {
       </p>
       <p className="foreignAmount">
         {getCurrencySymbol(currencyCodes, fromCurrency)}
-        {addDecimals(fromValue)}
+        {nFormatter(fromValue)}
       </p>
     </div>
   );

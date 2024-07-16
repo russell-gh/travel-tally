@@ -18,6 +18,12 @@ import { useState, useEffect } from "react";
 import { validate } from "../validation/validate";
 import { date } from "joi";
 import { getExpenseList } from "../utils/expenseData";
+import {
+  getActualEndDate,
+  getActualStartDate,
+  getDateForForm,
+} from "../utils/utilsDates";
+import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
@@ -37,6 +43,7 @@ export const AddExpense = ({ animatingOut }) => {
     category: "Food",
   });
   const [errors, setErrors] = useState({});
+  console.log(errors);
   let [multi, setMulti] = useState(false);
   // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
@@ -55,15 +62,19 @@ export const AddExpense = ({ animatingOut }) => {
   const currency = currencies.map((code) => ({ value: code, name: code }));
 
   const dataInput = (e) => {
-    getValidationResult();
     let target = e.target.name;
-    let value = e.target.value;
+    let value;
+    value = e.target.value;
     if (value === "true") value = true;
     if (value === "false") value = false;
 
     setFormData({ ...formData, [target]: value });
     if (target === 'amount') dispatch(setSplitMax({value}));
   };
+
+  useEffect(() => {
+    getValidationResult();
+  }, [formData]);
 
   const getValidationResult = async () => {
     if (!Object.values(formData).length) {
@@ -75,6 +86,7 @@ export const AddExpense = ({ animatingOut }) => {
   };
 
   const handleSubmit = () => {
+    console.log(errors);
     if (Object.keys(errors).length) {
       console.log(formData, "FAIL", errors);
       return;
@@ -138,7 +150,7 @@ export const AddExpense = ({ animatingOut }) => {
   const renderSplit = () => {
     if (formData.split === true) {
       return (
-        <div className="flex">
+        <>
           {split}
           <div className="containerBtnPopUp">
             <Button
@@ -152,7 +164,7 @@ export const AddExpense = ({ animatingOut }) => {
               className={"splitAddPerson"}
             />
           </div>
-        </div>
+        </>
       );
     }
   };
@@ -164,6 +176,14 @@ export const AddExpense = ({ animatingOut }) => {
   datalist = [...new Set(datalist)];
   datalist = datalist.filter((description) => description.trim() !== "");
 
+  //calculating start and enddate of trip
+  const trip = findItem(trips, tripID);
+  const { details } = trip;
+  const { startDateIncluded, endDateIncluded, startDate, endDate } =
+    details.dates;
+  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
+  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
   return (
     <div className="expenseContainer">
       <div className="flex">
@@ -174,6 +194,8 @@ export const AddExpense = ({ animatingOut }) => {
           value={formData.date}
           id={"datePicker"}
           callback={dataInput}
+          minDate={getDateForForm(actualStartDate)}
+          maxDate={getDateForForm(actualEndDate)}
         />
 
         <div className="multiDayCheckboxContainer">
@@ -262,6 +284,7 @@ export const AddExpense = ({ animatingOut }) => {
           text={"Add"}
           className={"expenseSubmit"}
           disabled={animatingOut}
+          animation={true}
         />
       </div>
     </div>

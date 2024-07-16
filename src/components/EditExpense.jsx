@@ -20,6 +20,12 @@ import {
   selectSplitData,
   setSplitData,
 } from "../redux/homeSlice";
+import {
+  getActualEndDate,
+  getActualStartDate,
+  getDateForForm,
+} from "../utils/utilsDates";
+import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 
 export const EditExpense = ({ animatingOut }) => {
@@ -109,21 +115,24 @@ export const EditExpense = ({ animatingOut }) => {
   };
 
   const dataInput = (e) => {
-    // getValidationResult();
     let target = e.target.name;
     let value = e.target.value;
     if (value === "true") value = true;
     if (value === "false") value = false;
     setFormData({ ...formData, [target]: value });
   };
-  // const getValidationResult = async () => {
-  //   if (!Object.values(formData).length) {
-  //     return;
-  //   }
-  //   const result = await validate(formData, "expense");
-  //   setErrors(result); //result returns promise
-  //   console.log(errors);
-  // };
+
+  useEffect(() => {
+    getValidationResult;
+  }, [formData]);
+  const getValidationResult = async () => {
+    if (!Object.values(formData).length) {
+      return;
+    }
+    const result = await validate(formData, "expense");
+    setErrors(result); //result returns promise
+    console.log(errors);
+  };
 
   const handleSubmit = () => {
     // if (Object.keys(errors).length) {
@@ -191,9 +200,10 @@ export const EditExpense = ({ animatingOut }) => {
     console.log("HIT render");
     if (formData.split === true) {
       return (
-        <div className="flex">
+        <>
           {theseSplits.map(function (split, index) {
             return (
+
               <div className="flex">
                 <SplitInput
                   maxAmount={formData.amount}
@@ -202,25 +212,36 @@ export const EditExpense = ({ animatingOut }) => {
                   data={split}
                 />
               </div>
+
             );
           })}
           <div className="containerBtnPopUp">
-          <Button
-              onClick={handleRemovePerson}
-              text={"-"}
-              className={"splitRemovePerson"}
-            />
             <Button
               onClick={handleAddPerson}
-              text={"+"}
+              text={"Add Person"}
               className={"splitAddPerson"}
             />
+            <Button
+              onClick={handleRemovePerson}
+              text={"Remove Person"}
+              className={"splitRemovePerson"}
+            />
           </div>
-        </div>
+        </>
       );
     }
   };
+
+  //calculating start and enddate of trip
+  const trip = findItem(trips, tripID);
+  const { details } = trip;
+  const { startDateIncluded, endDateIncluded, startDate, endDate } =
+    details.dates;
+  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
+  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
   console.log(splitIndex, "INDEX");
+
   return (
     <div className="editContainer">
       <div className="flex">
@@ -231,6 +252,8 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.date}
           id={"datePicker"}
           callback={dataInput}
+          minDate={getDateForForm(actualStartDate)}
+          maxDate={getDateForForm(actualEndDate)}
         />
         <div className="multiDayCheckboxContainer">
           <div>
@@ -319,7 +342,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
         <Button
           onClick={handleSubmit}
-          text={"Add"}
+          text={"Edit"}
           className={"expenseSubmit"}
           disabled={animatingOut}
           animation="animation"

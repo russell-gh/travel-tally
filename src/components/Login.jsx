@@ -23,8 +23,6 @@ const Login = () => {
     setErrors(errObj);
     // console.log(errors, formData);
   };
-  //BUG Error Timing is ugly
-
   const localUser = JSON.parse(localStorage.getItem("user"));
 
   //============================================
@@ -69,8 +67,11 @@ const Login = () => {
         />
 
         <p className="errortext">{errors.password}</p>
-
         <Button onClick={onSubmit} text="Login" />
+
+        <p className="signup-text">
+          Don't have an account? <a href="/signup"> Sign up! </a>
+        </p>
       </div>
     </>
   );

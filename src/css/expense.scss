@@ -22,6 +22,11 @@ $grey: #b3b3b3;
   border-radius: 24px;
   border: black solid 2px;
   font-size: 16px; // made smaller for easier styling
+  max-width: 460px;
+
+  p {
+    margin: 0px;
+  }
 
   #currencySelectExpense {
     margin-left: auto;
@@ -36,6 +41,17 @@ $grey: #b3b3b3;
 
     input {
       margin: 0px;
+    }
+
+    .paidContainer {
+      flex-basis: 100%;
+      text-align: right;
+      margin-top: 3px;
+      ;
+
+      input {
+        height: 13px;
+      }
     }
 
     .multiDayCheckboxContainer {

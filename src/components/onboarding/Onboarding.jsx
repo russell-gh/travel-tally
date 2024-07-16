@@ -15,6 +15,7 @@ import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { currencyCodes } from "./dummyCurrencyCodes.js"; //change format to Jacks data
 import { selectCountries } from "../../redux/homeSlice.js";
+import "../../css/onboarding.scss";
 
 let currencies = [];
 
@@ -53,10 +54,23 @@ const Onboarding = () => {
   const redirect = useNavigate();
 
   const countries = useSelector(selectCountries);
+  let _countries;
+  if (countries) {
+    _countries = JSON.parse(JSON.stringify(countries));
+    _countries = _countries.sort((a, b) => {
+      if (a.capitalCity < b.capitalCity) {
+        return -1;
+      }
+      if (a.capitalCity > b.capitalCity) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
   //run state through validate function everytime input is changed.
   useEffect(() => {
-    getValidationResult(); 
+    getValidationResult();
   }, [onboardingDetails]);
 
   const getValidationResult = async () => {
@@ -136,6 +150,7 @@ const Onboarding = () => {
         budgetOther,
       },
       expenses: [],
+      splits: [],
     };
 
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
@@ -158,11 +173,13 @@ const Onboarding = () => {
     const country = getCountryFromCity(city);
   };
 
+if (!_countries) {return <p>...Loading</p>}
+
   return (
-    <div>
+    <div className="onboarding">
       <form>
         {currentFormSection === 1 && (
-          <>
+          <div className="formSection">
             <FormElement
               type="text"
               id="destination"
@@ -174,18 +191,23 @@ const Onboarding = () => {
               list={"cities"}
             />
             <datalist id="cities">
-              {countries.map((country) => {
-                return <option value={country["Capital City"]}></option>;
+              {_countries.map((country) => {
+                return (
+                  <option
+                    key={country["capitalCity"]}
+                    value={country["capitalCity"]}
+                  ></option>
+                );
               })}
             </datalist>
-          </>
+          </div>
         )}
         {currentFormSection === 2 && (
-          <>
+          <div className="formSection">
             <FormElement
               type="date"
               id="startDate"
-              label="Choose the start date of your trip"
+              label="Choose the start and end dates of your trip"
               name="startDate"
               value={onboardingDetails.dates.startDate}
               callback={handleChange}
@@ -194,56 +216,65 @@ const Onboarding = () => {
             <FormElement
               type="date"
               id="endDate"
-              label="Choose the end date of your trip"
               name="endDate"
               value={onboardingDetails.dates.endDate}
               callback={handleChange}
               error={errors.endDate}
             />
-            <FormElement
-              type="checkbox"
-              id="startDateIncluded"
-              label="Include first day of trip in budget?"
-              name="startDateIncluded"
-              value={onboardingDetails.dates.startDateIncluded}
-              callback={handleChange}
-            />
-            <FormElement
-              type="checkbox"
-              id="endDateIncluded"
-              label="Include last day of trip in budget?"
-              name="endDateIncluded"
-              value={onboardingDetails.dates.endDateIncluded}
-              callback={handleChange}
-            />
-          </>
+            <div className="checkboxInput">
+              <FormElement
+                type="checkbox"
+                id="startDateIncluded"
+                label="Include first day of trip in budget?"
+                name="startDateIncluded"
+                value={onboardingDetails.dates.startDateIncluded}
+                callback={handleChange}
+              />
+            </div>
+            <div className="checkboxInput">
+              <FormElement
+                type="checkbox"
+                id="endDateIncluded"
+                label="Include last day of trip in budget?"
+                name="endDateIncluded"
+                value={onboardingDetails.dates.endDateIncluded}
+                callback={handleChange}
+              />
+            </div>
+          </div>
         )}
         {currentFormSection === 3 && (
-          <>
-            <FormElement
-              type="number"
-              id="budgetTotal"
-              label="What's your total budget for this trip?"
-              name="budgetTotal"
-              value={onboardingDetails.budgetTotal.toString()}
-              callback={handleChange}
-              error={errors.budgetTotal}
-            />
-            <FormElement
-              type="select"
-              id="homeCurrency"
-              label="Please select the currency of the country you live in."
-              name="homeCurrency"
-              choose={true}
-              options={currencies}
-              value={currencies[0].value}
-              callback={handleChange}
-              error={errors.homeCurrency}
-            />
-          </>
+          <div className="formSection">
+            <div className="budgetTotalSection">
+              <FormElement
+                type="number"
+                id="budgetTotal"
+                className="budgetTotal"
+                label="Enter your total budget for the trip and the currency of your home country"
+                name="budgetTotal"
+                value={onboardingDetails.budgetTotal.toString()}
+                callback={handleChange}
+                error={errors.budgetTotal}
+              />
+              <FormElement
+                type="select"
+                id="homeCurrency"
+                name="homeCurrency"
+                className="homeCurrency"
+                choose={true}
+                options={currencies}
+                value={currencies[0].value}
+                callback={handleChange}
+                error={errors.homeCurrency}
+              />
+            </div>
+          </div>
         )}
         {currentFormSection === 4 && (
-          <div>
+          <div className="formSection">
+            <p className="budgetSlidersLabel">
+              How would you like to allocate your budget?
+            </p>
             {onboardingQuestions.secondaryForm.map((question) => {
               //get rid of primary form as no longer used? then change this name
               return (
@@ -261,9 +292,13 @@ const Onboarding = () => {
         )}
 
         {currentFormSection === 4 ? (
-          <FormElement type="button" callback={handleSubmit} />
+          <FormElement type="button" className="btn" callback={handleSubmit} />
         ) : (
-          <Button text=">" onClick={() => formButtonHandler()} />
+          <Button
+            text=">"
+            onClick={() => formButtonHandler()}
+            animation={true}
+          />
         )}
       </form>
     </div>

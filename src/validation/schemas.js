@@ -22,7 +22,7 @@ export const expenseSchema = {
   endDate: Joi.date(),
   description: Joi.string().min(3).max(58).required(),
   category: Joi.string().required(),
-  amount: Joi.number().min(0).required(),
+  amount: Joi.number().min(1).required(),
   currency: Joi.string(),
   split: Joi.boolean(),
   multiDay: Joi.boolean(),
