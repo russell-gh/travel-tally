@@ -11,11 +11,12 @@ const Signup = () => {
   //Sends Errors + Creds to State
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
-  const [inputErr, setinputErr] = useState({});
+
   const onInput = async (e) => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData(_formData);
     const errObj = await validate(_formData, "signup");
+    //BUG Error Timing is ugly
     setErrors(errObj);
   };
   const user = useSelector((state) => state.user);

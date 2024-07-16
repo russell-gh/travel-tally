@@ -9,6 +9,7 @@ export const Header = () => {
         <Logo2 />
         <LogoText />
       </div>
+      <Profile />
       <button
         className="btn"
         onClick={() => {
@@ -18,7 +19,6 @@ export const Header = () => {
       >
         Reset
       </button>
-      <Profile />
     </header>
   );
 };
