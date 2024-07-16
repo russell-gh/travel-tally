@@ -27,6 +27,9 @@ import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
+  const [inputValues, setInputValues] = useState([]);
+  const [friendsNo, setFriendsNo] = useState(0);
+
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
@@ -69,7 +72,7 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "false") value = false;
 
     setFormData({ ...formData, [target]: value });
-    if (target === 'amount') dispatch(setSplitMax({value}));
+    if (target === "amount") dispatch(setSplitMax({ value }));
   };
 
   useEffect(() => {
@@ -125,33 +128,47 @@ export const AddExpense = ({ animatingOut }) => {
   };
 
   let handleAddPerson = () => {
-    setSplit([
-      ...split,
-      <SplitInput
-        tag={split.length}
-        parentCallback={getSplitData}
-      />,
-    ]);
-  };
-  let handleRemovePerson = () => {
-    setSplit(split.splice(split.length - 1, 1));
+    setFriendsNo(friendsNo + 1);
+    // setSplit([
+    //   ...split,
+    //   <SplitInput
+    //     tag={split.length}
+    //     parentCallback={getSplitData}
+    //     formData={splitData[split.length]}
+    //   />,
+    // ]);
   };
 
+  let handleRemovePerson = () => {
+    // setSplit(split.splice(split.length - 1, 1));
+    dispatch(setSplitData({ data: { amount: 0 }, tag: friendsNo - 1 }));
+    setFriendsNo(friendsNo - 1);
+  };
+
+  //handles on form change
   const getSplitData = (data, tag) => {
+    console.log(data, tag);
+    data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
 
-  const [split, setSplit] = useState([
-    <SplitInput
-      tag={0}
-      parentCallback={getSplitData}
-    />,
-  ]);
+  // const [split, setSplit] = useState([
+  //   <SplitInput tag={0} parentCallback={getSplitData} />,
+  // ]);
+
   const renderSplit = () => {
     if (formData.split === true) {
       return (
         <>
-          {split}
+          {new Array(friendsNo).fill("").map((item, index) => {
+            return (
+              <SplitInput
+                tag={index}
+                parentCallback={getSplitData}
+                data={splitData[index]}
+              />
+            );
+          })}
           <div className="containerBtnPopUp">
             <Button
               onClick={handleRemovePerson}
