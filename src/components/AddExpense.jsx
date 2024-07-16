@@ -27,6 +27,8 @@ import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
+  const [inputValues, setInputValues] = useState([]);
+  const [friendsNo, setFriendsNo] = useState(0);
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
@@ -124,29 +126,49 @@ export const AddExpense = ({ animatingOut }) => {
     }
   };
 
-  let handleAddPerson = () => {
-    setSplit([
-      ...split,
-      <SplitInput tag={split.length} parentCallback={getSplitData} />,
-    ]);
-  };
-  let handleRemovePerson = () => {
-    setSplit(split.splice(split.length - 1, 1));
+  const handleAddPerson = () => {
+    setFriendsNo(friendsNo + 1);
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -2 }));
   };
 
+  const handleRemovePerson = () => {
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
+    setFriendsNo(friendsNo - 1);
+  };
+
+  const handleEvenSplit = () => {
+    const divBy = splitData.length + 1;
+    let each = Number(formData.amount) / divBy;
+    each = Math.round(each * 100) / 100;
+    splitData.forEach((thisSplit, index) => {
+      const copy = JSON.parse(JSON.stringify(thisSplit));
+      copy.amount = each;
+      const data = copy;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
+    });
+  };
+
+  //handles on form change
   const getSplitData = (data, tag) => {
+    data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
 
-  const [split, setSplit] = useState([
-    <SplitInput tag={0} parentCallback={getSplitData} />,
-  ]);
   const renderSplit = () => {
     if (formData.split === true) {
       return (
         <>
-          {split}
-          <div className="containerBtnSplit">
+          {new Array(friendsNo).fill("").map((item, index) => {
+            return (
+              <SplitInput
+                tag={index}
+                parentCallback={getSplitData}
+                data={splitData[index]}
+              />
+            );
+          })}
+          <div className="containerBtnPopUp">
             <Button
               onClick={handleRemovePerson}
               text={"-"}
@@ -156,6 +178,11 @@ export const AddExpense = ({ animatingOut }) => {
               onClick={handleAddPerson}
               text={"+"}
               className={"splitAddPerson"}
+            />
+            <Button
+              onClick={handleEvenSplit}
+              text={"Evenly"}
+              className={"splitEvenly"}
             />
           </div>
         </>
