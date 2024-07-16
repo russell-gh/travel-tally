@@ -221,7 +221,7 @@ export const EditExpense = ({ animatingOut }) => {
               </div>
             );
           })}
-          <div className="containerBtnPopUp">
+          <div className="containerBtnSplit">
             <Button
               onClick={handleAddPerson}
               text={"Add Person"}
@@ -231,11 +231,6 @@ export const EditExpense = ({ animatingOut }) => {
               onClick={handleRemovePerson}
               text={"Remove Person"}
               className={"splitRemovePerson"}
-            />
-            <Button
-              onClick={handleEvenSplit}
-              text={"Evenly"}
-              className={"splitEvenly"}
             />
           </div>
         </>
@@ -308,7 +303,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className="flex amountContainer">
         <FormElement
           type={"number"}
           label={"Amount"}
@@ -328,7 +323,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
         <FormElement
           type={"select"}
           label={"Split"}
@@ -341,6 +336,13 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
         />
+        {formData.split && (
+          <Button
+            onClick={handleEvenSplit}
+            text={"Split evenly"}
+            className={"splitEvenly"}
+          />
+        )}
       </div>
       {renderSplit()}
       <div className="containerBtnPopUp">
