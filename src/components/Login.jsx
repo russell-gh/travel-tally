@@ -33,10 +33,8 @@ const Login = () => {
     Object.keys(errors).length
       ? console.log("Form Incomplete!")
       : !(
-          (
-            formData.password === localUser.password &&
-            formData.email === localUser.email
-          ) //TODO Change to state credentials
+          formData.password === localUser.password &&
+          formData.email === localUser.email
         )
       ? console.log("wrong email/password")
       : trips.length
