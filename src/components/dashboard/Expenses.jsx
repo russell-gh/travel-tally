@@ -47,7 +47,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
     <div className="expenses mt">
       {includesFuture && <ShowFutureExpenses />}
       {filtered.map((item) => {
-        const { description, id, category, date, amount, sharedId, splitBill } =
+        const { description, id, category, date, amount, sharedId, split } =
           item;
         const isFuture = dayjs(date).isAfter(dayjs());
         return (
@@ -62,7 +62,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 expenses={expenses}
               />
               <div className="containerAmountAndBillSplit">
-                {splitBill && (
+                {split && (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
@@ -72,7 +72,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                   homeCurrencySymbol={homeCurrencySymbol}
                   amount={amount}
                   currencyCodes={currencyCodes}
-                  splitBill={splitBill}
+                  split={split}
                   splits={splits}
                   expenseId={id}
                 />

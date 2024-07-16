@@ -39,6 +39,7 @@ const BillSplitItems = ({
       {arrayOfSplits.map((split) => {
         const { id, amount, paid, description, date, name } = split;
         const { fromCurrency, toValue, fromValue } = amount;
+        console.log(toValue);
         return (
           <div
             className={`billSplitItem ${

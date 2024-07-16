@@ -44,14 +44,14 @@ const BillSplitExpense = ({
         homeCurrencySymbol={homeCurrencySymbol}
         amount={splitExpense.amount}
         currencyCodes={currencyCodes}
-        splitBill={false}
+        split={false}
         expenseId={expenseId}
       />
       <ExpenseAmount
         homeCurrencySymbol={homeCurrencySymbol}
         amount={splitExpense.amount}
         currencyCodes={currencyCodes}
-        splitBill={true}
+        split={true}
         expenseId={expenseId}
         splits={splits}
       />

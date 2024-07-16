@@ -13,23 +13,22 @@ const BudgetInfo = ({
   expensesCategories,
   details,
   homeCurrencySymbol,
-  expensesArray,
   actualStartDate,
   actualEndDate,
   startDate,
   endDate,
   splits,
+  dataSpendPerDay,
+  amountOfBudgetDays,
 }) => {
   const [display, setDisplay] = useState("totalBudget");
   const showBillSplits = useSelector(selectShowBillSplits);
 
-  // converts and calculates days traveling
+  // converts and calculates if still travelling
   startDate = dayjs(startDate);
   endDate = dayjs(endDate);
   const stillTravelling =
     dayjs().isBefore(endDate) && startDate.isBefore(dayjs());
-  const amountOfBudgetDays =
-    dayjs(actualEndDate).diff(dayjs(actualStartDate), "day") + 1;
 
   const changeDisplay = (input) => {
     setDisplay(input);
@@ -106,7 +105,7 @@ const BudgetInfo = ({
       {/* if today is during traveltime, daily budget is calculated */}
       {stillTravelling && display === "dailyBudget" && (
         <BudgetPerDay
-          expensesArray={expensesArray}
+          dataSpendPerDay={dataSpendPerDay}
           details={details}
           homeCurrencySymbol={homeCurrencySymbol}
           amountOfBudgetDays={amountOfBudgetDays}

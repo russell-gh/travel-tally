@@ -17,7 +17,7 @@ const BillSplits = ({ splits, homeCurrencySymbol, expenses, filtered }) => {
   }
 
   const index = filtered.findIndex((expense) => {
-    return expense.splitBill;
+    return expense.split;
   });
 
   if (index === -1) {
@@ -28,7 +28,7 @@ const BillSplits = ({ splits, homeCurrencySymbol, expenses, filtered }) => {
     <div className="billSplits">
       {<ShowPaidSplitBills />}
       {filtered.map((expense) => {
-        if (expense.splitBill) {
+        if (expense.split) {
           return (
             <div key={expense.id}>
               <BillSplitExpense

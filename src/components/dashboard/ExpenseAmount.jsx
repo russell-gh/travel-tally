@@ -9,7 +9,7 @@ const ExpenseAmount = ({
   amount,
   currencyCodes,
   splits,
-  splitBill,
+  split,
   expenseId,
 }) => {
   if (!amount) {
@@ -18,7 +18,7 @@ const ExpenseAmount = ({
 
   let { fromCurrency, toValue, fromValue } = amount;
 
-  if (splitBill && splits) {
+  if (split && splits) {
     const arrayOfPaidSplits = splits.filter((split) => {
       return split.expenseID === expenseId && split.paid === true;
     });
