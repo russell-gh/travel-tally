@@ -78,7 +78,7 @@ export const homeSlice = createSlice({
     },
     togglePopUp: (state, { payload }) => {
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
-      state.splitData = [];
+      state.splitData = [{ amount: 0, name: "", paid: false }];
       state.splitMax = 0;
       if (!payload) {
         state.popUp = {};

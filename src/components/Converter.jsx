@@ -24,19 +24,9 @@ const Converter = () => {
   const dataInput = (e) => {
     let target = e.target.name;
     let value = e.target.value;
-    // if (target === "from" || "to") {
-    //   value = Number(value);
-    // }
     setFormData({ ...formData, [target]: value });
     console.log(target, value);
   };
-
-  //   function convertCurrency(from, fromCurrency, data) {
-  //     const origin = from;
-  //     const rate = data[fromCurrency];
-  //     const result = origin / rate;
-  //     return result;
-  //   }
 
   return (
     <>
