@@ -127,13 +127,11 @@ export const AddExpense = ({ animatingOut }) => {
   };
 
   const handleAddPerson = () => {
-    setFriendsNo(friendsNo + 1);
     dispatch(setSplitData({ data: { amount: 0 }, tag: -2 }));
   };
 
   const handleRemovePerson = () => {
     dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
-    setFriendsNo(friendsNo - 1);
   };
 
   const handleEvenSplit = () => {
@@ -159,13 +157,16 @@ export const AddExpense = ({ animatingOut }) => {
     if (formData.split === true) {
       return (
         <>
-          {new Array(friendsNo).fill("").map((item, index) => {
+          {splitData.map(function (split, index) {
             return (
-              <SplitInput
-                tag={index}
-                parentCallback={getSplitData}
-                data={splitData[index]}
-              />
+              <div className="flex">
+                <SplitInput
+                  maxAmount={formData.amount}
+                  tag={index}
+                  parentCallback={getSplitData}
+                  data={split}
+                />
+              </div>
             );
           })}
           <div className="containerBtnSplit">
