@@ -32,6 +32,7 @@ const BillSplits = ({ splits, homeCurrencySymbol, expenses, filtered }) => {
           return (
             <div key={expense.id}>
               <BillSplitExpense
+                homeCurrencySymbol={homeCurrencySymbol}
                 splitExpense={expense}
                 splits={splits}
                 expenseId={expense.id}

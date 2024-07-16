@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCurrencyCodes, togglePopUp } from "../../redux/homeSlice";
 import CategoryIcon from "./CategoryIcon";
 import DescriptionAndDate from "./DescriptionAndDate";
@@ -16,7 +16,6 @@ const BillSplitExpense = ({
   splitExpense,
 }) => {
   const currencyCodes = useSelector(selectCurrencyCodes);
-  const dispatch = useDispatch();
 
   // if (!expenses) {
   //   return;

@@ -167,7 +167,7 @@ body {
     justify-content: space-between;
     margin: 0px auto 10px auto;
     flex-wrap: wrap;
-    max-width: 740px;
+    max-width: 500px;
   }
 
   .dropDownTrips {
@@ -463,7 +463,7 @@ controls billSplit and Expenses
     display: grid;
     grid-template-columns: 1fr 1fr;
     max-width: 520px;
-    margin: 0px auto 10px auto;
+    margin: 0px auto 0px auto;
     border-radius: 15px 15px 0px 0px;
     border: $teal 2px solid;
     ;
