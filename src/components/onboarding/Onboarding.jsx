@@ -100,7 +100,6 @@ const Onboarding = () => {
       };
       setTyped({...typed, [e.target.name]:true})
       setOnboardingDetails(data);
-
       return;
     }
 
@@ -295,6 +294,7 @@ const Onboarding = () => {
                 callback={handleChange}
                 error={errors.budgetTotal}
                 typed={typed.budgetTotal}
+                minValue={0}
               />
               <FormElement
                 type="select"
