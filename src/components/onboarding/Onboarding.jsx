@@ -8,6 +8,7 @@ import { validate } from "../../validation/validate.js";
 import { BudgetSlider } from "./BudgetSlider.jsx";
 import { stringToUnix, toPennies, generateId } from "../../utils/utils.js";
 import {
+  checkBudgetAllocationTotals,
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
@@ -114,7 +115,7 @@ const Onboarding = () => {
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
     e.preventDefault();
-
+checkBudgetAllocationTotals(onboardingDetails)
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -160,7 +161,13 @@ const Onboarding = () => {
   };
 
   const formButtonHandler = () => {
-    const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
+    //display errors present for any elems which haven't yet been interacted with (and therefore not displayed)
+    //create func to check errcurrentFormSection
+    
+
+    const errorsPresent = checkFormSectionErrors(currentFormSection, errors); 
+    // setTyped(true); //for all the errs in that section.
+    
 
     //if section 1 has no errors run the below func on click and pass in destination state.
     if (currentFormSection === 1 && !errorsPresent) {

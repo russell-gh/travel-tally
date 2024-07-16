@@ -16,7 +16,7 @@ const FormElement = ({
   placeholder,
   className = [],
   onKeyDown = () => {},
-  typed
+  typed,
 }) => {
   switch (type) {
     case "text":
@@ -147,9 +147,15 @@ const FormElement = ({
       );
     case "button":
       return (
-        <button className={className} type="submit" onClick={(e) => callback(e)}>
-          Submit
-        </button>
+        <>
+          <button
+            className={className}
+            type="submit"
+            onClick={(e) => callback(e)}
+          >
+            Submit
+          </button>
+        </>
       );
   }
 };

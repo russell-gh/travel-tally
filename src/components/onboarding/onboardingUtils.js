@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_KEY } from "./secrets";
 
-export const getCountryFromCity  = async (city) => {
+export const getCountryFromCity = async (city) => {
   try {
     const { data } = await axios.get(
       `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
@@ -37,4 +37,20 @@ export const checkFormSectionErrors = (currentFormSection, errors) => {
       }
       return false;
   }
+};
+
+export const checkBudgetAllocationTotals = ({
+  budgetTotal,
+  budgetHotel,
+  budgetFood,
+  budgetTransport,
+  budgetActivities,
+  budgetOther,
+}) => {
+  const sum =
+    budgetHotel + budgetFood + budgetTransport + budgetActivities + budgetOther;
+
+  if (sum < budgetTotal) {
+    console.log("still need to allocate more");
+  } else {console.log("all allocated")}
 };

@@ -1,7 +1,7 @@
 import { Slider, Stack, styled } from "@mui/material";
 import { useState } from "react";
 
-const StyledSlider = styled(Slider)(({ sliderMax }) => ({
+const StyledSlider = styled(Slider)(({ slidermax }) => ({
   width: 230,
   height: 8,
   "& .MuiSlider-rail": {
@@ -14,7 +14,7 @@ const StyledSlider = styled(Slider)(({ sliderMax }) => ({
     color: "#235b89",
   },
   "& .MuiSlider-thumb": {
-    color: sliderMax,
+    color: slidermax,
     height: 20,
     width: 20,
   },
@@ -59,7 +59,7 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
       <p className="label">{label}</p>
       <Stack direction="row">
         <StyledSlider
-          sliderMax = {sliderMax ? "#06233b" : "#235b89"}
+          slidermax = {sliderMax ? "#06233b" : "#235b89"}
           value={position}
           id={id}
           name={id}
@@ -68,7 +68,6 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
           valueLabelDisplay="on"
           onChange={positionUpdate}
         />
-
         <p className="budgetTotal">{onboardingDetails.budgetTotal}</p>
       </Stack>
     </div>
