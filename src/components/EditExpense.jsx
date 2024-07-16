@@ -19,6 +19,7 @@ import {
   togglePopUp,
   selectSplitData,
   setSplitData,
+  setSplitMax,
 } from "../redux/homeSlice";
 import {
   getActualEndDate,
@@ -81,6 +82,7 @@ export const EditExpense = ({ animatingOut }) => {
     copy.currency = currency;
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
+    dispatch(setSplitMax(copy.amount));
     setFormData(copy);
     if (copy.split === true) {
       if (result.thisExpense.sharedID) {
@@ -99,7 +101,6 @@ export const EditExpense = ({ animatingOut }) => {
     let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
     copy.forEach((thisSplit, index) => {
-      console.log(thisSplit, "before");
       thisSplit.amount = thisSplit.amount.fromValue / 100;
       delete thisSplit.date;
       delete thisSplit.expenseID;
@@ -108,10 +109,11 @@ export const EditExpense = ({ animatingOut }) => {
       delete thisSplit.totalExpense;
       const data = thisSplit;
       const tag = index;
+      console.log(data, tag, "pre set");
       dispatch(setSplitData({ data, tag }));
     });
     setSplitIndexs(result.allIndexs);
-    setTheseSplits(copy);
+    // setTheseSplits(copy);
   };
 
   const dataInput = (e) => {
@@ -180,30 +182,23 @@ export const EditExpense = ({ animatingOut }) => {
     }
   };
   let handleAddPerson = () => {
-    console.log("HIT ADDPERSON");
-    const copy = JSON.parse(JSON.stringify(theseSplits));
-    copy.push({ paid: false });
-    setTheseSplits(copy);
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -2 }));
   };
   let handleRemovePerson = () => {
-    const copy = JSON.parse(JSON.stringify(theseSplits));
-    copy.splice(copy.length - 1, 1);
-    setTheseSplits(copy);
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
   };
 
   const getSplitData = (data, tag) => {
-    console.log(data, tag);
+    data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
 
   const renderSplit = () => {
-    console.log("HIT render");
     if (formData.split === true) {
       return (
         <>
-          {theseSplits.map(function (split, index) {
+          {splitData.map(function (split, index) {
             return (
-
               <div className="flex">
                 <SplitInput
                   maxAmount={formData.amount}
@@ -212,7 +207,6 @@ export const EditExpense = ({ animatingOut }) => {
                   data={split}
                 />
               </div>
-
             );
           })}
           <div className="containerBtnPopUp">

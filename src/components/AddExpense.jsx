@@ -29,7 +29,6 @@ import SplitInput from "./SplitInput";
 export const AddExpense = ({ animatingOut }) => {
   const [inputValues, setInputValues] = useState([]);
   const [friendsNo, setFriendsNo] = useState(0);
-
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
@@ -138,7 +137,6 @@ export const AddExpense = ({ animatingOut }) => {
 
   //handles on form change
   const getSplitData = (data, tag) => {
-    console.log(data, tag);
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };

@@ -179,7 +179,6 @@ export const homeSlice = createSlice({
 
     setSplitMax: (state, { payload }) => {
       state.splitMax = Number(payload.value); // Sets the expense value in the store so it is in the global scope
-      state.splitValues.remaining = state.splitMax;
     },
 
     setPaid: (state, { payload }) => {
@@ -191,6 +190,9 @@ export const homeSlice = createSlice({
       if (payload.tag === -1) {
         state.splitData.splice(state.splitData.length - 1, 1);
         return;
+      }
+      if (payload.tag === -2) {
+        state.splitData.push({ amount: 0, name: "", paid: false });
       }
       if (state.splitData.length === 0) {
         state.splitData.push(payload.data);

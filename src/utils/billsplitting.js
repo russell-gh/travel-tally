@@ -15,6 +15,9 @@ export function splitExpenseBill(splitData, expense) {
       fromCurrency: expense.amount.fromCurrency,
       toCurrency: expense.amount.toCurrency,
     };
+    if (!bill.paid) {
+      bill.paid = false;
+    }
 
     const formatted = {
       amount: newAmount,
