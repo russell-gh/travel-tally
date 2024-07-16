@@ -143,7 +143,7 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
 
-    toggleHide: (state, { payload }) => {
+    toggleDisplay: (state, { payload }) => {
       state[payload.key] = payload.value;
       saveStore("homeSlice", state);
     },
@@ -197,7 +197,7 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
-  toggleHide,
+  toggleDisplay,
   deleteToEdit,
   addSplitData,
   setSplitData,
@@ -222,6 +222,7 @@ export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
 export const selectHidePaidSplitBills = (state) =>
   state.home.hidePaidSplitBills;
+export const selectShowBillSplits = (state) => state.home.showBillSplits;
 export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
 

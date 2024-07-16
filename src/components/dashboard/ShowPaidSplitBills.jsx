@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import FormElement from "../../reusable-code/FormElement";
-import { toggleHide, selectHidePaidSplitBills } from "../../redux/homeSlice";
+import { toggleDisplay, selectHidePaidSplitBills } from "../../redux/homeSlice";
 
 const ShowPaidSplitBills = () => {
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ const ShowPaidSplitBills = () => {
       <FormElement
         type="checkbox"
         id="hidePaidSplits"
-        label="hide paid"
+        label="hide paid splits"
         checked={hidePaidSplitBills}
         callback={(e) => {
           dispatch(
-            toggleHide({
+            toggleDisplay({
               value: e.target.checked,
               key: "hidePaidSplitBills",
             })

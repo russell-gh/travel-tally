@@ -3,13 +3,7 @@
             SASS
 **************************
 */
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
-$blueSachaUsed: #3c43a5;
+@import "variables";
 /*
 ************END***********
 */
@@ -60,7 +54,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -113,9 +107,8 @@ body {
     margin: 0px;
   }
 
-  p {
+  * {
     font-size: 16px;
-    ;
   }
 
   h1 {
@@ -126,7 +119,7 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     border: none;
     transition: background-color 0.3s ease-in-out;
@@ -145,7 +138,7 @@ body {
 
   .message {
     margin: 10px;
-    background-color: $navy;
+    background-color: $teal;
     padding: 10px;
     border-radius: 10px;
     color: white;
@@ -211,7 +204,7 @@ body {
     align-self: center;
     justify-self: center;
     border: none;
-    color: $navy;
+    color: $teal;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -219,7 +212,7 @@ body {
   }
 
   .addExpense:hover {
-    background-color: $navy;
+    background-color: $teal;
     color: $green;
     transition: all 0.3s ease-in-out;
   }
@@ -239,7 +232,8 @@ body {
   }
 
   .totalBudgetBtn,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     background-color: rgba(255, 255, 255, 0);
     border: none;
     color: black;
@@ -256,7 +250,8 @@ body {
   }
 
   .dailyBudgetBtn:hover,
-  .dailyBudgetBtn {
+  .dailyBudgetBtn,
+  .billSplitsGraphBtn {
     border-radius: 0px 12px 0px 0px;
   }
 
@@ -297,7 +292,8 @@ body {
   }
 
   .budget,
-  .dayBudget {
+  .dayBudget,
+  .numbersBillSplits {
     display: grid;
     grid-template-columns: fit-content(200px) fit-content(100px);
     grid-template-rows: fit-content(100px);
@@ -341,15 +337,21 @@ body {
   }
 
   .hideFutureExpenseContainer,
-  .hidePaidSplitBills {
+  .hidePaidSplitBills,
+  .checkboxIncludeOwed {
     max-width: 510px;
     margin: 0px auto;
     font-size: 16px;
 
     input {
       height: auto;
+      margin-right: 3px;
     }
 
+  }
+
+  .checkboxIncludeOwed {
+    margin-bottom: 5px;
   }
 
   /*
@@ -363,7 +365,7 @@ body {
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
-    background-color: $navy;
+    background-color: $teal;
     color: white;
     margin: 0px auto 10px auto;
     display: grid;
@@ -452,6 +454,10 @@ body {
 controls billSplit and Expenses
 **************************
 */
+  .containerExpensesAndSplits {
+    margin: 10px;
+    flex-basis: 50%;
+  }
 
   .tabsExpensesAndSplitsContainer {
     display: grid;
@@ -459,7 +465,7 @@ controls billSplit and Expenses
     max-width: 520px;
     margin: 0px auto 10px auto;
     border-radius: 15px 15px 0px 0px;
-    border: $navy 2px solid;
+    border: $teal 2px solid;
     ;
 
     .btn {
@@ -469,7 +475,7 @@ controls billSplit and Expenses
 
     .focus {
       color: white;
-      background-color: $navy;
+      background-color: $teal;
     }
 
     .billSplitBtn {
