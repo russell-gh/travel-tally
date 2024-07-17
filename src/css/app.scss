@@ -76,17 +76,26 @@ header {
     }
   }
 
-  .logo-text-container {
-    bottom: 0;
-  }
+  // .logo-text-container {
+  //   bottom: 0;
+
+  // }
 
   .btn {
-    // display: flex;
     position: absolute;
-    align-items: center;
+    // align-items: center;
     // padding: 5px;
     right: 10px;
+    margin: 5px;
   }
+
+  // className="logotext"
+  // style={{
+  //   width: "150px",
+  //   display: "inline-block",
+  //   position: "absolute",
+  //   left: "-5px",
+  // }}
 }
 
 header,
