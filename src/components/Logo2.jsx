@@ -10,6 +10,7 @@ export const Logo2 = () => {
         alignItems: "center",
         justifyContent: "center",
         left: "33px",
+        top: "3px",
       }}
     >
       <svg
