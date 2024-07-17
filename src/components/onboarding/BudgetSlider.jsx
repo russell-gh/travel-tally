@@ -4,6 +4,7 @@ import { useState } from "react";
 const StyledSlider = styled(Slider)(({ slidermax }) => ({
   width: 230,
   height: 8,
+  marginBottom:"3em",
   "& .MuiSlider-rail": {
     backgroundColor: "#d6ee79",
     opacity: 1,
@@ -26,7 +27,7 @@ const StyledSlider = styled(Slider)(({ slidermax }) => ({
     height: 20,
     width: 10,
     borderRadius: "50%",
-    top: -15,
+    top: -8,
     padding: "5px 10px",
   },
 }));

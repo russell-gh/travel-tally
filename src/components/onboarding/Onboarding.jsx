@@ -17,6 +17,13 @@ import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 
 const Onboarding = () => {
+  const currencyCodes = useSelector(selectCurrencyCodes);
+
+  let currencies = [];
+  for (const key of Object.keys(currencyCodes)) {
+    currencies.push({ value: key, name: key });
+  }
+  
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     dates: {
@@ -26,7 +33,7 @@ const Onboarding = () => {
       endDateIncluded: false,
     },
     budgetTotal: 0,
-    homeCurrency: "",
+    homeCurrency: currencies[0].value,
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -39,13 +46,6 @@ const Onboarding = () => {
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
-
-  const currencyCodes = useSelector(selectCurrencyCodes);
-
-  let currencies = [];
-  for (const key of Object.keys(currencyCodes)) {
-    currencies.push({ value: key, name: key });
-  }
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -310,7 +310,7 @@ const Onboarding = () => {
                 id="homeCurrency"
                 name="homeCurrency"
                 className="homeCurrency"
-                choose={true}
+                // choose={true}
                 options={currencies}
                 value={currencies[0].value}
                 callback={handleChange}
