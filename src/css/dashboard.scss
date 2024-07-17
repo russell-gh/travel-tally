@@ -44,6 +44,7 @@ body {
   padding: 10px;
   width: 75vw;
   max-width: 400px;
+  font-size: 18px;
 
   p {
     margin-bottom: 10px;
@@ -67,10 +68,10 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-// .cancelBtn:hover {
-//   background-color: rgb(27, 126, 40);
-//   transition: background-color 0.3s ease-in-out;
-// }
+.cancelBtn:hover {
+  background-color: rgb(27, 126, 40);
+  transition: background-color 0.3s ease-in-out;
+}
 
 .containerBtnPopUp {
   display: flex;
@@ -125,8 +126,7 @@ body {
     transition: background-color 0.3s ease-in-out;
   }
 
-  .dashboardFixed,
-  .expenses {
+  .dashboardFixed {
     padding: 0px 10px 30px 10px;
   }
 
@@ -167,7 +167,7 @@ body {
     justify-content: space-between;
     margin: 0px auto 10px auto;
     flex-wrap: wrap;
-    max-width: 740px;
+    max-width: 500px;
   }
 
   .dropDownTrips {
@@ -182,6 +182,7 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 3px;
+    position: relative;
 
     .travellingIcon {
       width: 30px;
@@ -333,7 +334,7 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     margin: 0px auto 10px auto;
-    max-width: 512px;
+    max-width: 500px;
   }
 
   .hideFutureExpenseContainer,
@@ -362,6 +363,26 @@ body {
         expenses
 **************************
 */
+  .expenses {
+    max-width: 500px;
+    margin: 0px auto 50px auto;
+  }
+
+  .expensesSplits,
+  .billSplits,
+  .messageContainer {
+    max-width: 480px;
+    padding: 10px 10px 3px 10px;
+    // background-color: #235b8933;
+    margin: 0px auto 50px auto;
+    border-radius: 0px 0px 12px 12px;
+    border: $teal 2px solid;
+    border-top: none;
+    min-height: 300px;
+  }
+
+
+
   .expenseItem {
     padding: 10px;
     border-radius: 20px;
@@ -369,7 +390,7 @@ body {
     color: white;
     margin: 0px auto 10px auto;
     display: grid;
-    grid-template-columns: 40px 1fr minmax(50px, max-content) 30px 30px;
+    grid-template-columns: 40px 1fr minmax(55px, max-content) 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
@@ -378,7 +399,8 @@ body {
     .containerAmountAndBillSplit {
       display: flex;
       align-items: center;
-      gap: 5px
+      gap: 5px;
+      width: 100px;
     }
 
     .containerDescriptionAndDate {
@@ -462,8 +484,8 @@ controls billSplit and Expenses
   .tabsExpensesAndSplitsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 520px;
-    margin: 0px auto 10px auto;
+    max-width: 500px;
+    margin: 0px auto 0px auto;
     border-radius: 15px 15px 0px 0px;
     border: $teal 2px solid;
     ;
@@ -559,9 +581,13 @@ controls billSplit and Expenses
 }
 
 @media (min-width: 1000px) {
+  .noCheckbox {
+    padding-top: 21px;
+  }
+
   .dashboard {
     display: flex;
-    margin: 20px auto;
+    margin: 99px auto 20px auto;
     width: inherit;
     flex-direction: row-reverse;
     max-width: 1200px;
@@ -579,6 +605,14 @@ controls billSplit and Expenses
       width: 45%;
       max-width: 600px;
     }
+  }
+
+  .dashboardHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
   }
 }
 

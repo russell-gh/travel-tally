@@ -1,0 +1,66 @@
+@import "variables";
+
+
+.converterContainter {
+  background-color: $green;
+  padding: 15px;
+  border-radius: 24px;
+  border: black solid 2px;
+  width: 230px;
+
+  h2 {
+    margin: 0px;
+    color: $teal;
+    text-align: center;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  select {
+    height: 36px;
+    padding: 3px;
+    border: #b3b3b3 2px;
+    border-radius: 8px;
+    border-style: inset;
+    font-size: 16px;
+  }
+
+  .btn {
+    transition: background-color 0.3s ease-in-out;
+    background-color: $teal;
+    color: white;
+    margin-top: 10px;
+  }
+
+  .btn:hover {
+    background-color: rgb(112, 12, 12);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  input {
+    margin: 0px
+  }
+
+  .fromContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 232px;
+
+    label {
+      flex-basis: 100%;
+    }
+
+    input {
+      border-radius: 8px 0px 0px 8px;
+      border-right: 0px
+    }
+
+    select {
+      border-radius: 0px 8px 8px 0px;
+    }
+
+  }
+}

@@ -169,7 +169,7 @@ export const AddExpense = ({ animatingOut }) => {
               </div>
             );
           })}
-          <div className="containerBtnPopUp">
+          <div className="containerBtnSplit">
             <Button
               onClick={handleRemovePerson}
               text={"-"}
@@ -179,11 +179,6 @@ export const AddExpense = ({ animatingOut }) => {
               onClick={handleAddPerson}
               text={"+"}
               className={"splitAddPerson"}
-            />
-            <Button
-              onClick={handleEvenSplit}
-              text={"Evenly"}
-              className={"splitEvenly"}
             />
           </div>
         </>
@@ -260,7 +255,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className="flex amountContainer">
         <FormElement
           type={"number"}
           label={"Amount"}
@@ -279,7 +274,7 @@ export const AddExpense = ({ animatingOut }) => {
         />
       </div>
 
-      <div className="flex">
+      <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
         <FormElement
           type={"select"}
           label={"Split"}
@@ -291,12 +286,19 @@ export const AddExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
         />
+        {formData.split && (
+          <Button
+            onClick={handleEvenSplit}
+            text={"Split evenly"}
+            className={"splitEvenly"}
+          />
+        )}
       </div>
       {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
-          className="cancelBtn"
+          className="cancelBtnExpense"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
           disabled={animatingOut}

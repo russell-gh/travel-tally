@@ -1,9 +1,12 @@
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
+/*
+**************************
+            SASS
+**************************
+*/
+@import "variables";
+/*
+************END***********
+*/
 
 .expenseContainer {
   max-width: 430px;
@@ -21,15 +24,112 @@ $grey: #b3b3b3;
   padding: 15px;
   border-radius: 24px;
   border: black solid 2px;
-  font-size: 16px; // made smaller for easier styling
+  font-size: 16px;
   max-width: 460px;
+  max-height: 75vh;
+  overflow-y: auto;
+
+  .btn {
+    transition: background-color 0.3s ease-in-out;
+
+    background-color: $teal;
+    color: white
+  }
+
+  .splitAddPerson,
+  .splitRemovePerson {
+    background-color: rgba(27, 126, 40, 0);
+    border-radius: 100%;
+    align-self: center;
+    padding: 0px;
+    color: $teal;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: $teal solid 2px;
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0px;
+    padding-bottom: 5px;
+  }
+
+  .splitRemovePerson:hover,
+  .splitAddPerson:hover {
+    background-color: $teal;
+    color: $green
+  }
+
+  select {
+    height: 36px;
+    padding: 3px;
+    border: #b3b3b3 2px;
+    border-radius: 8px;
+    border-style: inset;
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 16px;
+  }
+
+  .validationError {
+    color: red;
+  }
+
+  .cancelBtnExpense {
+    padding: 8px 20px
+  }
+
+  .cancelBtnExpense:hover {
+    background-color: rgb(112, 12, 12);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .expenseSubmit:hover,
+  .splitEvenly:hover {
+    background-color: rgb(27, 126, 40);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .containerBtnSplit {
+    display: flex;
+    gap: 10px;
+  }
+
+  #endDatePicker,
+  #datePicker {
+    width: 120px;
+    padding: 1px 3px;
+  }
 
   p {
     margin: 0px;
   }
 
-  #currencySelectExpense {
-    margin-left: auto;
+  .amountContainer {
+
+    label {
+      order: 1;
+    }
+
+    input {
+      order: 3;
+      width: 110px;
+      border-radius: 0px 8px 8px 0px;
+    }
+
+    #currencySelectExpense {
+      order: 2;
+      margin-left: auto;
+      border-radius: 8px 0px 0px 8px;
+      border-right: 0px
+    }
+
+    .validationError {
+      order: 4;
+    }
   }
 
   .flex {
@@ -44,10 +144,11 @@ $grey: #b3b3b3;
     }
 
     .paidContainer {
-      flex-basis: 100%;
       text-align: right;
       margin-top: 3px;
-      ;
+      display: flex;
+      margin-bottom: 3px;
+      gap: 2px;
 
       input {
         height: 13px;
@@ -78,14 +179,70 @@ $grey: #b3b3b3;
     }
   }
 
+  .containerSplitPerson {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 7px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    border-top: $teal 2px dashed;
+
+    .flex {
+      width: 100%;
+    }
+  }
+
+  .containerSplitEvenly {
+    label {
+      order: 1;
+    }
+
+    .btn {
+      order: 3;
+      margin: 0px;
+      padding: 7.5px 25px;
+    }
+
+    select {
+      order: 2;
+      margin-left: auto;
+      margin-right: 3px;
+    }
+  }
+
+  .containerAmountSplit {
+    label {
+      order: 1;
+    }
+
+    .paidContainer {
+      order: 2;
+      margin-left: auto;
+      margin-right: 3px;
+
+      input {
+        width: 20px;
+        height: 20px;
+
+      }
+    }
+
+    >input {
+      order: 3;
+      width: 120px;
+    }
+
+    .validationError {
+      order: 4;
+    }
+  }
+
+
   input,
   label {
     display: inline;
-  }
-
-  .btn {
-    background-color: $navy;
-    color: white
   }
 
   @media (min-width: 376px) {
@@ -94,9 +251,26 @@ $grey: #b3b3b3;
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 460px) {
     .flex {
       width: 80%;
     }
+
+    .containerSplitPerson {
+      width: 80%;
+
+      .flex {
+        width: 100%;
+      }
+    }
+  }
+
+}
+
+@media (min-height: 1000px) {
+
+  .expenseContainer,
+  .editContainer {
+    max-height: 60vh;
   }
 }

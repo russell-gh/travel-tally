@@ -79,7 +79,6 @@ export function createDataForCharts(
       );
     }
   }
-  console.log("without owed", dataArray);
   return dataArray;
 }
 
@@ -115,12 +114,9 @@ export function createDateIncludingOwed(splits, expenses, chartData) {
   let arrayLeft = _chartData[2];
   let arrayOverspend = _chartData[3];
 
-  console.log(arrayLeft, arrayOverspend, totalOwedArr);
-
   for (let i = 0; i < arrayLeft.length; i++) {
     if (arrayLeft[i] !== 0) {
       const leftAfterOwed = arrayLeft[i] * 100 - totalOwedArr[i] * 100;
-      console.log(arrayLeft[i], totalOwedArr[i], leftAfterOwed);
       if (leftAfterOwed > 0) {
         arrayLeft[i] = addDecimals(leftAfterOwed);
       } else if (leftAfterOwed <= 0) {
@@ -136,11 +132,9 @@ export function createDateIncludingOwed(splits, expenses, chartData) {
     }
   }
 
-  console.log(arrayLeft, arrayOverspend);
-
   _chartData[2] = arrayLeft;
   _chartData[3] = arrayOverspend;
-  console.log(_chartData);
+
   return _chartData;
 }
 

@@ -16,7 +16,7 @@ import "./css/splashPage.scss";
 import DeletePopUp from "./components/dashboard/DeletePopUp";
 import { useState } from "react";
 import EditExpense from "./components/EditExpense";
-import { animationPopUp } from "./animations";
+import { animationPopUp } from "./animations/animations";
 import SplashPage from "./components/SplashPage";
 import CheckTrips from "./components/dashboard/CheckTrips";
 import Converter from "./components/Converter";
@@ -72,6 +72,7 @@ const Interface = () => {
     DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
     EditExpense: <EditExpense animatingOut={!popUp.component} />,
     AddExpense: <AddExpense animatingOut={!popUp.component} />,
+    Converter: <Converter animatingOut={!popUp.component} />,
   };
 
   return (

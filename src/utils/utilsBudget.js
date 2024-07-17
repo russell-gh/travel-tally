@@ -34,7 +34,7 @@ export function calculateTotalSpend(expenses, splits) {
 
     if (isNaN(totalSpend)) {
       console.log("Something went wrong with calculating total.");
-      return "<p>Something went wrong with the calculations.</p>";
+      return "";
     }
 
     totalSpend = Number(totalSpend / 100).toFixed(2);

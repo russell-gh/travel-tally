@@ -3,7 +3,6 @@ import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
 import FormElement from "../../reusable-code/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
-import BillSplitExpense from "./BillSplitExpense";
 
 const BillSplitItems = ({
   splits,
@@ -39,7 +38,6 @@ const BillSplitItems = ({
       {arrayOfSplits.map((split) => {
         const { id, amount, paid, description, date, name } = split;
         const { fromCurrency, toValue, fromValue } = amount;
-        console.log(toValue);
         return (
           <div
             className={`billSplitItem ${

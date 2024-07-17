@@ -17,7 +17,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
   };
 
   return (
-    <>
+    <div className="containerSplitPerson">
       <div className="flex">
         <FormElement
           type={"text"}
@@ -30,12 +30,12 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className="flex containerAmountSplit">
         <FormElement
           type={"number"}
           label={"Amount"}
           name={`amount`}
-          id={`splitAmount` + tag}
+          id={`splitAmount${tag} splitAmount`}
           minValue={0}
           value={data && data.amount ? data.amount : ""}
           //   error={errors["amount"]}
@@ -52,7 +52,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 $teal: #235b89;
 
 .splashPage {
-  height: calc(100vh - 208px); //why does this not work?
+  height: calc(100vh - 150px);
   background-color: $teal;
   padding: 50px 20px;
   display: flex;
@@ -23,6 +23,7 @@ $teal: #235b89;
     transform: translate(-50%, -50%);
     width: 68%;
     height: auto;
+    margin-top: 15px;
     aspect-ratio: 1/1;
 
     .logo {

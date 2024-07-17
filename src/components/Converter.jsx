@@ -1,13 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import FormElement from "../reusable-code/FormElement";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrencyNames, selectCurrencyRates } from "../redux/homeSlice";
 import { convertCurrency } from "../utils/expenseData";
+import Button from "../reusable-code/Button";
+import { togglePopUp } from "../redux/homeSlice";
+import "../css/converter.scss";
 
-const Converter = () => {
+const Converter = ({ animatingOut }) => {
   const currencies = useSelector(selectCurrencyNames);
   const rates = useSelector(selectCurrencyRates);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     from: 0,
     fromCurrency: "USD",
@@ -29,8 +33,9 @@ const Converter = () => {
   };
 
   return (
-    <>
-      <div className="flex">
+    <div className="converterContainter">
+      <h2>Convert here</h2>
+      <div className="flex fromContainer">
         <FormElement
           type={"number"}
           label={"From"}
@@ -56,8 +61,15 @@ const Converter = () => {
           value={convertCurrency(formData.from, formData.fromCurrency, rates)}
           callback={dataInput}
         />
+        <Button
+          text="Close"
+          className="closeBtn"
+          animation={true}
+          onClick={() => dispatch(togglePopUp())}
+          disabled={animatingOut}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
