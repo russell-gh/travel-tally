@@ -38,6 +38,7 @@ const Onboarding = () => {
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
+  const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
 
   const currencyCodes = useSelector(selectCurrencyCodes);
@@ -115,7 +116,10 @@ const Onboarding = () => {
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
     e.preventDefault();
-checkBudgetAllocationTotals(onboardingDetails)
+    if (!checkBudgetAllocationTotals(onboardingDetails)) {
+      setSliderError(true)
+    return;};
+
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -200,7 +204,6 @@ checkBudgetAllocationTotals(onboardingDetails)
 
     //use index to access currency code
     currencyCode = _countries[index].currencyCode;
-    console.log(currencyCode);
 
     if (!currencyCode) {
       currencyCode = "";
@@ -333,9 +336,12 @@ checkBudgetAllocationTotals(onboardingDetails)
                   id={question.id}
                   callback={handleChange}
                   onboardingDetails={onboardingDetails}
+                  sliderError={sliderError}
+                  setSliderError={setSliderError}
                 />
               );
             })}
+            {sliderError && <p className="validationError">There is still some of your budget left to allocate.</p>}
           </div>
         )}
 

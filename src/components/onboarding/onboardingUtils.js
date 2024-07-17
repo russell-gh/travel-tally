@@ -51,6 +51,8 @@ export const checkBudgetAllocationTotals = ({
     budgetHotel + budgetFood + budgetTransport + budgetActivities + budgetOther;
 
   if (sum < budgetTotal) {
-    console.log("still need to allocate more");
-  } else {console.log("all allocated")}
+    return false;
+  } else {
+    return true;
+  }
 };

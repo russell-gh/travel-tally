@@ -31,11 +31,17 @@ const StyledSlider = styled(Slider)(({ slidermax }) => ({
   },
 }));
 
-export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
+export const BudgetSlider = ({
+  label,
+  id,
+  callback,
+  onboardingDetails,
+  sliderError,
+  setSliderError,
+}) => {
   const [sliderMax, setSliderMax] = useState(false);
   const [position, setPosition] = useState(0);
 
-  const positionUpdate = (e) => {
     const sumOfNonActiveSliders =
       onboardingDetails.budgetHotel +
       onboardingDetails.budgetFood +
@@ -46,15 +52,21 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
 
     const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
 
+    const positionUpdate = (e) => {
+      if (sliderError && e.target.value == remaining) {
+        setSliderError(false);
+      }
+  
+
+    //if selected value is less than or equal to remaining to allocate, update slider with value. else change thumb col
     if (remaining >= e.target.value) {
       setPosition(Number(e.target.value));
-
+      //if selected value is equal to remaining to allocate, set thumb col to max
       if (e.target.value == onboardingDetails.budgetTotal) {
         setSliderMax(true);
       } else {
         setSliderMax(false);
       }
-
       callback(e);
     } else {
       setSliderMax(true);
