@@ -45,9 +45,16 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
       onboardingDetails[id];
 
     const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
+
     if (remaining >= e.target.value) {
       setPosition(Number(e.target.value));
-      setSliderMax(false);
+
+      if (e.target.value == onboardingDetails.budgetTotal) {
+        setSliderMax(true);
+      } else {
+        setSliderMax(false);
+      }
+
       callback(e);
     } else {
       setSliderMax(true);
@@ -59,7 +66,7 @@ export const BudgetSlider = ({ label, id, callback, onboardingDetails }) => {
       <p className="label">{label}</p>
       <Stack direction="row">
         <StyledSlider
-          slidermax = {sliderMax ? "#06233b" : "#235b89"}
+          slidermax={sliderMax ? "#06233b" : "#235b89"}
           value={position}
           id={id}
           name={id}
