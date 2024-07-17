@@ -4,10 +4,12 @@ export const Logo2 = () => {
       className="less_scale_preview_class"
       id="main-preview-svg"
       style={{
+        position: "absolute",
         transform: "scale(2.6)",
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
+        left: "33px",
       }}
     >
       <svg

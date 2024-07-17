@@ -7,6 +7,8 @@ const LogoText = () => {
       style={{
         width: "150px",
         display: "inline-block",
+        position: "absolute",
+        left: "-5px",
       }}
     >
       <svg

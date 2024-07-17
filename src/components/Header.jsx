@@ -5,7 +5,7 @@ import LogoText from "./LogoText";
 export const Header = () => {
   return (
     <header>
-      <div className="div">
+      <div className="logo-text-container">
         <Logo2 />
         <LogoText />
       </div>
