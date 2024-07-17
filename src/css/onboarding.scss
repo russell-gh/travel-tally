@@ -79,7 +79,7 @@
   .homeCurrency {
     height: 35px;
     width: 80px;
-    border-radius: 8px; //change to var
+    border-radius: $border-radius; //change to var
   }
 
   //budget sliders

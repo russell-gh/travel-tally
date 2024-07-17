@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import Button from "../../reusable-code/Button.jsx";
-import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { validate } from "../../validation/validate.js";
