@@ -57,6 +57,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
         const { description, id, category, date, amount, sharedId, split } =
           item;
         const isFuture = dayjs(date).isAfter(dayjs());
+        const hasBillSplit = splits.filter((split) => {
+          if (split.expenseID === id) {
+            return split;
+          }
+        });
         return (
           <div key={id}>
             <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
@@ -68,7 +73,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 sharedId={sharedId}
                 expenses={expenses}
               />
-              <div className="containerAmountAndBillSplit">
+              <div
+                className={
+                  hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
+                }
+              >
                 {split && (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}

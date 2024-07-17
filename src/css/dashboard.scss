@@ -390,7 +390,7 @@ body {
     color: white;
     margin: 0px auto 10px auto;
     display: grid;
-    grid-template-columns: 40px 1fr minmax(50px, max-content) 30px 30px;
+    grid-template-columns: 40px 1fr minmax(55px, max-content) 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
@@ -399,7 +399,8 @@ body {
     .containerAmountAndBillSplit {
       display: flex;
       align-items: center;
-      gap: 5px
+      gap: 5px;
+      width: 100px;
     }
 
     .containerDescriptionAndDate {
