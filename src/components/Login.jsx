@@ -29,16 +29,14 @@ const Login = () => {
   //====Compares Credentials to Local Storage===
   //============================================
   const onSubmit = async (e) => {
-    console.log(errors, formData);
+    console.log(errors, formData, localUser);
     Object.keys(errors).length
-      ? alert("Form Incomplete!")
+      ? console.log("Form Incomplete!")
       : !(
-          (
-            formData.password === localUser.password &&
-            formData.email === localUser.email
-          ) //TODO Change to state credentials
+          formData.password === localUser.password &&
+          formData.email === localUser.email
         )
-      ? alert("wrong email/password")
+      ? console.log("wrong email/password")
       : trips.length
       ? redirect("/dashboard")
       : redirect("/setup-profile");

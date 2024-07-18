@@ -1,7 +1,3 @@
-//TODOTODOTODOTODOTODO
-// Dropdown
-//Logo Bigger
-
 @import "variables";
 
 * {
@@ -19,7 +15,6 @@ body {
 }
 
 main {
-
   input,
   button {
     margin: auto;
@@ -53,14 +48,12 @@ input {
   }
 }
 
-// .btn:hover {
-//   background-color: $darker-green;
-// }
-
 header {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  padding: 0;
+  margin: 0;
 
   .logo {
     height: 50px;
@@ -71,7 +64,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    padding: 20px;
 
     p {
       margin: 0px;
@@ -82,6 +75,27 @@ header {
       width: 30px;
       border-radius: 100%;
     }
+  }
+  .logo2 {
+    width: 50px;
+  }
+  .logoText {
+    width: 150px;
+    padding-top: 5px;
+  }
+  .logo-text-container {
+    display: flex;
+    padding-top: 7px;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+
+  .profile-reset-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 }
 

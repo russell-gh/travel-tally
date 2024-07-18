@@ -1,5 +1,6 @@
 import Logo2 from "./Logo2";
 import Profile from "./setUpProfile/Profile";
+import LogoText from "./LogoText";
 import { useLocation } from "react-router-dom";
 import Button from "../reusable-code/Button";
 import { useDispatch } from "react-redux";
@@ -10,21 +11,18 @@ export const Header = ({ animatingOut }) => {
   const location = useLocation();
   console.log(location);
 
+
   return (
-    <header
+     <header
       className={location.pathname === "/dashboard" ? "dashboardHeader" : ""}
     >
-      <Logo2 />
-      <button
-        className="btn"
-        onClick={() => {
-          localStorage.clear();
-          location.reload();
-        }}
-      >
-        Reset
-      </button>
-      <Button
+      <div className="logo-text-container">
+        <Logo2 />
+        <LogoText />
+      </div>
+      <div className="profile-reset-container">
+        <Profile />
+     <Button
         animation={true}
         className="convertBtn"
         text="Convert"
@@ -37,7 +35,17 @@ export const Header = ({ animatingOut }) => {
           );
         }}
       />
-      <Profile />
+        <button
+          className="btn"
+          onClick={() => {
+            localStorage.clear();
+            location.reload();
+          }}
+        >
+          Reset
+        </button>
+      </div>
+
     </header>
   );
 };
