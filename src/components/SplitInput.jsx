@@ -1,20 +1,6 @@
-import React, { useEffect } from "react";
 import FormElement from "../reusable-code/FormElement";
-import { useState } from "react";
 
-const SplitInput = ({ amount, tag, parentCallback, data }) => {
-  const [formData, setFormData] = useState({
-    paid: false,
-    name: "",
-    amount: 0,
-  });
-
-  useEffect(() => {
-    if (data) {
-      setFormData(data);
-    }
-  }, []);
-
+const SplitInput = ({ tag, parentCallback, data }) => {
   const dataInput = (e) => {
     let target = e.target.name;
     let value;
@@ -24,35 +10,34 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
     } else {
       value = e.target.value;
     }
-    let input = { ...formData, [target]: value };
-    // setFormData({ ...formData, [target]: value });
-    setFormData({ ...formData, [target]: value });
-    parentCallback(input, tag);
+    if (target === "amount") {
+      value = e.target.value;
+    }
+    parentCallback({ ...data, [target]: value }, tag);
   };
 
   return (
-    <>
+    <div className="containerSplitPerson">
       <div className="flex">
         <FormElement
           type={"text"}
           label={"Name"}
           name={"name"}
           id={"nameSplit" + tag}
-          value={formData.name}
+          value={data && data.name ? data.name : ""}
           // error={errors["description"]}
           // list={"descriptionOptions"}
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className="flex containerAmountSplit">
         <FormElement
           type={"number"}
           label={"Amount"}
           name={`amount`}
-          id={`splitAmount` + tag}
+          id={`splitAmount${tag} splitAmount`}
           minValue={0}
-          maxValue={amount}
-          value={formData.amount}
+          value={data && data.amount ? data.amount : ""}
           //   error={errors["amount"]}
           callback={dataInput}
         />
@@ -62,12 +47,12 @@ const SplitInput = ({ amount, tag, parentCallback, data }) => {
             label={"Paid"}
             name={`paid`}
             id={`paidCheck` + tag}
-            value={formData.paid}
+            value={data && data.paid ? data.paid : false}
             callback={dataInput}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

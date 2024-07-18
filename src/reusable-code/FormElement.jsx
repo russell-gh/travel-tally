@@ -17,6 +17,7 @@ const FormElement = ({
   className = [],
   onKeyDown = () => {},
   checked,
+  typed = true,
 }) => {
   switch (type) {
     case "text":
@@ -39,7 +40,7 @@ const FormElement = ({
               onKeyDown(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "number":
@@ -57,7 +58,7 @@ const FormElement = ({
             min={minValue}
             max={maxValue}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
 
@@ -75,7 +76,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "date":
@@ -93,7 +94,7 @@ const FormElement = ({
               callback(e, id);
             }}
           />
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "checkbox":
@@ -110,7 +111,7 @@ const FormElement = ({
             checked={checked}
           />
           {label && <label htmlFor={id}>{label}</label>}
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "select":
@@ -143,14 +144,20 @@ const FormElement = ({
               </option>
             ))}
           </select>
-          {error && <p className="validationError">{error}</p>}
+          {typed && error && <p className="validationError">{error}</p>}
         </>
       );
     case "button":
       return (
-        <button className={className} type="submit" onClick={(e) => callback(e)}>
-          Submit
-        </button>
+        <>
+          <button
+            className={className}
+            type="submit"
+            onClick={(e) => callback(e)}
+          >
+            Submit
+          </button>
+        </>
       );
   }
 };

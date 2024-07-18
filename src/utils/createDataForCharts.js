@@ -79,6 +79,83 @@ export function createDataForCharts(
       );
     }
   }
-
   return dataArray;
+}
+
+export function createDateIncludingOwed(splits, expenses, chartData) {
+  //make copy of chartData
+  let _chartData = JSON.parse(JSON.stringify(chartData));
+
+  //function scope variable
+  let totalOwedArr = [];
+
+  // get the expenses that are bill splitting
+  const splitBillExpenses = expenses.filter((expense) => {
+    return expense.split;
+  });
+
+  const orderOfData = ["Activities", "Food", "Transport", "Hotel", "Other"];
+
+  orderOfData.forEach((category) => {
+    const expensesCategories = filterCategories(splitBillExpenses, category); // filters expenses on categories so totalspend can be calculated per category
+
+    const totalOwed =
+      expensesCategories.length === 0
+        ? 0
+        : getTotalOwed(expensesCategories, splits);
+
+    totalOwedArr.push(totalOwed);
+  });
+
+  // add total owed to the data for chart
+  _chartData.push(totalOwedArr);
+
+  //take owed away from left or overspend
+  let arrayLeft = _chartData[2];
+  let arrayOverspend = _chartData[3];
+
+  for (let i = 0; i < arrayLeft.length; i++) {
+    if (arrayLeft[i] !== 0) {
+      const leftAfterOwed = arrayLeft[i] * 100 - totalOwedArr[i] * 100;
+      if (leftAfterOwed > 0) {
+        arrayLeft[i] = addDecimals(leftAfterOwed);
+      } else if (leftAfterOwed <= 0) {
+        arrayLeft[i] = 0;
+      }
+    } else if (arrayLeft[i] === 0) {
+      const leftAfterOwed = arrayOverspend[i] * 100 - totalOwedArr[i] * 100;
+      if (leftAfterOwed > 0) {
+        arrayOverspend[i] = addDecimals(leftAfterOwed);
+      } else if (leftAfterOwed <= 0) {
+        arrayOverspend[i] = 0;
+      }
+    }
+  }
+
+  _chartData[2] = arrayLeft;
+  _chartData[3] = arrayOverspend;
+
+  return _chartData;
+}
+
+export function getTotalOwed(expenses, splits) {
+  let totalOwedArr = [];
+
+  //calculates total owed per split bill
+  expenses.forEach((expense) => {
+    const arrayOfSplits = splits.filter((split) => {
+      return split.expenseID === expense.id && !split.paid;
+    });
+    const totalOwedPerSplit = arrayOfSplits.reduce((acc, value) => {
+      return acc + value.amount.toValue;
+    }, 0);
+    totalOwedArr.push(totalOwedPerSplit);
+  });
+
+  //calculates total of all owed
+  const totalOwed = totalOwedArr.reduce((acc, value) => {
+    return acc + value;
+  }, 0);
+
+  return addDecimals(totalOwed);
 }

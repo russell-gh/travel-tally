@@ -14,7 +14,7 @@ export function calculateTotalSpend(expenses, splits) {
   const _expenses = [...expenses];
   const priceArr = _expenses.map((item) => {
     let toValue = item.amount.toValue;
-    if (item.splitBill === true) {
+    if (item.split === true) {
       const arrayOfSplits = splits.filter((split) => {
         return split.expenseID === item.id;
       });
@@ -34,7 +34,7 @@ export function calculateTotalSpend(expenses, splits) {
 
     if (isNaN(totalSpend)) {
       console.log("Something went wrong with calculating total.");
-      return "<p>Something went wrong with the calculations.</p>";
+      return "";
     }
 
     totalSpend = Number(totalSpend / 100).toFixed(2);
@@ -145,11 +145,10 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
     if (values[0].amount) {
       for (const expense of values) {
         let toValue = expense.amount.toValue;
-        if (expense.splitBill === true) {
+        if (expense.split === true) {
           const arrayOfSplits = splits.filter((split) => {
             return split.expenseID === expense.id;
           });
-
           arrayOfSplits.forEach((split) => {
             toValue -= split.amount.toValue;
           });
@@ -177,4 +176,21 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
   });
 
   return arrValues;
+}
+
+export function nFormatter(num) {
+  const lookup = [
+    { value: 1, symbol: "", digits: 2 },
+    { value: 1e3, symbol: "k", digits: 1 },
+    { value: 1e6, symbol: "M", digits: 1 },
+    { value: 1e9, symbol: "B", digits: 1 },
+    { value: 1e12, symbol: "T", digits: 1 },
+    { value: 1e15, symbol: "Q", digits: 1 },
+  ];
+
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  const item = lookup.findLast((item) => num >= item.value);
+  return item
+    ? (num / item.value).toFixed(item.digits).concat(item.symbol)
+    : "0";
 }

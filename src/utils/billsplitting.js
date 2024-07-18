@@ -9,6 +9,13 @@ export function splitExpenseBill(splitData, expense) {
   let allSplits = [];
 
   splitData.forEach((bill) => {
+    if (!bill.paid) {
+      bill.paid = false;
+    }
+    if (!bill.converted) {
+      bill.converted = bill.amount;
+    }
+
     let newAmount = {
       fromValue: Number(bill.amount),
       toValue: Number(bill.converted),

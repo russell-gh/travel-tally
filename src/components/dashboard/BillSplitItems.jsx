@@ -3,7 +3,6 @@ import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
 import FormElement from "../../reusable-code/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
-import BillSplitExpense from "./BillSplitExpense";
 
 const BillSplitItems = ({
   splits,
@@ -52,7 +51,7 @@ const BillSplitItems = ({
               className="paidIcon"
             />
             <div className="containerNameAndDate">
-              <h2>{!tabBillSplit ? name : description + " - " + name}</h2>
+              <h2>{name}</h2>
               <p>{unixToDate(date)}</p>
             </div>
             <div>

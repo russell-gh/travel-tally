@@ -78,7 +78,8 @@ export const homeSlice = createSlice({
     },
     togglePopUp: (state, { payload }) => {
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
-      state.splitData = [];
+      state.splitData = [{ amount: 0, name: "", paid: false }];
+      state.splitMax = 0;
       if (!payload) {
         state.popUp = {};
         saveStore("homeSlice", state);
@@ -143,7 +144,7 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
 
-    toggleHide: (state, { payload }) => {
+    toggleDisplay: (state, { payload }) => {
       state[payload.key] = payload.value;
       saveStore("homeSlice", state);
     },
@@ -175,18 +176,43 @@ export const homeSlice = createSlice({
       }
       saveStore("homeSlice", state);
     },
+
+    setSplitMax: (state, { payload }) => {
+      state.splitMax = Number(payload.value); // Sets the expense value in the store so it is in the global scope
+    },
+
+    setPaid: (state, { payload }) => {
+      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+      const index = getIndex(payload.data, payload.id, "id");
+      state.trips[indexTrip].splits[index].paid = true;
+    },
     setSplitData: (state, { payload }) => {
-      console.log(payload.data, payload.tag, "REDUCER");
+      if (payload.tag === -1) {
+        state.splitData.splice(state.splitData.length - 1, 1);
+        return;
+      }
+      if (payload.tag === -2) {
+        state.splitData.push({ amount: 0, name: "", paid: false });
+      }
       if (state.splitData.length === 0) {
         state.splitData.push(payload.data);
       } else {
         state.splitData[payload.tag] = payload.data;
       }
-    },
-    setPaid: (state, { payload }) => {
-      const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
-      const index = getIndex(payload.data, payload.id, "id");
-      state.trips[indexTrip].splits[index].paid = true;
+      const total = state.splitData.reduce((a, b) => a + b.amount, 0);
+      const maxRemaining = state.splitMax - (total - payload.data.amount);
+
+      if (total > state.splitMax) {
+        //over budget
+        state.splitData[payload.tag] = {
+          ...payload.data,
+          amount: maxRemaining,
+        };
+      } else {
+        state.splitData[payload.tag] = payload.data;
+      }
+
+      saveStore("homeSlice", state);
     },
   },
 });
@@ -197,11 +223,13 @@ export const {
   togglePopUp,
   formEvent,
   addExpenseData,
-  toggleHide,
+  toggleDisplay,
   deleteToEdit,
   addSplitData,
   setSplitData,
   addTrip,
+  setSplitMax,
+  calculateSplitMax,
   setPaid,
 } = homeSlice.actions;
 
@@ -222,7 +250,10 @@ export const selectHideFutureExpenses = (state) =>
   state.home.hideFutureExpenses;
 export const selectHidePaidSplitBills = (state) =>
   state.home.hidePaidSplitBills;
+export const selectShowBillSplits = (state) => state.home.showBillSplits;
 export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
+export const selectSplitMax = (state) => state.home.splitMax;
+export const selectSplitValues = (state) => state.home.splitValues;
 
 export default homeSlice.reducer;

@@ -14,7 +14,7 @@ import ChartBudget from "./ChartBudget";
 import { useMemo } from "react";
 
 const BudgetPerDay = ({
-  expensesArray,
+  dataSpendPerDay,
   homeCurrencySymbol,
   details,
   amountOfBudgetDays,
@@ -28,15 +28,10 @@ const BudgetPerDay = ({
 
   const budget = getBudget(details, filter);
   const budgetPerDay = addDecimals((budget * 100) / amountOfBudgetDays);
-  const data = getSpendPerDay(
-    (budget * 100) / amountOfBudgetDays,
-    expensesArray,
-    splits
-  );
 
   const selectedDay = useMemo(() => {
-    return getSpendSelectedDay(data, filterDate, budgetPerDay);
-  }, [data, filterDate, budgetPerDay]);
+    return getSpendSelectedDay(dataSpendPerDay, filterDate, budgetPerDay);
+  }, [dataSpendPerDay, filterDate, budgetPerDay]);
 
   const difference = addDecimals(
     budgetPerDay * 100 - selectedDay.totalSpendPerDay

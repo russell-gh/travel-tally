@@ -1,95 +1,38 @@
-import axios from "axios";
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import AddExpense from "./components/AddExpense";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Onboarding from "./components/onboarding/Onboarding";
-import { selectPopUp, setData } from "./redux/homeSlice";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { getStore } from "./localStorage";
-import SetUpProfile from "./components/setUpProfile/SetUpProfile";
-import "./css/app.scss";
-import "./css/splashPage.scss";
-import DeletePopUp from "./components/dashboard/DeletePopUp";
-import { useState } from "react";
-import EditExpense from "./components/EditExpense";
-import { animationPopUp } from "./animations";
-import SplashPage from "./components/SplashPage";
-import CheckTrips from "./components/dashboard/CheckTrips";
+import React from "react";
+import Interface from "./Interface";
+import { useEffect, useState } from "react";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const popUpRef = useRef();
-  const popUp = useSelector(selectPopUp);
-  const [_popUp, _setPopUp] = useState(null);
+  const [online, setOnline] = useState(true);
 
   useEffect(() => {
-    getApiData();
+    window.addEventListener("online", () => {
+      setOnline(true);
+    });
+
+    window.addEventListener("offline", () => {
+      setTimeout(() => {
+        setOnline(false);
+      }, 2000);
+    });
   }, []);
-
-  const getApiData = async () => {
-    const homeSlice = getStore("homeSlice");
-    const onboardingSlice = getStore("onboardingSlice");
-    if (homeSlice || onboardingSlice) {
-      return;
-    }
-    {
-      const { data } = await axios.get(`fakeCurrencies.json`);
-      dispatch(setData({ text: "currencies", data: data.rates }));
-    }
-    {
-      const { data } = await axios.get(`currencyCodes.json`);
-      dispatch(setData({ text: "currencyCodes", data }));
-    }
-    {
-      const { data } = await axios.get(`fakeExpenseData.json`);
-      dispatch(setData({ text: "trips", data }));
-    }
-    {
-      const { data } = await axios.get(`countryInfo.json`);
-      dispatch(setData({ text: "countries", data }));
-    }
-  };
-
-  const closePopUp = () => {
-    _setPopUp(false);
-  };
-
-  useEffect(() => {
-    if (_popUp && !popUp.component) {
-      animationPopUp(popUpRef.current, "reverse", closePopUp);
-    } else if (popUp.component) {
-      _setPopUp(popUp);
-      animationPopUp(popUpRef.current);
-    }
-  }, [popUp]);
-
-  const stringToComponent = {
-    DeletePopUp: <DeletePopUp popUp={_popUp} animatingOut={!popUp.component} />,
-    EditExpense: <EditExpense animatingOut={!popUp.component} />,
-    AddExpense: <AddExpense animatingOut={!popUp.component} />,
-  };
 
   return (
     <>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/setup-profile/*" element={<SetUpProfile />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<CheckTrips />} />
-          <Route path="*" element={<SplashPage />} />
-        </Routes>
-        <div ref={popUpRef} className="popUpContainer">
-          {_popUp && stringToComponent[_popUp.component]}
+      {!online && (
+        <div
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            position: "fixed",
+            top: "0",
+            left: "0",
+          }}
+        >
+          Internet offline
         </div>
-      </main>
-      <Footer />
+      )}
+      <Interface />
     </>
   );
 };

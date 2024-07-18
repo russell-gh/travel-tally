@@ -12,8 +12,6 @@ import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 import { useState } from "react";
-import ShowFutureExpenses from "./filter/ShowFutureExpenses";
-import { includesFutureExpenses } from "../../utils/utilsDates";
 
 const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
@@ -26,11 +24,23 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   }
 
   if (expenses.length === 0) {
-    return <Message message="You have no expenses yet." className="message" />;
+    return (
+      <Message
+        message="You have no expenses yet."
+        className="message"
+        classNameContainer="messageContainer"
+      />
+    );
   }
 
   if (filtered.length === 0) {
-    return <Message message="There are no matches" className="message" />;
+    return (
+      <Message
+        message="There are no matches"
+        className="message"
+        classNameContainer="messageContainer"
+      />
+    );
   }
 
   const toggleDisplaySplit = (expenseId) => {
@@ -41,15 +51,17 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
     }
   };
 
-  const includesFuture = includesFutureExpenses(expenses);
-
   return (
-    <div className="expenses mt">
-      {includesFuture && <ShowFutureExpenses />}
+    <div className={`expenses mt ${splits.length > 0 ? "expensesSplits" : ""}`}>
       {filtered.map((item) => {
-        const { description, id, category, date, amount, sharedId, splitBill } =
+        const { description, id, category, date, amount, sharedId, split } =
           item;
         const isFuture = dayjs(date).isAfter(dayjs());
+        const hasBillSplit = splits.filter((split) => {
+          if (split.expenseID === id) {
+            return split;
+          }
+        });
         return (
           <div key={id}>
             <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
@@ -61,8 +73,12 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 sharedId={sharedId}
                 expenses={expenses}
               />
-              <div className="containerAmountAndBillSplit">
-                {splitBill && (
+              <div
+                className={
+                  hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
+                }
+              >
+                {split && (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
@@ -72,7 +88,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                   homeCurrencySymbol={homeCurrencySymbol}
                   amount={amount}
                   currencyCodes={currencyCodes}
-                  splitBill={splitBill}
+                  split={split}
                   splits={splits}
                   expenseId={id}
                 />

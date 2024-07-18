@@ -9,6 +9,8 @@ import {
   togglePopUp,
   setSplitData,
   selectSplitData,
+  setSplitMax,
+  selectSplitMax,
 } from "../redux/homeSlice";
 import Button from "../reusable-code/Button";
 import FormElement from "../reusable-code/FormElement";
@@ -25,6 +27,9 @@ import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 
 export const AddExpense = ({ animatingOut }) => {
+  const [inputValues, setInputValues] = useState([]);
+  const [friendsNo, setFriendsNo] = useState(0);
+  const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
   const tripID = useSelector(selectSelectedTripId);
@@ -40,6 +45,7 @@ export const AddExpense = ({ animatingOut }) => {
     category: "Food",
   });
   const [errors, setErrors] = useState({});
+  console.log(errors);
   let [multi, setMulti] = useState(false);
   // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
@@ -65,6 +71,7 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "false") value = false;
 
     setFormData({ ...formData, [target]: value });
+    if (target === "amount") dispatch(setSplitMax({ value }));
   };
 
   useEffect(() => {
@@ -81,6 +88,7 @@ export const AddExpense = ({ animatingOut }) => {
   };
 
   const handleSubmit = () => {
+    console.log(errors);
     if (Object.keys(errors).length) {
       console.log(formData, "FAIL", errors);
       return;
@@ -118,37 +126,50 @@ export const AddExpense = ({ animatingOut }) => {
     }
   };
 
-  let handleAddPerson = () => {
-    setSplit([
-      ...split,
-      <SplitInput
-        amount={formData.amount}
-        tag={split.length}
-        parentCallback={getSplitData}
-      />,
-    ]);
-  };
-  let handleRemovePerson = () => {
-    setSplit(split.splice(split.length - 1, 1));
+  const handleAddPerson = () => {
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -2 }));
   };
 
+  const handleRemovePerson = () => {
+    dispatch(setSplitData({ data: { amount: 0 }, tag: -1 }));
+  };
+
+  const handleEvenSplit = () => {
+    const divBy = splitData.length + 1;
+    let each = Number(formData.amount) / divBy;
+    each = Math.round(each * 100) / 100;
+    splitData.forEach((thisSplit, index) => {
+      const copy = JSON.parse(JSON.stringify(thisSplit));
+      copy.amount = each;
+      const data = copy;
+      const tag = index;
+      dispatch(setSplitData({ data, tag }));
+    });
+  };
+
+  //handles on form change
   const getSplitData = (data, tag) => {
+    data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
 
-  const [split, setSplit] = useState([
-    <SplitInput
-      amount={formData.amount}
-      tag={0}
-      parentCallback={getSplitData}
-    />,
-  ]);
   const renderSplit = () => {
     if (formData.split === true) {
       return (
         <>
-          {split}
-          <div className="containerBtnPopUp">
+          {splitData.map(function (split, index) {
+            return (
+              <div className="flex">
+                <SplitInput
+                  maxAmount={formData.amount}
+                  tag={index}
+                  parentCallback={getSplitData}
+                  data={split}
+                />
+              </div>
+            );
+          })}
+          <div className="containerBtnSplit">
             <Button
               onClick={handleRemovePerson}
               text={"-"}
@@ -234,7 +255,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
         />
       </div>
-      <div className="flex">
+      <div className="flex amountContainer">
         <FormElement
           type={"number"}
           label={"Amount"}
@@ -253,7 +274,7 @@ export const AddExpense = ({ animatingOut }) => {
         />
       </div>
 
-      <div className="flex">
+      <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
         <FormElement
           type={"select"}
           label={"Split"}
@@ -265,12 +286,19 @@ export const AddExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
         />
+        {formData.split && (
+          <Button
+            onClick={handleEvenSplit}
+            text={"Split evenly"}
+            className={"splitEvenly"}
+          />
+        )}
       </div>
       {renderSplit()}
       <div className="containerBtnPopUp">
         <Button
           text="Cancel"
-          className="cancelBtn"
+          className="cancelBtnExpense"
           animation={true}
           onClick={() => dispatch(togglePopUp())}
           disabled={animatingOut}

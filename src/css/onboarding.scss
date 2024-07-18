@@ -1,11 +1,4 @@
-//CHANGE TO IMPORT VARS
-$teal: #235b89;
-$green: #d6ee79;
-$darker-green: #87964bd2;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
+@import "variables";
 
 @mixin flex($direction: row) {
   display: flex;
@@ -23,6 +16,7 @@ $grey: #b3b3b3;
     margin: 0;
     @include flex(column);
     position: relative;
+    margin: 2em;
   }
 
   label,
@@ -85,7 +79,7 @@ $grey: #b3b3b3;
   .homeCurrency {
     height: 35px;
     width: 80px;
-    border-radius: 8px; //change to var
+    border-radius: $border-radius; //change to var
   }
 
   //budget sliders
