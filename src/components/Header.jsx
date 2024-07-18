@@ -9,16 +9,18 @@ export const Header = () => {
         <Logo2 />
         <LogoText />
       </div>
-      <Profile />
-      <button
-        className="btn"
-        onClick={() => {
-          localStorage.clear();
-          location.reload();
-        }}
-      >
-        Reset
-      </button>
+      <div className="profile-reset-container">
+        <Profile />
+        <button
+          className="btn"
+          onClick={() => {
+            localStorage.clear();
+            location.reload();
+          }}
+        >
+          Reset
+        </button>
+      </div>
     </header>
   );
 };

@@ -49,7 +49,7 @@ input {
 
 header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 55px;
   padding: 0;
   margin: 0;
@@ -76,20 +76,28 @@ header {
     }
   }
   .logo2 {
-    scale: 0.5;
+    width: 50px;
   }
-  // .logo-text-container {
-  //   bottom: 0;
+  .logoText {
+    width: 100px;
+  }
+  .logo-text-container {
+    display: flex;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
 
   // }
 
-  .btn {
-    position: absolute;
-    // align-items: center;
-    // padding: 5px;
-    right: 10px;
-    margin: 5px;
-  }
+  // .btn {
+  //   position: absolute;
+  //   // align-items: center;
+  //   // padding: 5px;
+  //   right: 10px;
+  //   margin: 5px;
+  // }
 
   // className="logotext"
   // style={{
