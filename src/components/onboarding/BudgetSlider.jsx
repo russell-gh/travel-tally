@@ -88,7 +88,7 @@ export const BudgetSlider = ({
           valueLabelDisplay="on"
           onChange={positionUpdate}
         />
-        <p className="budgetTotal">{onboardingDetails.budgetTotal}</p>
+        <p className="budgetTotal">{onboardingDetails.budgetTotal}{onboardingDetails.homeCurrencySymbol}</p>
       </Stack>
     </div>
   );

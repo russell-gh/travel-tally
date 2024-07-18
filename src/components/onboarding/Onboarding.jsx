@@ -21,9 +21,9 @@ const Onboarding = () => {
 
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
-    currencies.push({ value: key, name: key });
+    currencies.push({ value: key, name: key});
   }
-  
+
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     dates: {
@@ -34,6 +34,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: currencies[0].value,
+    homeCurrencySymbol:"",
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -109,7 +110,7 @@ const Onboarding = () => {
       input = parseInt(e.target.value);
     }
     setTyped({...typed, [e.target.name]:true})
-    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
+    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });  
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
@@ -177,6 +178,10 @@ const Onboarding = () => {
       getDestinationCurrency(onboardingDetails.destination);
     }
 
+    if (currentFormSection===3 && !errorsPresent) {
+      setOnboardingDetails({...onboardingDetails, homeCurrencySymbol:currencyCodes[onboardingDetails.homeCurrency].symbol})
+    }
+
     //if no errors are present, increment state which renders next section
     !errorsPresent ? setCurrentFormSection(currentFormSection + 1) : "";
   };
@@ -194,7 +199,6 @@ const Onboarding = () => {
     //find index where iso2 code from api matches iso2 code in json data
     if (index === -1) {
       const countryFromApi = await getCountryFromCity(city);
-      console.log(countryFromApi);
       //=======
       index = _countries.findIndex((c) => {
         return c.isoCode2 === countryFromApi;
