@@ -4,6 +4,8 @@ import { getIndex } from "../utils/utils";
 import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
+import axios from "axios";
+import { addExpenseRemotely } from "../utils/sync";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
@@ -141,6 +143,8 @@ export const homeSlice = createSlice({
       }
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
       state.splitData = [];
+      const tripID = state.selectedTripId;
+      addExpenseRemotely({expense, tripID});
       saveStore("homeSlice", state);
     },
 
