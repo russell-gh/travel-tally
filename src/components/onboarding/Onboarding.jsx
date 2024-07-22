@@ -99,7 +99,7 @@ const Onboarding = () => {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
-      setTyped({...typed, [e.target.name]:true})
+      setTyped({ ...typed, [e.target.name]: true });
       setOnboardingDetails(data);
       return;
     }
@@ -108,14 +108,14 @@ const Onboarding = () => {
     if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
-    setTyped({...typed, [e.target.name]:true})
+    setTyped({ ...typed, [e.target.name]: true });
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = (e) => {
     e.preventDefault();
-checkBudgetAllocationTotals(onboardingDetails)
+    checkBudgetAllocationTotals(onboardingDetails);
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -163,11 +163,9 @@ checkBudgetAllocationTotals(onboardingDetails)
   const formButtonHandler = () => {
     //display errors present for any elems which haven't yet been interacted with (and therefore not displayed)
     //create func to check errcurrentFormSection
-    
 
-    const errorsPresent = checkFormSectionErrors(currentFormSection, errors); 
+    const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
     // setTyped(true); //for all the errs in that section.
-    
 
     //if section 1 has no errors run the below func on click and pass in destination state.
     if (currentFormSection === 1 && !errorsPresent) {

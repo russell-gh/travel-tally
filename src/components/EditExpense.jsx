@@ -175,6 +175,8 @@ export const EditExpense = ({ animatingOut }) => {
           id={"endDatePicker"}
           error={errors["endDate"]}
           callback={dataInput}
+          minDate={getStartDateForMultiDay(formData.date)}
+          maxDate={getDateForForm(actualEndDate)}
         />
       );
     } else {

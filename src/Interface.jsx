@@ -29,7 +29,19 @@ const Interface = () => {
 
   useEffect(() => {
     getApiData();
+    // getTripsTryOut();
   }, []);
+
+  // const getTripsTryOut = async () => {
+  //   try {
+  //     const results = await axios.get(`https://localhost:6001/trips`, {
+  //       id: 1,
+  //     });
+  //     console.log(results);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const getApiData = async () => {
     const homeSlice = getStore("homeSlice");

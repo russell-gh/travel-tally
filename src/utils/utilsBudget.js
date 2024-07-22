@@ -51,7 +51,12 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
     console.log("something went wrong with getting the currency symbol");
   }
-  return currencyCodes[currencyCode].symbol;
+
+  if (currencyCodes[currencyCode].hexCode) {
+    return currencyCodes[currencyCode].hexCode;
+  }
+
+  return currencyCodes[currencyCode].symbol_native;
 }
 
 export function getBudget(data, value) {

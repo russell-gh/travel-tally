@@ -45,7 +45,6 @@ const SplashPage = () => {
       const hiddenDelay = 3.7 - lineDelay * 0.1;
       const motionDuration = duration - (lineDelay * 2 + visibilityOffset); // Duration for the motion path animation
       const lineDuration = duration - lineDelay;
-      console.log(hiddenDelay);
 
       gsap
         .timeline({
