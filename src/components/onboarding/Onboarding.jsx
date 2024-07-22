@@ -15,13 +15,15 @@ import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
+import axios from "axios";
+import { jsxs } from "react/jsx-runtime";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
 
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
-    currencies.push({ value: key, name: key});
+    currencies.push({ value: key, name: key });
   }
 
   const [onboardingDetails, setOnboardingDetails] = useState({
@@ -34,7 +36,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: currencies[0].value,
-    homeCurrencySymbol:"",
+    homeCurrencySymbol: "",
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -100,7 +102,7 @@ const Onboarding = () => {
         ...onboardingDetails,
         dates: { ...onboardingDetails.dates, [e.target.name]: input },
       };
-      setTyped({...typed, [e.target.name]:true})
+      setTyped({ ...typed, [e.target.name]: true });
       setOnboardingDetails(data);
       return;
     }
@@ -109,16 +111,17 @@ const Onboarding = () => {
     if (e.target.name.includes("budget")) {
       input = parseInt(e.target.value);
     }
-    setTyped({...typed, [e.target.name]:true})
-    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });  
+    setTyped({ ...typed, [e.target.name]: true });
+    setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!checkBudgetAllocationTotals(onboardingDetails)) {
-      setSliderError(true)
-    return;};
+      setSliderError(true);
+      return;
+    }
 
     //if errors exist abort early
     if (Object.keys(errors).length) {
@@ -159,7 +162,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-
+    await axios.post("http://localhost:6001/onboarding", JSON.stringify(_onboardingDetails));
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
     redirect("/dashboard");
   };
@@ -167,19 +170,21 @@ const Onboarding = () => {
   const formButtonHandler = () => {
     //display errors present for any elems which haven't yet been interacted with (and therefore not displayed)
     //create func to check errcurrentFormSection
-    
 
-    const errorsPresent = checkFormSectionErrors(currentFormSection, errors); 
+    const errorsPresent = checkFormSectionErrors(currentFormSection, errors);
     // setTyped(true); //for all the errs in that section.
-    
 
     //if section 1 has no errors run the below func on click and pass in destination state.
     if (currentFormSection === 1 && !errorsPresent) {
       getDestinationCurrency(onboardingDetails.destination);
     }
 
-    if (currentFormSection===3 && !errorsPresent) {
-      setOnboardingDetails({...onboardingDetails, homeCurrencySymbol:currencyCodes[onboardingDetails.homeCurrency].symbol})
+    if (currentFormSection === 3 && !errorsPresent) {
+      setOnboardingDetails({
+        ...onboardingDetails,
+        homeCurrencySymbol:
+          currencyCodes[onboardingDetails.homeCurrency].symbol,
+      });
     }
 
     //if no errors are present, increment state which renders next section
@@ -344,7 +349,11 @@ const Onboarding = () => {
                 />
               );
             })}
-            {sliderError && <p className="validationError">There is still some of your budget left to allocate.</p>}
+            {sliderError && (
+              <p className="validationError">
+                There is still some of your budget left to allocate.
+              </p>
+            )}
           </div>
         )}
 
