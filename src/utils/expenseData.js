@@ -159,6 +159,7 @@ export function mergeExpenseDays(expense, allExpenses) {
       multiDay: true,
       currency: expenseArray[0].amount.fromCurrency,
       amount: Math.round(totalAmount) / 100,
+      sharedID: expenseArray[0].sharedID,
     };
   }
   return { newExpense, indexs };
