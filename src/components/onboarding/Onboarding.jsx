@@ -162,7 +162,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-    await axios.post("http://localhost:6001/onboarding", JSON.stringify(_onboardingDetails));
+    await axios.post("http://localhost:6001/onboarding", {_onboardingDetails});
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
     redirect("/dashboard");
   };
