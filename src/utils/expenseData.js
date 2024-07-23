@@ -69,7 +69,7 @@ export function handleData({ formData, splitData }, home, data) {
     billSplit = splitExpenseBill(splits, expense, data);
   }
 
-  console.log(JSON.stringify(expense));
+  console.log(billSplit, 'IN EXPENSEDATA');
 
   return { expense, billSplit };
 }
