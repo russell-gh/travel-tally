@@ -23,7 +23,7 @@ const BillSplitItems = ({
 
   if (expenseId) {
     arrayOfSplits = splits.filter((split) => {
-      return split.expenseID === expenseId;
+      return split.expenseId === expenseId;
     });
   }
 

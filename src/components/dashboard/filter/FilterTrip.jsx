@@ -25,7 +25,9 @@ const FilterTrip = () => {
         className="dropDownTrips"
         value={selectedTripId}
         callback={(e) => {
-          dispatch(formEvent({ id: e.target.id, value: e.target.value }));
+          dispatch(
+            formEvent({ id: e.target.id, value: Number(e.target.value) })
+          );
         }}
         options={arrDestinations.reverse()}
       />

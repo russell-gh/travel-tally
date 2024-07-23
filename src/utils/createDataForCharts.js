@@ -144,7 +144,7 @@ export function getTotalOwed(expenses, splits) {
   //calculates total owed per split bill
   expenses.forEach((expense) => {
     const arrayOfSplits = splits.filter((split) => {
-      return split.expenseID === expense.id && !split.paid;
+      return split.expenseId === expense.id && !split.paid;
     });
     const totalOwedPerSplit = arrayOfSplits.reduce((acc, value) => {
       return acc + value.amount.toValue;

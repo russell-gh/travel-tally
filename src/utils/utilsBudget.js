@@ -16,7 +16,7 @@ export function calculateTotalSpend(expenses, splits) {
     let toValue = item.amount.toValue;
     if (item.split === true) {
       const arrayOfSplits = splits.filter((split) => {
-        return split.expenseID === item.id;
+        return split.expenseId === item.id;
       });
 
       arrayOfSplits.forEach((split) => {
@@ -152,7 +152,7 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
         let toValue = expense.amount.toValue;
         if (expense.split === true) {
           const arrayOfSplits = splits.filter((split) => {
-            return split.expenseID === expense.id;
+            return split.expenseId === expense.id;
           });
           arrayOfSplits.forEach((split) => {
             toValue -= split.amount.toValue;

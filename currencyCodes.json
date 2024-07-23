@@ -20,7 +20,6 @@
   "EUR": {
     "symbol": "€",
     "name": "Euro",
-    "hexCode": "&#x20AC;",
     "symbol_native": "€",
     "decimal_digits": 2,
     "rounding": 0,

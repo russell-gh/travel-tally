@@ -15,9 +15,11 @@ export const onboardingSlice = createSlice({
     saveProfile: (state, { payload }) => {
       if (!payload) {
         state.profile = {};
-      } else {
+      } else if (payload.value) {
         const { value, key } = payload;
         state.profile[key] = value;
+      } else {
+        state.profile = payload;
       }
       saveStore("onboardingSlice", state);
     },

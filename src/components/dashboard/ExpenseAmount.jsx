@@ -20,7 +20,7 @@ const ExpenseAmount = ({
 
   if (split && splits) {
     const arrayOfPaidSplits = splits.filter((split) => {
-      return split.expenseID === expenseId && split.paid === true;
+      return split.expenseId === expenseId && split.paid === true;
     });
     arrayOfPaidSplits.forEach((split) => {
       toValue -= split.amount.toValue;
