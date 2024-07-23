@@ -130,22 +130,22 @@ export const homeSlice = createSlice({
       if (Array.isArray(expense)) {
         expense.forEach((element) => {
           state.trips[indexOf].expenses.push(element);
-          addExpenseRemotely({element, tripID});
+          addExpenseRemotely({ element, tripID });
         });
       } else {
         state.trips[indexOf].expenses.push(expense);
-        addExpenseRemotely({expense, tripID});
+        addExpenseRemotely({ expense, tripID });
       }
       // Push data to split array
-      console.log("IN SLICE", billSplit)
+      console.log("IN SLICE", billSplit);
       if (Array.isArray(billSplit)) {
         billSplit.forEach((element) => {
           state.trips[indexOf].splits.push(element);
-          // addSplitRemotely({element, tripID})
+          addSplitRemotely({ element, tripID });
         });
       } else {
         state.trips[indexOf].splits.push(billSplit);
-        // addSplitRemotely({billSplit, tripID})
+        addSplitRemotely({ billSplit, tripID });
       }
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
       state.splitData = [];
