@@ -69,6 +69,8 @@ export function handleData({ formData, splitData }, home, data) {
     billSplit = splitExpenseBill(splits, expense, data);
   }
 
+  console.log(billSplit, 'IN EXPENSEDATA');
+
   return { expense, billSplit };
 }
 
