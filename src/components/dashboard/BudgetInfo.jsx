@@ -87,7 +87,7 @@ const BudgetInfo = ({
           )}
         </>
       )}
-      {display === "totalBudget" && (
+      {display === "totalBudget" && stillTravelling && (
         <Budget
           expenses={expenses}
           expensesCategories={expensesCategories}
@@ -96,7 +96,7 @@ const BudgetInfo = ({
           splits={splits}
         />
       )}
-      {display === "billSplits" && (
+      {display === "billSplits" && stillTravelling && (
         <InfoBillSplits
           splits={splits}
           homeCurrencySymbol={homeCurrencySymbol}

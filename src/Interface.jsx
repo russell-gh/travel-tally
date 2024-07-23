@@ -34,10 +34,9 @@ const Interface = () => {
 
   // const getTripsTryOut = async () => {
   //   try {
-  //     const results = await axios.get(`https://localhost:6001/trips`, {
-  //       id: 1,
-  //     });
-  //     console.log(results);
+  //     const { data } = await axios.get(`http://localhost:6001/trips/${1}`);
+  //     console.log(data);
+  //     dispatch(setData({ text: "trips", data }));
   //   } catch (e) {
   //     console.log(e);
   //   }
