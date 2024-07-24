@@ -36,7 +36,7 @@ const Interface = () => {
 
   const getTripsTryOut = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:6001/trips/${1}`);
+      const { data } = await axios.get(`http://api.holidough.uk/trips/${1}`);
       dispatch(setData({ text: "trips", data }));
     } catch (e) {
       console.log(e);
@@ -45,7 +45,7 @@ const Interface = () => {
 
   const getProfileTryOut = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:6001/profile/${1}`);
+      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
       console.log(data);
       dispatch(saveProfile(data));
     } catch (e) {

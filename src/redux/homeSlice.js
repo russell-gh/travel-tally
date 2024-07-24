@@ -4,6 +4,7 @@ import { getIndex } from "../utils/utils";
 import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
+import { deleteSingleExpenseSQL } from "../utils/utilsBackEnd";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
