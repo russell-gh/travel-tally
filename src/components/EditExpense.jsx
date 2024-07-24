@@ -55,6 +55,7 @@ export const EditExpense = ({ animatingOut }) => {
   let [splitList, setSplitList] = useState([]);
   let [theseSplits, setTheseSplits] = useState([]);
   let [splitIndex, setSplitIndexs] = useState([]);
+  let [sharedID, setSharedID] = useState([]);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -84,7 +85,10 @@ export const EditExpense = ({ animatingOut }) => {
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
     dispatch(setSplitMax(copy.amount));
+    console.log(copy)
     setFormData(copy);
+    setSharedID(result.thisExpense.sharedID);
+  
     if (copy.split === true) {
       if (result.thisExpense.sharedID) {
         setThisSplit(thisTrip.splits, result.thisExpense.sharedID);
@@ -149,12 +153,15 @@ export const EditExpense = ({ animatingOut }) => {
       dispatch(addExpenseData(data));
       if (multi) {
         // delete from server with shared ID
-        let id = formData.sharedID;
+        let id = sharedID;
         deleteByID({ id, type: "shared" });
+        deleteByID({ id, type: "split" });
       } else {
         // delete from server with expense ID
-        let id = formData.id;
+        let id = popUp.id;
+        console.log(formData,"ID");
         deleteByID({ id, type: "single" });
+        deleteByID({ id, type: "split" });
       }
     } else {
       console.log("FAIL FINAL");
