@@ -27,7 +27,7 @@ export function splitExpenseBill(splitData, expense) {
       amount: newAmount,
       name: bill.name,
       paid: bill.paid,
-      expenseId: expense.id || expense.sharedID,
+      expenseID: expense.id || expense.sharedId,
       id: generateId("billSplit"),
       description: expense.description,
       date: expense.date,

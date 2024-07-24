@@ -21,7 +21,7 @@ export function handleData({ formData, splitData }, home, data) {
   // Wipes any existing id's if the expense is being edited
   if (expense.id) {
     delete expense.id;
-    delete expense.sharedID;
+    delete expense.sharedId;
   }
 
   // Creates object that replaces amount in original expense obj
@@ -96,7 +96,7 @@ export function splitExpenseDays({ expense, splits }) {
   const days = (endDate - date) / 1000 / 60 / 60 / 24 + 1;
   const newFrom = fromValue / days;
   const newTo = toValue / days;
-  expense.sharedID = generateId("sharedID");
+  expense.sharedId = generateId("sharedId");
   if (splits) {
     billSplit = splitExpenseBill(splits, expense);
   }
@@ -128,10 +128,10 @@ export function mergeExpenseDays(expense, allExpenses) {
   let indexs = [];
   let newExpense = {};
 
-  if (expense.sharedID) {
+  if (expense.sharedId) {
     allExpenses.forEach((thisExpense, index) => {
-      // Finds each expense with matching sharedID
-      if (thisExpense.sharedID === expense.sharedID) {
+      // Finds each expense with matching sharedId
+      if (thisExpense.sharedId === expense.sharedId) {
         indexs.push(index);
         expenseArray.push(thisExpense); // Adds all of them to and array
       }
@@ -159,7 +159,7 @@ export function mergeExpenseDays(expense, allExpenses) {
       multiDay: true,
       currency: expenseArray[0].amount.fromCurrency,
       amount: Math.round(totalAmount) / 100,
-      sharedID: expenseArray[0].sharedID,
+      sharedId: expenseArray[0].sharedId,
     };
   }
   return { newExpense, indexs };
@@ -190,7 +190,7 @@ export function getThisSplit(splitList, id) {
 
   splitList.forEach((thisSplit, index) => {
     // Finds each split with matching ID
-    if (thisSplit.expenseId === id) {
+    if (thisSplit.expenseID === id) {
       allSplits.push(thisSplit);
       allIndexs.push(index); // Adds all of them to and array
     }
