@@ -19,6 +19,9 @@ main {
   button {
     margin: auto;
     display: block;
+    &.loginBTN {
+      margin: auto;
+    }
   }
 }
 
