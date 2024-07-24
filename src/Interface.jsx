@@ -30,9 +30,19 @@ const Interface = () => {
 
   useEffect(() => {
     getApiData();
-    getTripsTryOut();
+    // getTripsTryOut();
     getProfileTryOut();
   }, []);
+
+  // Do we need to make this call at a different time? We need to know the homecurrency of the trip.
+  // const getCurrencyConversion = async () =>{
+  //   try {
+  //     const { data } = await axios.get(`http://api.holidough.uk/conversion/${101}`);
+  //     dispatch(setData({ text: "currencies", data }));
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   const getTripsTryOut = async () => {
     try {
@@ -67,10 +77,10 @@ const Interface = () => {
       const { data } = await axios.get(`currencyCodes.json`);
       dispatch(setData({ text: "currencyCodes", data }));
     }
-    // {
-    //   const { data } = await axios.get(`fakeExpenseData.json`);
-    //   dispatch(setData({ text: "trips", data }));
-    // }
+    {
+      const { data } = await axios.get(`fakeExpenseData.json`);
+      dispatch(setData({ text: "trips", data }));
+    }
     {
       const { data } = await axios.get(`countryInfo.json`);
       dispatch(setData({ text: "countries", data }));

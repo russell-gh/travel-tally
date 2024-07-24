@@ -5,7 +5,11 @@ import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
 import axios from "axios";
-import { addExpenseRemotely, addSplitRemotely, deleteByID } from "../utils/sync";
+import {
+  addExpenseRemotely,
+  addSplitRemotely,
+  deleteByID,
+} from "../utils/sync";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
@@ -53,15 +57,28 @@ export const homeSlice = createSlice({
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const expenses = state.trips[indexTrip].expenses;
-
-      console.log(state.popUp.sharedId, "POP UP IN SLICE")
+      console.log(state.popUp, "POP UP IN SLICE");
+      console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
         //get index of clicked expense
         const index = getIndex(expenses, state.popUp.id, "id");
         // delete expense
         expenses.splice(index, 1);
+
+        //if there are splits linked to the expense delete these as well
+        if (state.popUp.split) {
+          const splits = state.trips[indexTrip].splits;
+          let indexesSplits = [];
+          for (let i = 0; i < splits.length; i++) {
+            if (splits[i].expenseId === state.popUp.id) {
+              indexesSplits.push(i);
+            }
+          }
+          //delete the expenses
+          splits.splice(indexesSplits[0], indexesSplits.length);
+        }
         //delete the expense/split from backend
-        const id = state.popUp.id
+        const id = state.popUp.id;
         deleteByID({ id, type: "single" });
         deleteByID({ id, type: "split" });
       }
@@ -78,8 +95,8 @@ export const homeSlice = createSlice({
         //delete the expenses
         expenses.splice(indexes[0], indexes.length);
         //delete the expense/split from backend
-        const id = state.popUp.sharedId
-        console.log(id, "POP UP IN SLICE")
+        const id = state.popUp.sharedId;
+        console.log(id, "POP UP IN SLICE");
         deleteByID({ id, type: "shared" });
         deleteByID({ id, type: "split" });
       }
