@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
 import onboardingReducer from "./onboardingSlice";
 import homeReducer from "./homeSlice";
 import storage from "redux-persist/lib/storage";
@@ -14,9 +14,7 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(
-  persistConfig, reducers
-);
+const persistedReducer = persistReducer(persistConfig, reducers);
 
-export const store = configureStore(persistedReducer);
+export const store = createStore(persistedReducer);
 export const persistor = persistStore(store);
