@@ -16,7 +16,7 @@ export function calculateTotalSpend(expenses, splits) {
     let toValue = item.amount.toValue;
     if (item.split === true) {
       const arrayOfSplits = splits.filter((split) => {
-        return split.expenseID === item.id;
+        return split.expenseId === item.id;
       });
 
       arrayOfSplits.forEach((split) => {
@@ -51,7 +51,12 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
     console.log("something went wrong with getting the currency symbol");
   }
-  return currencyCodes[currencyCode].symbol;
+
+  if (currencyCodes[currencyCode].hexCode) {
+    return currencyCodes[currencyCode].hexCode;
+  }
+
+  return currencyCodes[currencyCode].symbol_native;
 }
 
 export function getBudget(data, value) {
@@ -147,7 +152,7 @@ export function getSpendPerDay(budgetPerDay, data, splits) {
         let toValue = expense.amount.toValue;
         if (expense.split === true) {
           const arrayOfSplits = splits.filter((split) => {
-            return split.expenseID === expense.id;
+            return split.expenseId === expense.id;
           });
           arrayOfSplits.forEach((split) => {
             toValue -= split.amount.toValue;

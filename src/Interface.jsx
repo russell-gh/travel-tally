@@ -20,6 +20,7 @@ import { animationPopUp } from "./animations/animations";
 import SplashPage from "./components/SplashPage";
 import CheckTrips from "./components/dashboard/CheckTrips";
 import Converter from "./components/Converter";
+import { saveProfile } from "./redux/onboardingSlice";
 
 const Interface = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,28 @@ const Interface = () => {
 
   useEffect(() => {
     getApiData();
+    getTripsTryOut();
+    getProfileTryOut();
   }, []);
+
+  const getTripsTryOut = async () => {
+    try {
+      const { data } = await axios.get(`http://api.holidough.uk/trips/${1}`);
+      dispatch(setData({ text: "trips", data }));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getProfileTryOut = async () => {
+    try {
+      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
+      console.log(data);
+      dispatch(saveProfile(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const getApiData = async () => {
     const homeSlice = getStore("homeSlice");
@@ -45,10 +67,10 @@ const Interface = () => {
       const { data } = await axios.get(`currencyCodes.json`);
       dispatch(setData({ text: "currencyCodes", data }));
     }
-    {
-      const { data } = await axios.get(`fakeExpenseData.json`);
-      dispatch(setData({ text: "trips", data }));
-    }
+    // {
+    //   const { data } = await axios.get(`fakeExpenseData.json`);
+    //   dispatch(setData({ text: "trips", data }));
+    // }
     {
       const { data } = await axios.get(`countryInfo.json`);
       dispatch(setData({ text: "countries", data }));

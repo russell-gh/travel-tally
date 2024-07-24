@@ -28,7 +28,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
       <Message
         message="You have no expenses yet."
         className="message"
-        classNameContainer="messageContainer"
+        classNameContainer="messageContainerExpenses"
       />
     );
   }
@@ -58,7 +58,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
           item;
         const isFuture = dayjs(date).isAfter(dayjs());
         const hasBillSplit = splits.filter((split) => {
-          if (split.expenseID === id) {
+          if (split.expenseId === id) {
             return split;
           }
         });

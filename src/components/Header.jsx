@@ -9,7 +9,6 @@ import { togglePopUp } from "../redux/homeSlice";
 export const Header = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
 
 
   return (

@@ -22,6 +22,7 @@ import {
   getActualEndDate,
   getActualStartDate,
   getDateForForm,
+  getStartDateForMultiDay,
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
@@ -118,6 +119,8 @@ export const AddExpense = ({ animatingOut }) => {
           id={"endDatePicker"}
           error={errors["endDate"]}
           callback={dataInput}
+          minDate={getStartDateForMultiDay(formData.date)}
+          maxDate={getDateForForm(actualEndDate)}
         />
       );
     } else {

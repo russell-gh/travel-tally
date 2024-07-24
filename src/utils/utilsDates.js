@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 export function unixToDate(unix) {
   if (!unix) {
     console.log("unix is undefined");
-    return;
+    return "unknown date";
   }
   const date = new Date(unix); //converts unix back to object
   const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -45,4 +45,14 @@ export function getDateForForm(unix) {
     "-" +
     date.getDate().toString().padStart(2, "0");
   return formattedDate;
+}
+
+export function getStartDateForMultiDay(inputDate) {
+  // Create a new Date object from the date string
+  let date = new Date(inputDate);
+
+  // Add one day to the date
+  date.setDate(date.getDate() + 1);
+  let startDate = getDateForForm(date);
+  return startDate;
 }

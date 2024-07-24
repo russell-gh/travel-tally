@@ -12,7 +12,7 @@
       "destination": "Netherlands",
       "dates": {
         "startDate": 1719356400000,
-        "endDate": 1721343600000,
+        "endDate": 1722294000000,
         "startDateIncluded": true,
         "endDateIncluded": false
       }
@@ -720,7 +720,7 @@
         },
         "name": "Manzi",
         "paid": false,
-        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "expenseId": "expense_A2rdJ7nN8kJ3gHA25T4gd",
         "id": "billSplit_A2rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
@@ -734,7 +734,7 @@
         },
         "name": "Zahra",
         "paid": true,
-        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "expenseId": "expense_A2rdJ7nN8kJ3gHA25T4gd",
         "id": "billSplit_A3rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
@@ -748,7 +748,7 @@
         },
         "name": "Jack",
         "paid": true,
-        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "expenseId": "expense_A2rdJ7nN8kJ3gHA25T4gd",
         "id": "billSplit_A4rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
@@ -762,7 +762,7 @@
         },
         "name": "Russell",
         "paid": false,
-        "expenseID": "expense_A2rdJ7nN8kJ3gHA25T4gd",
+        "expenseId": "expense_A2rdJ7nN8kJ3gHA25T4gd",
         "id": "billSplit_A5rdJ7nN8kJ3gHA25T4gd",
         "description": "Day at beach",
         "date": 1720911600000
@@ -776,7 +776,7 @@
         },
         "name": "Manzi",
         "paid": false,
-        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "expenseId": "expense_A5rdJ7nM8kJ3gHA25T4gd",
         "id": "billSplit_A5rdJ7nM8kJ3gHA25T5gd",
         "description": "lego tour",
         "date": 1720998000000
@@ -790,7 +790,7 @@
         },
         "name": "Zahra",
         "paid": true,
-        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "expenseId": "expense_A5rdJ7nM8kJ3gHA25T4gd",
         "id": "billSplit_A5rdJ7nM8kJ3gHA25T6gd",
         "description": "lego tour",
         "date": 1720998000000
@@ -804,7 +804,7 @@
         },
         "name": "Jack",
         "paid": true,
-        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "expenseId": "expense_A5rdJ7nM8kJ3gHA25T4gd",
         "id": "billSplit_A5rdJ7nM8kJ3gHA25T7gd",
         "description": "lego tour",
         "date": 1720998000000
@@ -818,7 +818,7 @@
         },
         "name": "Russell",
         "paid": false,
-        "expenseID": "expense_A5rdJ7nM8kJ3gHA25T4gd",
+        "expenseId": "expense_A5rdJ7nM8kJ3gHA25T4gd",
         "id": "billSplit_A5rdJ7nM8kJ3gHA25T8gd",
         "description": "lego tour",
         "date": 1720998000000

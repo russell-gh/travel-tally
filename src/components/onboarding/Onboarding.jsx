@@ -118,6 +118,7 @@ const Onboarding = () => {
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    checkBudgetAllocationTotals(onboardingDetails);
     if (!checkBudgetAllocationTotals(onboardingDetails)) {
       setSliderError(true);
       return;

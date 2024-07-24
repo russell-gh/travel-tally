@@ -45,7 +45,6 @@ const SplashPage = () => {
       const hiddenDelay = 3.7 - lineDelay * 0.1;
       const motionDuration = duration - (lineDelay * 2 + visibilityOffset); // Duration for the motion path animation
       const lineDuration = duration - lineDelay;
-      console.log(hiddenDelay);
 
       gsap
         .timeline({
@@ -97,7 +96,7 @@ const SplashPage = () => {
         <div className="splashPage">
           <div className="animationContainer">
             <img
-              src="../src/img/plane.png"
+              src="./plane.png"
               alt="plane"
               ref={planeRef}
               className="plane"
@@ -107,7 +106,7 @@ const SplashPage = () => {
                 key={index}
                 ref={lineRef}
                 className={`line`}
-                src="../src/img/dash.png"
+                src="./dash.png"
                 alt="line"
               />
             ))}
