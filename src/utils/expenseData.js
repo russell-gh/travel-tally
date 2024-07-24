@@ -3,6 +3,7 @@ import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
 
 export function handleData({ formData, splitData }, home, data) {
+  console.log("Start handle data", splitData);
   const expense = formData;
   let splits = [];
   if (splitData) {
@@ -52,12 +53,15 @@ export function handleData({ formData, splitData }, home, data) {
     }
   }
 
+  console.log("middle of handle data", splits);
+
   // Tidies object up, adds unique id and unix time
   expense.amount = newAmount;
   delete expense.currency;
   expense.date = start;
   expense.endDate = end;
   if (expense.multiDay === true) {
+    console.log("in if statement", splits);
     // If it's a multiday expense, it gets sent to be split
     let allExpenses = splitExpenseDays({ expense, splits });
     return allExpenses;
@@ -69,7 +73,7 @@ export function handleData({ formData, splitData }, home, data) {
     billSplit = splitExpenseBill(splits, expense, data);
   }
 
-  console.log(billSplit, 'IN EXPENSEDATA');
+  console.log(billSplit, "IN EXPENSEDATA");
 
   return { expense, billSplit };
 }
@@ -81,7 +85,8 @@ export function convertCurrency(fromValue, fromCurrency, data) {
   return result;
 }
 
-export function splitExpenseDays({ expense, splitData }) {
+export function splitExpenseDays({ expense, splits }) {
+  console.log("Split expense days", splits);
   let { date, endDate, description, category, amount, currency, split } =
     expense;
   let { fromValue, toValue } = amount;
@@ -92,8 +97,8 @@ export function splitExpenseDays({ expense, splitData }) {
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedID = generateId("sharedID");
-  if (splitData) {
-    billSplit = splitExpenseBill(splitData, expense);
+  if (splits) {
+    billSplit = splitExpenseBill(splits, expense);
   }
 
   // splits up the expense object and puts in the right part of array
@@ -114,6 +119,7 @@ export function splitExpenseDays({ expense, splitData }) {
     delete copy.endDate;
     allExpenses.push(copy);
   }
+  console.log("End split exp", billSplit);
   return { allExpenses, billSplit };
 }
 
@@ -153,6 +159,7 @@ export function mergeExpenseDays(expense, allExpenses) {
       multiDay: true,
       currency: expenseArray[0].amount.fromCurrency,
       amount: Math.round(totalAmount) / 100,
+      sharedID: expenseArray[0].sharedID,
     };
   }
   return { newExpense, indexs };

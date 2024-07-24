@@ -28,6 +28,7 @@ import {
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
+import { deleteByID } from "../utils/sync";
 
 export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
@@ -146,6 +147,15 @@ export const EditExpense = ({ animatingOut }) => {
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
+      if (multi) {
+        // delete from server with shared ID
+        let id = formData.sharedID;
+        deleteByID({ id, type: "shared" });
+      } else {
+        // delete from server with expense ID
+        let id = formData.id;
+        deleteByID({ id, type: "single" });
+      }
     } else {
       console.log("FAIL FINAL");
       return;
@@ -246,7 +256,7 @@ export const EditExpense = ({ animatingOut }) => {
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
   const actualEndDate = getActualEndDate(endDateIncluded, endDate);
 
-  console.log(splitIndex, "INDEX");
+  console.log(splitIndex, formData, "INDEX");
 
   return (
     <div className="editContainer">
