@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FormElement from "../../reusable-code/FormElement.jsx";
 import Button from "../../reusable-code/Button.jsx";
-import "./Onboarding.css";
 import { onboardingQuestions } from "./onboardingQuestions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { validate } from "../../validation/validate.js";
@@ -16,8 +15,17 @@ import { addTrip } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
+import axios from "axios";
+import { jsxs } from "react/jsx-runtime";
 
 const Onboarding = () => {
+  const currencyCodes = useSelector(selectCurrencyCodes);
+
+  let currencies = [];
+  for (const key of Object.keys(currencyCodes)) {
+    currencies.push({ value: key, name: key });
+  }
+
   const [onboardingDetails, setOnboardingDetails] = useState({
     destination: "",
     dates: {
@@ -27,7 +35,8 @@ const Onboarding = () => {
       endDateIncluded: false,
     },
     budgetTotal: 0,
-    homeCurrency: "",
+    homeCurrency: currencies[0].value,
+    homeCurrencySymbol: "",
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -38,14 +47,8 @@ const Onboarding = () => {
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
+  const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
-
-  const currencyCodes = useSelector(selectCurrencyCodes);
-
-  let currencies = [];
-  for (const key of Object.keys(currencyCodes)) {
-    currencies.push({ value: key, name: key });
-  }
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -113,9 +116,14 @@ const Onboarding = () => {
   };
 
   //make a copy of state. if errors exist abort early. else send data to store and set visible to true to display second half of form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     checkBudgetAllocationTotals(onboardingDetails);
+    if (!checkBudgetAllocationTotals(onboardingDetails)) {
+      setSliderError(true);
+      return;
+    }
+
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -155,7 +163,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-
+    await axios.post("http://localhost:6001/onboarding", {_onboardingDetails});
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
     redirect("/dashboard");
   };
@@ -170,6 +178,14 @@ const Onboarding = () => {
     //if section 1 has no errors run the below func on click and pass in destination state.
     if (currentFormSection === 1 && !errorsPresent) {
       getDestinationCurrency(onboardingDetails.destination);
+    }
+
+    if (currentFormSection === 3 && !errorsPresent) {
+      setOnboardingDetails({
+        ...onboardingDetails,
+        homeCurrencySymbol:
+          currencyCodes[onboardingDetails.homeCurrency].symbol,
+      });
     }
 
     //if no errors are present, increment state which renders next section
@@ -189,7 +205,6 @@ const Onboarding = () => {
     //find index where iso2 code from api matches iso2 code in json data
     if (index === -1) {
       const countryFromApi = await getCountryFromCity(city);
-      console.log(countryFromApi);
       //=======
       index = _countries.findIndex((c) => {
         return c.isoCode2 === countryFromApi;
@@ -198,7 +213,6 @@ const Onboarding = () => {
 
     //use index to access currency code
     currencyCode = _countries[index].currencyCode;
-    console.log(currencyCode);
 
     if (!currencyCode) {
       currencyCode = "";
@@ -306,7 +320,7 @@ const Onboarding = () => {
                 id="homeCurrency"
                 name="homeCurrency"
                 className="homeCurrency"
-                choose={true}
+                // choose={true}
                 options={currencies}
                 value={currencies[0].value}
                 callback={handleChange}
@@ -331,9 +345,16 @@ const Onboarding = () => {
                   id={question.id}
                   callback={handleChange}
                   onboardingDetails={onboardingDetails}
+                  sliderError={sliderError}
+                  setSliderError={setSliderError}
                 />
               );
             })}
+            {sliderError && (
+              <p className="validationError">
+                There is still some of your budget left to allocate.
+              </p>
+            )}
           </div>
         )}
 

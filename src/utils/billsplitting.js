@@ -1,11 +1,11 @@
 import React from "react";
 import { generateId } from "./utils";
-import { convertCurrency } from "./expenseData";
 
 export function splitExpenseBill(splitData, expense) {
   if (!splitData) {
     return;
   }
+  console.log(splitData, "IN SPLIT");
   let allSplits = [];
 
   splitData.forEach((bill) => {
@@ -34,6 +34,8 @@ export function splitExpenseBill(splitData, expense) {
     };
     allSplits.push(formatted);
   });
+
+  console.log(allSplits, "END SPLIT");
 
   return allSplits;
 }

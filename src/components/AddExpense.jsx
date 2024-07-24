@@ -46,7 +46,6 @@ export const AddExpense = ({ animatingOut }) => {
     category: "Food",
   });
   const [errors, setErrors] = useState({});
-  console.log(errors);
   let [multi, setMulti] = useState(false);
   // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);

@@ -4,7 +4,8 @@ import { getIndex } from "../utils/utils";
 import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
-import { deleteSingleExpenseSQL } from "../utils/utilsBackEnd";
+import axios from "axios";
+import { addExpenseRemotely, addSplitRemotely } from "../utils/sync";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
@@ -110,6 +111,7 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
     addExpenseData: (state, { payload }) => {
+      const tripID = state.selectedTripId;
       // Close expense popup
       state.popUp = {};
       // Find index of trip from id
@@ -128,20 +130,26 @@ export const homeSlice = createSlice({
       if (Array.isArray(expense)) {
         expense.forEach((element) => {
           state.trips[indexOf].expenses.push(element);
+          addExpenseRemotely({ element, tripID });
         });
       } else {
         state.trips[indexOf].expenses.push(expense);
+        addExpenseRemotely({ expense, tripID });
       }
       // Push data to split array
+      console.log("IN SLICE", billSplit);
       if (Array.isArray(billSplit)) {
         billSplit.forEach((element) => {
           state.trips[indexOf].splits.push(element);
+          addSplitRemotely({ element, tripID });
         });
       } else {
         state.trips[indexOf].splits.push(billSplit);
+        addSplitRemotely({ billSplit, tripID });
       }
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
       state.splitData = [];
+      // addExpenseRemotely({expense, tripID});
       saveStore("homeSlice", state);
     },
 

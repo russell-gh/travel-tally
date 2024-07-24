@@ -36,9 +36,9 @@ const Signup = () => {
       dispatch(addUser(formData));
       localStorage.setItem("user", JSON.stringify(formData));
       console.log(formData);
-      redirect("/login"); //TODO Change to SetupProfile??
+      redirect("/login");
     } else {
-      alert("passwords don't match", formData);
+      console.log("passwords don't match", formData);
     }
   };
 
@@ -71,6 +71,9 @@ const Signup = () => {
       />
       <p className="errortext">{errors.passwordConfirm}</p>
       <Button onClick={onSubmit} text="Sign Up" animation={true} />
+      <p className="signup-text">
+        Already have an account? <a href="/login"> Login! </a>
+      </p>
     </div>
   );
 };
