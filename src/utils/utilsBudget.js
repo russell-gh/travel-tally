@@ -54,9 +54,7 @@ export function getCurrencySymbol(currencyCodes, currencyCode) {
   }
 
   if (currencyCodes[currencyCode].hexCode) {
-    console.log(currencyCodes[currencyCode].hexCode);
     const currencySymbol = parseInt(currencyCodes[currencyCode].hexCode, 16);
-    console.log(currencySymbol);
     return String.fromCharCode(currencySymbol);
   }
 

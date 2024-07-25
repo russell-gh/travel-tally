@@ -56,7 +56,6 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
       {filtered.map((item) => {
         const { description, id, category, date, amount, sharedId, split } =
           item;
-        console.log(item);
         const isFuture = dayjs(date).isAfter(dayjs());
         const hasBillSplit = splits.filter((split) => {
           if (split.expenseId === id) {
