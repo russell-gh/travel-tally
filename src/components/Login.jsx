@@ -7,6 +7,8 @@ import "../css/login.scss";
 import "../css/app.scss";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //==========================================
 //=======Displays Login Data================
 //==========================================
@@ -31,12 +33,12 @@ const Login = () => {
   const onSubmit = async (e) => {
     console.log(errors, formData, localUser);
     Object.keys(errors).length
-      ? console.log("Form Incomplete!")
+      ? toast.error("Form Incomplete!")
       : !(
           formData.password === localUser.password &&
           formData.email === localUser.email
         )
-      ? console.log("wrong email/password")
+      ? toast.error("wrong email/password")
       : trips.length
       ? redirect("/dashboard")
       : redirect("/setup-profile");
@@ -71,6 +73,21 @@ const Login = () => {
           animation={true}
           text="Login"
         />
+        <div>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition:Bounce
+          />
+        </div>
 
         <p className="signup-text">
           Don't have an account? <a href="/signup"> Sign up! </a>

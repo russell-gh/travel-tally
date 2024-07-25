@@ -6,6 +6,8 @@ import { validate } from "../validation/validate";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 import { generateId } from "../utils/utils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   //Sends Errors + Creds to State
@@ -16,7 +18,7 @@ const Signup = () => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData(_formData);
     const errObj = await validate(_formData, "signup");
-    //BUG Error Timing is ugly
+    //Error Timing is ugly
     setErrors(errObj);
   };
   const user = useSelector((state) => state.user);
@@ -38,7 +40,7 @@ const Signup = () => {
       console.log(formData);
       redirect("/login");
     } else {
-      console.log("passwords don't match", formData);
+      toast.error("Passwords do not match!");
     }
   };
 
@@ -76,6 +78,22 @@ const Signup = () => {
         className="logsignBTN"
         animation={true}
       />
+      <div>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+        />
+      </div>
+
       <p className="signup-text">
         Already have an account? <a href="/login"> Login! </a>
       </p>
