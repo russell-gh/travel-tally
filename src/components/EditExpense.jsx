@@ -25,6 +25,7 @@ import {
   getActualEndDate,
   getActualStartDate,
   getDateForForm,
+  getStartDateForMultiDay,
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
@@ -55,7 +56,6 @@ export const EditExpense = ({ animatingOut }) => {
   let [splitList, setSplitList] = useState([]);
   let [theseSplits, setTheseSplits] = useState([]);
   let [splitIndex, setSplitIndexs] = useState([]);
-  let [sharedId, setSharedId] = useState([]);
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -87,7 +87,6 @@ export const EditExpense = ({ animatingOut }) => {
     dispatch(setSplitMax(copy.amount));
     console.log(copy);
     setFormData(copy);
-    setSharedId(result.thisExpense.sharedId);
 
     if (copy.split === true) {
       if (result.thisExpense.sharedId) {
@@ -153,7 +152,7 @@ export const EditExpense = ({ animatingOut }) => {
       dispatch(addExpenseData(data));
       if (multi) {
         // delete from server with shared ID
-        let id = sharedId;
+        let id = popUp.sharedId;
         deleteByID({ id, type: "shared" });
         deleteByID({ id, type: "split" });
       } else {
