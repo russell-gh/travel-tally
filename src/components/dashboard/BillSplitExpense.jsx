@@ -29,8 +29,6 @@ const BillSplitExpense = ({
     return;
   }
 
-  console.log(expenses);
-
   return (
     <div className="expenseItem">
       <CategoryIcon category={splitExpense.category} />

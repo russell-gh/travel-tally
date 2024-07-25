@@ -71,14 +71,18 @@ export const homeSlice = createSlice({
       }
 
       //if there are splits linked to the expense delete these as well
+      console.log("is it a split", state.popUp.split);
       if (state.popUp.split) {
         const splits = state.trips[indexTrip].splits;
+        console.log(JSON.stringify(state.trips[indexTrip].splits));
         let indexesSplits = [];
         for (let i = 0; i < splits.length; i++) {
+          console.log(splits[i].expenseId, state.popUp.id);
           if (splits[i].expenseId === state.popUp.id) {
             indexesSplits.push(i);
           }
         }
+        console.log("indexes splits", indexesSplits);
         //delete the expenses
         splits.splice(indexesSplits[0], indexesSplits.length);
       }
@@ -116,15 +120,17 @@ export const homeSlice = createSlice({
       }
 
       const { config, component } = payload;
-      const { id, title, sharedId } = config;
+      const { id, title, sharedId, split } = config;
       state.popUp.showPopUp = !state.popUp.showPopUp;
       state.popUp.id = id;
       state.popUp.sharedId = sharedId;
       state.popUp.title = title;
       state.popUp.component = component;
+      state.popUp.split = split;
       saveStore("homeSlice", state);
     },
     formEvent: (state, { payload }) => {
+      console.log(payload.id, payload.value);
       state[payload.id] = payload.value;
 
       saveStore("homeSlice", state);
