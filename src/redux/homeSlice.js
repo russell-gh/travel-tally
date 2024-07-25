@@ -5,7 +5,11 @@ import { getCurrencySymbol } from "../utils/utilsBudget";
 import { initialState } from "./InitialState";
 import { getStore, saveStore } from "../localStorage";
 import axios from "axios";
-import { addExpenseRemotely, addSplitRemotely, deleteByID } from "../utils/sync";
+import {
+  addExpenseRemotely,
+  addSplitRemotely,
+  deleteByID,
+} from "../utils/sync";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
@@ -54,14 +58,14 @@ export const homeSlice = createSlice({
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const expenses = state.trips[indexTrip].expenses;
 
-      console.log(state.popUp.sharedId, "POP UP IN SLICE")
+      console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
         //get index of clicked expense
         const index = getIndex(expenses, state.popUp.id, "id");
         // delete expense
         expenses.splice(index, 1);
         //delete the expense/split from backend
-        const id = state.popUp.id
+        const id = state.popUp.id;
         deleteByID({ id, type: "single" });
         deleteByID({ id, type: "split" });
       }
@@ -78,8 +82,8 @@ export const homeSlice = createSlice({
         //delete the expenses
         expenses.splice(indexes[0], indexes.length);
         //delete the expense/split from backend
-        const id = state.popUp.sharedId
-        console.log(id, "POP UP IN SLICE")
+        const id = state.popUp.sharedId;
+        console.log(id, "POP UP IN SLICE");
         deleteByID({ id, type: "shared" });
         deleteByID({ id, type: "split" });
       }
@@ -274,5 +278,6 @@ export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
 export const selectSplitMax = (state) => state.home.splitMax;
 export const selectSplitValues = (state) => state.home.splitValues;
+export const selectToken = (state) => state.home.token;
 
 export default homeSlice.reducer;
