@@ -70,7 +70,12 @@ const Signup = () => {
         placeholder="confirm new password"
       />
       <p className="errortext">{errors.passwordConfirm}</p>
-      <Button onClick={onSubmit} text="Sign Up" animation={true} />
+      <Button
+        onClick={onSubmit}
+        text="Sign Up"
+        className="loginBTN"
+        animation={true}
+      />
       <p className="signup-text">
         Already have an account? <a href="/login"> Login! </a>
       </p>
