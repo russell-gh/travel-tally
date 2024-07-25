@@ -78,11 +78,13 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                   hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
                 }
               >
-                {split && (
+                {split ? (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
                   />
+                ) : (
+                  ""
                 )}
                 <ExpenseAmount
                   homeCurrencySymbol={homeCurrencySymbol}

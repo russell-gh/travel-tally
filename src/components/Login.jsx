@@ -9,6 +9,8 @@ import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { selectToken } from "../redux/homeSlice";
+
 //==========================================
 //=======Displays Login Data================
 //==========================================
@@ -17,6 +19,7 @@ const Login = () => {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const trips = useSelector(selectTrips);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
   const onInput = async (e) => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
@@ -37,16 +40,43 @@ const Login = () => {
       formData
     );
 
-    const next = trips.length ? "/dashboard" : "/setup-profile";
-
     if (data.status) {
       dispatch(setData({ text: "token", data: data.token }));
-      redirect(next);
+      getTripsTryOut(data.token);
       return;
     }
 
     //message the user
     console.log(errors, formData, localUser);
+  };
+
+  const getTripsTryOut = async (token) => {
+    console.log("HERE");
+    try {
+      const { data } = await axios.get(`http://localhost:6001/trips`, {
+        headers: { token },
+      });
+      if (data.status) {
+        dispatch(setData({ text: "trips", data: data.tripsComplete }));
+        const next = data.tripsComplete.length
+          ? "/dashboard"
+          : "/setup-profile";
+        redirect(next);
+      }
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getProfileTryOut = async () => {
+    try {
+      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
+      console.log(data);
+      dispatch(saveProfile(data));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

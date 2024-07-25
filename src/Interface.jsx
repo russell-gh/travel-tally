@@ -27,17 +27,9 @@ const Interface = () => {
   const popUpRef = useRef();
   const popUp = useSelector(selectPopUp);
   const [_popUp, _setPopUp] = useState(null);
-  const token = useSelector(selectToken);
 
   useEffect(() => {
     getApiData();
-<<<<<<< HEAD
-    // getTripsTryOut();
-    getProfileTryOut();
-=======
-    getTripsTryOut();
-    // getProfileTryOut();
->>>>>>> auth
   }, []);
 
   // Do we need to make this call at a different time? We need to know the homecurrency of the trip.
@@ -49,28 +41,6 @@ const Interface = () => {
   //     console.log(e);
   //   }
   // }
-
-  const getTripsTryOut = async () => {
-    console.log("HERE");
-    try {
-      const { data } = await axios.get(`http://localhost:6001/trips`, {
-        headers: { token },
-      });
-      dispatch(setData({ text: "trips", data }));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const getProfileTryOut = async () => {
-    try {
-      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
-      console.log(data);
-      dispatch(saveProfile(data));
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const getApiData = async () => {
     const homeSlice = getStore("homeSlice");
@@ -86,10 +56,10 @@ const Interface = () => {
       const { data } = await axios.get(`currencyCodes.json`);
       dispatch(setData({ text: "currencyCodes", data }));
     }
-    {
-      const { data } = await axios.get(`fakeExpenseData.json`);
-      dispatch(setData({ text: "trips", data }));
-    }
+    // {
+    //   const { data } = await axios.get(`fakeExpenseData.json`);
+    //   dispatch(setData({ text: "trips", data }));
+    // }
     {
       const { data } = await axios.get(`countryInfo.json`);
       dispatch(setData({ text: "countries", data }));
