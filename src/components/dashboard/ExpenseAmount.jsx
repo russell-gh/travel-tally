@@ -30,7 +30,6 @@ const ExpenseAmount = ({
 
   fromValue = addDecimals(fromValue);
   const currencySymbol = getCurrencySymbol(currencyCodes, fromCurrency);
-  console.log(currencySymbol);
 
   return (
     <div>
