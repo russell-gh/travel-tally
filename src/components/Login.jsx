@@ -67,7 +67,7 @@ const Login = () => {
         <p className="errortext">{errors.password}</p>
         <Button
           onClick={onSubmit}
-          className="loginBTN"
+          className="logsignBTN"
           animation={true}
           text="Login"
         />

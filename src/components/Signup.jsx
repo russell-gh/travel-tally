@@ -73,7 +73,7 @@ const Signup = () => {
       <Button
         onClick={onSubmit}
         text="Sign Up"
-        className="loginBTN"
+        className="logsignBTN"
         animation={true}
       />
       <p className="signup-text">
