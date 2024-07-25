@@ -50,10 +50,14 @@ export function addDecimals(number) {
 export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
     console.log("something went wrong with getting the currency symbol");
+    return "";
   }
 
   if (currencyCodes[currencyCode].hexCode) {
-    return currencyCodes[currencyCode].hexCode;
+    console.log(currencyCodes[currencyCode].hexCode);
+    const currencySymbol = parseInt(currencyCodes[currencyCode].hexCode, 16);
+    console.log(currencySymbol);
+    return String.fromCharCode(currencySymbol);
   }
 
   return currencyCodes[currencyCode].symbol_native;

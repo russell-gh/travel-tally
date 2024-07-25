@@ -65,22 +65,23 @@ export const homeSlice = createSlice({
         // delete expense
         expenses.splice(index, 1);
 
-        //if there are splits linked to the expense delete these as well
-        if (state.popUp.split) {
-          const splits = state.trips[indexTrip].splits;
-          let indexesSplits = [];
-          for (let i = 0; i < splits.length; i++) {
-            if (splits[i].expenseId === state.popUp.id) {
-              indexesSplits.push(i);
-            }
-          }
-          //delete the expenses
-          splits.splice(indexesSplits[0], indexesSplits.length);
-        }
         //delete the expense/split from backend
         const id = state.popUp.id;
         deleteByID({ id, type: "single" });
         deleteByID({ id, type: "split" });
+      }
+
+      //if there are splits linked to the expense delete these as well
+      if (state.popUp.split) {
+        const splits = state.trips[indexTrip].splits;
+        let indexesSplits = [];
+        for (let i = 0; i < splits.length; i++) {
+          if (splits[i].expenseId === state.popUp.id) {
+            indexesSplits.push(i);
+          }
+        }
+        //delete the expenses
+        splits.splice(indexesSplits[0], indexesSplits.length);
       }
 
       //get indexes of all items with sharedId
