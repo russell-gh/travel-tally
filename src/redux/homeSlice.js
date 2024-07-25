@@ -57,7 +57,6 @@ export const homeSlice = createSlice({
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const expenses = state.trips[indexTrip].expenses;
-      console.log(state.popUp, "POP UP IN SLICE");
       console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
         //get index of clicked expense
@@ -292,5 +291,6 @@ export const selectSplitData = (state) => state.home.splitData;
 export const selectCountries = (state) => state.home.countries;
 export const selectSplitMax = (state) => state.home.splitMax;
 export const selectSplitValues = (state) => state.home.splitValues;
+export const selectToken = (state) => state.home.token;
 
 export default homeSlice.reducer;

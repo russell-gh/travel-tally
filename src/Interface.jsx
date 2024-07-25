@@ -6,7 +6,7 @@ import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Onboarding from "./components/onboarding/Onboarding";
-import { selectPopUp, setData } from "./redux/homeSlice";
+import { selectPopUp, selectToken, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
@@ -27,11 +27,17 @@ const Interface = () => {
   const popUpRef = useRef();
   const popUp = useSelector(selectPopUp);
   const [_popUp, _setPopUp] = useState(null);
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     getApiData();
+<<<<<<< HEAD
     // getTripsTryOut();
     getProfileTryOut();
+=======
+    getTripsTryOut();
+    // getProfileTryOut();
+>>>>>>> auth
   }, []);
 
   // Do we need to make this call at a different time? We need to know the homecurrency of the trip.
@@ -45,8 +51,11 @@ const Interface = () => {
   // }
 
   const getTripsTryOut = async () => {
+    console.log("HERE");
     try {
-      const { data } = await axios.get(`http://api.holidough.uk/trips/${1}`);
+      const { data } = await axios.get(`http://localhost:6001/trips`, {
+        headers: { token },
+      });
       dispatch(setData({ text: "trips", data }));
     } catch (e) {
       console.log(e);

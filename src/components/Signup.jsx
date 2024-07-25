@@ -6,6 +6,7 @@ import { validate } from "../validation/validate";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 import { generateId } from "../utils/utils";
+import axios from "axios";
 
 const Signup = () => {
   //Sends Errors + Creds to State
@@ -33,10 +34,20 @@ const Signup = () => {
       console.log(">>>", errObj);
     } else if (formData.password === formData.passwordConfirm) {
       formData.userID = generateId("user");
-      dispatch(addUser(formData));
-      localStorage.setItem("user", JSON.stringify(formData));
-      console.log(formData);
-      redirect("/login");
+      // dispatch(addUser(formData));
+      // localStorage.setItem("user", JSON.stringify(formData));
+
+      const { data } = await axios.post(
+        `http://localhost:6001/user/signup`,
+        formData
+      );
+
+      if (data.status) {
+        redirect("/login");
+      } else {
+        //send user some error
+        console.log("Failed to add user");
+      }
     } else {
       console.log("passwords don't match", formData);
     }
