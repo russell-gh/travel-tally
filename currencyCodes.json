@@ -28,9 +28,8 @@
   },
   "AED": {
     "symbol": "AED",
-    "hexCode": "&#x62f;&#x2e;&#x625;",
     "name": "United Arab Emirates Dirham",
-    "symbol_native": "د.إ.‏",
+    "symbol_native": "AED",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "AED",
@@ -38,7 +37,7 @@
   },
   "AFN": {
     "symbol": "Af",
-    "hexCode": "&#x60B;",
+    "hexCode": "0x060B",
     "name": "Afghan Afghani",
     "symbol_native": "؋",
     "decimal_digits": 0,
@@ -57,7 +56,7 @@
   },
   "AMD": {
     "symbol": "AMD",
-    "hexCode": "&#x58F;",
+    "hexCode": "0x058F",
     "name": "Armenian Dram",
     "symbol_native": "դր.",
     "decimal_digits": 0,
@@ -85,7 +84,7 @@
   },
   "AZN": {
     "symbol": "man.",
-    "hexCode": "&#x20BC;",
+    "hexCode": "0x20BC",
     "name": "Azerbaijani Manat",
     "symbol_native": "ман.",
     "decimal_digits": 2,
@@ -104,7 +103,7 @@
   },
   "BDT": {
     "symbol": "Tk",
-    "hexCode": "&#x9F3;",
+    "hexCode": "0x09F3",
     "name": "Bangladeshi Taka",
     "symbol_native": "৳",
     "decimal_digits": 2,
@@ -114,9 +113,8 @@
   },
   "BGN": {
     "symbol": "BGN",
-    "hexCode": "&#x43B;&#x432;",
     "name": "Bulgarian Lev",
-    "symbol_native": "лв.",
+    "symbol_native": "BGN",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "BGN",
@@ -124,9 +122,8 @@
   },
   "BHD": {
     "symbol": "BD",
-    "hexCode": "&#x2E;&#x62F;&#x2E;&#x628;",
     "name": "Bahraini Dinar",
-    "symbol_native": "د.ب.‏",
+    "symbol_native": "BD",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "BHD",
@@ -179,9 +176,8 @@
   },
   "BYN": {
     "symbol": "Br",
-    "hexCode": "&#x42;&#x72;",
     "name": "Belarusian Ruble",
-    "symbol_native": "руб.",
+    "symbol_native": "Br",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "BYN",
@@ -225,7 +221,7 @@
   },
   "CNY": {
     "symbol": "CN¥",
-    "hexCode": "&#xA5;",
+    "hexCode": "0x00A5",
     "name": "Chinese Yuan",
     "symbol_native": "CN¥",
     "decimal_digits": 2,
@@ -244,7 +240,7 @@
   },
   "CRC": {
     "symbol": "₡",
-    "hexCode": "&#x20A1;",
+    "hexCode": "0x20A1",
     "name": "Costa Rican Colón",
     "symbol_native": "₡",
     "decimal_digits": 0,
@@ -263,9 +259,8 @@
   },
   "CZK": {
     "symbol": "Kč",
-    "hexCode": "&#x4B;&#x10D;",
     "name": "Czech Republic Koruna",
-    "symbol_native": "Kč",
+    "symbol_native": "CZK",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "CZK",
@@ -300,9 +295,8 @@
   },
   "DZD": {
     "symbol": "DA",
-    "hexCode": "&#x62F;&#x2E;&#x62C;",
     "name": "Algerian Dinar",
-    "symbol_native": "د.ج.‏",
+    "symbol_native": "DA",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "DZD",
@@ -319,7 +313,7 @@
   },
   "EGP": {
     "symbol": "EGP",
-    "hexCode": "&#xA3;",
+    "hexCode": "0x00A5",
     "name": "Egyptian Pound",
     "symbol_native": "ج.م.‏",
     "decimal_digits": 2,
@@ -365,7 +359,7 @@
   },
   "GHS": {
     "symbol": "GH₵",
-    "hexCode": "&#x20B5;",
+    "hexCode": "0x20AC",
     "name": "Ghanaian Cedi",
     "symbol_native": "GH₵",
     "decimal_digits": 2,
@@ -438,7 +432,7 @@
   },
   "ILS": {
     "symbol": "₪",
-    "hexCode": "&#x20AA;",
+    "hexCode": "0x20AA;",
     "name": "Israeli New Sheqel",
     "symbol_native": "₪",
     "decimal_digits": 2,
@@ -448,7 +442,7 @@
   },
   "INR": {
     "symbol": "Rs",
-    "hexCode": "&#x20B9;",
+    "hexCode": "0x20A8",
     "name": "Indian Rupee",
     "symbol_native": "টকা",
     "decimal_digits": 2,
@@ -458,9 +452,8 @@
   },
   "IQD": {
     "symbol": "IQD",
-    "hexCode": "IR",
     "name": "Iraqi Dinar",
-    "symbol_native": "د.ع.‏",
+    "symbol_native": "IR",
     "decimal_digits": 0,
     "rounding": 0,
     "code": "IQD",
@@ -468,7 +461,7 @@
   },
   "IRR": {
     "symbol": "IRR",
-    "hexCode": "&#xFDFC;",
+    "hexCode": "0xFDFC",
     "name": "Iranian Rial",
     "symbol_native": "﷼",
     "decimal_digits": 0,
@@ -496,9 +489,8 @@
   },
   "JOD": {
     "symbol": "JD",
-    "hexCode": "&#x4A;&#x44;",
     "name": "Jordanian Dinar",
-    "symbol_native": "د.أ.‏",
+    "symbol_native": "JD",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "JOD",
@@ -506,7 +498,7 @@
   },
   "JPY": {
     "symbol": "¥",
-    "hexCode": "&#xA5;",
+    "hexCode": "0xFFE5",
     "name": "Japanese Yen",
     "symbol_native": "￥",
     "decimal_digits": 0,
@@ -525,7 +517,7 @@
   },
   "KHR": {
     "symbol": "KHR",
-    "hexCode": "&#x17DB;",
+    "hexCode": "0x17DB",
     "name": "Cambodian Riel",
     "symbol_native": "៛",
     "decimal_digits": 2,
@@ -544,7 +536,7 @@
   },
   "KRW": {
     "symbol": "₩",
-    "hexCode": "&#x20A9;",
+    "hexCode": "0x20A9",
     "name": "South Korean Won",
     "symbol_native": "₩",
     "decimal_digits": 0,
@@ -554,9 +546,8 @@
   },
   "KWD": {
     "symbol": "KD",
-    "hexCode": "&#x62F;&#x2E;&#x643;",
     "name": "Kuwaiti Dinar",
-    "symbol_native": "د.ك.‏",
+    "symbol_native": "KD",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "KWD",
@@ -574,9 +565,8 @@
   },
   "LBP": {
     "symbol": "L.L.",
-    "hexCode": "&#x644;&#x2E;&#x644;",
     "name": "Lebanese Pound",
-    "symbol_native": "ل.ل.‏",
+    "symbol_native": "لL.L.",
     "decimal_digits": 0,
     "rounding": 0,
     "code": "LBP",
@@ -611,9 +601,8 @@
   },
   "LYD": {
     "symbol": "LD",
-    "hexCode": "&#x4C;&#x44;",
     "name": "Libyan Dinar",
-    "symbol_native": "د.ل.‏",
+    "symbol_native": "L.D.",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "LYD",
@@ -621,9 +610,8 @@
   },
   "MAD": {
     "symbol": "MAD",
-    "hexCode": "&#x62F;&#x2E;&#x645;&#x2E;",
     "name": "Moroccan Dirham",
-    "symbol_native": "د.م.‏",
+    "symbol_native": "MAD",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "MAD",
@@ -721,7 +709,7 @@
   },
   "NGN": {
     "symbol": "₦",
-    "hexCode": "&#x20A6;",
+    "hexCode": "0x20A6",
     "name": "Nigerian Naira",
     "symbol_native": "₦",
     "decimal_digits": 2,
@@ -749,9 +737,8 @@
   },
   "NPR": {
     "symbol": "NPRs",
-    "hexCode": "&#x930;&#x942;",
     "name": "Nepalese Rupee",
-    "symbol_native": "नेरू",
+    "symbol_native": "NPRs",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "NPR",
@@ -768,9 +755,8 @@
   },
   "OMR": {
     "symbol": "OMR",
-    "hexCode": "&#x631;&#x2E;&#x639;&#x2E;",
     "name": "Omani Rial",
-    "symbol_native": "ر.ع.‏",
+    "symbol_native": "OMR",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "OMR",
@@ -796,7 +782,7 @@
   },
   "PHP": {
     "symbol": "₱",
-    "hexCode": "&#x20B1;",
+    "hexCode": "0x20B1;",
     "name": "Philippine Peso",
     "symbol_native": "₱",
     "decimal_digits": 2,
@@ -806,7 +792,7 @@
   },
   "PKR": {
     "symbol": "PKRs",
-    "hexCode": "&#x20A8;",
+    "hexCode": "0x20A8;",
     "name": "Pakistani Rupee",
     "symbol_native": "₨",
     "decimal_digits": 0,
@@ -816,7 +802,6 @@
   },
   "PLN": {
     "symbol": "zł",
-    "hexCode": "&#x7A;&#x142;",
     "name": "Polish Zloty",
     "symbol_native": "zł",
     "decimal_digits": 2,
@@ -826,7 +811,7 @@
   },
   "PYG": {
     "symbol": "₲",
-    "hexCode": "&#x20B2;",
+    "hexCode": "0x20B2;",
     "name": "Paraguayan Guarani",
     "symbol_native": "₲",
     "decimal_digits": 0,
@@ -836,9 +821,8 @@
   },
   "QAR": {
     "symbol": "QR",
-    "hexCode": "&#x631;&#x2E;&#x642;",
     "name": "Qatari Rial",
-    "symbol_native": "ر.ق.‏",
+    "symbol_native": "QR",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "QAR",
@@ -855,9 +839,8 @@
   },
   "RSD": {
     "symbol": "din.",
-    "hexCode": "&#x434;&#x438;&#x43D;&#x2E;",
     "name": "Serbian Dinar",
-    "symbol_native": "дин.",
+    "symbol_native": "din.",
     "decimal_digits": 0,
     "rounding": 0,
     "code": "RSD",
@@ -865,7 +848,7 @@
   },
   "RUB": {
     "symbol": "RUB",
-    "hexCode": "&#x20BD;",
+    "hexCode": "0x20BD;",
     "name": "Russian Ruble",
     "symbol_native": "₽.",
     "decimal_digits": 2,
@@ -884,9 +867,8 @@
   },
   "SAR": {
     "symbol": "SR",
-    "hexCode": "&#xFDFC;",
     "name": "Saudi Riyal",
-    "symbol_native": "ر.س.‏",
+    "symbol_native": "SR",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "SAR",
@@ -930,9 +912,8 @@
   },
   "SYP": {
     "symbol": "SY£",
-    "hexCode": "&#xA3;&#x53;",
     "name": "Syrian Pound",
-    "symbol_native": "ل.س.‏",
+    "symbol_native": "SYP",
     "decimal_digits": 0,
     "rounding": 0,
     "code": "SYP",
@@ -941,7 +922,7 @@
   "THB": {
     "symbol": "฿",
     "name": "Thai Baht",
-    "hexCode": "&#x0E3F;",
+    "hexCode": "0x0E3F",
     "symbol_native": "฿",
     "decimal_digits": 2,
     "rounding": 0,
@@ -950,9 +931,8 @@
   },
   "TND": {
     "symbol": "DT",
-    "hexCode": "&#x62F;&#x2E;&#x62A;",
     "name": "Tunisian Dinar",
-    "symbol_native": "د.ت.‏",
+    "symbol_native": "DT",
     "decimal_digits": 3,
     "rounding": 0,
     "code": "TND",
@@ -1005,7 +985,7 @@
   },
   "UAH": {
     "symbol": "₴",
-    "hexCode": "&#x20B4;",
+    "hexCode": "0x20B4;",
     "name": "Ukrainian Hryvnia",
     "symbol_native": "₴",
     "decimal_digits": 2,
@@ -1051,7 +1031,7 @@
   },
   "VND": {
     "symbol": "₫",
-    "hexCode": "&#x20AB;",
+    "hexCode": "0x20AB;",
     "name": "Vietnamese Dong",
     "symbol_native": "₫",
     "decimal_digits": 0,
@@ -1079,9 +1059,8 @@
   },
   "YER": {
     "symbol": "YR",
-    "hexCode": "&#xFDFC;",
     "name": "Yemeni Rial",
-    "symbol_native": "ر.ي.‏",
+    "symbol_native": "YR",
     "decimal_digits": 0,
     "rounding": 0,
     "code": "YER",

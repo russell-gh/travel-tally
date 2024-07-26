@@ -46,6 +46,7 @@ const BillSplits = ({ splits, homeCurrencySymbol, expenses, filtered }) => {
                 splitExpense={expense}
                 splits={splits}
                 expenseId={expense.id}
+                expenses={expenses}
               />
               <BillSplitItems
                 splits={splits}

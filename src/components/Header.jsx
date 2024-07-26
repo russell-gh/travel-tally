@@ -8,32 +8,29 @@ import { togglePopUp } from "../redux/homeSlice";
 
 export const Header = ({ animatingOut }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
-
+  const url = useLocation();
 
   return (
-     <header
-      className={location.pathname === "/dashboard" ? "dashboardHeader" : ""}
-    >
+    <header className={url.pathname === "/dashboard" ? "dashboardHeader" : ""}>
       <div className="logo-text-container">
         <Logo2 />
         <LogoText />
       </div>
       <div className="profile-reset-container">
         <Profile />
-     <Button
-        animation={true}
-        className="convertBtn"
-        text="Convert"
-        onClick={() => {
-          dispatch(
-            togglePopUp({
-              config: {},
-              component: "Converter",
-            })
-          );
-        }}
-      />
+        <Button
+          animation={true}
+          className="convertBtn"
+          text="Convert"
+          onClick={() => {
+            dispatch(
+              togglePopUp({
+                config: {},
+                component: "Converter",
+              })
+            );
+          }}
+        />
         <button
           className="btn"
           onClick={() => {
@@ -44,7 +41,6 @@ export const Header = ({ animatingOut }) => {
           Reset
         </button>
       </div>
-
     </header>
   );
 };
