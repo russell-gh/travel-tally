@@ -111,6 +111,7 @@ const Login = () => {
           />
         </div>
         <div className="loginInput">
+          <p className="signup-text">Don't have an account?</p>
           <FormElement
             callback={onInput}
             type="email"
@@ -182,6 +183,7 @@ const Login = () => {
         />
       </div>
       <div className="loginInput">
+        <p className="login-title">Login to Your Account</p>
         <FormElement
           callback={onInput}
           type="email"
