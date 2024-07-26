@@ -19,6 +19,7 @@ const App = () => {
 
   return (
     <>
+      <p>Hello</p>
       {!online && (
         <div
           style={{
@@ -32,7 +33,7 @@ const App = () => {
           Internet offline
         </div>
       )}
-      <Interface />
+      {/* <Interface /> */}
     </>
   );
 };
