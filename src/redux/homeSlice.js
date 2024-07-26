@@ -156,7 +156,9 @@ export const homeSlice = createSlice({
       // Send data to be converted into the preferred format (uses function in expenseData.js)
       let result = handleData({ ...payload }, thisTrip.details.homeCurrency, {
         ...state.currencyRates,
+        tripID,
       });
+      console.log("handleDataResult", result);
       let expense = result.expense || result.allExpenses;
       let billSplit = result.billSplit;
       // Push data into expenses array
@@ -166,19 +168,21 @@ export const homeSlice = createSlice({
           addExpenseRemotely({ element, tripID });
         });
       } else {
+        // const expenseId = addExpenseRemotely({ expense, tripID });
+        // console.log(">>>>", expenseId);
+        // expense.id = expenseId;
         state.trips[indexOf].expenses.push(expense);
-        addExpenseRemotely({ expense, tripID });
       }
       // Push data to split array
       console.log("IN SLICE", billSplit);
       if (Array.isArray(billSplit)) {
         billSplit.forEach((element) => {
           state.trips[indexOf].splits.push(element);
-          addSplitRemotely({ element, tripID });
+          // addSplitRemotely({ element, tripID });
         });
       } else {
         state.trips[indexOf].splits.push(billSplit);
-        addSplitRemotely({ billSplit, tripID });
+        // addSplitRemotely({ billSplit, tripID });
       }
       // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
       state.splitData = [];

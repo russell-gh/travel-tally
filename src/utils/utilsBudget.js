@@ -195,9 +195,16 @@ export function nFormatter(num) {
     { value: 1e15, symbol: "Q", digits: 1 },
   ];
 
+  if (num < 0) {
+    return "0";
+  }
+
   const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
   const item = lookup.findLast((item) => num >= item.value);
   return item
-    ? (num / item.value).toFixed(item.digits).concat(item.symbol)
-    : "0";
+    ? (num / item.value)
+        .toFixed(item.digits)
+        .replace(regexp, "")
+        .concat(item.symbol)
+    : num.toFixed(2).replace(regexp, "");
 }

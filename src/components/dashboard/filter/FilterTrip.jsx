@@ -2,14 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { formEvent, selectTrips } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 import { selectSelectedTripId } from "../../../redux/homeSlice";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FilterTrip = () => {
   const dispatch = useDispatch();
   const redirect = useNavigate();
   const trips = useSelector(selectTrips);
   const selectedTripId = useSelector(selectSelectedTripId);
-  console.log("selectedTripID", selectedTripId);
 
   if (!trips) {
     return;

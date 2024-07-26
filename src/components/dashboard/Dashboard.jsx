@@ -7,8 +7,7 @@ import {
   selectFilter,
   selectFilterDate,
 } from "../../redux/homeSlice";
-import { findItem, getIndex } from "../../utils/utils";
-import Expenses from "./Expenses";
+import { findItem } from "../../utils/utils";
 import Title from "./Title";
 import "../../css/dashboard.scss";
 import {

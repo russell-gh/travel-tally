@@ -1,8 +1,9 @@
 import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
+import { addExpenseRemotely } from "./sync";
 
-export function handleData({ formData, splitData }, home, data) {
+export async function handleData({ formData, splitData }, home, data, tripID) {
   console.log("Start handle data", splitData);
   const expense = formData;
   let splits = [];
@@ -68,7 +69,10 @@ export function handleData({ formData, splitData }, home, data) {
   }
   delete expense.multiDay;
   delete expense.endDate;
-  expense.id = generateId("expense");
+  const expenseId = await addExpenseRemotely({ expense, tripID });
+  console.log(">>>>", expenseId);
+  expense.id = expenseId;
+  // expense.id = generateId("expense");
   if (splitData) {
     billSplit = splitExpenseBill(splits, expense, data);
   }
@@ -108,7 +112,7 @@ export function splitExpenseDays({ expense, splits }) {
     let unix = Math.round(currentDate.getTime());
     const copy = {
       ...expense,
-      id: generateId("expense"),
+      // id: generateId("expense"),
       date: unix,
       amount: {
         ...expense.amount,
