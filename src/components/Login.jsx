@@ -9,6 +9,7 @@ import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/toastifyVariables.css";
 //==========================================
 //=======Displays Login Data================
 //==========================================
@@ -38,7 +39,7 @@ const Login = () => {
           formData.password === localUser.password &&
           formData.email === localUser.email
         )
-      ? toast.error("wrong email/password")
+      ? toast.error("Wrong email/password!")
       : trips.length
       ? redirect("/dashboard")
       : redirect("/setup-profile");
@@ -46,6 +47,29 @@ const Login = () => {
 
   return (
     <>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          borderRadius: "8px",
+          fontFamily: "pt sans",
+        }}
+      >
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+          progressStyle={{ background: "#235b89" }}
+        />
+      </div>
       <div className="loginInput">
         <FormElement
           callback={onInput}
@@ -73,21 +97,6 @@ const Login = () => {
           animation={true}
           text="Login"
         />
-        <div>
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition:Bounce
-          />
-        </div>
 
         <p className="signup-text">
           Don't have an account? <a href="/signup"> Sign up! </a>

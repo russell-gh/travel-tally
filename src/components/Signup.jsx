@@ -8,6 +8,7 @@ import Button from "../reusable-code/Button";
 import { generateId } from "../utils/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/toastifyVariables.css";
 
 const Signup = () => {
   //Sends Errors + Creds to State
@@ -45,40 +46,15 @@ const Signup = () => {
   };
 
   return (
-    <div onInput={onInput} className="loginInput">
-      <FormElement
-        callback={onInput}
-        type="email"
-        name="email"
-        id="email"
-        placeholder="email"
-      />
-      <p className="errortext">{errors.email}</p>
-
-      <FormElement
-        callback={onInput}
-        type="password"
-        name="password"
-        id="password"
-        placeholder="new password"
-      />
-      <p className="errortext">{errors.password}</p>
-
-      <FormElement
-        callback={onInput}
-        type="password"
-        name="passwordConfirm"
-        id="passwordConfirm"
-        placeholder="confirm new password"
-      />
-      <p className="errortext">{errors.passwordConfirm}</p>
-      <Button
-        onClick={onSubmit}
-        text="Sign Up"
-        className="logsignBTN"
-        animation={true}
-      />
-      <div>
+    <>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          borderRadius: "8px",
+          fontFamily: "pt sans",
+        }}
+      >
         <ToastContainer
           position="top-center"
           autoClose={2000}
@@ -91,13 +67,48 @@ const Signup = () => {
           pauseOnHover
           theme="light"
           transition:Bounce
+          progressStyle={{ background: "#235b89" }}
         />
       </div>
+      <div onInput={onInput} className="loginInput">
+        <FormElement
+          callback={onInput}
+          type="email"
+          name="email"
+          id="email"
+          placeholder="email"
+        />
+        <p className="errortext">{errors.email}</p>
 
-      <p className="signup-text">
-        Already have an account? <a href="/login"> Login! </a>
-      </p>
-    </div>
+        <FormElement
+          callback={onInput}
+          type="password"
+          name="password"
+          id="password"
+          placeholder="new password"
+        />
+        <p className="errortext">{errors.password}</p>
+
+        <FormElement
+          callback={onInput}
+          type="password"
+          name="passwordConfirm"
+          id="passwordConfirm"
+          placeholder="confirm new password"
+        />
+        <p className="errortext">{errors.passwordConfirm}</p>
+        <Button
+          onClick={onSubmit}
+          text="Sign Up"
+          className="logsignBTN"
+          animation={true}
+        />
+
+        <p className="signup-text">
+          Already have an account? <a href="/login"> Login! </a>
+        </p>
+      </div>
+    </>
   );
 };
 
