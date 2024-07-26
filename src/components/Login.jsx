@@ -27,7 +27,6 @@ const Login = () => {
     setFormData(_formData);
     const errObj = await validate(_formData, "login");
     setErrors(errObj);
-    // console.log(errors, formData);
   };
   const localUser = JSON.parse(localStorage.getItem("user"));
 
@@ -51,7 +50,6 @@ const Login = () => {
   };
 
   const getTripsTryOut = async (token) => {
-    console.log("HERE");
     try {
       const { data } = await axios.get(`http://localhost:6001/trips`, {
         headers: { token },
@@ -63,7 +61,6 @@ const Login = () => {
           : "/setup-profile";
         redirect(next);
       }
-      console.log(data);
     } catch (e) {
       console.log(e);
     }

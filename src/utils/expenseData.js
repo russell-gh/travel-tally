@@ -1,9 +1,8 @@
 import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
-import { addExpenseRemotely } from "./sync";
 
-export async function handleData({ formData, splitData }, home, data, tripID) {
+export function handleData({ formData, splitData }, home, data) {
   console.log("Start handle data", splitData);
   const expense = formData;
   let splits = [];
@@ -61,25 +60,26 @@ export async function handleData({ formData, splitData }, home, data, tripID) {
   delete expense.currency;
   expense.date = start;
   expense.endDate = end;
+
   if (expense.multiDay === true) {
     console.log("in if statement", splits);
     // If it's a multiday expense, it gets sent to be split
     let allExpenses = splitExpenseDays({ expense, splits });
+    console.log(allExpenses);
     return allExpenses;
   }
+
+  expense.id = generateId("expense");
   delete expense.multiDay;
   delete expense.endDate;
-  const expenseId = await addExpenseRemotely({ expense, tripID });
-  console.log(">>>>", expenseId);
-  expense.id = expenseId;
-  // expense.id = generateId("expense");
-  if (splitData) {
+  console.log("expenseSplit", expense.split, expense);
+  if (expense.split) {
     billSplit = splitExpenseBill(splits, expense, data);
+    console.log(billSplit, "IN EXPENSEDATA");
+    return { expense, billSplit };
   }
 
-  console.log(billSplit, "IN EXPENSEDATA");
-
-  return { expense, billSplit };
+  return { expense };
 }
 
 export function convertCurrency(fromValue, fromCurrency, data) {
@@ -112,7 +112,7 @@ export function splitExpenseDays({ expense, splits }) {
     let unix = Math.round(currentDate.getTime());
     const copy = {
       ...expense,
-      // id: generateId("expense"),
+      id: generateId("expense"),
       date: unix,
       amount: {
         ...expense.amount,

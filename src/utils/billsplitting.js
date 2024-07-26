@@ -23,11 +23,14 @@ export function splitExpenseBill(splitData, expense) {
       toCurrency: expense.amount.toCurrency,
     };
 
+    console.log(expense);
+
     const formatted = {
       amount: newAmount,
       name: bill.name,
       paid: bill.paid,
-      expenseId: expense.id || expense.sharedId,
+      expenseId: expense.id,
+      ...(expense.sharedId ? { sharedId: expense.sharedId } : {}),
       id: generateId("billSplit"),
       description: expense.description,
       date: expense.date,

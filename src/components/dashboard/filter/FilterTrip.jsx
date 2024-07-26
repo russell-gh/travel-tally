@@ -26,7 +26,6 @@ const FilterTrip = () => {
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
-    console.log(value);
     if (value === "addTrip") {
       redirect("/onboarding");
       return;

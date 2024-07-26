@@ -64,7 +64,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
         });
         return (
           <div key={id}>
-            <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
+            <div className={`expenseItem ${isFuture ? "future" : ""}`}>
               <CategoryIcon category={category} />
               <DescriptionAndDate
                 description={description}

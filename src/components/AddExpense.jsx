@@ -151,6 +151,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   //handles on form change
   const getSplitData = (data, tag) => {
+    console.log("getSplitData", data, tag);
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };

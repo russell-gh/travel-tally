@@ -129,7 +129,6 @@ export const homeSlice = createSlice({
       saveStore("homeSlice", state);
     },
     formEvent: (state, { payload }) => {
-      console.log(payload.id, payload.value);
       state[payload.id] = payload.value;
 
       saveStore("homeSlice", state);
@@ -170,17 +169,21 @@ export const homeSlice = createSlice({
       }
       // Push data to split array
       console.log("IN SLICE", billSplit);
-      if (Array.isArray(billSplit)) {
-        billSplit.forEach((element) => {
-          state.trips[indexOf].splits.push(element);
-          addSplitRemotely({ element, tripID });
-        });
-      } else {
-        state.trips[indexOf].splits.push(billSplit);
-        addSplitRemotely({ billSplit, tripID });
+      if (billSplit) {
+        console.log(">>>>>>", billSplit, tripID);
+        // billSplit is always an array. So this if else statemement is unnecesary.
+        if (Array.isArray(billSplit)) {
+          billSplit.forEach((element) => {
+            state.trips[indexOf].splits.push(element);
+            addSplitRemotely({ element, tripID });
+          });
+        } else {
+          state.trips[indexOf].splits.push(billSplit);
+          addSplitRemotely({ billSplit, tripID });
+        }
+        // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
+        state.splitData = [];
       }
-      // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
-      state.splitData = [];
       // addExpenseRemotely({expense, tripID});
       saveStore("homeSlice", state);
     },
