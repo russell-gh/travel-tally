@@ -21,7 +21,7 @@ import { jsxs } from "react/jsx-runtime";
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const token = useSelector(selectToken);
-  
+
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
     currencies.push({ value: key, name: key });
@@ -124,7 +124,7 @@ const Onboarding = () => {
       setSliderError(true);
       return;
     }
-
+    console.log(errors);
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
