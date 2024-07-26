@@ -7,6 +7,9 @@ import "../css/login.scss";
 import "../css/app.scss";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../css/toastifyVariables.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { selectToken } from "../redux/homeSlice";
@@ -34,6 +37,7 @@ const Login = () => {
   //============================================
   //====Compares Credentials to Local Storage===
   //============================================
+
   const onSubmit = async (e) => {
     try {
       const { data } = await axios.post(
@@ -85,34 +89,62 @@ const Login = () => {
 
   return (
     <>
+      <div
+          style={{
+            position: "absolute",
+            top: 0,
+            borderRadius: "8px",
+            fontFamily: "pt sans",
+          }}
+        >
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition:Bounce
+            progressStyle={{ background: "#235b89" }}
+          />
+        </div> 
       <div className="loginInput">
-        <p>HELLO</p>
-        <FormElement
-          callback={onInput}
-          type="email"
-          name="email"
-          id="email"
-          placeholder="email"
-          className="logsign-input"
-        />
 
-        <p className="errortext">{errors.email}</p>
-        <FormElement
-          callback={onInput}
-          type="password"
-          name="password"
-          id="password"
-          placeholder="password"
-          className="logsign-input"
-        />
+          <FormElement
+            callback={onInput}
+            type="email"
+            name="email"
+            id="email"
+            placeholder="email"
+            className="logsign-input"
+          />
 
-        <p className="errortext">{errors.password}</p>
-        <Button onClick={onSubmit} className="loginBTN" text="Login" />
+          <p className="errortext">{errors.email}</p>
+          <FormElement
+            callback={onInput}
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            className="logsign-input"
+          />
 
-        <p className="signup-text">
-          Don't have an account? <a href="/signup"> Sign up! </a>
-        </p>
-      </div>
+          <p className="errortext">{errors.password}</p>
+          <Button
+            onClick={onSubmit}
+            className="logsignBTN"
+            animation={true}
+            text="Login"
+          />
+
+          <p className="signup-text">
+            Don't have an account? <a href="/signup"> Sign up! </a>
+          </p>
+        </div>
     </>
   );
 };

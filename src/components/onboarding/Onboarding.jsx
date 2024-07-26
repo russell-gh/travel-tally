@@ -11,7 +11,7 @@ import {
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
-import { addTrip } from "../../redux/homeSlice.js";
+import { addTrip, selectToken } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
@@ -20,7 +20,8 @@ import { jsxs } from "react/jsx-runtime";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
-
+  const token = useSelector(selectToken);
+  
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
     currencies.push({ value: key, name: key });
@@ -163,7 +164,11 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-    await axios.post("http://localhost:6001/onboarding", {_onboardingDetails});
+    await axios.post(
+      "http://localhost:6001/onboarding",
+      { _onboardingDetails },
+      { headers: { token } }
+    );
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
     redirect("/dashboard");
   };
