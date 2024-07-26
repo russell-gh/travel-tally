@@ -17,6 +17,7 @@ import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
 import { jsxs } from "react/jsx-runtime";
+import { getCurrencySymbol } from "../../utils/utilsBudget.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
@@ -37,7 +38,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: currencies[0].value,
-    homeCurrencySymbol: "",
+    homeCurrencySymbol: getCurrencySymbol(currencyCodes, currencies[0].value),
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -46,10 +47,13 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
+
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
+
+  console.log(currencies);
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -189,7 +193,7 @@ const Onboarding = () => {
       setOnboardingDetails({
         ...onboardingDetails,
         homeCurrencySymbol:
-          currencyCodes[onboardingDetails.homeCurrency].symbol,
+        getCurrencySymbol(currencyCodes, onboardingDetails.homeCurrency)
       });
     }
 
