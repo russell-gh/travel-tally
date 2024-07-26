@@ -82,6 +82,7 @@ const Signup = () => {
         />
       </div>
       <div onInput={onInput} className="loginInput">
+        <p className="signin-title">Create an Account</p>
         <FormElement
           callback={onInput}
           type="email"
