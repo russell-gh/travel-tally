@@ -37,7 +37,27 @@ const Login = () => {
   //============================================
   //====Compares Credentials to Local Storage===
   //============================================
-  //message the user
+
+  const onSubmit = async (e) => {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:6001/user/login`,
+        formData
+      );
+
+      if (data.status) {
+        dispatch(setData({ text: "token", data: data.token }));
+        getTripsTryOut(data.token);
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    //message the user
+    console.log(errors, formData, localUser);
+  };
+
   const getTripsTryOut = async (token) => {
     console.log("HERE");
     try {
@@ -54,19 +74,6 @@ const Login = () => {
       console.log(data);
     } catch (e) {
       console.log(e);
-    }
-  };
-
-  const onSubmit = async (e) => {
-    const { data } = await axios.post(
-      `http://localhost:6001/user/login`,
-      formData
-    );
-
-    if (data.status) {
-      dispatch(setData({ text: "token", data: data.token }));
-      getTripsTryOut(data.token);
-      return;
     }
   };
 
@@ -106,6 +113,7 @@ const Login = () => {
           />
         </div> 
       <div className="loginInput">
+
           <FormElement
             callback={onInput}
             type="email"
