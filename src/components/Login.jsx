@@ -71,7 +71,9 @@ const Login = () => {
           : "/setup-profile";
         redirect(next);
       }
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
 
     const getProfileTryOut = async () => {
       try {

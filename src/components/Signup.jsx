@@ -49,7 +49,7 @@ const Signup = () => {
         redirect("/login");
       } else {
         //send user some error
-        console.log("Failed to add user");
+        toast.error("Failed to add user");
       }
     } else {
       toast.error("Passwords do not match!");
