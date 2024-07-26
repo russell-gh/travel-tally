@@ -6,7 +6,7 @@ import AddExpense from "./components/AddExpense";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Onboarding from "./components/onboarding/Onboarding";
-import { selectPopUp, setData } from "./redux/homeSlice";
+import { selectPopUp, selectToken, setData } from "./redux/homeSlice";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getStore } from "./localStorage";
@@ -30,28 +30,17 @@ const Interface = () => {
 
   useEffect(() => {
     getApiData();
-    getTripsTryOut();
-    getProfileTryOut();
   }, []);
 
-  const getTripsTryOut = async () => {
-    try {
-      const { data } = await axios.get(`http://api.holidough.uk/trips/${1}`);
-      dispatch(setData({ text: "trips", data }));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const getProfileTryOut = async () => {
-    try {
-      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
-      console.log(data);
-      dispatch(saveProfile(data));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // Do we need to make this call at a different time? We need to know the homecurrency of the trip.
+  // const getCurrencyConversion = async () =>{
+  //   try {
+  //     const { data } = await axios.get(`http://api.holidough.uk/conversion/${101}`);
+  //     dispatch(setData({ text: "currencies", data }));
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   const getApiData = async () => {
     const homeSlice = getStore("homeSlice");

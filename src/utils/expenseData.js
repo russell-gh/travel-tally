@@ -190,7 +190,7 @@ export function getThisSplit(splitList, id) {
 
   splitList.forEach((thisSplit, index) => {
     // Finds each split with matching ID
-    if (thisSplit.expenseID === id) {
+    if (thisSplit.expenseId === id) {
       allSplits.push(thisSplit);
       allIndexs.push(index); // Adds all of them to and array
     }

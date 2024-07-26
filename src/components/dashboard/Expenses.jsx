@@ -78,11 +78,13 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                   hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
                 }
               >
-                {split && (
+                {split ? (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
                   />
+                ) : (
+                  ""
                 )}
                 <ExpenseAmount
                   homeCurrencySymbol={homeCurrencySymbol}
@@ -104,6 +106,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                         title: description,
                         id: id,
                         sharedId: sharedId,
+                        split: split,
                       },
                       component: "EditExpense",
                     })
@@ -121,6 +124,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                         title: description,
                         id: id,
                         sharedId: sharedId,
+                        split: split,
                       },
                       component: "DeletePopUp",
                     })

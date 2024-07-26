@@ -29,6 +29,7 @@ const ExpenseAmount = ({
   }
 
   fromValue = addDecimals(fromValue);
+  const currencySymbol = getCurrencySymbol(currencyCodes, fromCurrency);
 
   return (
     <div>
@@ -37,7 +38,7 @@ const ExpenseAmount = ({
         {addDecimals(toValue)}
       </p>
       <p className="foreignAmount">
-        {getCurrencySymbol(currencyCodes, fromCurrency)}
+        {currencySymbol}
         {nFormatter(fromValue)}
       </p>
     </div>
