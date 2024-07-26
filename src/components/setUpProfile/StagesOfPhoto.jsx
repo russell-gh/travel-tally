@@ -6,6 +6,7 @@ import { selectProfilePictureSrc } from "../../redux/onboardingSlice";
 import { selectUserName } from "../../redux/onboardingSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { selectToken } from "../../redux/homeSlice";
 
 const StageOfPhoto = ({ profilePicture, handleCapture }) => {
   const redirect = useNavigate();
@@ -14,13 +15,19 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
+  const token = useSelector(selectToken);
+
   const clickHandler = async () => {
     try {
-      await axios.post("http://localhost:6001/profile", {
-        profilePictureSrc,
-        userName,
-        userID: user.userID,
-      });
+      await axios.post(
+        "http://localhost:6001/profile",
+        {
+          profilePictureSrc,
+          userName,
+          userID: user.userID,
+        },
+        { headers: { token } }
+      );
       redirect("/onboarding");
     } catch (e) {
       console.log("There was an error posting to the database", e);
