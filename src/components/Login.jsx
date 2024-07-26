@@ -24,6 +24,7 @@ const Login = () => {
   const trips = useSelector(selectTrips);
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
+
   const onInput = async (e) => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -32,42 +33,45 @@ const Login = () => {
     setErrors(errObj);
     // console.log(errors, formData);
   };
-  const localUser = JSON.parse(localStorage.getItem("user"));
 
   //============================================
   //====Compares Credentials to Local Storage===
   //============================================
-  const onSubmit = async (e) => {
-    const { data } = await axios.post(
-      `http://localhost:6001/user/login`,
-      formData
-    );
 
-    if (data.status) {
-      dispatch(setData({ text: "token", data: data.token }));
-      getTripsTryOut(data.token);
-      return;
+  const onSubmit = async (e) => {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:6001/user/login`,
+        formData
+      );
+
+      if (data.status) {
+        dispatch(setData({ text: "token", data: data.token }));
+        getTripsTryOut(data.token);
+        return;
+      }
+    } catch (e) {
+      console.log(e);
     }
 
     //message the user
-    const getTripsTryOut = async (token) => {
-      console.log("HERE");
-      try {
-        const { data } = await axios.get(`http://localhost:6001/trips`, {
-          headers: { token },
-        });
-        if (data.status) {
-          dispatch(setData({ text: "trips", data: data.tripsComplete }));
-          const next = data.tripsComplete.length
-            ? "/dashboard"
-            : "/setup-profile";
-          redirect(next);
-        }
-        console.log(data);
-      } catch (e) {
-        console.log(e);
+    console.log(errors, formData, localUser);
+  };
+
+  const getTripsTryOut = async (token) => {
+    console.log("HERE");
+    try {
+      const { data } = await axios.get(`http://localhost:6001/trips`, {
+        headers: { token },
+      });
+      if (data.status) {
+        dispatch(setData({ text: "trips", data: data.tripsComplete }));
+        const next = data.tripsComplete.length
+          ? "/dashboard"
+          : "/setup-profile";
+        redirect(next);
       }
-    };
+    } catch {}
 
     const getProfileTryOut = async () => {
       try {
@@ -141,6 +145,76 @@ const Login = () => {
       </>
     );
   };
+
+  const getProfileTryOut = async () => {
+    try {
+      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
+      console.log(data);
+      dispatch(saveProfile(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          borderRadius: "8px",
+          fontFamily: "pt sans",
+        }}
+      >
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+          progressStyle={{ background: "#235b89" }}
+        />
+      </div>
+      <div className="loginInput">
+        <FormElement
+          callback={onInput}
+          type="email"
+          name="email"
+          id="email"
+          placeholder="email"
+          className="logsign-input"
+        />
+
+        <p className="errortext">{errors.email}</p>
+        <FormElement
+          callback={onInput}
+          type="password"
+          name="password"
+          id="password"
+          placeholder="password"
+          className="logsign-input"
+        />
+
+        <p className="errortext">{errors.password}</p>
+        <Button
+          onClick={onSubmit}
+          className="logsignBTN"
+          animation={true}
+          text="Login"
+        />
+
+        <p className="signup-text">
+          Don't have an account? <a href="/signup"> Sign up! </a>
+        </p>
+      </div>
+    </>
+  );
 };
 
 export default Login;
