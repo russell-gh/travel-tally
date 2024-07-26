@@ -21,6 +21,7 @@ const Login = () => {
   const trips = useSelector(selectTrips);
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
+
   const onInput = async (e) => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -29,21 +30,24 @@ const Login = () => {
     setErrors(errObj);
     // console.log(errors, formData);
   };
-  const localUser = JSON.parse(localStorage.getItem("user"));
 
   //============================================
   //====Compares Credentials to Local Storage===
   //============================================
   const onSubmit = async (e) => {
-    const { data } = await axios.post(
-      `http://localhost:6001/user/login`,
-      formData
-    );
+    try {
+      const { data } = await axios.post(
+        `http://localhost:6001/user/login`,
+        formData
+      );
 
-    if (data.status) {
-      dispatch(setData({ text: "token", data: data.token }));
-      getTripsTryOut(data.token);
-      return;
+      if (data.status) {
+        dispatch(setData({ text: "token", data: data.token }));
+        getTripsTryOut(data.token);
+        return;
+      }
+    } catch (e) {
+      console.log(e);
     }
 
     //message the user
@@ -82,6 +86,7 @@ const Login = () => {
   return (
     <>
       <div className="loginInput">
+        <p>HELLO</p>
         <FormElement
           callback={onInput}
           type="email"
