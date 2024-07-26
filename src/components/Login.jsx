@@ -7,6 +7,9 @@ import "../css/login.scss";
 import "../css/app.scss";
 import FormElement from "../reusable-code/FormElement";
 import Button from "../reusable-code/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../css/toastifyVariables.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { selectToken } from "../redux/homeSlice";
@@ -47,9 +50,6 @@ const Login = () => {
     }
 
     //message the user
-    console.log(errors, formData, localUser);
-  };
-
   const getTripsTryOut = async (token) => {
     console.log("HERE");
     try {
@@ -81,6 +81,29 @@ const Login = () => {
 
   return (
     <>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          borderRadius: "8px",
+          fontFamily: "pt sans",
+        }}
+      >
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+          progressStyle={{ background: "#235b89" }}
+        />
+      </div>
       <div className="loginInput">
         <FormElement
           callback={onInput}
@@ -102,7 +125,12 @@ const Login = () => {
         />
 
         <p className="errortext">{errors.password}</p>
-        <Button onClick={onSubmit} className="loginBTN" text="Login" />
+        <Button
+          onClick={onSubmit}
+          className="logsignBTN"
+          animation={true}
+          text="Login"
+        />
 
         <p className="signup-text">
           Don't have an account? <a href="/signup"> Sign up! </a>
