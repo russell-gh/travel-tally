@@ -44,13 +44,6 @@ const BillSplitExpense = ({
         expenseId={expenseId}
         splits={splits}
       />
-      <BillSplitItems
-        expenseId={expenseId}
-        splits={splits}
-        homeCurrencySymbol={homeCurrencySymbol}
-        currencyCodes={currencyCodes}
-        expenses={expenses}
-      />
     </div>
   );
 };
