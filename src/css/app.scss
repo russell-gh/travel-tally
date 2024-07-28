@@ -102,10 +102,22 @@ header {
     align-items: center;
   }
 
+  // @media (max-width: 600px) {
+  //   .btn {
+  //     display: flex;
+  //     text-align: center;
+  //     width: 10px;
+  //   }
+  // }
+
   @media (max-width: 600px) {
     .btn {
-      width: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      width: auto;
+      padding: 10px;
     }
   }
 }
