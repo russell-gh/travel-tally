@@ -101,6 +101,13 @@ header {
     justify-content: space-around;
     align-items: center;
   }
+
+  @media (max-width: 600px) {
+    .btn {
+      width: 10px;
+      text-align: center;
+    }
+  }
 }
 
 header,

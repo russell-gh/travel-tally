@@ -14,9 +14,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { selectToken } from "../redux/homeSlice";
 
-//==========================================
 //=======Displays Login Data================
-//==========================================
+
 const Login = () => {
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
@@ -34,10 +33,7 @@ const Login = () => {
     // console.log(errors, formData);
   };
 
-  //============================================
   //====Compares Credentials to Local Storage===
-  //============================================
-
   const onSubmit = async (e) => {
     try {
       const { data } = await axios.post(
