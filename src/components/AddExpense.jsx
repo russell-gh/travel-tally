@@ -43,7 +43,7 @@ export const AddExpense = ({ animatingOut }) => {
     amount: 0,
     split: false,
     currency: "GBP",
-    category: "Food",
+    category: "Activities",
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);

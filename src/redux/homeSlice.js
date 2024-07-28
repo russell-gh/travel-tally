@@ -56,6 +56,7 @@ export const homeSlice = createSlice({
       //get index of the current trip
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const expenses = state.trips[indexTrip].expenses;
+      const splits = state.trips[indexTrip].splits;
       console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
         //get index of clicked expense
@@ -63,27 +64,24 @@ export const homeSlice = createSlice({
         // delete expense
         expenses.splice(index, 1);
 
+        //if there are splits linked to the expense delete these as well
+        if (state.popUp.split) {
+          let indexesSplits = [];
+          for (let i = 0; i < splits.length; i++) {
+            if (splits[i].expenseId === state.popUp.id) {
+              indexesSplits.unshift(i);
+            }
+          }
+          console.log(indexesSplits);
+          for (const index of indexesSplits) {
+            splits.splice(index, 1);
+          }
+        }
+
         //delete the expense/split from backend
         const id = state.popUp.id;
         deleteByID({ id, type: "single" });
         deleteByID({ id, type: "split" });
-      }
-
-      //if there are splits linked to the expense delete these as well
-      console.log("is it a split", state.popUp.split);
-      if (state.popUp.split) {
-        const splits = state.trips[indexTrip].splits;
-        console.log(JSON.stringify(state.trips[indexTrip].splits));
-        let indexesSplits = [];
-        for (let i = 0; i < splits.length; i++) {
-          console.log(splits[i].expenseId, state.popUp.id);
-          if (splits[i].expenseId === state.popUp.id) {
-            indexesSplits.push(i);
-          }
-        }
-        console.log("indexes splits", indexesSplits);
-        //delete the expenses
-        splits.splice(indexesSplits[0], indexesSplits.length);
       }
 
       //get indexes of all items with sharedId
