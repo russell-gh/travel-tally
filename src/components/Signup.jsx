@@ -45,7 +45,6 @@ const Signup = () => {
       if (data.status) {
         redirect("/login");
       } else {
-        //send user some error
         toast.error("Failed to add user");
       }
     } else {

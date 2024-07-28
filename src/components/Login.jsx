@@ -74,7 +74,6 @@ const Login = () => {
       }
     } catch (e) {
       console.log(e);
-      toast.error("Error logging in!");
     }
 
     // const getProfileTryOut = async () => {
