@@ -52,6 +52,7 @@ export function splitMultiExpenseBill(splits, multiExpenses, days) {
   let allSplits = [];
 
   for (const expense of multiExpenses) {
+    console.log(expense);
     for (const split of splits) {
       if (!split.converted) {
         split.converted = split.amount;
@@ -77,6 +78,7 @@ export function splitMultiExpenseBill(splits, multiExpenses, days) {
       allSplits.push(formatted);
     }
   }
+  console.log(allSplits);
 
   return allSplits;
 }

@@ -227,8 +227,28 @@ export const homeSlice = createSlice({
 
     setPaid: (state, { payload }) => {
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
+
+      if (payload.sharedId) {
+        const splits = state.trips[indexTrip].splits;
+        let indexesSplits = [];
+        for (let i = 0; i < splits.length; i++) {
+          if (
+            splits[i].sharedId === payload.sharedId &&
+            splits[i].name === payload.name
+          ) {
+            indexesSplits.push(i);
+          }
+        }
+
+        for (const index of indexesSplits) {
+          state.trips[indexTrip].splits[index].paid = true;
+        }
+      }
+
       const index = getIndex(payload.data, payload.id, "id");
       state.trips[indexTrip].splits[index].paid = true;
+
+      //this needs to be send to database as change
     },
     setSplitData: (state, { payload }) => {
       if (payload.tag === -1) {
