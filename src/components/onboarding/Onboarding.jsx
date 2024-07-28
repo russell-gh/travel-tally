@@ -11,15 +11,17 @@ import {
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
-import { addTrip } from "../../redux/homeSlice.js";
+import { addTrip, selectToken } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
 import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
 import { jsxs } from "react/jsx-runtime";
+import { getCurrencySymbol } from "../../utils/utilsBudget.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
+  const token = useSelector(selectToken);
 
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
@@ -36,7 +38,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: currencies[0].value,
-    homeCurrencySymbol: "",
+    homeCurrencySymbol: getCurrencySymbol(currencyCodes, currencies[0].value),
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -45,10 +47,13 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
+
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
+
+  console.log(currencies);
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -123,7 +128,7 @@ const Onboarding = () => {
       setSliderError(true);
       return;
     }
-
+    console.log(errors);
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -163,7 +168,11 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-    await axios.post("http://localhost:6001/onboarding", {_onboardingDetails});
+    await axios.post(
+      "http://localhost:6001/onboarding",
+      { _onboardingDetails },
+      { headers: { token } }
+    );
     dispatch(addTrip({ text: "trips", data: _onboardingDetails }));
     redirect("/dashboard");
   };
@@ -184,7 +193,7 @@ const Onboarding = () => {
       setOnboardingDetails({
         ...onboardingDetails,
         homeCurrencySymbol:
-          currencyCodes[onboardingDetails.homeCurrency].symbol,
+        getCurrencySymbol(currencyCodes, onboardingDetails.homeCurrency)
       });
     }
 

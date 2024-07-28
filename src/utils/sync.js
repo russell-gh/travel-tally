@@ -20,6 +20,9 @@ export async function addSplitRemotely(payload) {
     payload.billSplit = payload.element;
     delete payload.element;
   }
+  if (!payload.billSplit.name || payload.billSplit.name === "") {
+    return;
+  }
   console.log(payload);
   try {
     const results = await axios.post("http://127.0.0.1:6001/splits", payload);
