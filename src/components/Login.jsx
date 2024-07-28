@@ -52,10 +52,11 @@ const Login = () => {
       }
     } catch (e) {
       console.log(e);
+      toast.error("Incorrect Credentials!");
     }
 
     //message the user
-    console.log(errors, formData, localUser);
+    // console.log(errors, formData, localUser);
   };
 
   const getTripsTryOut = async (token) => {
@@ -73,19 +74,20 @@ const Login = () => {
       }
     } catch (e) {
       console.log(e);
+      toast.error("Error logging in!");
     }
 
-    const getProfileTryOut = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://api.holidough.uk/profile/${1}`
-        );
-        console.log(data);
-        dispatch(saveProfile(data));
-      } catch (e) {
-        console.log(e);
-      }
-    };
+    // const getProfileTryOut = async () => {
+    //   try {
+    //     const { data } = await axios.get(
+    //       `http://api.holidough.uk/profile/${1}`
+    //     );
+    //     console.log(data);
+    //     dispatch(saveProfile(data));
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // };
 
     return (
       <>

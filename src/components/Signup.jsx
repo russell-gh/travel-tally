@@ -26,15 +26,12 @@ const Signup = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const redirect = useNavigate();
-  //==========================================
   //=========Validates credentials============
-  //==========================================
   const onSubmit = async (e) => {
     const errObj = await validate(formData, "signup");
     setErrors(errObj);
 
     if (errObj.password || errObj.email) {
-      console.log(">>>", errObj);
     } else if (formData.password === formData.passwordConfirm) {
       formData.userID = generateId("user");
       // dispatch(addUser(formData));
