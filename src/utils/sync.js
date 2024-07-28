@@ -16,6 +16,9 @@ export async function addSplitRemotely(payload) {
     payload.billSplit = payload.element;
     delete payload.element;
   }
+  if (!payload.billSplit.name || payload.billSplit.name === "") {
+    return;
+  }
   console.log(payload);
   const results = await axios.post("http://127.0.0.1:6001/splits", payload);
   console.log(results, "add split");
@@ -35,9 +38,7 @@ export async function deleteByID(payload) {
     );
     console.log(results);
   } else if (payload.type === "split") {
-    const results = await axios.delete(
-      `http://127.0.0.1:6001/splits/id/${id}`
-    );
+    const results = await axios.delete(`http://127.0.0.1:6001/splits/id/${id}`);
     console.log(results);
   }
 }
