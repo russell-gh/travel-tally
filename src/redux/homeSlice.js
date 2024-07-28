@@ -59,6 +59,7 @@ export const homeSlice = createSlice({
       const splits = state.trips[indexTrip].splits;
       console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
+        const id = state.popUp.id;
         //get index of clicked expense
         const index = getIndex(expenses, state.popUp.id, "id");
         // delete expense
@@ -76,16 +77,17 @@ export const homeSlice = createSlice({
           for (const index of indexesSplits) {
             splits.splice(index, 1);
           }
+
+          deleteByID({ id, type: "singleSplit" });
         }
 
-        //delete the expense/split from backend
-        const id = state.popUp.id;
+        //delete the expense from backend
         deleteByID({ id, type: "single" });
-        deleteByID({ id, type: "split" });
       }
 
       //get indexes of all items with sharedId
       if (payload === "all") {
+        const id = state.popUp.sharedId;
         let indexes = [];
         for (let i = 0; i < expenses.length; i++) {
           if (expenses[i].sharedId === state.popUp.sharedId) {
@@ -95,11 +97,26 @@ export const homeSlice = createSlice({
 
         //delete the expenses
         expenses.splice(indexes[0], indexes.length);
-        //delete the expense/split from backend
-        const id = state.popUp.sharedId;
+
+        //if there are splits linked to the expense delete these as well
+        if (state.popUp.split) {
+          let indexesSplits = [];
+          for (let i = 0; i < splits.length; i++) {
+            if (splits[i].sharedId === state.popUp.sharedId) {
+              indexesSplits.unshift(i);
+            }
+          }
+
+          for (const index of indexesSplits) {
+            splits.splice(index, 1);
+          }
+
+          deleteByID({ id, type: "sharedSplit" });
+        }
+
+        //delete the expense from backend
         console.log(id, "POP UP IN SLICE");
         deleteByID({ id, type: "shared" });
-        deleteByID({ id, type: "split" });
       }
 
       //set popUp to empty so popUp disappears

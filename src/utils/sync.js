@@ -39,14 +39,17 @@ export async function deleteByID(payload) {
     const results = await axios.delete(
       `http://127.0.0.1:6001/expenses/shared/${id}`
     );
-    console.log(results);
+    console.log(results, "sharedExpense");
   } else if (payload.type === "single") {
+    const results = await axios.delete(`http://127.0.0.1:6001/expenses/${id}`);
+    console.log(results, "singleExpense");
+  } else if (payload.type === "singleSplit") {
+    const results = await axios.delete(`http://127.0.0.1:6001/splits/${id}`);
+    console.log(results, "singleSplit");
+  } else if (payload.type === "sharedSplit") {
     const results = await axios.delete(
-      `http://127.0.0.1:6001/expenses/id/${id}`
+      `http://127.0.0.1:6001/splits/shared/${id}`
     );
-    console.log(results);
-  } else if (payload.type === "split") {
-    const results = await axios.delete(`http://127.0.0.1:6001/splits/id/${id}`);
-    console.log(results);
+    console.log(results, "sharedSplit");
   }
 }
