@@ -118,6 +118,12 @@ const Login = () => {
           id="email"
           placeholder="email"
           className="logsign-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !errors.length) {
+              console.log("enter");
+              onSubmit();
+            }
+          }}
         />
 
         <p className="errortext">{errors.email}</p>
@@ -128,6 +134,12 @@ const Login = () => {
           id="password"
           placeholder="password"
           className="logsign-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !errors.lenght) {
+              console.log("enter");
+              onSubmit();
+            }
+          }}
         />
 
         <p className="errortext">{errors.password}</p>
