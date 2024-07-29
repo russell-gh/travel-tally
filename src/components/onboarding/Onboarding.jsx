@@ -147,7 +147,7 @@ const Onboarding = () => {
 
     //spread existing state and update modified keys
     _onboardingDetails = {
-      id: generateId("trip"),
+      tripId: generateId("trip"),
       details: {
         ..._onboardingDetails,
         dates: { startDate, endDate, startDateIncluded, endDateIncluded },
