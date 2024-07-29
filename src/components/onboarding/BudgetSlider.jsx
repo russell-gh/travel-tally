@@ -2,7 +2,7 @@ import { Slider, Stack, styled } from "@mui/material";
 import { useState } from "react";
 
 const StyledSlider = styled(Slider)(({ slidermax }) => ({
-  width: 230,
+  width:"65vw",
   height: 8,
   marginBottom:"3em",
   "& .MuiSlider-rail": {

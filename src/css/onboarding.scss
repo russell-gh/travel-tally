@@ -24,6 +24,10 @@
     font-size: 1.7rem;
   }
 
+  .budgetSlidersLabel {
+    margin-bottom:3em;
+  }
+
   input[type="text"],
   input[type="date"],
   input[type="number"],
@@ -63,7 +67,7 @@
   }
 
   .validationError {
-    color: $teal;
+    color: $red;
     font-size: 1.2rem;
     margin: 0;
   }

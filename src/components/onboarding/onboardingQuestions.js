@@ -58,7 +58,7 @@ export const onboardingQuestions = {
       type: "number",
       id: "budgetHotel",
       name: "budgetHotel",
-      label: "Hotels and accommodation",
+      label: "Hotels",
     },
     {
       type: "number",
