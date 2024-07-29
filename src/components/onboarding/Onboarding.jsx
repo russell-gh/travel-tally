@@ -53,13 +53,6 @@ const Onboarding = () => {
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
 
-  console.log(currencies);
-
-  // getCountryCurrency("london", 5);
-  // useEffect(() => {
-  //   getCountryCurrency(setCountryCurrency);
-  // }, []);
-
   const dispatch = useDispatch();
   const redirect = useNavigate();
 
@@ -128,7 +121,7 @@ const Onboarding = () => {
       setSliderError(true);
       return;
     }
-    console.log(errors);
+
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
