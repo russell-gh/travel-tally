@@ -1,6 +1,7 @@
 import { splitExpenseBill } from "./billsplitting";
 import { unixToDate } from "./utilsDates";
 import { stringToUnix, generateId } from "./utils";
+import { splitMultiExpenseBill } from "./billsplitting";
 
 export function handleData({ formData, splitData }, home, data) {
   console.log("Start handle data", splitData);
@@ -60,22 +61,26 @@ export function handleData({ formData, splitData }, home, data) {
   delete expense.currency;
   expense.date = start;
   expense.endDate = end;
+
   if (expense.multiDay === true) {
     console.log("in if statement", splits);
     // If it's a multiday expense, it gets sent to be split
     let allExpenses = splitExpenseDays({ expense, splits });
+    console.log(allExpenses);
     return allExpenses;
   }
+
+  expense.id = generateId("expense");
   delete expense.multiDay;
   delete expense.endDate;
-  expense.id = generateId("expense");
-  if (splitData) {
+  console.log("expenseSplit", expense.split, expense);
+  if (expense.split) {
     billSplit = splitExpenseBill(splits, expense, data);
+    console.log(billSplit, "IN EXPENSEDATA");
+    return { expense, billSplit };
   }
 
-  console.log(billSplit, "IN EXPENSEDATA");
-
-  return { expense, billSplit };
+  return { expense };
 }
 
 export function convertCurrency(fromValue, fromCurrency, data) {
@@ -91,15 +96,12 @@ export function splitExpenseDays({ expense, splits }) {
     expense;
   let { fromValue, toValue } = amount;
   let allExpenses = [];
-  let billSplit;
+
   delete expense.multiDay;
   const days = (endDate - date) / 1000 / 60 / 60 / 24 + 1;
   const newFrom = fromValue / days;
   const newTo = toValue / days;
   expense.sharedId = generateId("sharedId");
-  if (splits) {
-    billSplit = splitExpenseBill(splits, expense);
-  }
 
   // splits up the expense object and puts in the right part of array
   for (let j = 0; j < days; j++) {
@@ -118,6 +120,12 @@ export function splitExpenseDays({ expense, splits }) {
     };
     delete copy.endDate;
     allExpenses.push(copy);
+  }
+
+  //split up the billsplits
+  let billSplit;
+  if (split === true) {
+    billSplit = splitMultiExpenseBill(splits, allExpenses, days);
   }
   console.log("End split exp", billSplit);
   return { allExpenses, billSplit };

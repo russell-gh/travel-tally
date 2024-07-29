@@ -36,7 +36,7 @@ const BillSplitItems = ({
   return (
     <>
       {arrayOfSplits.map((split) => {
-        const { id, amount, paid, description, date, name } = split;
+        const { id, amount, paid, date, name, sharedId } = split;
         const { fromCurrency, toValue, fromValue } = amount;
         return (
           <div
@@ -72,7 +72,14 @@ const BillSplitItems = ({
                   id="paid"
                   name="paid"
                   callback={() => {
-                    dispatch(setPaid({ data: splits, id: id }));
+                    dispatch(
+                      setPaid({
+                        data: splits,
+                        id: id,
+                        sharedId: sharedId,
+                        name: name,
+                      })
+                    );
                   }}
                 />
               </div>

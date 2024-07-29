@@ -16,8 +16,8 @@ import { useState } from "react";
 const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
+  const [displaySplit, setDisplaySplit] = useState([]);
   const dispatch = useDispatch();
-  const [displaySplit, setDisplaySplit] = useState("");
 
   if (!currencyCodes || !trips) {
     return;
@@ -44,11 +44,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   }
 
   const toggleDisplaySplit = (expenseId) => {
-    if (displaySplit === expenseId) {
-      setDisplaySplit("");
-    } else {
-      setDisplaySplit(expenseId);
-    }
+    setDisplaySplit((prevDisplaySplit) =>
+      prevDisplaySplit.includes(expenseId)
+        ? prevDisplaySplit.filter((id) => id !== expenseId)
+        : [...prevDisplaySplit, expenseId]
+    );
   };
 
   return (
@@ -64,7 +64,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
         });
         return (
           <div key={id}>
-            <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
+            <div className={`expenseItem ${isFuture ? "future" : ""}`}>
               <CategoryIcon category={category} />
               <DescriptionAndDate
                 description={description}
@@ -132,7 +132,7 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 }}
               />
             </div>
-            {displaySplit === id && (
+            {displaySplit.includes(id) && (
               <BillSplitItems
                 expenseId={id}
                 splits={splits}

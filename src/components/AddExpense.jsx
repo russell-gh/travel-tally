@@ -43,7 +43,7 @@ export const AddExpense = ({ animatingOut }) => {
     amount: 0,
     split: false,
     currency: "GBP",
-    category: "Food",
+    category: "Activities",
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
@@ -151,6 +151,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   //handles on form change
   const getSplitData = (data, tag) => {
+    console.log("getSplitData", data, tag);
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
@@ -161,7 +162,7 @@ export const AddExpense = ({ animatingOut }) => {
         <>
           {splitData.map(function (split, index) {
             return (
-              <div className="flex">
+              <div className="flex" key={index}>
                 <SplitInput
                   maxAmount={formData.amount}
                   tag={index}
