@@ -120,7 +120,6 @@ const Login = () => {
           className="logsign-input"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !errors.length) {
-              console.log("enter");
               onSubmit();
             }
           }}
@@ -136,7 +135,6 @@ const Login = () => {
           className="logsign-input"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !errors.lenght) {
-              console.log("enter");
               onSubmit();
             }
           }}

@@ -30,7 +30,7 @@ const FilterTrip = () => {
       redirect("/onboarding");
       return;
     } else {
-      dispatch(formEvent({ id: e.target.id, value: Number(value) }));
+      dispatch(formEvent({ id: e.target.id, value: value }));
     }
   };
 
