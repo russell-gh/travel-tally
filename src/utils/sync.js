@@ -53,3 +53,13 @@ export async function deleteByID(payload) {
     console.log(results, "sharedSplit");
   }
 }
+
+export async function updatePaidDB(id, name) {
+  try {
+    const results = await axios.patch(
+      `http://127.0.0.1:6001/splits/paid/${id}/${name}`
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}

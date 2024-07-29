@@ -8,6 +8,7 @@ import {
   addExpenseRemotely,
   addSplitRemotely,
   deleteByID,
+  updatePaidDB,
 } from "../utils/sync";
 
 const dataFromDisc = getStore("homeSlice");
@@ -258,12 +259,17 @@ export const homeSlice = createSlice({
         for (const index of indexesSplits) {
           state.trips[indexTrip].splits[index].paid = true;
         }
+
+        //send to database to change
+        updatePaidDB(payload.sharedId, payload.name);
+        return;
       }
 
       const index = getIndex(payload.data, payload.id, "id");
       state.trips[indexTrip].splits[index].paid = true;
 
-      //this needs to be send to database as change
+      //send to database to change
+      updatePaidDB(payload.id, payload.name);
     },
     setSplitData: (state, { payload }) => {
       if (payload.tag === -1) {
