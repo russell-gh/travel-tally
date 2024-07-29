@@ -303,8 +303,7 @@ const Onboarding = () => {
           </div>
         )}
         {currentFormSection === 3 && (
-          <div className="formSection">
-            <div className="budgetTotalSection">
+          <div className="formSection budgetTotalSection">
               <FormElement
                 type="number"
                 id="budgetTotal"
@@ -322,14 +321,12 @@ const Onboarding = () => {
                 id="homeCurrency"
                 name="homeCurrency"
                 className="homeCurrency"
-                // choose={true}
                 options={currencies}
                 value={currencies[0].value}
                 callback={handleChange}
                 error={errors.homeCurrency}
                 typed={typed.homeCurrency}
               />
-            </div>
           </div>
         )}
         {currentFormSection === 4 && (

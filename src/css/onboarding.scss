@@ -43,18 +43,23 @@
     margin: 1em 0;
   }
 
+  .budgetTotalSection {
+    position: relative;
+  }
+
   .budgetTotalSection input[type="number"],
   .budgetTotalSection select {
+    margin: 0;
     position: absolute;
-    bottom: 10px;
+    bottom: -37px;
   }
 
   .budgetTotalSection input[type="number"] {
-    left: 55px;
+    margin-right: 85px;
   }
 
   .budgetTotalSection select {
-    right: 55px;
+    margin-left: 160px;
   }
 
   .validationError {
@@ -75,7 +80,9 @@
   input[type="checkbox"] {
     margin: 0 0 0 5px;
   }
-
+  .budgetTotal {
+    height: 31px;
+  }
   .homeCurrency {
     height: 35px;
     width: 80px;
