@@ -20,6 +20,8 @@ const ExpensesAndSplits = ({
 
   const includesFuture = includesFutureExpenses(expenses);
 
+  let width = window.innerWidth;
+
   return (
     <div
       className={`containerExpensesAndSplits ${

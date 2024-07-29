@@ -151,18 +151,18 @@ export const EditExpense = ({ animatingOut }) => {
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
-      if (multi) {
-        // delete from server with shared ID
-        let id = sharedId;
-        deleteByID({ id, type: "shared" });
-        deleteByID({ id, type: "split" });
-      } else {
-        // delete from server with expense ID
-        let id = popUp.id;
-        console.log(formData, "ID");
-        deleteByID({ id, type: "single" });
-        deleteByID({ id, type: "split" });
-      }
+      // if (multi) {
+      //   // delete from server with shared ID
+      //   let id = sharedId;
+      //   deleteByID({ id, type: "shared", token: state.token });
+      //   deleteByID({ id, type: "split", token: state.token });
+      // } else {
+      //   // delete from server with expense ID
+      //   let id = popUp.id;
+      //   console.log(formData, "ID");
+      //   deleteByID({ id, type: "single", token: state.token });
+      //   deleteByID({ id, type: "split", token: state.token });
+      // }
     } else {
       console.log("FAIL FINAL");
       return;
