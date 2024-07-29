@@ -112,6 +112,14 @@ body {
     font-size: 16px;
   }
 
+  .dropdown {
+    font-size: 14px;
+
+    select {
+      font-size: 14px;
+    }
+  }
+
   h1 {
     text-align: center;
   }
@@ -391,7 +399,7 @@ body {
     grid-template-columns: 40px 1fr minmax(55px, max-content) 30px 30px;
     grid-template-rows: 1fr;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     max-width: 500px;
 
     .containerAmountAndBillSplit {
@@ -405,7 +413,7 @@ body {
       overflow: hidden;
 
       h2 {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: normal;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -552,6 +560,11 @@ controls billSplit and Expenses
     }
   }
 
+  .smallExpenseWithSplit {
+    cursor: pointer;
+    border-bottom: $green 8px solid;
+  }
+
   /*
 ************END***********
 */
@@ -560,6 +573,28 @@ controls billSplit and Expenses
      media queries
 **************************
 */
+  @media (min-width: 400px) {
+    .dropdown {
+      font-size: 16px;
+
+      select {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (min-width: 420px) {
+    .expenseItem {
+      gap: 10px;
+
+      .containerDescriptionAndDate {
+        h2 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
   @media (min-width: 450px) {
     .tripInfo {
       p {
