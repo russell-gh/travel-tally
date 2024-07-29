@@ -58,7 +58,7 @@ const FormElement = ({
             min={minValue}
             max={maxValue}
             className={className}
-                    />
+          />
           {typed && error && <p className="validationError">{error}</p>}
         </>
       );
