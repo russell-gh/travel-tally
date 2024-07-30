@@ -29,13 +29,16 @@ const ExpenseAmount = ({
   }
 
   fromValue = addDecimals(fromValue);
+  toValue = addDecimals(toValue);
   const currencySymbol = getCurrencySymbol(currencyCodes, fromCurrency);
+  console.log(fromValue);
+  console.log(nFormatter(fromValue));
 
   return (
     <div>
       <p>
         {homeCurrencySymbol}
-        {addDecimals(toValue)}
+        {nFormatter(toValue)}
       </p>
       <p className="foreignAmount">
         {currencySymbol}

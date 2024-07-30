@@ -1,5 +1,9 @@
 import { unixToDate } from "../../utils/utilsDates";
-import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
+import {
+  addDecimals,
+  getCurrencySymbol,
+  nFormatter,
+} from "../../utils/utilsBudget";
 import FormElement from "../../reusable-code/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
@@ -10,7 +14,6 @@ const BillSplitItems = ({
   homeCurrencySymbol,
   currencyCodes,
   expenses,
-  filtered,
   tabBillSplit,
 }) => {
   const dispatch = useDispatch();
@@ -37,7 +40,9 @@ const BillSplitItems = ({
     <>
       {arrayOfSplits.map((split) => {
         const { id, amount, paid, date, name, sharedId } = split;
-        const { fromCurrency, toValue, fromValue } = amount;
+        let { fromCurrency, toValue, fromValue } = amount;
+        toValue = addDecimals(toValue);
+        fromValue = addDecimals(fromValue);
         return (
           <div
             className={`billSplitItem ${
@@ -57,11 +62,11 @@ const BillSplitItems = ({
             <div>
               <p>
                 {homeCurrencySymbol}
-                {addDecimals(toValue)}
+                {nFormatter(toValue)}
               </p>
               <p className="foreignAmount">
                 {getCurrencySymbol(currencyCodes, fromCurrency)}
-                {addDecimals(fromValue)}
+                {nFormatter(fromValue)}
               </p>
             </div>
             {!paid && (

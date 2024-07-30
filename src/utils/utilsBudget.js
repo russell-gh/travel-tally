@@ -196,10 +196,17 @@ export function nFormatter(num) {
   ];
 
   if (num < 1 && num > 0) {
+    // Convert the number to a string
+    const numStr = num.toString();
+    // Regular expression to check if the number has exactly two digits after the decimal
+    const twoDecimalPattern = /^\d*\.?\d{0,2}$/;
+    if (twoDecimalPattern.test(numStr)) {
+      return numStr;
+    }
     return num.toFixed(2);
   }
 
-  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  // const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
   const item = lookup.findLast((item) => num >= item.value);
   return item
     ? (num / item.value).toFixed(item.digits).concat(item.symbol)
