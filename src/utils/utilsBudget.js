@@ -100,7 +100,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
   if (data.length !== 0) {
     //filterDate
     if (filterDate === "All Dates") {
-      const now = unixToDate(new Date());
+      const now = unixToDate(Date.now());
       const index = data.findIndex((item) => {
         return unixToDate(item.date) === now;
       });
