@@ -107,7 +107,10 @@ const Onboarding = () => {
 
     //if id is a type of budget convert to a number
     if (e.target.name.includes("budget")) {
-      input = parseInt(e.target.value);
+      if (e.target.value === "") {
+        input = 0;
+      } else {
+      input = parseInt(e.target.value);}
     }
     setTyped({ ...typed, [e.target.name]: true });
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
