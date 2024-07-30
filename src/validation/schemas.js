@@ -20,7 +20,10 @@ export const tripSchema = {
 };
 
 export const expenseSchema = {
-  date: Joi.date().required,
+  date: Joi.date().required().messages({
+    "any.required": "Date is required",
+    "date.base": "Invalid date format",
+  }),
   endDate: Joi.date(),
   description: Joi.string().min(3).max(58).required(),
   category: Joi.string().required(),
