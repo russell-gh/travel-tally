@@ -79,11 +79,11 @@ export const homeSlice = createSlice({
             splits.splice(index, 1);
           }
 
-          deleteByID({ id, type: "singleSplit" });
+          deleteByID({ id, type: "singleSplit", token: state.token });
         }
 
         //delete the expense from backend
-        deleteByID({ id, type: "single" });
+        deleteByID({ id, type: "single", token: state.token });
       }
 
       //get indexes of all items with sharedId
@@ -112,12 +112,12 @@ export const homeSlice = createSlice({
             splits.splice(index, 1);
           }
 
-          deleteByID({ id, type: "sharedSplit" });
+          deleteByID({ id, type: "sharedSplit", token: state.token });
         }
 
         //delete the expense from backend
         console.log(id, "POP UP IN SLICE");
-        deleteByID({ id, type: "shared" });
+        deleteByID({ id, type: "shared", token: state.token });
       }
 
       //set popUp to empty so popUp disappears
@@ -177,11 +177,11 @@ export const homeSlice = createSlice({
       if (Array.isArray(expense)) {
         expense.forEach((element) => {
           state.trips[indexOf].expenses.push(element);
-          addExpenseRemotely({ element, tripID });
+          addExpenseRemotely({ element, tripID, token: state.token });
         });
       } else {
         state.trips[indexOf].expenses.push(expense);
-        addExpenseRemotely({ expense, tripID });
+        addExpenseRemotely({ expense, tripID, token: state.token });
       }
       // Push data to split array
       console.log("IN SLICE", billSplit);
@@ -191,11 +191,11 @@ export const homeSlice = createSlice({
         if (Array.isArray(billSplit)) {
           billSplit.forEach((element) => {
             state.trips[indexOf].splits.push(element);
-            addSplitRemotely({ element, tripID });
+            addSplitRemotely({ element, tripID, token: state.token });
           });
         } else {
           state.trips[indexOf].splits.push(billSplit);
-          addSplitRemotely({ billSplit, tripID });
+          addSplitRemotely({ billSplit, tripID, token: state.token });
         }
         // Clear splitData to prevent duplicate data (it's eventually stored elsewhere)
         state.splitData = [];
@@ -261,7 +261,7 @@ export const homeSlice = createSlice({
         }
 
         //send to database to change
-        updatePaidDB(payload.sharedId, payload.name);
+        updatePaidDB(payload.sharedId, payload.name, state.token);
         return;
       }
 
@@ -269,7 +269,7 @@ export const homeSlice = createSlice({
       state.trips[indexTrip].splits[index].paid = true;
 
       //send to database to change
-      updatePaidDB(payload.id, payload.name);
+      updatePaidDB(payload.id, payload.name, state.token);
     },
     setSplitData: (state, { payload }) => {
       if (payload.tag === -1) {

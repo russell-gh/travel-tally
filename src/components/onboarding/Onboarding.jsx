@@ -47,7 +47,6 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
@@ -168,6 +167,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
+    console.log(_onboardingDetails);
     await axios.post(
       "http://localhost:6001/onboarding",
       { _onboardingDetails },
@@ -192,8 +192,10 @@ const Onboarding = () => {
     if (currentFormSection === 3 && !errorsPresent) {
       setOnboardingDetails({
         ...onboardingDetails,
-        homeCurrencySymbol:
-        getCurrencySymbol(currencyCodes, onboardingDetails.homeCurrency)
+        homeCurrencySymbol: getCurrencySymbol(
+          currencyCodes,
+          onboardingDetails.homeCurrency
+        ),
       });
     }
 

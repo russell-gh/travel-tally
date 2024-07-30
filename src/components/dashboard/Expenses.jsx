@@ -13,7 +13,13 @@ import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 import { useState } from "react";
 
-const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
+const Expenses = ({
+  filtered,
+  homeCurrencySymbol,
+  expenses,
+  splits,
+  width,
+}) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
   const [displaySplit, setDisplaySplit] = useState([]);
@@ -64,7 +70,16 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
         });
         return (
           <div key={id}>
-            <div className={`expenseItem ${isFuture ? "future" : ""}`}>
+            <div
+              className={`expenseItem ${isFuture ? "future" : ""} ${
+                split && width < 450 ? "smallExpenseWithSplit" : ""
+              }`}
+              onClick={() => {
+                if (split && width < 450) {
+                  toggleDisplaySplit(id);
+                }
+              }}
+            >
               <CategoryIcon category={category} />
               <DescriptionAndDate
                 description={description}
@@ -75,10 +90,12 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
               />
               <div
                 className={
-                  hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
+                  hasBillSplit.length > 0 && width > 450
+                    ? "containerAmountAndBillSplit"
+                    : ""
                 }
               >
-                {split ? (
+                {split && width > 450 ? (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
