@@ -8,6 +8,7 @@ import {
   mergeExpenseDays,
   getThisSplit,
   mergeMultiSplit,
+  unixToDateReversed,
 } from "../utils/expenseData";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -55,7 +56,6 @@ export const EditExpense = ({ animatingOut }) => {
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
   let [splitList, setSplitList] = useState([]);
-  let [theseSplits, setTheseSplits] = useState([]);
   let [splitIndex, setSplitIndexs] = useState([]);
   let [sharedId, setSharedId] = useState([]);
   const currencies = useSelector(selectCurrencyNames);
@@ -79,7 +79,7 @@ export const EditExpense = ({ animatingOut }) => {
     let result = getThisExpense(thisTrip.expenses, popUp.id);
     setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
-    let date = new Date(formData.date).toLocaleDateString("en-CA");
+    let date = unixToDateReversed(copy.date);
     let newAmount = copy.amount.fromValue;
     let currency = copy.amount.fromCurrency;
     copy.date = date;
@@ -87,7 +87,6 @@ export const EditExpense = ({ animatingOut }) => {
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
     dispatch(setSplitMax(copy.amount));
-    console.log(copy);
     setFormData(copy);
     setSharedId(result.thisExpense.sharedId);
 
@@ -104,7 +103,7 @@ export const EditExpense = ({ animatingOut }) => {
     let result = getThisSplit(splits, id);
     const copy = JSON.parse(JSON.stringify(result.allSplits));
     copy.forEach((thisSplit, index) => {
-      thisSplit.amount = thisSplit.amount.fromValue / 100;
+      thisSplit.amount = Math.round(thisSplit.amount.fromValue) / 100;
       delete thisSplit.date;
       delete thisSplit.expenseID;
       delete thisSplit.id;
@@ -116,7 +115,6 @@ export const EditExpense = ({ animatingOut }) => {
       dispatch(setSplitData({ data, tag }));
     });
     setSplitIndexs(result.allIndexs);
-    // setTheseSplits(copy);
   };
 
   const dataInput = (e) => {
