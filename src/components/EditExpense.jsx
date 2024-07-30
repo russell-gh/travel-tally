@@ -7,6 +7,7 @@ import {
   getThisExpense,
   mergeExpenseDays,
   getThisSplit,
+  mergeMultiSplit,
 } from "../utils/expenseData";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -25,6 +26,7 @@ import {
   getActualEndDate,
   getActualStartDate,
   getDateForForm,
+  getStartDateForMultiDay,
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
@@ -90,11 +92,7 @@ export const EditExpense = ({ animatingOut }) => {
     setSharedId(result.thisExpense.sharedId);
 
     if (copy.split === true) {
-      if (result.thisExpense.sharedId) {
-        setThisSplit(thisTrip.splits, result.thisExpense.sharedId);
-      } else {
-        setThisSplit(thisTrip.splits, result.thisExpense.id);
-      }
+      setThisSplit(thisTrip.splits, result.thisExpense.id);
     }
   };
 
@@ -173,9 +171,18 @@ export const EditExpense = ({ animatingOut }) => {
     setMulti((multi = !multi));
     if (multi) {
       let result = mergeExpenseDays(formData, expenseList);
+      let splits = mergeMultiSplit(splitData, splitList);
+      console.log(splits, "RESULTS ARE IN");
       if (result.indexs.length > 1) {
         setFormData(result.newExpense);
         setIndex(result.indexs);
+        setSplitIndexs(splits.indexs);
+        splits.splitArray.forEach((thisSplit, index) => {
+          const data = thisSplit;
+          const tag = index;
+          console.log(data, tag, "pre set");
+          dispatch(setSplitData({ data, tag }));
+        });
       }
     } else if (!multi) {
       setThisExpense();
@@ -264,8 +271,6 @@ export const EditExpense = ({ animatingOut }) => {
     details.dates;
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
   const actualEndDate = getActualEndDate(endDateIncluded, endDate);
-
-  console.log(splitIndex, formData, "INDEX");
 
   return (
     <div className="editContainer">

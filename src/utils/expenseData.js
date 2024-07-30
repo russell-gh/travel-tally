@@ -173,6 +173,39 @@ export function mergeExpenseDays(expense, allExpenses) {
   return { newExpense, indexs };
 }
 
+export function mergeMultiSplit(splitData, allSplits) {
+  let splitArray = []; // These variables are the combination of all people splitting
+  let indexs = [];
+
+  splitData.forEach((split) => {
+    let internalArr = []; // These variables represent each person in the split
+    let internalIndexs = [];
+    let newSplit = {};
+    // find all splits with same name and sharedID
+    allSplits.forEach((thisSplit, index) => {
+      if (
+        thisSplit.sharedId === split.sharedId &&
+        thisSplit.name === split.name
+      ) {
+        indexs.push(index);
+        internalArr.push(thisSplit); // Adds all of them to and array
+      }
+    });
+
+    const total = internalArr.length; // Counts how many in array
+    const totalAmount = internalArr[0].amount.fromValue * total; // Finds the original total of the split
+    newSplit = {
+      // Creates a new object with combined information
+      amount: Math.round(totalAmount) / 100,
+      name: internalArr[0].name,
+      paid: internalArr[0].paid,
+    };
+    splitArray.push(newSplit);
+  });
+
+  return { splitArray, indexs };
+}
+
 export function getExpenseList(tripID, trips) {
   const indexOf = trips.findIndex((trip) => {
     return trip.id === tripID;
