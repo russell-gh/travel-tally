@@ -26,6 +26,7 @@ export const onboardingSlice = createSlice({
   },
 });
 
+export const selectProfile = (state) => state.onboarding.profile;
 export const selectUser = (state) => state.onboarding.user;
 export const selectProfilePictureSrc = (state) =>
   state.onboarding.profile.profilePictureSrc;

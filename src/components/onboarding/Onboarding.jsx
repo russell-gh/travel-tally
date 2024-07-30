@@ -11,19 +11,39 @@ import {
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
-import { addTrip, selectToken } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
-import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
+import {
+  selectCountries,
+  selectCurrencyCodes,
+  addTrip,
+  selectToken,
+} from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
 import { jsxs } from "react/jsx-runtime";
 import { getCurrencySymbol } from "../../utils/utilsBudget.js";
+import { selectProfile } from "../../redux/onboardingSlice.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const token = useSelector(selectToken);
+  const profile = useSelector(selectProfile);
+
+  useEffect(() => {
+    if (!token) {
+      redirect("/login");
+      return;
+    }
+
+    if (!profile || Object.keys(profile).length === 0) {
+      redirect("/setup-profile");
+      return;
+    }
+  }, [token, profile]);
+
 
   let currencies = [];
+
   for (const key of Object.keys(currencyCodes)) {
     currencies.push({ value: key, name: key });
   }
@@ -46,7 +66,6 @@ const Onboarding = () => {
     budgetActivities: 0,
     budgetOther: 0,
   });
-
 
   const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
@@ -110,7 +129,8 @@ const Onboarding = () => {
       if (e.target.value === "") {
         input = 0;
       } else {
-      input = parseInt(e.target.value);}
+        input = parseInt(e.target.value);
+      }
     }
     setTyped({ ...typed, [e.target.name]: true });
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
@@ -188,8 +208,10 @@ const Onboarding = () => {
     if (currentFormSection === 3 && !errorsPresent) {
       setOnboardingDetails({
         ...onboardingDetails,
-        homeCurrencySymbol:
-        getCurrencySymbol(currencyCodes, onboardingDetails.homeCurrency)
+        homeCurrencySymbol: getCurrencySymbol(
+          currencyCodes,
+          onboardingDetails.homeCurrency
+        ),
       });
     }
 
@@ -307,29 +329,29 @@ const Onboarding = () => {
         )}
         {currentFormSection === 3 && (
           <div className="formSection budgetTotalSection">
-              <FormElement
-                type="number"
-                id="budgetTotal"
-                className="budgetTotal"
-                label="Enter your total budget for the trip and the currency of your home country"
-                name="budgetTotal"
-                value={onboardingDetails.budgetTotal.toString()}
-                callback={handleChange}
-                error={errors.budgetTotal}
-                typed={typed.budgetTotal}
-                minValue={0}
-              />
-              <FormElement
-                type="select"
-                id="homeCurrency"
-                name="homeCurrency"
-                className="homeCurrency"
-                options={currencies}
-                value={currencies[0].value}
-                callback={handleChange}
-                error={errors.homeCurrency}
-                typed={typed.homeCurrency}
-              />
+            <FormElement
+              type="number"
+              id="budgetTotal"
+              className="budgetTotal"
+              label="Enter your total budget for the trip and the currency of your home country"
+              name="budgetTotal"
+              value={onboardingDetails.budgetTotal.toString()}
+              callback={handleChange}
+              error={errors.budgetTotal}
+              typed={typed.budgetTotal}
+              minValue={0}
+            />
+            <FormElement
+              type="select"
+              id="homeCurrency"
+              name="homeCurrency"
+              className="homeCurrency"
+              options={currencies}
+              value={currencies[0].value}
+              callback={handleChange}
+              error={errors.homeCurrency}
+              typed={typed.homeCurrency}
+            />
           </div>
         )}
         {currentFormSection === 4 && (
