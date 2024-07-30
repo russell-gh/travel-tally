@@ -16,9 +16,7 @@ const ExpensesAndSplits = ({
 }) => {
   const dispatch = useDispatch();
   const showBillSplits = useSelector(selectShowBillSplits);
-
   const includesFuture = includesFutureExpenses(expenses);
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {

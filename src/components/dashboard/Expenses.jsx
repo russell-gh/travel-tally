@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Expenses = ({
   filtered,
@@ -149,15 +150,26 @@ const Expenses = ({
                 }}
               />
             </div>
-            {displaySplit.includes(id) && (
-              <BillSplitItems
-                expenseId={id}
-                splits={splits}
-                homeCurrencySymbol={homeCurrencySymbol}
-                currencyCodes={currencyCodes}
-                expenses={expenses}
-              />
-            )}
+            <AnimatePresence>
+              {displaySplit.includes(id) && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ overflow: "hidden" }} // Ensure content is hidden during animation
+                  className="animationContainerSplit"
+                >
+                  <BillSplitItems
+                    expenseId={id}
+                    splits={splits}
+                    homeCurrencySymbol={homeCurrencySymbol}
+                    currencyCodes={currencyCodes}
+                    expenses={expenses}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}

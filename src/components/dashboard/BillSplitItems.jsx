@@ -7,6 +7,7 @@ import {
 import FormElement from "../../reusable-code/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
+import { motion, AnimatePresence } from "framer-motion";
 
 const BillSplitItems = ({
   splits,
@@ -50,11 +51,20 @@ const BillSplitItems = ({
             }`}
             key={id}
           >
-            <img
-              src={`../src/img/${paid ? "paid" : "unpaid"}.svg`}
-              alt={paid ? "paid icon" : "unpaid icon"}
-              className="paidIcon"
-            />
+            <div className="iconContainer">
+              <AnimatePresence>
+                <motion.img
+                  key={paid} // Ensure a new image instance is created for animation
+                  src={`../src/img/${paid ? "paid" : "unpaid"}.svg`}
+                  alt={paid ? "paid icon" : "unpaid icon"}
+                  className="paidIcon"
+                  initial={{ scale: 0, y: "-50%" }}
+                  animate={{ scale: 1, y: "-50%" }}
+                  exit={{ scale: 0, y: "-50%" }}
+                  transition={{ duration: 0.5 }}
+                />
+              </AnimatePresence>
+            </div>
             <div className="containerNameAndDate">
               <h2>{name}</h2>
               <p>{unixToDate(date)}</p>
