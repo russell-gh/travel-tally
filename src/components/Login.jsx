@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectTrips, setData } from "../redux/homeSlice";
+import { selectTrips, setData, selectToken } from "../redux/homeSlice";
 import { validate } from "../validation/validate";
 import "../css/login.scss";
 import "../css/app.scss";
@@ -11,8 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/toastifyVariables.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { selectToken } from "../redux/homeSlice";
+import { saveProfile } from "../redux/onboardingSlice";
 
 //=======Displays Login Data================
 
@@ -30,7 +29,6 @@ const Login = () => {
     setFormData(_formData);
     const errObj = await validate(_formData, "login");
     setErrors(errObj);
-    // console.log(errors, formData);
   };
 
   //====Compares Credentials to Local Storage===
@@ -43,7 +41,8 @@ const Login = () => {
 
       if (data.status) {
         dispatch(setData({ text: "token", data: data.token }));
-        getTripsTryOut(data.token);
+        getTrips(data.token);
+        getProfile(data.token);
         return;
       }
     } catch (e) {
@@ -56,8 +55,7 @@ const Login = () => {
     // console.log(errors, formData, localUser);
   };
 
-  const getTripsTryOut = async (token) => {
-    console.log("HERE");
+  const getTrips = async (token) => {
     try {
       const { data } = await axios.get(`http://localhost:6001/trips`, {
         headers: { token },
@@ -72,84 +70,13 @@ const Login = () => {
     } catch (e) {
       console.log(e);
     }
-
-    // const getProfileTryOut = async () => {
-    //   try {
-    //     const { data } = await axios.get(
-    //       `http://api.holidough.uk/profile/${1}`
-    //     );
-    //     console.log(data);
-    //     dispatch(saveProfile(data));
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // };
-
-    return (
-      <>
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            borderRadius: "8px",
-            fontFamily: "pt sans",
-          }}
-        >
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition:Bounce
-            progressStyle={{ background: "#235b89" }}
-          />
-        </div>
-        <div className="loginInput">
-          <p className="signup-text">Don't have an account?</p>
-          <FormElement
-            callback={onInput}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="email"
-            className="logsign-input"
-          />
-
-          <p className="errortext">{errors.email}</p>
-          <FormElement
-            callback={onInput}
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
-            className="logsign-input"
-          />
-
-          <p className="errortext">{errors.password}</p>
-          <Button
-            onClick={onSubmit}
-            className="logsignBTN"
-            animation={true}
-            text="Login"
-          />
-
-          <p className="signup-text">
-            Don't have an account? <a href="/signup"> Sign up! </a>
-          </p>
-        </div>
-      </>
-    );
   };
 
-  const getProfileTryOut = async () => {
+  const getProfile = async (token) => {
     try {
-      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
+      const { data } = await axios.get(`http://localhost:6001/profile/`, {
+        headers: { token },
+      });
       console.log(data);
       dispatch(saveProfile(data));
     } catch (e) {
@@ -191,6 +118,11 @@ const Login = () => {
           id="email"
           placeholder="email"
           className="logsign-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !errors.length) {
+              onSubmit();
+            }
+          }}
         />
 
         <p className="errortext">{errors.email}</p>
@@ -201,6 +133,11 @@ const Login = () => {
           id="password"
           placeholder="password"
           className="logsign-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !errors.lenght) {
+              onSubmit();
+            }
+          }}
         />
 
         <p className="errortext">{errors.password}</p>

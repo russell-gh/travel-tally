@@ -17,11 +17,12 @@ import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
 import { jsxs } from "react/jsx-runtime";
+import { getCurrencySymbol } from "../../utils/utilsBudget.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const token = useSelector(selectToken);
-  
+
   let currencies = [];
   for (const key of Object.keys(currencyCodes)) {
     currencies.push({ value: key, name: key });
@@ -37,7 +38,7 @@ const Onboarding = () => {
     },
     budgetTotal: 0,
     homeCurrency: currencies[0].value,
-    homeCurrencySymbol: "",
+    homeCurrencySymbol: getCurrencySymbol(currencyCodes, currencies[0].value),
     destinationCurrency: "",
     budgetHotel: 0,
     budgetFood: 0,
@@ -50,6 +51,8 @@ const Onboarding = () => {
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
+
+  console.log(currencies);
 
   // getCountryCurrency("london", 5);
   // useEffect(() => {
@@ -124,7 +127,7 @@ const Onboarding = () => {
       setSliderError(true);
       return;
     }
-
+    console.log(errors);
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -164,6 +167,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
+    console.log(_onboardingDetails);
     await axios.post(
       "http://localhost:6001/onboarding",
       { _onboardingDetails },
@@ -188,8 +192,10 @@ const Onboarding = () => {
     if (currentFormSection === 3 && !errorsPresent) {
       setOnboardingDetails({
         ...onboardingDetails,
-        homeCurrencySymbol:
-          currencyCodes[onboardingDetails.homeCurrency].symbol,
+        homeCurrencySymbol: getCurrencySymbol(
+          currencyCodes,
+          onboardingDetails.homeCurrency
+        ),
       });
     }
 

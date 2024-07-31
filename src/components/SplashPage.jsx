@@ -97,7 +97,7 @@ const SplashPage = () => {
         <div className="splashPage">
           <div className="animationContainer">
             <img
-              src="./plane.png"
+              src="/plane.png"
               alt="plane"
               ref={planeRef}
               className="plane"
@@ -107,7 +107,7 @@ const SplashPage = () => {
                 key={index}
                 ref={lineRef}
                 className={`line`}
-                src="./dash.png"
+                src="/dash.png"
                 alt="line"
               />
             ))}

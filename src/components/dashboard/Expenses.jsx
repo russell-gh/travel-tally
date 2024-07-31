@@ -12,12 +12,19 @@ import dayjs from "dayjs";
 import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
+const Expenses = ({
+  filtered,
+  homeCurrencySymbol,
+  expenses,
+  splits,
+  width,
+}) => {
   const trips = useSelector(selectTrips);
   const currencyCodes = useSelector(selectCurrencyCodes);
+  const [displaySplit, setDisplaySplit] = useState([]);
   const dispatch = useDispatch();
-  const [displaySplit, setDisplaySplit] = useState("");
 
   if (!currencyCodes || !trips) {
     return;
@@ -44,11 +51,11 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
   }
 
   const toggleDisplaySplit = (expenseId) => {
-    if (displaySplit === expenseId) {
-      setDisplaySplit("");
-    } else {
-      setDisplaySplit(expenseId);
-    }
+    setDisplaySplit((prevDisplaySplit) =>
+      prevDisplaySplit.includes(expenseId)
+        ? prevDisplaySplit.filter((id) => id !== expenseId)
+        : [...prevDisplaySplit, expenseId]
+    );
   };
 
   return (
@@ -64,7 +71,16 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
         });
         return (
           <div key={id}>
-            <div className={`expenseItem ${isFuture ? "future" : ""}`} key={id}>
+            <div
+              className={`expenseItem ${isFuture ? "future" : ""} ${
+                split && width < 450 ? "smallExpenseWithSplit" : ""
+              }`}
+              onClick={() => {
+                if (split && width < 450) {
+                  toggleDisplaySplit(id);
+                }
+              }}
+            >
               <CategoryIcon category={category} />
               <DescriptionAndDate
                 description={description}
@@ -75,10 +91,12 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
               />
               <div
                 className={
-                  hasBillSplit.length > 0 ? "containerAmountAndBillSplit" : ""
+                  hasBillSplit.length > 0 && width > 450
+                    ? "containerAmountAndBillSplit"
+                    : ""
                 }
               >
-                {split ? (
+                {split && width > 450 ? (
                   <SplitBillIcon
                     toggleDisplaySplit={toggleDisplaySplit}
                     expenseId={id}
@@ -132,15 +150,26 @@ const Expenses = ({ filtered, homeCurrencySymbol, expenses, splits }) => {
                 }}
               />
             </div>
-            {displaySplit === id && (
-              <BillSplitItems
-                expenseId={id}
-                splits={splits}
-                homeCurrencySymbol={homeCurrencySymbol}
-                currencyCodes={currencyCodes}
-                expenses={expenses}
-              />
-            )}
+            <AnimatePresence>
+              {displaySplit.includes(id) && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ overflow: "hidden" }} // Ensure content is hidden during animation
+                  className="animationContainerSplit"
+                >
+                  <BillSplitItems
+                    expenseId={id}
+                    splits={splits}
+                    homeCurrencySymbol={homeCurrencySymbol}
+                    currencyCodes={currencyCodes}
+                    expenses={expenses}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}

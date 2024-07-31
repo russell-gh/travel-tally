@@ -26,6 +26,7 @@ import {
 } from "../utils/utilsDates";
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
+import dayjs from "dayjs";
 
 export const AddExpense = ({ animatingOut }) => {
   const [inputValues, setInputValues] = useState([]);
@@ -36,17 +37,35 @@ export const AddExpense = ({ animatingOut }) => {
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let expenses = getExpenseList(tripID, trips).expenses;
+
+  //calculating start and enddate of trip
+  const trip = findItem(trips, tripID);
+  const { details } = trip;
+  const { startDateIncluded, endDateIncluded, startDate, endDate } =
+    details.dates;
+  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
+  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
+  //get standard value for dates
+  const currentDate = dayjs();
+  const date = currentDate.isBefore(actualStartDate)
+    ? getDateForForm(actualStartDate)
+    : currentDate.isAfter(actualEndDate)
+    ? getDateForForm(actualEndDate)
+    : new Date().toLocaleDateString("en-CA");
+
   const [formData, setFormData] = useState({
     multiDay: false,
-    date: new Date().toLocaleDateString("en-CA"),
-    endDate: new Date().toLocaleDateString("en-CA"),
+    date: date,
+    endDate: date,
     amount: 0,
     split: false,
     currency: "GBP",
-    category: "Food",
+    category: "Activities",
   });
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
+
   // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
@@ -151,6 +170,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   //handles on form change
   const getSplitData = (data, tag) => {
+    console.log("getSplitData", data, tag);
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
@@ -161,7 +181,7 @@ export const AddExpense = ({ animatingOut }) => {
         <>
           {splitData.map(function (split, index) {
             return (
-              <div className="flex">
+              <div className="flex" key={index}>
                 <SplitInput
                   maxAmount={formData.amount}
                   tag={index}
@@ -194,14 +214,6 @@ export const AddExpense = ({ animatingOut }) => {
   });
   datalist = [...new Set(datalist)];
   datalist = datalist.filter((description) => description.trim() !== "");
-
-  //calculating start and enddate of trip
-  const trip = findItem(trips, tripID);
-  const { details } = trip;
-  const { startDateIncluded, endDateIncluded, startDate, endDate } =
-    details.dates;
-  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
-  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
 
   return (
     <div className="expenseContainer">

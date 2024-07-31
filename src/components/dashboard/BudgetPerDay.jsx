@@ -1,6 +1,5 @@
 import {
   addDecimals,
-  getSpendPerDay,
   getBudget,
   getSpendSelectedDay,
 } from "../../utils/utilsBudget";

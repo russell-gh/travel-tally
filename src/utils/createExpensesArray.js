@@ -24,6 +24,18 @@ export const createExpensesArray = (expenses, startDate, endDate) => {
   _expenses.map((item) => {
     if (item.date) {
       for (let i = 0; i < amountOfDaysTrip; i++) {
+        // console.log(startDateTrip.add(i, "day"));
+        // const date = startDateTrip.add(i, "day");
+        // const options = { year: "numeric", month: "numeric", day: "numeric" };
+        // const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
+        //   date
+        // );
+        // console.log(formattedDate);
+        // if (formattedDate === unixToDate(item.date)) {
+        //   expensesArray[i].push(item);
+        //   break;
+        // }
+
         const date = unixToDate(startDateTrip.add(i, "day"));
         if (date === unixToDate(item.date)) {
           expensesArray[i].push(item);

@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectCurrencyCodes, togglePopUp } from "../../redux/homeSlice";
+import { selectCurrencyCodes } from "../../redux/homeSlice";
 import CategoryIcon from "./CategoryIcon";
 import DescriptionAndDate from "./DescriptionAndDate";
 import ExpenseAmount from "./ExpenseAmount";
-import dayjs from "dayjs";
-import SplitBillIcon from "./SplitBillIcon";
 import BillSplitItems from "./BillSplitItems";
 
 const BillSplitExpense = ({
@@ -16,14 +14,6 @@ const BillSplitExpense = ({
   splitExpense,
 }) => {
   const currencyCodes = useSelector(selectCurrencyCodes);
-
-  // if (!expenses) {
-  //   return;
-  // }
-
-  // const splitExpense = expenses.filter((expense) => {
-  //   return expense.id === expenseID;
-  // });
 
   if (!splitExpense) {
     return;
@@ -53,13 +43,6 @@ const BillSplitExpense = ({
         split={true}
         expenseId={expenseId}
         splits={splits}
-      />
-      <BillSplitItems
-        expenseId={expenseId}
-        splits={splits}
-        homeCurrencySymbol={homeCurrencySymbol}
-        currencyCodes={currencyCodes}
-        expenses={expenses}
       />
     </div>
   );

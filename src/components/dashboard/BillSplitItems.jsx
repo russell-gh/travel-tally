@@ -1,8 +1,13 @@
 import { unixToDate } from "../../utils/utilsDates";
-import { addDecimals, getCurrencySymbol } from "../../utils/utilsBudget";
+import {
+  addDecimals,
+  getCurrencySymbol,
+  nFormatter,
+} from "../../utils/utilsBudget";
 import FormElement from "../../reusable-code/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHidePaidSplitBills, setPaid } from "../../redux/homeSlice";
+import { motion, AnimatePresence } from "framer-motion";
 
 const BillSplitItems = ({
   splits,
@@ -10,7 +15,6 @@ const BillSplitItems = ({
   homeCurrencySymbol,
   currencyCodes,
   expenses,
-  filtered,
   tabBillSplit,
 }) => {
   const dispatch = useDispatch();
@@ -36,8 +40,10 @@ const BillSplitItems = ({
   return (
     <>
       {arrayOfSplits.map((split) => {
-        const { id, amount, paid, description, date, name } = split;
-        const { fromCurrency, toValue, fromValue } = amount;
+        const { id, amount, paid, date, name, sharedId } = split;
+        let { fromCurrency, toValue, fromValue } = amount;
+        toValue = addDecimals(toValue);
+        fromValue = addDecimals(fromValue);
         return (
           <div
             className={`billSplitItem ${
@@ -45,11 +51,20 @@ const BillSplitItems = ({
             }`}
             key={id}
           >
-            <img
-              src={`../src/img/${paid ? "paid" : "unpaid"}.svg`}
-              alt={paid ? "paid icon" : "unpaid icon"}
-              className="paidIcon"
-            />
+            <div className="iconContainer">
+              <AnimatePresence>
+                <motion.img
+                  key={paid} // Ensure a new image instance is created for animation
+                  src={`../src/img/${paid ? "paid" : "unpaid"}.svg`}
+                  alt={paid ? "paid icon" : "unpaid icon"}
+                  className="paidIcon"
+                  initial={{ scale: 0.5, y: "-50%" }}
+                  animate={{ scale: 1, y: "-50%" }}
+                  exit={{ scale: 0, y: "-50%" }}
+                  transition={{ duration: 0.5 }}
+                />
+              </AnimatePresence>
+            </div>
             <div className="containerNameAndDate">
               <h2>{name}</h2>
               <p>{unixToDate(date)}</p>
@@ -57,11 +72,11 @@ const BillSplitItems = ({
             <div>
               <p>
                 {homeCurrencySymbol}
-                {addDecimals(toValue)}
+                {nFormatter(toValue)}
               </p>
               <p className="foreignAmount">
                 {getCurrencySymbol(currencyCodes, fromCurrency)}
-                {addDecimals(fromValue)}
+                {nFormatter(fromValue)}
               </p>
             </div>
             {!paid && (
@@ -72,7 +87,14 @@ const BillSplitItems = ({
                   id="paid"
                   name="paid"
                   callback={() => {
-                    dispatch(setPaid({ data: splits, id: id }));
+                    dispatch(
+                      setPaid({
+                        data: splits,
+                        id: id,
+                        sharedId: sharedId,
+                        name: name,
+                      })
+                    );
                   }}
                 />
               </div>

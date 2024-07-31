@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  formEvent,
-  selectFilter,
-  selectSelectedTripId,
-} from "../../../redux/homeSlice";
+import { formEvent, selectFilter } from "../../../redux/homeSlice";
 import FormElement from "../../../reusable-code/FormElement";
 
 const Filter = () => {

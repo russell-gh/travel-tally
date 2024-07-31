@@ -1,11 +1,22 @@
 import dayjs from "dayjs";
 
 export function unixToDate(unix) {
-  if (!unix) {
-    console.log("unix is undefined");
+  let date;
+
+  // Check if unix is a Day.js object
+  if (unix && unix.$d && unix.$isDayjsObject) {
+    date = unix.$d;
+  } else if (typeof unix === "number" && !isNaN(unix)) {
+    date = new Date(unix);
+  } else {
+    console.log(unix, "unix is undefined or not a valid number");
     return "unknown date";
   }
-  const date = new Date(unix); //converts unix back to object
+
+  if (isNaN(date.getTime())) {
+    console.log("Invalid date object:", date);
+    return "unknown date";
+  }
   const options = { year: "numeric", month: "numeric", day: "numeric" };
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
   return formattedDate;

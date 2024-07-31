@@ -1,14 +1,12 @@
 import Expenses from "./Expenses";
 import BillSplits from "./BillSplits";
-import { useState } from "react";
 import Button from "../../reusable-code/Button";
-import { toggleDisplay } from "../../redux/homeSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { selectShowBillSplits } from "../../redux/homeSlice";
+import { toggleDisplay, selectShowBillSplits } from "../../redux/homeSlice";
+import { useDispatch, useSelector } from "react-redux";
 import ShowPaidSplitBills from "./ShowPaidSplitBills";
 import { includesFutureExpenses } from "../../utils/utilsDates";
 import ShowFutureExpenses from "./filter/ShowFutureExpenses";
+import { useEffect, useState } from "react";
 
 const ExpensesAndSplits = ({
   filtered,
@@ -18,8 +16,21 @@ const ExpensesAndSplits = ({
 }) => {
   const dispatch = useDispatch();
   const showBillSplits = useSelector(selectShowBillSplits);
-
   const includesFuture = includesFutureExpenses(expenses);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div
@@ -58,6 +69,7 @@ const ExpensesAndSplits = ({
           expenses={expenses}
           homeCurrencySymbol={homeCurrencySymbol}
           splits={splits}
+          width={windowWidth}
         />
       )}
       {showBillSplits && (
