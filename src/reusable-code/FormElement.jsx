@@ -133,9 +133,9 @@ const FormElement = ({
                 Please choose from the below
               </option>
             )}
-            {options.map((option) => (
+            {options.map((option, index) => (
               <option
-                key={option.value}
+                key={index}
                 value={option.value}
                 className={
                   className.includes(option.name) ? "includes" : "excludes"

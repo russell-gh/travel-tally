@@ -1,6 +1,7 @@
 import React from "react";
 import Interface from "./Interface";
 import { useEffect, useState } from "react";
+import Redirect from "./components/Redirect";
 
 const App = () => {
   const [online, setOnline] = useState(true);
@@ -32,6 +33,7 @@ const App = () => {
           Internet offline
         </div>
       )}
+      <Redirect />
       <Interface />
     </>
   );

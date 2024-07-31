@@ -31,15 +31,6 @@ export const Header = ({ animatingOut }) => {
             );
           }}
         />
-        <button
-          className="btn"
-          onClick={() => {
-            localStorage.clear();
-            location.reload();
-          }}
-        >
-          Reset
-        </button>
       </div>
     </header>
   );
