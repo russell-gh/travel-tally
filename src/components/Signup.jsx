@@ -42,16 +42,16 @@ const Signup = () => {
           `http://localhost:6001/user/signup`,
           formData
         );
-      } catch {
-        toast.error("Error connecting to API");
-        console.log(Date.now() - now);
-      } //BUG Delay?!
 
-      if (data.status) {
-        redirect("/login");
-      } else {
-        toast.error("Failed to add user");
-      }
+        if (data.status) {
+          redirect("/login");
+        } else {
+          toast.error("Failed to add user");
+        }
+      } catch (e) {
+        toast.error("Error connecting to API");
+        console.log(Date.now() - now, e);
+      } //BUG Delay?!
     } else {
       toast.error("Passwords do not match!");
     }
