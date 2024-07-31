@@ -58,7 +58,7 @@ const Converter = ({ animatingOut }) => {
           label={"To home currency"}
           name={"to"}
           id={"toAmount"}
-          value={convertCurrency(formData.from, formData.fromCurrency, rates)}
+          value={convertCurrency(formData.from, formData.fromCurrency, rates).toFixed(4)}
           callback={dataInput}
         />
         <Button
