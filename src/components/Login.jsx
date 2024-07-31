@@ -49,6 +49,7 @@ const Login = () => {
     } catch (e) {
       console.log(e);
       toast.error("Incorrect Credentials!");
+      //TODO Why is there a delay?
     }
 
     //message the user
