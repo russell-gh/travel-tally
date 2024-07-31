@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectTrips, setData } from "../redux/homeSlice";
+import { selectTrips, setData, selectToken } from "../redux/homeSlice";
 import { validate } from "../validation/validate";
 import "../css/login.scss";
 import "../css/app.scss";
@@ -11,8 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/toastifyVariables.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { selectToken } from "../redux/homeSlice";
+import { saveProfile } from "../redux/onboardingSlice";
 
 //==========================================
 //=======Displays Login Data================
@@ -46,7 +45,8 @@ const Login = () => {
 
       if (data.status) {
         dispatch(setData({ text: "token", data: data.token }));
-        getTripsTryOut(data.token);
+        getTrips(data.token);
+        getProfile(data.token);
         return;
       }
     } catch (e) {
@@ -57,7 +57,7 @@ const Login = () => {
     console.log(errors, formData, localUser);
   };
 
-  const getTripsTryOut = async (token) => {
+  const getTrips = async (token) => {
     try {
       const { data } = await axios.get(`http://localhost:6001/trips`, {
         headers: { token },
@@ -74,9 +74,11 @@ const Login = () => {
     }
   };
 
-  const getProfileTryOut = async () => {
+  const getProfile = async (token) => {
     try {
-      const { data } = await axios.get(`http://api.holidough.uk/profile/${1}`);
+      const { data } = await axios.get(`http://localhost:6001/profile/`, {
+        headers: { token },
+      });
       console.log(data);
       dispatch(saveProfile(data));
     } catch (e) {

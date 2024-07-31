@@ -35,6 +35,7 @@ test("returns '0' for invalid or undefined inputs", () => {
 
 test("handles decimal numbers correctly", () => {
   expect(nFormatter(0.5)).toBe("0.50");
+  expect(nFormatter(0.5)).toBe("0.50");
   expect(nFormatter(0.123456)).toBe("0.12");
   expect(nFormatter(1234.5678)).toBe("1.2k");
 });

@@ -146,7 +146,13 @@ export const homeSlice = createSlice({
     },
     formEvent: (state, { payload }) => {
       state[payload.id] = payload.value;
-
+      if (payload.id === "selectedTripId") {
+        const indexTrip = getIndex(state.trips, payload.value, "id");
+        const splits = state.trips[indexTrip].splits;
+        if (splits.length === 0) {
+          state.showBillSplits = false;
+        }
+      }
       saveStore("homeSlice", state);
 
       // resets the filters when switching between trips
