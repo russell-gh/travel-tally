@@ -6,15 +6,10 @@ const Input = styled(MuiInput)(() => ({
   width: "50px",
   top: "-13px",
   marginLeft: "3px",
-  textAlign: "center",
   "::before": {
     border: "none",
   },
-  "& .MuiInput-underline": {
-    display: "none",
-  },
   "& .MuiInputBase-input": {
-    textAlign: "center",
     height: "22px",
     padding: "2px 0 0 15px",
   },
