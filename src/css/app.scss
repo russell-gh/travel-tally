@@ -102,14 +102,6 @@ header {
     justify-content: space-around;
     align-items: center;
   }
-
-  // @media (max-width: 600px) {
-  //   .btn {
-  //     display: flex;
-  //     text-align: center;
-  //     width: 10px;
-  //   }
-  // }
 }
 
 @media (max-width: 600px) {
@@ -152,7 +144,7 @@ footer {
   }
   .btn {
     justify-content: right;
-    margin: 5px;
+    margin: 6px;
   }
 }
 
