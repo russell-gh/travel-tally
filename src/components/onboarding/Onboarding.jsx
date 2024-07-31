@@ -67,7 +67,7 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-  const [currentFormSection, setCurrentFormSection] = useState(1);
+  const [currentFormSection, setCurrentFormSection] = useState(4);
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
