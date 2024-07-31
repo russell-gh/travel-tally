@@ -46,8 +46,7 @@ const Signup = () => {
           toast.error("Failed to add user");
         }
       } catch (e) {
-        toast.error("Error connecting to API");
-        console.log(Date.now() - now, e);
+        toast.error("Error creating account");
       }
     } else {
       toast.error("Passwords do not match!");
