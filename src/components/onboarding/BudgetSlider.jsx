@@ -7,13 +7,15 @@ const Input = styled(MuiInput)(() => ({
   top: "-13px",
   marginLeft: "3px",
   textAlign: "center",
-  height: "50px",
+  "::before": {
+    border: "none",
+  },
   "& .MuiInput-underline": {
-    display:"none"
+    display: "none",
   },
   "& .MuiInputBase-input": {
     textAlign: "center",
-    height: "20px",
+    height: "22px",
     padding: "2px 0 0 15px",
   },
 }));
