@@ -24,6 +24,7 @@ const Filter = () => {
           { value: "Hotel", name: "Hotel" },
           { value: "Other", name: "Other" },
         ]}
+        typed={true}
       />
     </div>
   );

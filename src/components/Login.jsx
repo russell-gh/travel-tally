@@ -124,6 +124,7 @@ const Login = () => {
               onSubmit();
             }
           }}
+          typed={true}
         />
 
         <p className="errortext">{errors.email}</p>
@@ -139,6 +140,7 @@ const Login = () => {
               onSubmit();
             }
           }}
+          typed={true}
         />
 
         <p className="errortext">{errors.password}</p>

@@ -3,18 +3,14 @@ import { useState } from "react";
 import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)(() => ({
-  width: "50px",
+  width: "60px",
   top: "-13px",
   marginLeft: "3px",
-  textAlign: "center",
+  marginRight: "15px",
   "::before": {
     border: "none",
   },
-  "& .MuiInput-underline": {
-    display: "none",
-  },
   "& .MuiInputBase-input": {
-    textAlign: "center",
     height: "22px",
     padding: "2px 0 0 15px",
   },
@@ -95,7 +91,21 @@ export const BudgetSlider = ({
   return (
     <>
       <div className="budgetSlider">
-        <p className="label">{label}</p>
+        <div className="labelContainer">
+          <p className="label">{label}</p>
+          <Input
+            value={position}
+            size="small"
+            onChange={positionUpdate}
+            inputProps={{
+              step: 1,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </div>
         <Stack direction="row">
           <StyledSlider
             slidermax={sliderMax ? "#06233b" : "#235b89"}
@@ -112,18 +122,6 @@ export const BudgetSlider = ({
             {onboardingDetails.homeCurrencySymbol}
           </p>
         </Stack>
-        <Input
-          value={position}
-          size="small"
-          onChange={positionUpdate}
-          inputProps={{
-            step: 10,
-            min: 0,
-            max: 100,
-            type: "number",
-            "aria-labelledby": "input-slider",
-          }}
-        />
       </div>
     </>
   );

@@ -10,6 +10,7 @@ const CheckboxChartIncludingOwed = ({ toggleIncludeOwed }) => {
         callback={(e) => {
           toggleIncludeOwed();
         }}
+        typed={true}
       />
     </div>
   );
