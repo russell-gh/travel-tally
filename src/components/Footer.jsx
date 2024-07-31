@@ -10,7 +10,7 @@ export const Footer = () => {
             location.reload();
           }}
         >
-          Log out
+          Log Out
         </button>
       </footer>
     </>
