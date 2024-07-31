@@ -20,7 +20,6 @@ import {
 } from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
-import { jsxs } from "react/jsx-runtime";
 import { getCurrencySymbol } from "../../utils/utilsBudget.js";
 import { selectProfile } from "../../redux/onboardingSlice.js";
 
@@ -67,7 +66,7 @@ const Onboarding = () => {
     budgetOther: 0,
   });
 
-  const [currentFormSection, setCurrentFormSection] = useState(4);
+  const [currentFormSection, setCurrentFormSection] = useState(1);
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});

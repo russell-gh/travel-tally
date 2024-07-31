@@ -3,7 +3,7 @@ import { useState } from "react";
 import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)(() => ({
-  width: "42px",
+  width: "50px",
   top: "-13px",
   marginLeft: "3px",
   textAlign: "center",
@@ -13,14 +13,13 @@ const Input = styled(MuiInput)(() => ({
   },
   "& .MuiInputBase-input": {
     textAlign: "center",
-    width: "20px",
     height: "20px",
     padding: "2px 0 0 15px",
   },
 }));
 
 const StyledSlider = styled(Slider)(({ slidermax }) => ({
-  width: "65vw",
+  width: "55vw",
   height: 8,
   marginBottom: "3em",
   "& .MuiSlider-rail": {
