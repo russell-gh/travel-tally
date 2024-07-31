@@ -36,11 +36,16 @@ const Signup = () => {
       formData.userID = generateId("user");
       // dispatch(addUser(formData));
       // localStorage.setItem("user", JSON.stringify(formData));
-
-      const { data } = await axios.post(
-        `http://localhost:6001/user/signup`,
-        formData
-      );
+      const now = Date.now();
+      try {
+        const { data } = await axios.post(
+          `http://localhost:6001/user/signup`,
+          formData
+        );
+      } catch {
+        toast.error("Error connecting to API");
+        console.log(Date.now() - now);
+      } //BUG Delay?!
 
       if (data.status) {
         redirect("/login");
