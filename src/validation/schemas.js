@@ -51,3 +51,9 @@ export const loginSchema = {
 export const setUpProfileSchema = {
   userName: Joi.string().min(3).max(15).label("username").required(),
 };
+
+export const splitSchema = {
+  name: Joi.string().min(3).max(32).required(),
+  amount: Joi.number().min(0.01).required(),
+  paid: Joi.boolean(),
+};

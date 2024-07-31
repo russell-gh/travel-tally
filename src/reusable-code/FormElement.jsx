@@ -124,7 +124,6 @@ const FormElement = ({
       if (value === false) {
         deValue = "false";
       }
-      console.log("HERE", name, value);
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}

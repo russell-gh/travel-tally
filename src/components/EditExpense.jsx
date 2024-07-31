@@ -33,6 +33,7 @@ import {
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 import { deleteByID } from "../utils/sync";
+import { validate } from "../validation/validate";
 
 export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ export const EditExpense = ({ animatingOut }) => {
   // },
   // }
   const [errors, setErrors] = useState({});
+  const [splitErrors, setSplitErrors] = useState({});
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
   let [splitList, setSplitList] = useState([]);
@@ -134,6 +136,15 @@ export const EditExpense = ({ animatingOut }) => {
   useEffect(() => {
     getValidationResult;
   }, [formData]);
+
+  useEffect(() => {
+    if (!formData) {
+      return;
+    } else {
+      getSplitValidationResult();
+    }
+  }, [splitData]);
+
   const getValidationResult = async () => {
     if (!Object.values(formData).length) {
       return;
@@ -143,11 +154,33 @@ export const EditExpense = ({ animatingOut }) => {
     console.log(errors);
   };
 
+  const getSplitValidationResult = async () => {
+    if (formData.split === false) {
+      return;
+    }
+    let errors = [];
+    splitData.forEach(async (thisSplit) => {
+      // Loops over split data array as there can be many
+      const result = await validate(thisSplit, "split");
+      if (Object.values(result).length) {
+        errors.push(result);
+      }
+    });
+    setSplitErrors(errors); //result returns promise
+    console.log(splitErrors);
+  };
+
   const handleSubmit = () => {
-    // if (Object.keys(errors).length) {
-    //   console.log(formData, "FAIL", errors);
-    //   return;
-    // }
+    if (Object.keys(errors).length) {
+      // Checks for expense validation errors
+      console.log(formData, "FAIL", errors);
+      return;
+    }
+    if (Object.keys(splitErrors).length) {
+      // Checks for split validation errors
+      console.log(splitData, "FAIL", splitErrors);
+      return;
+    }
     if (formData.description && formData.amount) {
       const data = { formData, splitData };
       const indexs = { index, splitIndex };

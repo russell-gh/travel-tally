@@ -5,6 +5,7 @@ import {
   signupSchema,
   loginSchema,
   setUpProfileSchema,
+  splitSchema,
 } from "./schemas";
 
 //pass through form data as obj, schema as string and any callback which needs to occur on successful tests.
@@ -35,6 +36,9 @@ const schemaObjFromString = (schema) => {
     }
     case "expense": {
       return Joi.object(expenseSchema);
+    }
+    case "split": {
+      return Joi.object(splitSchema);
     }
   }
 };
