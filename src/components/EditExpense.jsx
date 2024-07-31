@@ -22,6 +22,7 @@ import {
   selectSplitData,
   setSplitData,
   setSplitMax,
+  selectToken,
 } from "../redux/homeSlice";
 import {
   getActualEndDate,
@@ -37,6 +38,7 @@ export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const splitData = useSelector(selectSplitData);
   const popUp = useSelector(selectPopUp);
+  const token = useSelector(selectToken);
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
@@ -82,10 +84,13 @@ export const EditExpense = ({ animatingOut }) => {
     let date = unixToDateReversed(copy.date);
     let newAmount = copy.amount.fromValue;
     let currency = copy.amount.fromCurrency;
+    let split = Boolean(copy.split);
     copy.date = date;
     copy.currency = currency;
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
+    copy.split = split;
+    console.log(copy);
     dispatch(setSplitMax(copy.amount));
     setFormData(copy);
     setSharedId(result.thisExpense.sharedId);
@@ -147,18 +152,22 @@ export const EditExpense = ({ animatingOut }) => {
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
-      // if (multi) {
-      //   // delete from server with shared ID
-      //   let id = sharedId;
-      //   deleteByID({ id, type: "shared", token: state.token });
-      //   deleteByID({ id, type: "split", token: state.token });
-      // } else {
-      //   // delete from server with expense ID
-      //   let id = popUp.id;
-      //   console.log(formData, "ID");
-      //   deleteByID({ id, type: "single", token: state.token });
-      //   deleteByID({ id, type: "split", token: state.token });
-      // }
+      if (multi) {
+        // delete from server with shared ID
+        let id = sharedId;
+        deleteByID({ id, type: "shared", token: token });
+        if (formData.split === true) {
+          deleteByID({ id, type: "sharedSplit", token: token });
+        }
+      } else {
+        // delete from server with expense ID
+        let id = popUp.id;
+        console.log(formData, "ID");
+        deleteByID({ id, type: "single", token: token });
+        if (formData.split === true) {
+          deleteByID({ id, type: "singleSplit", token: token });
+        }
+      }
     } else {
       console.log("FAIL FINAL");
       return;
@@ -248,12 +257,12 @@ export const EditExpense = ({ animatingOut }) => {
           <div className="containerBtnSplit">
             <Button
               onClick={handleAddPerson}
-              text={"Add Person"}
+              text={"+"}
               className={"splitAddPerson"}
             />
             <Button
               onClick={handleRemovePerson}
-              text={"Remove Person"}
+              text={"-"}
               className={"splitRemovePerson"}
             />
           </div>
@@ -346,6 +355,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
       </div>
       <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
+        {console.log(formData.split)}
         <FormElement
           type={"select"}
           label={"Split"}
