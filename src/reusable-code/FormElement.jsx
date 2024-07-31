@@ -19,6 +19,7 @@ const FormElement = ({
   checked,
   typed = false,
 }) => {
+  // console.log(value, id, name);
   switch (type) {
     case "text":
     case "email":
@@ -116,13 +117,21 @@ const FormElement = ({
         </>
       );
     case "select":
+      let deValue = value;
+      if (value === true) {
+        deValue = "true";
+      }
+      if (value === false) {
+        deValue = "false";
+      }
+      console.log("HERE", name, value);
       return (
         <>
           {label && <label htmlFor={id}>{label}:</label>}
           <select
             name={name}
             className={className}
-            defaultValue={value}
+            defaultValue={deValue}
             id={id}
             onChange={(e) => {
               callback(e);

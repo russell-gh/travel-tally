@@ -42,18 +42,19 @@ export const EditExpense = ({ animatingOut }) => {
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
-  let [formData, setFormData] = useState({
-    date: new Date().toLocaleDateString("en-CA"),
-    split: false,
-    category: "Food",
-    description: "test",
-    amount: {
-      fromValue: 50,
-      fromCurrency: "GBP",
-      toCurrency: "GBP",
-      toValue: 50,
-    },
-  });
+  let [formData, setFormData] = useState();
+  // {
+  // date: new Date().toLocaleDateString("en-CA"),
+  // split: false,
+  // category: "Food",
+  // description: "test",
+  // amount: {
+  //   fromValue: 50,
+  //   fromCurrency: "GBP",
+  //   toCurrency: "GBP",
+  //   toValue: 50,
+  // },
+  // }
   const [errors, setErrors] = useState({});
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
@@ -84,7 +85,7 @@ export const EditExpense = ({ animatingOut }) => {
     let date = unixToDateReversed(copy.date);
     let newAmount = copy.amount.fromValue;
     let currency = copy.amount.fromCurrency;
-    let split = Boolean(copy.split);
+    let split = copy.split;
     copy.date = date;
     copy.currency = currency;
     copy.amount = Math.round(newAmount) / 100;
@@ -156,7 +157,7 @@ export const EditExpense = ({ animatingOut }) => {
         // delete from server with shared ID
         let id = sharedId;
         deleteByID({ id, type: "shared", token: token });
-        if (formData.split === true) {
+        if (popUp.split === true) {
           deleteByID({ id, type: "sharedSplit", token: token });
         }
       } else {
@@ -164,7 +165,7 @@ export const EditExpense = ({ animatingOut }) => {
         let id = popUp.id;
         console.log(formData, "ID");
         deleteByID({ id, type: "single", token: token });
-        if (formData.split === true) {
+        if (popUp.split === true) {
           deleteByID({ id, type: "singleSplit", token: token });
         }
       }
@@ -278,6 +279,11 @@ export const EditExpense = ({ animatingOut }) => {
     details.dates;
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
   const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
+  //if there is no formData it stops the rendering
+  if (!formData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="editContainer">
