@@ -58,6 +58,8 @@ export const EditExpense = ({ animatingOut }) => {
   let [splitList, setSplitList] = useState([]);
   let [splitIndex, setSplitIndexs] = useState([]);
   let [sharedId, setSharedId] = useState([]);
+  let [disabled, setDisabled] = useState(false);
+
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -77,6 +79,8 @@ export const EditExpense = ({ animatingOut }) => {
     setExpenseList(thisTrip.expenses);
     setSplitList(thisTrip.splits);
     let result = getThisExpense(thisTrip.expenses, popUp.id);
+    if (result.thisExpense.split === true) {setDisabled(true)};
+    
     setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = unixToDateReversed(copy.date);
@@ -365,6 +369,7 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
           typed={true}
+          disabled={disabled}
         />
         {formData.split && (
           <Button
