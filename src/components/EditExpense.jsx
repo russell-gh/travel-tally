@@ -377,7 +377,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
         <Button
           onClick={handleSubmit}
-          text={"Edit"}
+          text={"Save"}
           className={"expenseSubmit"}
           disabled={animatingOut}
           animation="animation"
