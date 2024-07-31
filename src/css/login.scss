@@ -4,14 +4,22 @@
   color: $red;
 }
 .loginInput {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  // position: fixed;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  margin-top: 7vh;
 }
 
 .signup-text {
   font-size: 1.3rem;
+  text-align: center;
+}
+
+.signin-title {
   text-align: center;
 }
