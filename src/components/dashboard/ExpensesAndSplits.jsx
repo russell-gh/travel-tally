@@ -7,6 +7,7 @@ import ShowPaidSplitBills from "./ShowPaidSplitBills";
 import { includesFutureExpenses } from "../../utils/utilsDates";
 import ShowFutureExpenses from "./filter/ShowFutureExpenses";
 import { useEffect, useState } from "react";
+import ExpensesAndSplitsTabs from "./ExpensesAndSplitsTabs";
 
 const ExpensesAndSplits = ({
   filtered,
@@ -46,6 +47,12 @@ const ExpensesAndSplits = ({
         ""
       )}
       {splits.length > 0 && (
+        <ExpensesAndSplitsTabs
+          showBillSplits={showBillSplits}
+          toggleDisplay={toggleDisplay}
+        />
+      )}
+      {/* {splits.length > 0 && (
         <div className="tabsExpensesAndSplitsContainer">
           <Button
             text="Expenses"
@@ -62,7 +69,7 @@ const ExpensesAndSplits = ({
             }}
           />
         </div>
-      )}
+      )} */}
       {!showBillSplits && (
         <Expenses
           filtered={filtered}

@@ -500,15 +500,15 @@ controls billSplit and Expenses
     border: $teal 2px solid;
     ;
 
-    .btn {
-      color: black;
-      background-color: rgba(255, 255, 255, 0);
-    }
+    // .btn {
+    //   color: black;
+    //   background-color: rgba(255, 255, 255, 0);
+    // }
 
-    .focus {
-      color: white;
-      background-color: $teal;
-    }
+    // .focus {
+    //   color: white;
+    //   background-color: $teal;
+    // }
 
     .billSplitBtn {
       border-radius: 0px 11px 0px 0px;
@@ -517,6 +517,77 @@ controls billSplit and Expenses
     .expensesBtn {
       border-radius: 11px 0px 0px 0px;
     }
+  }
+
+  /*
+************END***********
+*/
+
+  /*
+**************************
+     Animation tabs expenses & billsplits
+**************************
+*/
+  .tabsExpensesAndSplitsContainer {
+    display: flex;
+  }
+
+  .expensesBtn,
+  .billSplitBtn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    color: black;
+    /* Ensure text color is set */
+  }
+
+  .expensesBtn::before,
+  .billSplitBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $teal;
+    color: white;
+    transition: transform 0.5s ease;
+    transform: scaleX(0);
+    z-index: 0;
+  }
+
+  .expensesBtn::before {
+    right: 0;
+    transform-origin: right;
+  }
+
+  .billSplitBtn::before {
+    left: 0;
+    transform-origin: left;
+  }
+
+  .expensesBtn.focus::before {
+    transform: scaleX(1);
+  }
+
+  .billSplitBtn.focus::before {
+    transform: scaleX(1);
+  }
+
+  .expensesBtn>span,
+  .billSplitBtn>span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.5s ease;
+  }
+
+  .expensesBtn.focus>span,
+  .billSplitBtn.focus>span {
+    color: white;
   }
 
   /*
