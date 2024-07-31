@@ -88,7 +88,6 @@ body {
   margin: 0px auto;
 }
 
-
 /*
 ************END***********
 */
@@ -180,10 +179,6 @@ body {
 
   .dropDownTrips {
     border: none;
-
-    option {
-      padding: 10px; //why does this not do anything?
-    }
   }
 
   .containerTrips {
@@ -316,9 +311,6 @@ body {
     justify-self: flex-end;
   }
 
-  //chart
-
-
   // controls expenses
   .includes {
     background-color: #ddf18970;
@@ -345,7 +337,6 @@ body {
       height: auto;
       margin-right: 3px;
     }
-
   }
 
   .checkboxIncludeOwed {

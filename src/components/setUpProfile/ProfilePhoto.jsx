@@ -13,20 +13,22 @@ const ProfilePhoto = () => {
     <>
       <p className="titleProfilePicture">Profile Picture:</p>
       <div className="setProfilePhotoContainer">
-        <Button
-          text="Take Photo"
-          className={`takePhotoBtn ${
+        <button
+          className={`takePhotoBtn btn ${
             photoChoice === "takePhoto" ? "focus" : ""
           }`}
           onClick={() => setPhotoChoice("takePhoto")}
-        />
-        <Button
-          text="Upload Photo"
-          className={`uploadPhotoBtn ${
+        >
+          <span>Take Photo</span>
+        </button>
+        <button
+          className={`uploadPhotoBtn btn ${
             photoChoice === "uploadPhoto" ? "focus" : ""
           }`}
           onClick={() => setPhotoChoice("uploadPhoto")}
-        />
+        >
+          <span>Upload Photo</span>
+        </button>
         <div className="photoDisplayContainer">
           {!photoChoice && <p>Choose how to set your profile picture.</p>}
           {photoChoice === "takePhoto" && <TakePhoto />}

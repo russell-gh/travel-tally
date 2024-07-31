@@ -3,13 +3,7 @@
             SASS
 **************************
 */
-$navy: #2e42ac;
-$green: #d6ee79;
-$sage: #d3bb5b84;
-$white: #ffffff;
-$black: #000000;
-$grey: #b3b3b3;
-$blueSachaUsed: #3c43a5;
+@import "variables";
 /*
 ************END***********
 */
@@ -84,28 +78,18 @@ $blueSachaUsed: #3c43a5;
 
     .takePhotoBtn,
     .uploadPhotoBtn {
-      background-color: rgba(255, 255, 255, 0);
-      border: none;
       width: 100%;
       height: 100%;
-      color: black;
-      cursor: pointer;
-      border-bottom: $green solid 2px;
+      margin: 0px;
     }
 
-    .takePhotoBtn:hover,
     .takePhotoBtn {
       border-radius: 12px 0px 0px 0px;
       border-right: $green solid 2px;
     }
 
-    .uploadPhotoBtn:hover,
     .uploadPhotoBtn {
       border-radius: 0px 12px 0px 0px;
-    }
-
-    .focus {
-      background-color: $green;
     }
   }
 
@@ -165,6 +149,64 @@ $blueSachaUsed: #3c43a5;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /*
+************END***********
+*/
+  /*
+**************************
+     Animation Budget
+**************************
+*/
+  .takePhotoBtn,
+  .uploadPhotoBtn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    transition: background-color 0.5s ease;
+    border-bottom: $green solid 2px;
+    color: black;
+  }
+
+  .takePhotoBtn::before,
+  .uploadPhotoBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $green;
+    color: black;
+    transition: transform 0.5s ease;
+    transform: scaleX(0);
+    z-index: 0;
+  }
+
+  .takePhotoBtn::before {
+    right: 0;
+    transform-origin: right;
+  }
+
+  .uploadPhotoBtn::before {
+    left: 0;
+    transform-origin: left;
+  }
+
+  .takePhotoBtn.focus::before,
+  .uploadPhotoBtn.focus::before {
+    transform: scaleX(1);
+  }
+
+  .takePhotoBtn>span,
+  .uploadPhotoBtn>span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.5s ease;
   }
 
   /*
