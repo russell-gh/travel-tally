@@ -39,6 +39,7 @@ const FilterDate = ({ expenses, expensesCategories }) => {
           dispatch(formEvent({ id: e.target.id, value: e.target.value }));
         }}
         options={arrDates}
+        typed={true}
       />
     </div>
   );

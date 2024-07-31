@@ -48,6 +48,7 @@ const UploadPhoto = () => {
               !profilePicture ? "Choose profile photo" : "Choose another photo"
             }
             callback={onChange}
+            typed={true}
           />
           {errorMessage && <p>{errorMessage}</p>}
         </>

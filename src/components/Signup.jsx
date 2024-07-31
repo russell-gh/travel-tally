@@ -91,6 +91,7 @@ const Signup = () => {
           name="email"
           id="email"
           placeholder="email"
+          typed={true}
         />
         <p className="errortext">{errors.email}</p>
 
@@ -100,6 +101,7 @@ const Signup = () => {
           name="password"
           id="password"
           placeholder="new password"
+          typed={true}
         />
         <p className="errortext">{errors.password}</p>
 
@@ -109,6 +111,7 @@ const Signup = () => {
           name="passwordConfirm"
           id="passwordConfirm"
           placeholder="confirm new password"
+          typed={true}
         />
         <p className="errortext">{errors.passwordConfirm}</p>
         <Button

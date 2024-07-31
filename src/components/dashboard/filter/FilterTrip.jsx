@@ -44,6 +44,7 @@ const FilterTrip = () => {
         value={selectedTripId}
         callback={handleSelectChange}
         options={arrDestinations.reverse()}
+        typed={true}
       />
     </>
   );

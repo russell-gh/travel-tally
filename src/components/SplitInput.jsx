@@ -28,6 +28,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           // error={errors["description"]}
           // list={"descriptionOptions"}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className="flex containerAmountSplit">
@@ -40,6 +41,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           value={data && data.amount ? data.amount : ""}
           //   error={errors["amount"]}
           callback={dataInput}
+          typed={true}
         />
         <div className="paidContainer">
           <FormElement
@@ -49,6 +51,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
             id={`paidCheck` + tag}
             value={data && data.paid ? data.paid : false}
             callback={dataInput}
+            typed={true}
           />
         </div>
       </div>

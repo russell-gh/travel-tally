@@ -199,6 +199,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getStartDateForMultiDay(formData.date)}
           maxDate={getDateForForm(actualEndDate)}
+          typed={true}
         />
       );
     } else {
@@ -282,6 +283,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getDateForForm(actualStartDate)}
           maxDate={getDateForForm(actualEndDate)}
+          typed={true}
         />
         <div className="multiDayCheckboxContainer">
           <div>
@@ -291,6 +293,7 @@ export const EditExpense = ({ animatingOut }) => {
               name={"dateCheck"}
               id={"dateCheck"}
               callback={multiDay}
+              typed={true}
             />
           </div>
           {renderMultiDay()}
@@ -306,6 +309,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.description}
           // list={"descriptionOptions"}
           callback={dataInput}
+          typed={true}
         />
       </div>
       {/* <datalist id="descriptionOptions">
@@ -323,6 +327,7 @@ export const EditExpense = ({ animatingOut }) => {
           options={categories}
           error={errors["category"]}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className="flex amountContainer">
@@ -335,6 +340,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.amount}
           error={errors["amount"]}
           callback={dataInput}
+          typed={true}
         />
         <FormElement
           type={"select"}
@@ -343,6 +349,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.currency}
           options={currency}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
@@ -357,6 +364,7 @@ export const EditExpense = ({ animatingOut }) => {
             { value: true, name: "Yes" },
           ]}
           callback={dataInput}
+          typed={true}
         />
         {formData.split && (
           <Button
