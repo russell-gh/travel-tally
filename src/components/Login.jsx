@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../css/toastifyVariables.css";
 import axios from "axios";
 import { saveProfile } from "../redux/onboardingSlice";
+import { API_URL } from "../config";
 
 //=======Displays Login Data================
 
@@ -35,7 +36,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:6001/user/login`,
+        `${API_URL}/user/login`,
         formData
       );
 
@@ -57,7 +58,7 @@ const Login = () => {
 
   const getTrips = async (token) => {
     try {
-      const { data } = await axios.get(`http://localhost:6001/trips`, {
+      const { data } = await axios.get(`${API_URL}/trips`, {
         headers: { token },
       });
       if (data.status) {
@@ -74,7 +75,7 @@ const Login = () => {
 
   const getProfile = async (token) => {
     try {
-      const { data } = await axios.get(`http://localhost:6001/profile/`, {
+      const { data } = await axios.get(`${API_URL}/profile/`, {
         headers: { token },
       });
       console.log(data);

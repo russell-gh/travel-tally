@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/toastifyVariables.css";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const Signup = () => {
   //Sends Errors + Creds to State
@@ -39,7 +40,7 @@ const Signup = () => {
       const now = Date.now();
       try {
         const { data } = await axios.post(
-          `http://localhost:6001/user/signup`,
+          `${API_URL}/user/signup`,
           formData
         );
 

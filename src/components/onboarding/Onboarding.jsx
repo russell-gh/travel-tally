@@ -22,6 +22,7 @@ import "../../css/onboarding.scss";
 import axios from "axios";
 import { getCurrencySymbol } from "../../utils/utilsBudget.js";
 import { selectProfile } from "../../redux/onboardingSlice.js";
+import { API_URL } from "../../config.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
@@ -185,7 +186,7 @@ const Onboarding = () => {
     };
     console.log(_onboardingDetails);
     await axios.post(
-      "http://localhost:6001/onboarding",
+      `${API_URL}/onboarding`, 
       { _onboardingDetails },
       { headers: { token } }
     );

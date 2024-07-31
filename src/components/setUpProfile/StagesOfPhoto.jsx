@@ -7,6 +7,7 @@ import { selectUserName } from "../../redux/onboardingSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { selectToken } from "../../redux/homeSlice";
+import { API_URL } from "../../config";
 
 const StageOfPhoto = ({ profilePicture, handleCapture }) => {
   const redirect = useNavigate();
@@ -20,7 +21,7 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
   const clickHandler = async () => {
     try {
       await axios.post(
-        "http://localhost:6001/profile",
+        `${API_URL}/profile`,
         {
           profilePictureSrc,
           userName,
