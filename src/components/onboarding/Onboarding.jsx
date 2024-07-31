@@ -41,7 +41,6 @@ const Onboarding = () => {
     }
   }, [token, profile]);
 
-
   let currencies = [];
 
   for (const key of Object.keys(currencyCodes)) {
@@ -186,7 +185,7 @@ const Onboarding = () => {
     };
     console.log(_onboardingDetails);
     await axios.post(
-      `${API_URL}/onboarding`, 
+      `${API_URL}/onboarding`,
       { _onboardingDetails },
       { headers: { token } }
     );
@@ -252,6 +251,15 @@ const Onboarding = () => {
       destinationCurrency: currencyCode,
     });
   };
+
+  const sumOfNonActiveSliders =
+    onboardingDetails.budgetHotel +
+    onboardingDetails.budgetFood +
+    onboardingDetails.budgetOther +
+    onboardingDetails.budgetTransport +
+    onboardingDetails.budgetActivities
+
+  const allocation = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
 
   if (!_countries) {
     return <p>...Loading</p>;
@@ -377,7 +385,7 @@ const Onboarding = () => {
             })}
             {sliderError && (
               <p className="validationError">
-                There is still some of your budget left to allocate.
+                {`There is still ${allocation}${onboardingDetails.homeCurrencySymbol} left to allocate.`}
               </p>
             )}
           </div>
