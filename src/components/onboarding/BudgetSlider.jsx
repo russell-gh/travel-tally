@@ -68,14 +68,25 @@ export const BudgetSlider = ({
 
   const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
 
+  let _position;
+
   const positionUpdate = (e) => {
     if (sliderError && e.target.value == remaining) {
       setSliderError(false);
     }
+    if (e.target.classList !== undefined) {
+      if (e.target.value === "") {
+        _position = 0;
+      } else {
+        _position = parseInt(e.target.value);
+      }
+    } else {
+      _position = Number(e.target.value);
+    }
 
     //if selected value is less than or equal to remaining to allocate, update slider with value. else change thumb col
     if (remaining >= e.target.value) {
-      setPosition(Number(e.target.value));
+      setPosition(_position.toString());
       //if selected value is equal to remaining to allocate, set thumb col to max
       if (e.target.value == onboardingDetails.budgetTotal) {
         setSliderMax(true);
@@ -96,6 +107,7 @@ export const BudgetSlider = ({
           <Input
             value={position}
             size="small"
+            name={id}
             onChange={positionUpdate}
             inputProps={{
               step: 1,
@@ -109,7 +121,7 @@ export const BudgetSlider = ({
         <Stack direction="row">
           <StyledSlider
             slidermax={sliderMax ? "#06233b" : "#235b89"}
-            value={position}
+            value={parseInt(position)}
             id={id}
             name={id}
             min={0}

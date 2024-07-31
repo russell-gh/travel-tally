@@ -183,7 +183,7 @@ const Onboarding = () => {
       expenses: [],
       splits: [],
     };
-    console.log(_onboardingDetails);
+
     await axios.post(
       `${API_URL}/onboarding`,
       { _onboardingDetails },
