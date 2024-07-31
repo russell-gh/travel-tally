@@ -22,6 +22,7 @@ import {
   selectSplitData,
   setSplitData,
   setSplitMax,
+  selectToken,
 } from "../redux/homeSlice";
 import {
   getActualEndDate,
@@ -32,27 +33,31 @@ import {
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 import { deleteByID } from "../utils/sync";
+import { validate } from "../validation/validate";
 
 export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const splitData = useSelector(selectSplitData);
   const popUp = useSelector(selectPopUp);
+  const token = useSelector(selectToken);
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let [index, setIndex] = useState(0);
-  let [formData, setFormData] = useState({
-    date: new Date().toLocaleDateString("en-CA"),
-    split: false,
-    category: "Food",
-    description: "test",
-    amount: {
-      fromValue: 50,
-      fromCurrency: "GBP",
-      toCurrency: "GBP",
-      toValue: 50,
-    },
-  });
+  let [formData, setFormData] = useState();
+  // {
+  // date: new Date().toLocaleDateString("en-CA"),
+  // split: false,
+  // category: "Food",
+  // description: "test",
+  // amount: {
+  //   fromValue: 50,
+  //   fromCurrency: "GBP",
+  //   toCurrency: "GBP",
+  //   toValue: 50,
+  // },
+  // }
   const [errors, setErrors] = useState({});
+  const [splitErrors, setSplitErrors] = useState({});
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
   let [splitList, setSplitList] = useState([]);
@@ -86,10 +91,13 @@ export const EditExpense = ({ animatingOut }) => {
     let date = unixToDateReversed(copy.date);
     let newAmount = copy.amount.fromValue;
     let currency = copy.amount.fromCurrency;
+    let split = copy.split;
     copy.date = date;
     copy.currency = currency;
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
+    copy.split = split;
+    console.log(copy);
     dispatch(setSplitMax(copy.amount));
     setFormData(copy);
     setSharedId(result.thisExpense.sharedId);
@@ -132,6 +140,15 @@ export const EditExpense = ({ animatingOut }) => {
   useEffect(() => {
     getValidationResult;
   }, [formData]);
+
+  useEffect(() => {
+    if (!formData) {
+      return;
+    } else {
+      getSplitValidationResult();
+    }
+  }, [splitData]);
+
   const getValidationResult = async () => {
     if (!Object.values(formData).length) {
       return;
@@ -141,28 +158,54 @@ export const EditExpense = ({ animatingOut }) => {
     console.log(errors);
   };
 
+  const getSplitValidationResult = async () => {
+    if (formData.split === false) {
+      return;
+    }
+    let errors = [];
+    splitData.forEach(async (thisSplit) => {
+      // Loops over split data array as there can be many
+      const result = await validate(thisSplit, "split");
+      if (Object.values(result).length) {
+        errors.push(result);
+      }
+    });
+    setSplitErrors(errors); //result returns promise
+    console.log(splitErrors);
+  };
+
   const handleSubmit = () => {
-    // if (Object.keys(errors).length) {
-    //   console.log(formData, "FAIL", errors);
-    //   return;
-    // }
+    if (Object.keys(errors).length) {
+      // Checks for expense validation errors
+      console.log(formData, "FAIL", errors);
+      return;
+    }
+    if (Object.keys(splitErrors).length) {
+      // Checks for split validation errors
+      console.log(splitData, "FAIL", splitErrors);
+      return;
+    }
     if (formData.description && formData.amount) {
       const data = { formData, splitData };
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
-      // if (multi) {
-      //   // delete from server with shared ID
-      //   let id = sharedId;
-      //   deleteByID({ id, type: "shared", token: state.token });
-      //   deleteByID({ id, type: "split", token: state.token });
-      // } else {
-      //   // delete from server with expense ID
-      //   let id = popUp.id;
-      //   console.log(formData, "ID");
-      //   deleteByID({ id, type: "single", token: state.token });
-      //   deleteByID({ id, type: "split", token: state.token });
-      // }
+      if (multi) {
+        // delete from server with shared ID
+        let id = sharedId;
+        deleteByID({ id, type: "shared", token: token });
+        if (popUp.split === true) {
+          deleteByID({ id, type: "sharedSplit", token: token });
+        }
+      } else {
+        // delete from server with expense ID
+        let id = popUp.id;
+        console.log(formData, "ID");
+        deleteByID({ id, type: "single", token: token });
+        if (popUp.split === true) {
+          deleteByID({ id, type: "singleSplit", token: token });
+        }
+      }
     } else {
       console.log("FAIL FINAL");
       return;
@@ -253,12 +296,12 @@ export const EditExpense = ({ animatingOut }) => {
           <div className="containerBtnSplit">
             <Button
               onClick={handleAddPerson}
-              text={"Add Person"}
+              text={"+"}
               className={"splitAddPerson"}
             />
             <Button
               onClick={handleRemovePerson}
-              text={"Remove Person"}
+              text={"-"}
               className={"splitRemovePerson"}
             />
           </div>
@@ -274,6 +317,11 @@ export const EditExpense = ({ animatingOut }) => {
     details.dates;
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
   const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
+  //if there is no formData it stops the rendering
+  if (!formData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="editContainer">
@@ -357,6 +405,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
       </div>
       <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
+        {console.log(formData.split)}
         <FormElement
           type={"select"}
           label={"Split"}
@@ -390,7 +439,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
         <Button
           onClick={handleSubmit}
-          text={"Edit"}
+          text={"Save"}
           className={"expenseSubmit"}
           disabled={animatingOut}
           animation="animation"

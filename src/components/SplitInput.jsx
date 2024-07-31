@@ -46,6 +46,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
         <div className="paidContainer">
           <FormElement
             type={"checkbox"}
+            checked={data ? data.paid : false}
             label={"Paid"}
             name={`paid`}
             id={`paidCheck` + tag}

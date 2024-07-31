@@ -32,8 +32,14 @@ const Converter = ({ animatingOut }) => {
     console.log(target, value);
   };
 
+  const convertedValue = convertCurrency(
+    formData.from,
+    formData.fromCurrency,
+    rates
+  );
+
   return (
-    <div className="converterContainter">
+    <div className="converterContainer">
       <h2>Convert here</h2>
       <div className="flex fromContainer">
         <FormElement

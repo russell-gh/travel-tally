@@ -10,6 +10,7 @@ import {
   deleteByID,
   updatePaidDB,
 } from "../utils/sync";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const dataFromDisc = getStore("homeSlice");
 export const homeSlice = createSlice({
@@ -33,6 +34,7 @@ export const homeSlice = createSlice({
       //set homecurrencySymbol inside each trip
       if (state.trips.length && state.currencyCodes) {
         state.trips.map((item, index) => {
+          console.log(state.trips[index].details.homeCurrency);
           item.details.homeCurrencySymbol = getCurrencySymbol(
             { ...state.currencyCodes },
             state.trips[index].details.homeCurrency

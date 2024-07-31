@@ -33,7 +33,7 @@ const ExpenseAmount = ({
   const currencySymbol = getCurrencySymbol(currencyCodes, fromCurrency);
 
   return (
-    <div>
+    <div className="amountContainer">
       <p>
         {homeCurrencySymbol}
         {nFormatter(toValue)}

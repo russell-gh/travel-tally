@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../config";
 
 export async function addExpenseRemotely(payload) {
   const { token } = payload;
@@ -8,11 +9,9 @@ export async function addExpenseRemotely(payload) {
   }
   console.log(payload);
   try {
-    const results = await axios.post(
-      "http://127.0.0.1:6001/expenses",
-      payload,
-      { headers: { token } }
-    );
+    const results = await axios.post(`${API_URL}/expenses`, payload, {
+      headers: { token },
+    });
     console.log(results, "Add expense");
   } catch (e) {
     console.log(e);
@@ -31,7 +30,7 @@ export async function addSplitRemotely(payload) {
   }
   console.log(payload);
   try {
-    const results = await axios.post("http://127.0.0.1:6001/splits", payload, {
+    const results = await axios.post(`${API_URL}/splits`, payload, {
       headers: { token },
     });
     console.log(results, "add split");
@@ -45,26 +44,24 @@ export async function deleteByID(payload) {
   const id = payload.id;
   const { token } = payload;
   if (payload.type === "shared") {
-    const results = await axios.delete(
-      `http://127.0.0.1:6001/expenses/shared/${id}`,
-      { headers: { token } }
-    );
+    const results = await axios.delete(`${API_URL}/expenses/shared/${id}`, {
+      headers: { token },
+    });
     console.log(results, "sharedExpense");
   } else if (payload.type === "single") {
-    const results = await axios.delete(`http://127.0.0.1:6001/expenses/${id}`, {
+    const results = await axios.delete(`${API_URL}/expenses/${id}`, {
       headers: { token },
     });
     console.log(results, "singleExpense");
   } else if (payload.type === "singleSplit") {
-    const results = await axios.delete(`http://127.0.0.1:6001/splits/${id}`, {
+    const results = await axios.delete(`${API_URL}/splits/${id}`, {
       headers: { token },
     });
     console.log(results, "singleSplit");
   } else if (payload.type === "sharedSplit") {
-    const results = await axios.delete(
-      `http://127.0.0.1:6001/splits/shared/${id}`,
-      { headers: { token } }
-    );
+    const results = await axios.delete(`${API_URL}/splits/shared/${id}`, {
+      headers: { token },
+    });
     console.log(results, "sharedSplit");
   }
 }
@@ -72,7 +69,7 @@ export async function deleteByID(payload) {
 export async function updatePaidDB(id, name, token) {
   try {
     const results = await axios.patch(
-      `http://127.0.0.1:6001/splits/paid/${id}/${name}`,
+      `${API_URL}/splits/paid/${id}/${name}`,
       {},
       { headers: { token } }
     );

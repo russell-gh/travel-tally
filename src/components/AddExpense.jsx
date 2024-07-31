@@ -64,9 +64,9 @@ export const AddExpense = ({ animatingOut }) => {
     category: "Activities",
   });
   const [errors, setErrors] = useState({});
+  const [splitErrors, setSplitErrors] = useState({});
   let [multi, setMulti] = useState(false);
 
-  // const [splitData, setSplitData] = useState([])
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -97,6 +97,10 @@ export const AddExpense = ({ animatingOut }) => {
     getValidationResult();
   }, [formData]);
 
+  useEffect(() => {
+    getSplitValidationResult();
+  }, [splitData]);
+
   const getValidationResult = async () => {
     if (!Object.values(formData).length) {
       return;
@@ -106,10 +110,32 @@ export const AddExpense = ({ animatingOut }) => {
     // console.log(errors);
   };
 
+  const getSplitValidationResult = async () => {
+    if (formData.split === false) {
+      return;
+    }
+    let errors = [];
+    splitData.forEach(async (thisSplit) => {
+      // Loops over split data array as there can be many
+      const result = await validate(thisSplit, "split");
+      if (Object.values(result).length) {
+        errors.push(result);
+      }
+    });
+    setSplitErrors(errors); //result returns promise
+    console.log(splitErrors);
+  };
+
   const handleSubmit = () => {
     console.log(errors);
     if (Object.keys(errors).length) {
+      // Checks for expense validation errors
       console.log(formData, "FAIL", errors);
+      return;
+    }
+    if (Object.keys(splitErrors).length) {
+      // Checks for split validation errors
+      console.log(splitData, "FAIL", splitErrors);
       return;
     }
     if (formData.description && formData.amount) {
@@ -171,7 +197,7 @@ export const AddExpense = ({ animatingOut }) => {
 
   //handles on form change
   const getSplitData = (data, tag) => {
-    console.log("getSplitData", data, tag);
+    // console.log("getSplitData", data, tag);
     data.amount = Number(data.amount);
     dispatch(setSplitData({ data, tag }));
   };
