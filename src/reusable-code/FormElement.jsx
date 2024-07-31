@@ -17,7 +17,7 @@ const FormElement = ({
   className = [],
   onKeyDown = () => {},
   checked,
-  typed = true,
+  typed = false,
 }) => {
   switch (type) {
     case "text":
