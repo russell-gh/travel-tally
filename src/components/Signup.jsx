@@ -26,30 +26,31 @@ const Signup = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const redirect = useNavigate();
-  //==========================================
   //=========Validates credentials============
-  //==========================================
   const onSubmit = async (e) => {
     const errObj = await validate(formData, "signup");
     setErrors(errObj);
 
     if (errObj.password || errObj.email) {
-      console.log(">>>", errObj);
     } else if (formData.password === formData.passwordConfirm) {
       formData.userID = generateId("user");
       // dispatch(addUser(formData));
       // localStorage.setItem("user", JSON.stringify(formData));
-
-      const { data } = await axios.post(
-        `http://localhost:6001/user/signup`,
-        formData
-      );
+      const now = Date.now();
+      try {
+        const { data } = await axios.post(
+          `http://localhost:6001/user/signup`,
+          formData
+        );
+      } catch {
+        toast.error("Error connecting to API");
+        console.log(Date.now() - now);
+      } //BUG Delay?!
 
       if (data.status) {
         redirect("/login");
       } else {
-        //send user some error
-        console.log("Failed to add user");
+        toast.error("Failed to add user");
       }
     } else {
       toast.error("Passwords do not match!");

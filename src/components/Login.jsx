@@ -13,9 +13,8 @@ import "../css/toastifyVariables.css";
 import axios from "axios";
 import { saveProfile } from "../redux/onboardingSlice";
 
-//==========================================
 //=======Displays Login Data================
-//==========================================
+
 const Login = () => {
   const redirect = useNavigate();
   const [formData, setFormData] = useState({});
@@ -32,10 +31,7 @@ const Login = () => {
     setErrors(errObj);
   };
 
-  //============================================
   //====Compares Credentials to Local Storage===
-  //============================================
-
   const onSubmit = async (e) => {
     try {
       const { data } = await axios.post(
@@ -51,10 +47,12 @@ const Login = () => {
       }
     } catch (e) {
       console.log(e);
+      toast.error("Incorrect Credentials!");
+      //TODO Why is there a delay?
     }
 
     //message the user
-    console.log(errors, formData, localUser);
+    // console.log(errors, formData, localUser);
   };
 
   const getTrips = async (token) => {

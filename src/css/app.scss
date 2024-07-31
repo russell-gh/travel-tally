@@ -101,6 +101,25 @@ header {
     justify-content: space-around;
     align-items: center;
   }
+
+  // @media (max-width: 600px) {
+  //   .btn {
+  //     display: flex;
+  //     text-align: center;
+  //     width: 10px;
+  //   }
+  // }
+
+  @media (max-width: 600px) {
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: auto;
+      padding: 10px;
+    }
+  }
 }
 
 header,
