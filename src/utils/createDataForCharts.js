@@ -111,29 +111,29 @@ export function createDateIncludingOwed(splits, expenses, chartData) {
   _chartData.push(totalOwedArr);
 
   //take owed away from left or overspend
-  let arrayLeft = _chartData[2];
-  let arrayOverspend = _chartData[3];
+  // let arrayLeft = _chartData[2];
+  // let arrayOverspend = _chartData[3];
 
-  for (let i = 0; i < arrayLeft.length; i++) {
-    if (arrayLeft[i] !== 0) {
-      const leftAfterOwed = arrayLeft[i] * 100 - totalOwedArr[i] * 100;
-      if (leftAfterOwed > 0) {
-        arrayLeft[i] = addDecimals(leftAfterOwed);
-      } else if (leftAfterOwed <= 0) {
-        arrayLeft[i] = 0;
-      }
-    } else if (arrayLeft[i] === 0) {
-      const leftAfterOwed = arrayOverspend[i] * 100 - totalOwedArr[i] * 100;
-      if (leftAfterOwed > 0) {
-        arrayOverspend[i] = addDecimals(leftAfterOwed);
-      } else if (leftAfterOwed <= 0) {
-        arrayOverspend[i] = 0;
-      }
-    }
-  }
+  // for (let i = 0; i < arrayLeft.length; i++) {
+  //   if (arrayLeft[i] !== 0) {
+  //     const leftAfterOwed = arrayLeft[i] * 100 - totalOwedArr[i] * 100;
+  //     if (leftAfterOwed > 0) {
+  //       arrayLeft[i] = addDecimals(leftAfterOwed);
+  //     } else if (leftAfterOwed <= 0) {
+  //       arrayLeft[i] = 0;
+  //     }
+  //   } else if (arrayLeft[i] === 0) {
+  //     const leftAfterOwed = arrayOverspend[i] * 100 - totalOwedArr[i] * 100;
+  //     if (leftAfterOwed > 0) {
+  //       arrayOverspend[i] = addDecimals(leftAfterOwed);
+  //     } else if (leftAfterOwed <= 0) {
+  //       arrayOverspend[i] = 0;
+  //     }
+  //   }
+  // }
 
-  _chartData[2] = arrayLeft;
-  _chartData[3] = arrayOverspend;
+  // _chartData[2] = arrayLeft;
+  // _chartData[3] = arrayOverspend;
 
   return _chartData;
 }
