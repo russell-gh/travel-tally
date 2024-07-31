@@ -34,10 +34,10 @@ const FormElement = ({
             list={list}
             placeholder={placeholder}
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
             onKeyDown={(e) => {
-              onKeyDown(e, id);
+              onKeyDown(e);
             }}
           />
           {typed && error && <p className="validationError">{error}</p>}
@@ -53,10 +53,11 @@ const FormElement = ({
             name={name}
             value={value}
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
             min={minValue}
             max={maxValue}
+            className={className}
           />
           {typed && error && <p className="validationError">{error}</p>}
         </>
@@ -73,7 +74,7 @@ const FormElement = ({
             value={value}
             accept="image/*"
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
           />
           {typed && error && <p className="validationError">{error}</p>}
@@ -91,7 +92,7 @@ const FormElement = ({
             min={minDate}
             max={maxDate}
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
           />
           {typed && error && <p className="validationError">{error}</p>}
@@ -106,7 +107,7 @@ const FormElement = ({
             name={name}
             value={value}
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
             checked={checked}
           />
@@ -124,7 +125,7 @@ const FormElement = ({
             defaultValue={value}
             id={id}
             onChange={(e) => {
-              callback(e, id);
+              callback(e);
             }}
           >
             {choose && (

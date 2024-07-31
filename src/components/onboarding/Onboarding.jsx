@@ -11,19 +11,38 @@ import {
   checkFormSectionErrors,
   getCountryFromCity,
 } from "./onboardingUtils.js";
-import { addTrip, selectToken } from "../../redux/homeSlice.js";
 import { useNavigate } from "react-router-dom";
-import { selectCountries, selectCurrencyCodes } from "../../redux/homeSlice.js";
+import {
+  selectCountries,
+  selectCurrencyCodes,
+  addTrip,
+  selectToken,
+} from "../../redux/homeSlice.js";
 import "../../css/onboarding.scss";
 import axios from "axios";
-import { jsxs } from "react/jsx-runtime";
 import { getCurrencySymbol } from "../../utils/utilsBudget.js";
+import { selectProfile } from "../../redux/onboardingSlice.js";
 
 const Onboarding = () => {
   const currencyCodes = useSelector(selectCurrencyCodes);
   const token = useSelector(selectToken);
+  const profile = useSelector(selectProfile);
+
+  useEffect(() => {
+    if (!token) {
+      redirect("/login");
+      return;
+    }
+
+    if (!profile || Object.keys(profile).length === 0) {
+      redirect("/setup-profile");
+      return;
+    }
+  }, [token, profile]);
+
 
   let currencies = [];
+
   for (const key of Object.keys(currencyCodes)) {
     currencies.push({ value: key, name: key });
   }
@@ -51,13 +70,6 @@ const Onboarding = () => {
   const [errors, setErrors] = useState({});
   const [sliderError, setSliderError] = useState(false);
   const [typed, setTyped] = useState({});
-
-  console.log(currencies);
-
-  // getCountryCurrency("london", 5);
-  // useEffect(() => {
-  //   getCountryCurrency(setCountryCurrency);
-  // }, []);
 
   const dispatch = useDispatch();
   const redirect = useNavigate();
@@ -113,7 +125,11 @@ const Onboarding = () => {
 
     //if id is a type of budget convert to a number
     if (e.target.name.includes("budget")) {
-      input = parseInt(e.target.value);
+      if (e.target.value === "") {
+        input = 0;
+      } else {
+        input = parseInt(e.target.value);
+      }
     }
     setTyped({ ...typed, [e.target.name]: true });
     setOnboardingDetails({ ...onboardingDetails, [e.target.name]: input });
@@ -127,7 +143,7 @@ const Onboarding = () => {
       setSliderError(true);
       return;
     }
-    console.log(errors);
+
     //if errors exist abort early
     if (Object.keys(errors).length) {
       return;
@@ -153,7 +169,7 @@ const Onboarding = () => {
 
     //spread existing state and update modified keys
     _onboardingDetails = {
-      id: generateId("trip"),
+      tripId: generateId("trip"),
       details: {
         ..._onboardingDetails,
         dates: { startDate, endDate, startDateIncluded, endDateIncluded },
@@ -312,33 +328,30 @@ const Onboarding = () => {
           </div>
         )}
         {currentFormSection === 3 && (
-          <div className="formSection">
-            <div className="budgetTotalSection">
-              <FormElement
-                type="number"
-                id="budgetTotal"
-                className="budgetTotal"
-                label="Enter your total budget for the trip and the currency of your home country"
-                name="budgetTotal"
-                value={onboardingDetails.budgetTotal.toString()}
-                callback={handleChange}
-                error={errors.budgetTotal}
-                typed={typed.budgetTotal}
-                minValue={0}
-              />
-              <FormElement
-                type="select"
-                id="homeCurrency"
-                name="homeCurrency"
-                className="homeCurrency"
-                // choose={true}
-                options={currencies}
-                value={currencies[0].value}
-                callback={handleChange}
-                error={errors.homeCurrency}
-                typed={typed.homeCurrency}
-              />
-            </div>
+          <div className="formSection budgetTotalSection">
+            <FormElement
+              type="number"
+              id="budgetTotal"
+              className="budgetTotal"
+              label="Enter your total budget for the trip and the currency of your home country"
+              name="budgetTotal"
+              value={onboardingDetails.budgetTotal.toString()}
+              callback={handleChange}
+              error={errors.budgetTotal}
+              typed={typed.budgetTotal}
+              minValue={0}
+            />
+            <FormElement
+              type="select"
+              id="homeCurrency"
+              name="homeCurrency"
+              className="homeCurrency"
+              options={currencies}
+              value={currencies[0].value}
+              callback={handleChange}
+              error={errors.homeCurrency}
+              typed={typed.homeCurrency}
+            />
           </div>
         )}
         {currentFormSection === 4 && (
