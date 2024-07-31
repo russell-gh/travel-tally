@@ -235,7 +235,7 @@ export const EditExpense = ({ animatingOut }) => {
         <>
           {splitData.map(function (split, index) {
             return (
-              <div className="flex">
+              <div className="flex" key={index}>
                 <SplitInput
                   maxAmount={formData.amount}
                   tag={index}
