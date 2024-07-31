@@ -2,7 +2,7 @@ import Budget from "./Budget";
 import { useState } from "react";
 import BudgetPerDay from "./BudgetPerDay";
 import dayjs from "dayjs";
-import Button from "../../reusable-code/Button";
+import TabsBudget from "./TabsBudget";
 import { useSelector } from "react-redux";
 import { selectShowBillSplits } from "../../redux/homeSlice";
 import InfoBillSplits from "./InfoBillSplits";
@@ -60,32 +60,11 @@ const BudgetInfo = ({
         />
       )}
       {stillTravelling && (
-        <>
-          <Button
-            text="Total budget"
-            className={`totalBudgetBtn ${
-              display === "totalBudget" ? "focus" : ""
-            }`}
-            onClick={() => changeDisplay("totalBudget")}
-          />
-          {showBillSplits ? (
-            <Button
-              text="Bill splits"
-              className={`billSplitsGraphBtn ${
-                display === "billSplits" ? "focus" : ""
-              }`}
-              onClick={() => changeDisplay("billSplits")}
-            />
-          ) : (
-            <Button
-              text="Daily budget"
-              className={`dailyBudgetBtn ${
-                display === "dailyBudget" ? "focus" : ""
-              }`}
-              onClick={() => changeDisplay("dailyBudget")}
-            />
-          )}
-        </>
+        <TabsBudget
+          changeDisplay={changeDisplay}
+          display={display}
+          showBillSplits={showBillSplits}
+        />
       )}
       {display === "totalBudget" && stillTravelling && (
         <Budget

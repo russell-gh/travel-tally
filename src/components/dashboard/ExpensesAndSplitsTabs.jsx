@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { gsap } from "gsap";
 import { useDispatch } from "react-redux";
-import Button from "../../reusable-code/Button";
 
 const ExpensesAndSplitsTabs = ({ showBillSplits, toggleDisplay }) => {
   const dispatch = useDispatch();

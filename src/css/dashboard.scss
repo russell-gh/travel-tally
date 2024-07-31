@@ -243,14 +243,8 @@ body {
   .totalBudgetBtn,
   .dailyBudgetBtn,
   .billSplitsGraphBtn {
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-    color: black;
     justify-self: stretch;
     align-self: stretch;
-    cursor: pointer;
-    border-bottom: $green solid 2px;
-    border-radius: 0px;
   }
 
   .totalBudgetBtn:hover,
@@ -262,10 +256,6 @@ body {
   .dailyBudgetBtn,
   .billSplitsGraphBtn {
     border-radius: 0px 12px 0px 0px;
-  }
-
-  .focus {
-    background-color: $green;
   }
 
   .containerBottomRowGrid {
@@ -307,7 +297,6 @@ body {
     grid-template-columns: fit-content(200px) fit-content(100px);
     grid-template-rows: fit-content(100px);
     gap: 0px 10px;
-
   }
 
   .positive {
@@ -366,6 +355,71 @@ body {
   /*
 ************END***********
 */
+
+  /*
+**************************
+     Animation Budget
+**************************
+*/
+  .totalBudgetBtn,
+  .billSplitsGraphBtn,
+  .dailyBudgetBtn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    transition: background-color 0.5s ease;
+    border-bottom: $green solid 2px;
+    color: black;
+  }
+
+  .totalBudgetBtn::before,
+  .billSplitsGraphBtn::before,
+  .dailyBudgetBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $green;
+    color: black;
+    transition: transform 0.5s ease;
+    transform: scaleX(0);
+    z-index: 0;
+  }
+
+  .totalBudgetBtn::before {
+    right: 0;
+    transform-origin: right;
+  }
+
+  .billSplitsGraphBtn::before,
+  .dailyBudgetBtn::before {
+    left: 0;
+    transform-origin: left;
+  }
+
+  .billSplitsGraphBtn.focus::before,
+  .dailyBudgetBtn.focus::before,
+  .totalBudgetBtn.focus::before {
+    transform: scaleX(1);
+  }
+
+  .totalBudgetBtn>span,
+  .billSplitsGraphBtn>span,
+  .dailyBudgetBtn>span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.5s ease;
+  }
+
+  /*
+************END***********
+*/
+
   /*
 **************************
         expenses
@@ -499,16 +553,6 @@ controls billSplit and Expenses
     border-radius: 15px 15px 0px 0px;
     border: $teal 2px solid;
     ;
-
-    // .btn {
-    //   color: black;
-    //   background-color: rgba(255, 255, 255, 0);
-    // }
-
-    // .focus {
-    //   color: white;
-    //   background-color: $teal;
-    // }
 
     .billSplitBtn {
       border-radius: 0px 11px 0px 0px;
