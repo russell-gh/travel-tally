@@ -92,8 +92,7 @@ export function convertCurrency(fromValue, fromCurrency, data) {
 
 export function splitExpenseDays({ expense, splits }) {
   console.log("Split expense days", splits);
-  let { date, endDate, description, category, amount, currency, split } =
-    expense;
+  let { date, endDate, amount, split } = expense;
   let { fromValue, toValue } = amount;
   let allExpenses = [];
 
