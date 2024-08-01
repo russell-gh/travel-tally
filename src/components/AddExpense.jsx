@@ -34,6 +34,7 @@ export const AddExpense = ({ animatingOut }) => {
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
+  const [typed, setTyped] = useState({});
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let expenses = getExpenseList(tripID, trips).expenses;
@@ -89,6 +90,8 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "true") value = true;
     if (value === "false") value = false;
 
+    setTyped({ ...typed, [target]: true });
+
     setFormData({ ...formData, [target]: value });
     if (target === "amount") dispatch(setSplitMax({ value }));
   };
@@ -141,13 +144,10 @@ export const AddExpense = ({ animatingOut }) => {
 
     let updatedFormData = formData;
 
-    console.log("check", formData.split === true, splitData.length === 0);
-    console.log("before", formData, splitData);
     //set split to false if they do not put in any formData
     if (formData.split === true && splitData.length === 0) {
       updatedFormData = { ...formData, split: false };
     }
-    console.log("after", formData, splitData);
 
     if (formData.description && formData.amount) {
       const result = { formData: updatedFormData, splitData };
@@ -268,7 +268,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getDateForForm(actualStartDate)}
           maxDate={getDateForForm(actualEndDate)}
-          typed={true}
+          typed={typed.date}
         />
 
         <div className="multiDayCheckboxContainer">
@@ -294,7 +294,7 @@ export const AddExpense = ({ animatingOut }) => {
           error={errors["description"]}
           list={"descriptionOptions"}
           callback={dataInput}
-          typed={true}
+          typed={typed.description}
         />
         <datalist id="descriptionOptions">
           {datalist.map((expense, index) => {
@@ -323,7 +323,7 @@ export const AddExpense = ({ animatingOut }) => {
           minValue={0}
           error={errors["amount"]}
           callback={dataInput}
-          typed={true}
+          typed={typed.amount}
         />
         <FormElement
           type={"select"}
