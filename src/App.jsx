@@ -19,7 +19,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div className="app-container">
       {!online && (
         <div
           style={{
@@ -35,7 +35,7 @@ const App = () => {
       )}
       <Redirect />
       <Interface />
-    </>
+    </div>
   );
 };
 
