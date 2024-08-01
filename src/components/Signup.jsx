@@ -21,7 +21,6 @@ const Signup = () => {
     const _formData = { ...formData, [e.target.id]: e.target.value };
     setFormData(_formData);
     const errObj = await validate(_formData, "signup");
-    //Error Timing is ugly
     setErrors(errObj);
   };
   const user = useSelector((state) => state.user);
@@ -35,8 +34,6 @@ const Signup = () => {
     if (errObj.password || errObj.email) {
     } else if (formData.password === formData.passwordConfirm) {
       formData.userID = generateId("user");
-      // dispatch(addUser(formData));
-      // localStorage.setItem("user", JSON.stringify(formData));
       const now = Date.now();
       try {
         const { data } = await axios.post(
@@ -50,9 +47,8 @@ const Signup = () => {
           toast.error("Failed to add user");
         }
       } catch (e) {
-        toast.error("Error connecting to API");
-        console.log(Date.now() - now, e);
-      } //BUG Delay?!
+        toast.error("Error creating account");
+      }
     } else {
       toast.error("Passwords do not match!");
     }

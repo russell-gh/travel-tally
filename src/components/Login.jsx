@@ -51,9 +51,6 @@ const Login = () => {
       toast.error("Incorrect Credentials!");
       //TODO Why is there a delay?
     }
-
-    //message the user
-    // console.log(errors, formData, localUser);
   };
 
   const getTrips = async (token) => {

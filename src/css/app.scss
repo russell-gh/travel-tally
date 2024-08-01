@@ -89,7 +89,8 @@ header {
   }
   .logo-text-container {
     display: flex;
-    padding-top: 7px;
+    margin-top: 7px;
+    padding: 10px;
     align-items: center;
     img {
       width: 100%;
@@ -101,27 +102,18 @@ header {
     justify-content: space-around;
     align-items: center;
   }
-
-  // @media (max-width: 600px) {
-  //   .btn {
-  //     display: flex;
-  //     text-align: center;
-  //     width: 10px;
-  //   }
-  // }
-
-  @media (max-width: 600px) {
-    .btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      width: auto;
-      padding: 10px;
-    }
-  }
 }
 
+@media (max-width: 600px) {
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    padding: 10px;
+  }
+}
 header,
 footer {
   background-color: $teal;
@@ -140,6 +132,20 @@ footer {
   width: 100%;
   bottom: 0;
   font-size: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  height: 55px;
+  padding: 0;
+  margin: 0;
+  p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn {
+    justify-content: right;
+    margin: 6px;
+  }
 }
 
 svg {
