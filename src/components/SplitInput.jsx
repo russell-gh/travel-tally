@@ -17,9 +17,14 @@ const SplitInput = ({ tag, parentCallback, data, splitErrors }) => {
   };
 
   const tagIndex = tag;
-  const nameError = splitErrors[tagIndex]
-    ? splitErrors[tagIndex]["name"]
-    : undefined;
+  const nameError =
+    splitErrors && splitErrors[tagIndex]
+      ? splitErrors[tagIndex]["name"]
+      : undefined;
+  const amountError =
+    splitErrors && splitErrors[tagIndex]
+      ? splitErrors[tagIndex]["amount"]
+      : undefined;
 
   console.log(splitErrors, nameError, tag);
 
@@ -46,7 +51,7 @@ const SplitInput = ({ tag, parentCallback, data, splitErrors }) => {
           id={`splitAmount${tag} splitAmount`}
           minValue={0}
           value={data && data.amount ? data.amount : ""}
-          error={splitErrors["amount"]}
+          error={amountError}
           callback={dataInput}
           typed={true}
         />

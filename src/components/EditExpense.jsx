@@ -428,7 +428,7 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
           typed={true}
-          disabled={disabled}
+          // disabled={disabled}
         />
         {formData.split && (
           <Button

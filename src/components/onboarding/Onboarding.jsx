@@ -29,17 +29,21 @@ const Onboarding = () => {
   const token = useSelector(selectToken);
   const profile = useSelector(selectProfile);
 
-  useEffect(() => {
-    if (!token) {
-      redirect("/login");
-      return;
-    }
+  if (!token) {
+    return;
+  }
 
-    if (!profile || Object.keys(profile).length === 0) {
-      redirect("/setup-profile");
-      return;
-    }
-  }, [token, profile]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     redirect("/login");
+  //     return;
+  //   }
+
+  //   if (!profile || Object.keys(profile).length === 0) {
+  //     redirect("/setup-profile");
+  //     return;
+  //   }
+  // }, [token, profile]);
 
   let currencies = [];
 
@@ -257,7 +261,7 @@ const Onboarding = () => {
     onboardingDetails.budgetFood +
     onboardingDetails.budgetOther +
     onboardingDetails.budgetTransport +
-    onboardingDetails.budgetActivities
+    onboardingDetails.budgetActivities;
 
   const allocation = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
 
