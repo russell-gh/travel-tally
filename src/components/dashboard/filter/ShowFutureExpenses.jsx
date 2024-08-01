@@ -24,6 +24,7 @@ const ShowFutureExpenses = () => {
             })
           );
         }}
+        typed={true}
       />
     </div>
   );

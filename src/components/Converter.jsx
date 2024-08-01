@@ -49,6 +49,7 @@ const Converter = ({ animatingOut }) => {
           id={"fromAmount"}
           minValue={0}
           callback={dataInput}
+          typed={true}
         />
         <FormElement
           type={"select"}
@@ -56,6 +57,7 @@ const Converter = ({ animatingOut }) => {
           id={"fromCurrencySelect"}
           options={currency}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className="flex">
@@ -64,8 +66,9 @@ const Converter = ({ animatingOut }) => {
           label={"To home currency"}
           name={"to"}
           id={"toAmount"}
-          value={convertedValue.toFixed(2)}
+          value={convertCurrency(formData.from, formData.fromCurrency, rates).toFixed(4)}
           callback={dataInput}
+          typed={true}
         />
         <Button
           text="Close"

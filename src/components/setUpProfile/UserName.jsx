@@ -54,6 +54,7 @@ const UserName = () => {
           }
         }}
         error={error}
+        typed={true}
       />
       <Button
         className="next"

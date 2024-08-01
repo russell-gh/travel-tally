@@ -96,6 +96,7 @@ const BillSplitItems = ({
                       })
                     );
                   }}
+                  typed={true}
                 />
               </div>
             )}

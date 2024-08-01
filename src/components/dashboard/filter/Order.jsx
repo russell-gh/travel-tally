@@ -21,6 +21,7 @@ const Sort = () => {
           { value: "Price: high to low", name: "Price: high to low" },
           { value: "Price: low to high", name: "Price: low to high" },
         ]}
+        typed={true}
       />
     </div>
   );

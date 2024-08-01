@@ -33,6 +33,7 @@ import {
 import { findItem } from "../utils/utils";
 import SplitInput from "./SplitInput";
 import { deleteByID } from "../utils/sync";
+import { validate } from "../validation/validate";
 
 export const EditExpense = ({ animatingOut }) => {
   const dispatch = useDispatch();
@@ -56,11 +57,14 @@ export const EditExpense = ({ animatingOut }) => {
   // },
   // }
   const [errors, setErrors] = useState({});
+  const [splitErrors, setSplitErrors] = useState({});
   let [multi, setMulti] = useState(false);
   let [expenseList, setExpenseList] = useState([]);
   let [splitList, setSplitList] = useState([]);
   let [splitIndex, setSplitIndexs] = useState([]);
   let [sharedId, setSharedId] = useState([]);
+  let [disabled, setDisabled] = useState(false);
+
   const currencies = useSelector(selectCurrencyNames);
   const categories = [
     { value: "Activities", name: "Activities" },
@@ -80,6 +84,8 @@ export const EditExpense = ({ animatingOut }) => {
     setExpenseList(thisTrip.expenses);
     setSplitList(thisTrip.splits);
     let result = getThisExpense(thisTrip.expenses, popUp.id);
+    if (result.thisExpense.split === true) {setDisabled(true)};
+    
     setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = unixToDateReversed(copy.date);
@@ -134,6 +140,15 @@ export const EditExpense = ({ animatingOut }) => {
   useEffect(() => {
     getValidationResult;
   }, [formData]);
+
+  useEffect(() => {
+    if (!formData) {
+      return;
+    } else {
+      getSplitValidationResult();
+    }
+  }, [splitData]);
+
   const getValidationResult = async () => {
     if (!Object.values(formData).length) {
       return;
@@ -143,11 +158,33 @@ export const EditExpense = ({ animatingOut }) => {
     console.log(errors);
   };
 
+  const getSplitValidationResult = async () => {
+    if (formData.split === false) {
+      return;
+    }
+    let errors = [];
+    splitData.forEach(async (thisSplit) => {
+      // Loops over split data array as there can be many
+      const result = await validate(thisSplit, "split");
+      if (Object.values(result).length) {
+        errors.push(result);
+      }
+    });
+    setSplitErrors(errors); //result returns promise
+    console.log(splitErrors);
+  };
+
   const handleSubmit = () => {
-    // if (Object.keys(errors).length) {
-    //   console.log(formData, "FAIL", errors);
-    //   return;
-    // }
+    if (Object.keys(errors).length) {
+      // Checks for expense validation errors
+      console.log(formData, "FAIL", errors);
+      return;
+    }
+    if (Object.keys(splitErrors).length) {
+      // Checks for split validation errors
+      console.log(splitData, "FAIL", splitErrors);
+      return;
+    }
     if (formData.description && formData.amount) {
       const data = { formData, splitData };
       const indexs = { index, splitIndex };
@@ -209,6 +246,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getStartDateForMultiDay(formData.date)}
           maxDate={getDateForForm(actualEndDate)}
+          typed={true}
         />
       );
     } else {
@@ -245,7 +283,7 @@ export const EditExpense = ({ animatingOut }) => {
         <>
           {splitData.map(function (split, index) {
             return (
-              <div className="flex">
+              <div className="flex" key={index}>
                 <SplitInput
                   maxAmount={formData.amount}
                   tag={index}
@@ -297,6 +335,7 @@ export const EditExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getDateForForm(actualStartDate)}
           maxDate={getDateForForm(actualEndDate)}
+          typed={true}
         />
         <div className="multiDayCheckboxContainer">
           <div>
@@ -306,6 +345,7 @@ export const EditExpense = ({ animatingOut }) => {
               name={"dateCheck"}
               id={"dateCheck"}
               callback={multiDay}
+              typed={true}
             />
           </div>
           {renderMultiDay()}
@@ -321,6 +361,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.description}
           // list={"descriptionOptions"}
           callback={dataInput}
+          typed={true}
         />
       </div>
       {/* <datalist id="descriptionOptions">
@@ -338,6 +379,7 @@ export const EditExpense = ({ animatingOut }) => {
           options={categories}
           error={errors["category"]}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className="flex amountContainer">
@@ -350,6 +392,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.amount}
           error={errors["amount"]}
           callback={dataInput}
+          typed={true}
         />
         <FormElement
           type={"select"}
@@ -358,6 +401,7 @@ export const EditExpense = ({ animatingOut }) => {
           value={formData.currency}
           options={currency}
           callback={dataInput}
+          typed={true}
         />
       </div>
       <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
@@ -373,6 +417,8 @@ export const EditExpense = ({ animatingOut }) => {
             { value: true, name: "Yes" },
           ]}
           callback={dataInput}
+          typed={true}
+          disabled={disabled}
         />
         {formData.split && (
           <Button

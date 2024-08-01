@@ -18,6 +18,7 @@ const FormElement = ({
   onKeyDown = () => {},
   checked,
   typed = false,
+  disabled=false
 }) => {
   // console.log(value, id, name);
   switch (type) {
@@ -135,6 +136,7 @@ const FormElement = ({
             onChange={(e) => {
               callback(e);
             }}
+            disabled={disabled}
           >
             {choose && (
               <option disabled value="">

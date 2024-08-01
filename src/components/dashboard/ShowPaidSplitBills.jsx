@@ -21,6 +21,7 @@ const ShowPaidSplitBills = () => {
             })
           );
         }}
+        typed={true}
       />
     </div>
   );

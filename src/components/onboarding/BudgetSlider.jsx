@@ -3,18 +3,14 @@ import { useState } from "react";
 import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)(() => ({
-  width: "50px",
+  width: "60px",
   top: "-13px",
   marginLeft: "3px",
-  textAlign: "center",
+  marginRight: "15px",
   "::before": {
     border: "none",
   },
-  "& .MuiInput-underline": {
-    display: "none",
-  },
   "& .MuiInputBase-input": {
-    textAlign: "center",
     height: "22px",
     padding: "2px 0 0 15px",
   },
@@ -72,14 +68,25 @@ export const BudgetSlider = ({
 
   const remaining = onboardingDetails.budgetTotal - sumOfNonActiveSliders;
 
+  let _position;
+
   const positionUpdate = (e) => {
     if (sliderError && e.target.value == remaining) {
       setSliderError(false);
     }
+    if (e.target.classList !== undefined) {
+      if (e.target.value === "") {
+        _position = 0;
+      } else {
+        _position = parseInt(e.target.value);
+      }
+    } else {
+      _position = Number(e.target.value);
+    }
 
     //if selected value is less than or equal to remaining to allocate, update slider with value. else change thumb col
     if (remaining >= e.target.value) {
-      setPosition(Number(e.target.value));
+      setPosition(_position.toString());
       //if selected value is equal to remaining to allocate, set thumb col to max
       if (e.target.value == onboardingDetails.budgetTotal) {
         setSliderMax(true);
@@ -95,11 +102,26 @@ export const BudgetSlider = ({
   return (
     <>
       <div className="budgetSlider">
-        <p className="label">{label}</p>
+        <div className="labelContainer">
+          <p className="label">{label}</p>
+          <Input
+            value={position}
+            size="small"
+            name={id}
+            onChange={positionUpdate}
+            inputProps={{
+              step: 1,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </div>
         <Stack direction="row">
           <StyledSlider
             slidermax={sliderMax ? "#06233b" : "#235b89"}
-            value={position}
+            value={parseInt(position)}
             id={id}
             name={id}
             min={0}
@@ -112,18 +134,6 @@ export const BudgetSlider = ({
             {onboardingDetails.homeCurrencySymbol}
           </p>
         </Stack>
-        <Input
-          value={position}
-          size="small"
-          onChange={positionUpdate}
-          inputProps={{
-            step: 10,
-            min: 0,
-            max: 100,
-            type: "number",
-            "aria-labelledby": "input-slider",
-          }}
-        />
       </div>
     </>
   );
