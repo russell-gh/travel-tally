@@ -182,11 +182,11 @@ export const EditExpense = ({ animatingOut }) => {
       return;
     }
     let errors = [];
-    splitData.forEach(async (thisSplit) => {
+    splitData.forEach(async (thisSplit, index) => {
       // Loops over split data array as there can be many
       const result = await validate(thisSplit, "split");
       if (Object.values(result).length) {
-        errors.push(result);
+        errors[index] = result;
       }
     });
     setSplitErrors(errors); //result returns promise
@@ -204,8 +204,16 @@ export const EditExpense = ({ animatingOut }) => {
       console.log(splitData, "FAIL", splitErrors);
       return;
     }
+
+    let updatedFormData = { ...formData };
+
+    //set split to false if they do not put in any formData
+    if (formData.split === true && splitData.length === 0) {
+      updatedFormData = { ...formData, split: false };
+    }
+
     if (formData.description && formData.amount) {
-      const data = { formData, splitData };
+      const data = { formData: updatedFormData, splitData };
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));
@@ -429,7 +437,7 @@ export const EditExpense = ({ animatingOut }) => {
           ]}
           callback={dataInput}
           typed={true}
-          disabled={disabled}
+          // disabled={disabled}
         />
         {formData.split && (
           <Button

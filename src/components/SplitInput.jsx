@@ -1,6 +1,6 @@
 import FormElement from "../reusable-code/FormElement";
 
-const SplitInput = ({ tag, parentCallback, data }) => {
+const SplitInput = ({ tag, parentCallback, data, splitErrors }) => {
   const dataInput = (e) => {
     let target = e.target.name;
     let value;
@@ -16,6 +16,18 @@ const SplitInput = ({ tag, parentCallback, data }) => {
     parentCallback({ ...data, [target]: value }, tag);
   };
 
+  const tagIndex = tag;
+  const nameError =
+    splitErrors && splitErrors[tagIndex]
+      ? splitErrors[tagIndex]["name"]
+      : undefined;
+  const amountError =
+    splitErrors && splitErrors[tagIndex]
+      ? splitErrors[tagIndex]["amount"]
+      : undefined;
+
+  console.log(splitErrors, nameError, tag);
+
   return (
     <div className="containerSplitPerson">
       <div className="flex">
@@ -25,7 +37,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           name={"name"}
           id={"nameSplit" + tag}
           value={data && data.name ? data.name : ""}
-          // error={errors["description"]}
+          error={nameError}
           // list={"descriptionOptions"}
           callback={dataInput}
           typed={true}
@@ -39,7 +51,7 @@ const SplitInput = ({ tag, parentCallback, data }) => {
           id={`splitAmount${tag} splitAmount`}
           minValue={0}
           value={data && data.amount ? data.amount : ""}
-          //   error={errors["amount"]}
+          error={amountError}
           callback={dataInput}
           typed={true}
         />

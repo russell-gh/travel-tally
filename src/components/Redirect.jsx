@@ -14,8 +14,18 @@ const Redirect = () => {
   useEffect(() => {
     const { pathname } = location;
     console.log(pathname, token, profile, trips);
+    //go to splashpage if there is no path
+    if (pathname === "/") {
+      return;
+    }
+
     //you are on login or signup and you do not have a token. This is correct.
     if ((pathname === "/login" || pathname === "/signup") && !token) {
+      return;
+    }
+
+    if (pathname === "/onboarding" && !token) {
+      redirect("/login");
       return;
     }
 

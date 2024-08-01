@@ -34,6 +34,7 @@ export const AddExpense = ({ animatingOut }) => {
   const splitMax = useSelector(selectSplitMax);
   const splitData = useSelector(selectSplitData);
   const dispatch = useDispatch();
+  const [typed, setTyped] = useState({});
   const tripID = useSelector(selectSelectedTripId);
   const trips = useSelector(selectTrips);
   let expenses = getExpenseList(tripID, trips).expenses;
@@ -98,6 +99,8 @@ export const AddExpense = ({ animatingOut }) => {
     if (value === "true") value = true;
     if (value === "false") value = false;
 
+    setTyped({ ...typed, [target]: true });
+
     setFormData({ ...formData, [target]: value });
     if (target === "amount") dispatch(setSplitMax({ value }));
   };
@@ -124,11 +127,11 @@ export const AddExpense = ({ animatingOut }) => {
       return;
     }
     let errors = [];
-    splitData.forEach(async (thisSplit) => {
+    splitData.forEach(async (thisSplit, index) => {
       // Loops over split data array as there can be many
       const result = await validate(thisSplit, "split");
       if (Object.values(result).length) {
-        errors.push(result);
+        errors[index] = result;
       }
     });
     setSplitErrors(errors); //result returns promise
@@ -147,8 +150,16 @@ export const AddExpense = ({ animatingOut }) => {
       console.log(splitData, "FAIL", splitErrors);
       return;
     }
+
+    let updatedFormData = formData;
+
+    //set split to false if they do not put in any formData
+    if (formData.split === true && splitData.length === 0) {
+      updatedFormData = { ...formData, split: false };
+    }
+
     if (formData.description && formData.amount) {
-      const result = { formData, splitData };
+      const result = { formData: updatedFormData, splitData };
       console.log(result, "pass");
       dispatch(addExpenseData(result));
     } else {
@@ -223,6 +234,7 @@ export const AddExpense = ({ animatingOut }) => {
                   tag={index}
                   parentCallback={getSplitData}
                   data={split}
+                  splitErrors={splitErrors}
                 />
               </div>
             );
@@ -251,6 +263,8 @@ export const AddExpense = ({ animatingOut }) => {
   datalist = [...new Set(datalist)];
   datalist = datalist.filter((description) => description.trim() !== "");
 
+  console.log(errors);
+
   return (
     <div className="expenseContainer">
       <div className="flex">
@@ -263,7 +277,7 @@ export const AddExpense = ({ animatingOut }) => {
           callback={dataInput}
           minDate={getDateForForm(actualStartDate)}
           maxDate={getDateForForm(actualEndDate)}
-          typed={true}
+          typed={typed.date}
         />
 
         <div className="multiDayCheckboxContainer">
@@ -289,7 +303,7 @@ export const AddExpense = ({ animatingOut }) => {
           error={errors["description"]}
           list={"descriptionOptions"}
           callback={dataInput}
-          typed={true}
+          typed={typed.description}
         />
         <datalist id="descriptionOptions">
           {datalist.map((expense, index) => {
@@ -318,7 +332,7 @@ export const AddExpense = ({ animatingOut }) => {
           minValue={0}
           error={errors["amount"]}
           callback={dataInput}
-          typed={true}
+          typed={typed.amount}
         />
         <FormElement
           type={"select"}
