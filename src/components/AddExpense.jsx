@@ -118,11 +118,11 @@ export const AddExpense = ({ animatingOut }) => {
       return;
     }
     let errors = [];
-    splitData.forEach(async (thisSplit) => {
+    splitData.forEach(async (thisSplit, index) => {
       // Loops over split data array as there can be many
       const result = await validate(thisSplit, "split");
       if (Object.values(result).length) {
-        errors.push(result);
+        errors[index] = result;
       }
     });
     setSplitErrors(errors); //result returns promise
