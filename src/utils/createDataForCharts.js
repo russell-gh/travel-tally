@@ -73,11 +73,12 @@ export function createDataForCharts(
       dataArray[1].push(totalBudgetArray[i]);
       dataArray[2].push(0);
       dataArray[3].push(Math.abs(difference / 100).toFixed(2));
-    } else {
-      console.log(
-        "something went wrong with collecting the data for the graphs"
-      );
-    }
+    } 
+    // else {
+    //   // console.log(
+    //   //   "something went wrong with collecting the data for the graphs"
+    //   // );
+    // }
   }
   return dataArray;
 }

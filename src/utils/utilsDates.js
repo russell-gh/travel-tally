@@ -9,12 +9,12 @@ export function unixToDate(unix) {
   } else if (typeof unix === "number" && !isNaN(unix)) {
     date = new Date(unix);
   } else {
-    console.log(unix, "unix is undefined or not a valid number");
+    // console.log(unix, "unix is undefined or not a valid number");
     return "unknown date";
   }
 
   if (isNaN(date.getTime())) {
-    console.log("Invalid date object:", date);
+    // console.log("Invalid date object:", date);
     return "unknown date";
   }
   const options = { year: "numeric", month: "numeric", day: "numeric" };

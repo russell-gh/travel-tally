@@ -35,10 +35,7 @@ const Login = () => {
   //====Compares Credentials to Local Storage===
   const onSubmit = async (e) => {
     try {
-      const { data } = await axios.post(
-        `${API_URL}/user/login`,
-        formData
-      );
+      const { data } = await axios.post(`${API_URL}/user/login`, formData);
 
       if (data.status) {
         dispatch(setData({ text: "token", data: data.token }));
@@ -47,8 +44,8 @@ const Login = () => {
         return;
       }
     } catch (e) {
-      console.log(e);
-      toast.error("Incorrect Credentials!");
+      // console.log(e);
+      toast.error("Error logging in!");
       //TODO Why is there a delay?
     }
   };
@@ -66,7 +63,7 @@ const Login = () => {
         redirect(next);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 
@@ -75,10 +72,10 @@ const Login = () => {
       const { data } = await axios.get(`${API_URL}/profile/`, {
         headers: { token },
       });
-      console.log(data);
+      // console.log(data);
       dispatch(saveProfile(data));
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 

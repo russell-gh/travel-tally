@@ -31,7 +31,7 @@ const StageOfPhoto = ({ profilePicture, handleCapture }) => {
       );
       redirect("/onboarding");
     } catch (e) {
-      console.log("There was an error posting to the database", e);
+      // console.log("There was an error posting to the database", e);
     }
   };
 

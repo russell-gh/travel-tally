@@ -7,19 +7,19 @@ export async function addExpenseRemotely(payload) {
     payload.expense = payload.element;
     delete payload.element;
   }
-  console.log(payload);
+  // console.log(payload);
   try {
     const results = await axios.post(`${API_URL}/expenses`, payload, {
       headers: { token },
     });
-    console.log(results, "Add expense");
+    // console.log(results, "Add expense");
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 
 export async function addSplitRemotely(payload) {
-  console.log("PAYLOAD", payload);
+  // console.log("PAYLOAD", payload);
   const { token } = payload;
   if (payload.element) {
     payload.billSplit = payload.element;
@@ -28,44 +28,45 @@ export async function addSplitRemotely(payload) {
   if (!payload.billSplit.name || payload.billSplit.name === "") {
     return;
   }
-  console.log(payload);
+  // console.log(payload);
   try {
     const results = await axios.post(`${API_URL}/splits`, payload, {
       headers: { token },
     });
-    console.log(results, "add split");
+    // console.log(results, "add split");
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 
 export async function deleteByID(payload) {
   try {
-    console.log("PAYLOAD", payload.id);
+    // console.log("PAYLOAD", payload.id);
     const id = payload.id;
     const { token } = payload;
     if (payload.type === "shared") {
-      const results = await axios.delete(`${API_URL}/expenses/shared/${id}`, {
+      axios.delete(`${API_URL}/expenses/shared/${id}`, {
         headers: { token },
       });
-      console.log(results, "sharedExpense");
+      // console.log(results, "sharedExpense");
     } else if (payload.type === "single") {
-      const results = await axios.delete(`${API_URL}/expenses/${id}`, {
+      axios.delete(`${API_URL}/expenses/${id}`, {
         headers: { token },
       });
-      console.log(results, "singleExpense");
+      // console.log(results, "singleExpense");
     } else if (payload.type === "singleSplit") {
-      const results = await axios.delete(`${API_URL}/splits/${id}`, {
+      axios.delete(`${API_URL}/splits/${id}`, {
         headers: { token },
       });
-      console.log(results, "singleSplit");
+      // console.log(results, "singleSplit");
     } else if (payload.type === "sharedSplit") {
-      const results = await axios.delete(`${API_URL}/splits/shared/${id}`, {
+      axios.delete(`${API_URL}/splits/shared/${id}`, {
         headers: { token },
       });
-      console.log(results, "sharedSplit");
+      // console.log(results, "sharedSplit");
     }
-  } catch (e) {}
+  } catch (e) {
+  }
 }
 
 export async function updatePaidDB(id, name, token) {
@@ -76,6 +77,6 @@ export async function updatePaidDB(id, name, token) {
       { headers: { token } }
     );
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }

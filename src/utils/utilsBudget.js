@@ -33,7 +33,7 @@ export function calculateTotalSpend(expenses, splits) {
     });
 
     if (isNaN(totalSpend)) {
-      console.log("Something went wrong with calculating total.");
+      // console.log("Something went wrong with calculating total.");
       return "";
     }
 
@@ -49,7 +49,7 @@ export function addDecimals(number) {
 
 export function getCurrencySymbol(currencyCodes, currencyCode) {
   if (!currencyCodes || !currencyCode) {
-    console.log("something went wrong with getting the currency symbol");
+    // console.log("something went wrong with getting the currency symbol");
     return "";
   }
 
@@ -77,7 +77,7 @@ export function getBudget(data, value) {
       budget = data[string];
       break;
     default:
-      console.log("something went wrong with getting the budget");
+      // console.log("something went wrong with getting the budget");
       break;
   }
 
@@ -107,7 +107,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
       if (index !== -1) {
         date = data[index];
       } else {
-        console.log("something went wrong with finding the right day budget");
+        // console.log("something went wrong with finding the right day budget");
       }
     } else {
       const index = data.findIndex((item) => {
@@ -116,7 +116,7 @@ export function getSpendSelectedDay(data, filterDate, budgetPerDay) {
       if (index !== -1) {
         date = data[index];
       } else {
-        console.log("something went wrong with finding the right day budget");
+        // console.log("something went wrong with finding the right day budget");
       }
     }
   }

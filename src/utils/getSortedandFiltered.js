@@ -43,7 +43,7 @@ export const getSortedandFiltered = (
       });
       break;
     default:
-      console.log("something went wrong with the sorting");
+      // console.log("something went wrong with the sorting");
       break;
   }
 
@@ -57,7 +57,7 @@ export const getSortedandFiltered = (
       return unixToDate(item.date) === filterDate;
     });
     if (filtered.length === 0) {
-      console.log("Something went wrong with filtering the date");
+      // console.log("Something went wrong with filtering the date");
     }
   }
 
@@ -86,7 +86,7 @@ export const filterCategories = (data, filter) => {
       });
       break;
     default:
-      console.log("something went wrong with the filtering");
+      // console.log("something went wrong with the filtering");
       break;
   }
   return data;

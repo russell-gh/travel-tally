@@ -14,7 +14,7 @@ export function getTotalSplitBills(splits, filter) {
       return !split.paid;
     });
   } else {
-    console.log("something went wrong with filtering the splits");
+    // console.log("something went wrong with filtering the splits");
     return;
   }
 

@@ -4,7 +4,7 @@ import { stringToUnix, generateId } from "./utils";
 import { splitMultiExpenseBill } from "./billsplitting";
 
 export function handleData({ formData, splitData }, home, data) {
-  console.log("Start handle data", splitData);
+  // console.log("Start handle data", splitData);
   const expense = formData;
   let splits = [];
   if (splitData) {
@@ -54,7 +54,7 @@ export function handleData({ formData, splitData }, home, data) {
     }
   }
 
-  console.log("middle of handle data", splits);
+  // console.log("middle of handle data", splits);
 
   // Tidies object up, adds unique id and unix time
   expense.amount = newAmount;
@@ -63,20 +63,20 @@ export function handleData({ formData, splitData }, home, data) {
   expense.endDate = end;
 
   if (expense.multiDay === true) {
-    console.log("in if statement", splits);
+    // console.log("in if statement", splits);
     // If it's a multiday expense, it gets sent to be split
     let allExpenses = splitExpenseDays({ expense, splits });
-    console.log(allExpenses);
+    // console.log(allExpenses);
     return allExpenses;
   }
 
   expense.id = generateId("expense");
   delete expense.multiDay;
   delete expense.endDate;
-  console.log("expenseSplit", expense.split, expense);
+  // console.log("expenseSplit", expense.split, expense);
   if (expense.split) {
     billSplit = splitExpenseBill(splits, expense, data);
-    console.log(billSplit, "IN EXPENSEDATA");
+    // console.log(billSplit, "IN EXPENSEDATA");
     return { expense, billSplit };
   }
 
@@ -91,8 +91,14 @@ export function convertCurrency(fromValue, fromCurrency, data) {
 }
 
 export function splitExpenseDays({ expense, splits }) {
+<<<<<<< HEAD
   console.log("Split expense days", splits);
   let { date, endDate, amount, split } = expense;
+=======
+  // console.log("Split expense days", splits);
+  let { date, endDate, description, category, amount, currency, split } =
+    expense;
+>>>>>>> 49f013afc5ab1114605ac5cd62cd1e8efc931b2a
   let { fromValue, toValue } = amount;
   let allExpenses = [];
 
@@ -126,7 +132,7 @@ export function splitExpenseDays({ expense, splits }) {
   if (split === true) {
     billSplit = splitMultiExpenseBill(splits, allExpenses, days);
   }
-  console.log("End split exp", billSplit);
+  // console.log("End split exp", billSplit);
   return { allExpenses, billSplit };
 }
 
@@ -243,7 +249,7 @@ export function getThisSplit(splitList, id) {
 
 export function unixToDateReversed(unix) {
   if (!unix) {
-    console.log("error finding unix");
+    // console.log("error finding unix");
     return;
   }
 
