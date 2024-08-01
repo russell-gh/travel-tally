@@ -84,8 +84,10 @@ export const EditExpense = ({ animatingOut }) => {
     setExpenseList(thisTrip.expenses);
     setSplitList(thisTrip.splits);
     let result = getThisExpense(thisTrip.expenses, popUp.id);
-    if (result.thisExpense.split === true) {setDisabled(true)};
-    
+    if (result.thisExpense.split === true) {
+      setDisabled(true);
+    }
+
     setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = unixToDateReversed(copy.date);
@@ -185,8 +187,16 @@ export const EditExpense = ({ animatingOut }) => {
       console.log(splitData, "FAIL", splitErrors);
       return;
     }
+
+    let updatedFormData = { ...formData };
+
+    //set split to false if they do not put in any formData
+    if (formData.split === true && splitData.length === 0) {
+      updatedFormData = { ...formData, split: false };
+    }
+
     if (formData.description && formData.amount) {
-      const data = { formData, splitData };
+      const data = { formData: updatedFormData, splitData };
       const indexs = { index, splitIndex };
       dispatch(deleteToEdit(indexs));
       dispatch(addExpenseData(data));

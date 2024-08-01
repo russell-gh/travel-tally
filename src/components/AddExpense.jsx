@@ -138,8 +138,19 @@ export const AddExpense = ({ animatingOut }) => {
       console.log(splitData, "FAIL", splitErrors);
       return;
     }
+
+    let updatedFormData = formData;
+
+    console.log("check", formData.split === true, splitData.length === 0);
+    console.log("before", formData, splitData);
+    //set split to false if they do not put in any formData
+    if (formData.split === true && splitData.length === 0) {
+      updatedFormData = { ...formData, split: false };
+    }
+    console.log("after", formData, splitData);
+
     if (formData.description && formData.amount) {
-      const result = { formData, splitData };
+      const result = { formData: updatedFormData, splitData };
       console.log(result, "pass");
       dispatch(addExpenseData(result));
     } else {
@@ -214,6 +225,7 @@ export const AddExpense = ({ animatingOut }) => {
                   tag={index}
                   parentCallback={getSplitData}
                   data={split}
+                  splitErrors={splitErrors}
                 />
               </div>
             );
@@ -241,6 +253,8 @@ export const AddExpense = ({ animatingOut }) => {
   });
   datalist = [...new Set(datalist)];
   datalist = datalist.filter((description) => description.trim() !== "");
+
+  console.log(errors);
 
   return (
     <div className="expenseContainer">
