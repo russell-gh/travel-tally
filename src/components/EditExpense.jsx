@@ -77,15 +77,34 @@ export const EditExpense = ({ animatingOut }) => {
     return <p>Loading</p>;
   }
 
-  const currency = currencies.map((code) => ({ value: code, name: code }));
+  //calculating start and enddate of trip
+  const trip = findItem(trips, tripID);
+  const { details } = trip;
+  const { homeCurrency, destinationCurrency } = details;
+  const { startDateIncluded, endDateIncluded, startDate, endDate } =
+    details.dates;
+  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
+  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
+
+  const favs = [homeCurrency, destinationCurrency];
+  const _currencies = [...currencies];
+  favs.forEach((item) => {
+    const found = _currencies.findIndex((el) => el === item);
+    _currencies.splice(found, 1);
+    _currencies.unshift(item);
+  });
+
+  const currency = _currencies.map((code) => ({ value: code, name: code }));
 
   const setThisExpense = () => {
     let thisTrip = getExpenseList(tripID, trips);
     setExpenseList(thisTrip.expenses);
     setSplitList(thisTrip.splits);
     let result = getThisExpense(thisTrip.expenses, popUp.id);
-    if (result.thisExpense.split === true) {setDisabled(true)};
-    
+    if (result.thisExpense.split === true) {
+      setDisabled(true);
+    }
+
     setIndex(result.indexOf);
     const copy = JSON.parse(JSON.stringify(result.thisExpense));
     let date = unixToDateReversed(copy.date);
@@ -309,14 +328,6 @@ export const EditExpense = ({ animatingOut }) => {
       );
     }
   };
-
-  //calculating start and enddate of trip
-  const trip = findItem(trips, tripID);
-  const { details } = trip;
-  const { startDateIncluded, endDateIncluded, startDate, endDate } =
-    details.dates;
-  const actualStartDate = getActualStartDate(startDateIncluded, startDate);
-  const actualEndDate = getActualEndDate(endDateIncluded, endDate);
 
   //if there is no formData it stops the rendering
   if (!formData) {

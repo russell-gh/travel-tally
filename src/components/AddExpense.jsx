@@ -41,6 +41,7 @@ export const AddExpense = ({ animatingOut }) => {
   //calculating start and enddate of trip
   const trip = findItem(trips, tripID);
   const { details } = trip;
+  const { homeCurrency, destinationCurrency } = details;
   const { startDateIncluded, endDateIncluded, startDate, endDate } =
     details.dates;
   const actualStartDate = getActualStartDate(startDateIncluded, startDate);
@@ -80,7 +81,15 @@ export const AddExpense = ({ animatingOut }) => {
     return <p>Loading</p>;
   }
 
-  const currency = currencies.map((code) => ({ value: code, name: code }));
+  const favs = [homeCurrency, destinationCurrency];
+  const _currencies = [...currencies];
+  favs.forEach((item) => {
+    const found = _currencies.findIndex((el) => el === item);
+    _currencies.splice(found, 1);
+    _currencies.unshift(item);
+  });
+
+  const currency = _currencies.map((code) => ({ value: code, name: code }));
 
   const dataInput = (e) => {
     let target = e.target.name;
