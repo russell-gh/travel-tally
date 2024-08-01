@@ -8,7 +8,7 @@ export const getCountryFromCity = async (city) => {
     );
     return data[0].country;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 

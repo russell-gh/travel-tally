@@ -44,8 +44,8 @@ const Login = () => {
         return;
       }
     } catch (e) {
-      console.log(e);
-      toast.error("Error loggin in!");
+      // console.log(e);
+      toast.error("Error logging in!");
       //TODO Why is there a delay?
     }
   };
@@ -63,7 +63,7 @@ const Login = () => {
         redirect(next);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 
@@ -72,10 +72,10 @@ const Login = () => {
       const { data } = await axios.get(`${API_URL}/profile/`, {
         headers: { token },
       });
-      console.log(data);
+      // console.log(data);
       dispatch(saveProfile(data));
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 

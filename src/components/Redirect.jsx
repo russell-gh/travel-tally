@@ -13,7 +13,7 @@ const Redirect = () => {
 
   useEffect(() => {
     const { pathname } = location;
-    console.log(pathname, token, profile, trips);
+    // console.log(pathname, token, profile, trips);
     //go to splashpage if there is no path
     if (pathname === "/") {
       return;

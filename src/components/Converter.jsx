@@ -29,7 +29,7 @@ const Converter = ({ animatingOut }) => {
     let target = e.target.name;
     let value = e.target.value;
     setFormData({ ...formData, [target]: value });
-    console.log(target, value);
+    // console.log(target, value);
   };
 
   const convertedValue = convertCurrency(

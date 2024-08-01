@@ -5,7 +5,7 @@ export function splitExpenseBill(splitData, expense) {
   if (!splitData) {
     return;
   }
-  console.log(splitData, "IN SPLIT");
+  // console.log(splitData, "IN SPLIT");
   let allSplits = [];
 
   splitData.forEach((bill) => {
@@ -23,7 +23,7 @@ export function splitExpenseBill(splitData, expense) {
       toCurrency: expense.amount.toCurrency,
     };
 
-    console.log(expense);
+    // console.log(expense);
 
     const formatted = {
       amount: newAmount,
@@ -38,21 +38,21 @@ export function splitExpenseBill(splitData, expense) {
     allSplits.push(formatted);
   });
 
-  console.log(allSplits, "END SPLIT");
+  // console.log(allSplits, "END SPLIT");
 
   return allSplits;
 }
 
 export function splitMultiExpenseBill(splits, multiExpenses, days) {
   if (!splits || !multiExpenses || !days) {
-    console.log("something went wrong with the multiday billsplits");
+    // console.log("something went wrong with the multiday billsplits");
     return;
   }
 
   let allSplits = [];
 
   for (const expense of multiExpenses) {
-    console.log(expense);
+    // console.log(expense);
     for (const split of splits) {
       if (!split.converted) {
         split.converted = split.amount;
@@ -78,7 +78,7 @@ export function splitMultiExpenseBill(splits, multiExpenses, days) {
       allSplits.push(formatted);
     }
   }
-  console.log(allSplits);
+  // console.log(allSplits);
 
   return allSplits;
 }

@@ -12,7 +12,8 @@ const UploadPhoto = () => {
   const onChange = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      return console.log("No file Selected");
+      // console.log("No file Selected");
+      return ;
     }
 
     if (file["type"].split("/")[0] !== "image") {

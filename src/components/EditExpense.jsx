@@ -116,7 +116,7 @@ export const EditExpense = ({ animatingOut }) => {
     copy.amount = Math.round(newAmount) / 100;
     copy.endDate = date;
     copy.split = split;
-    console.log(copy);
+    // console.log(copy);
     dispatch(setSplitMax(copy.amount));
     setFormData(copy);
     setSharedId(result.thisExpense.sharedId);
@@ -142,7 +142,7 @@ export const EditExpense = ({ animatingOut }) => {
       delete thisSplit.totalExpense;
       const data = thisSplit;
       const tag = index;
-      console.log(data, tag, "pre set");
+      // console.log(data, tag, "pre set");
       dispatch(setSplitData({ data, tag }));
     });
     setSplitIndexs(result.allIndexs);
@@ -174,7 +174,7 @@ export const EditExpense = ({ animatingOut }) => {
     }
     const result = await validate(formData, "expense");
     setErrors(result); //result returns promise
-    console.log(errors);
+    // console.log(errors);
   };
 
   const getSplitValidationResult = async () => {
@@ -190,18 +190,18 @@ export const EditExpense = ({ animatingOut }) => {
       }
     });
     setSplitErrors(errors); //result returns promise
-    console.log(splitErrors);
+    // console.log(splitErrors);
   };
 
   const handleSubmit = () => {
     if (Object.keys(errors).length) {
       // Checks for expense validation errors
-      console.log(formData, "FAIL", errors);
+      // console.log(formData, "FAIL", errors);
       return;
     }
     if (Object.keys(splitErrors).length) {
       // Checks for split validation errors
-      console.log(splitData, "FAIL", splitErrors);
+      // console.log(splitData, "FAIL", splitErrors);
       return;
     }
 
@@ -227,14 +227,14 @@ export const EditExpense = ({ animatingOut }) => {
       } else {
         // delete from server with expense ID
         let id = popUp.id;
-        console.log(formData, "ID");
+        // console.log(formData, "ID");
         deleteByID({ id, type: "single", token: token });
         if (popUp.split === true) {
           deleteByID({ id, type: "singleSplit", token: token });
         }
       }
     } else {
-      console.log("FAIL FINAL");
+      // console.log("FAIL FINAL");
       return;
     }
   };
@@ -244,7 +244,7 @@ export const EditExpense = ({ animatingOut }) => {
     if (multi) {
       let result = mergeExpenseDays(formData, expenseList);
       let splits = mergeMultiSplit(splitData, splitList);
-      console.log(splits, "RESULTS ARE IN");
+      // console.log(splits, "RESULTS ARE IN");
       if (result.indexs.length > 1) {
         setFormData(result.newExpense);
         setIndex(result.indexs);
@@ -252,7 +252,7 @@ export const EditExpense = ({ animatingOut }) => {
         splits.splitArray.forEach((thisSplit, index) => {
           const data = thisSplit;
           const tag = index;
-          console.log(data, tag, "pre set");
+          // console.log(data, tag, "pre set");
           dispatch(setSplitData({ data, tag }));
         });
       }
@@ -424,7 +424,7 @@ export const EditExpense = ({ animatingOut }) => {
         />
       </div>
       <div className={`flex ${formData.split ? "containerSplitEvenly" : ""}`}>
-        {console.log(formData.split)}
+        {/* {console.log(formData.split)} */}
         <FormElement
           type={"select"}
           label={"Split"}

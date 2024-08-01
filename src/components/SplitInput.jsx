@@ -26,7 +26,7 @@ const SplitInput = ({ tag, parentCallback, data, splitErrors }) => {
       ? splitErrors[tagIndex]["amount"]
       : undefined;
 
-  console.log(splitErrors, nameError, tag);
+  // console.log(splitErrors, nameError, tag);
 
   return (
     <div className="containerSplitPerson">

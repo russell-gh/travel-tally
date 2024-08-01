@@ -135,19 +135,19 @@ export const AddExpense = ({ animatingOut }) => {
       }
     });
     setSplitErrors(errors); //result returns promise
-    console.log(splitErrors);
+    // console.log(splitErrors);
   };
 
   const handleSubmit = () => {
-    console.log(errors);
+    // console.log(errors);
     if (Object.keys(errors).length) {
       // Checks for expense validation errors
-      console.log(formData, "FAIL", errors);
+      // console.log(formData, "FAIL", errors);
       return;
     }
     if (Object.keys(splitErrors).length) {
       // Checks for split validation errors
-      console.log(splitData, "FAIL", splitErrors);
+      // console.log(splitData, "FAIL", splitErrors);
       return;
     }
 
@@ -160,10 +160,10 @@ export const AddExpense = ({ animatingOut }) => {
 
     if (formData.description && formData.amount) {
       const result = { formData: updatedFormData, splitData };
-      console.log(result, "pass");
+      // console.log(result, "pass");
       dispatch(addExpenseData(result));
     } else {
-      console.log("FAIL FINAL");
+      // console.log("FAIL FINAL");
       return;
     }
   };
@@ -263,7 +263,7 @@ export const AddExpense = ({ animatingOut }) => {
   datalist = [...new Set(datalist)];
   datalist = datalist.filter((description) => description.trim() !== "");
 
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <div className="expenseContainer">

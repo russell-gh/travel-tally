@@ -34,7 +34,7 @@ export const homeSlice = createSlice({
       //set homecurrencySymbol inside each trip
       if (state.trips.length && state.currencyCodes) {
         state.trips.map((item, index) => {
-          console.log(state.trips[index].details.homeCurrency);
+          // console.log(state.trips[index].details.homeCurrency);
           item.details.homeCurrencySymbol = getCurrencySymbol(
             { ...state.currencyCodes },
             state.trips[index].details.homeCurrency
@@ -60,7 +60,7 @@ export const homeSlice = createSlice({
       const indexTrip = getIndex(state.trips, state.selectedTripId, "id");
       const expenses = state.trips[indexTrip].expenses;
       const splits = state.trips[indexTrip].splits;
-      console.log(state.popUp.sharedId, "POP UP IN SLICE");
+      // console.log(state.popUp.sharedId, "POP UP IN SLICE");
       if (!payload) {
         const id = state.popUp.id;
         //get index of clicked expense
@@ -76,7 +76,7 @@ export const homeSlice = createSlice({
               indexesSplits.unshift(i);
             }
           }
-          console.log(indexesSplits);
+          // console.log(indexesSplits);
           for (const index of indexesSplits) {
             splits.splice(index, 1);
           }
@@ -85,7 +85,9 @@ export const homeSlice = createSlice({
         }
 
         //delete the expense from backend
-        deleteByID({ id, type: "single", token: state.token });
+        try {
+          deleteByID({ id, type: "single", token: state.token });
+        } catch (e) {}
       }
 
       //get indexes of all items with sharedId
@@ -118,7 +120,7 @@ export const homeSlice = createSlice({
         }
 
         //delete the expense from backend
-        console.log(id, "POP UP IN SLICE");
+        // console.log(id, "POP UP IN SLICE");
         deleteByID({ id, type: "shared", token: state.token });
       }
 
@@ -192,9 +194,9 @@ export const homeSlice = createSlice({
         addExpenseRemotely({ expense, tripID, token: state.token });
       }
       // Push data to split array
-      console.log("IN SLICE", billSplit);
+      // console.log("IN SLICE", billSplit);
       if (billSplit) {
-        console.log(">>>>>>", billSplit, tripID);
+        // console.log(">>>>>>", billSplit, tripID);
         // billSplit is always an array. So this if else statemement is unnecesary.
         if (Array.isArray(billSplit)) {
           billSplit.forEach((element) => {

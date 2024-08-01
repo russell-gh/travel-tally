@@ -9,7 +9,7 @@ export function getIndex(data, id, key) {
   });
 
   if (indexOf === -1) {
-    console.log("something went wrong getting the index");
+    // console.log("something went wrong getting the index");
     return;
   }
 
@@ -22,7 +22,7 @@ export function findItem(data, id) {
   });
 
   if (!item) {
-    console.log("something went wrong getting the item");
+    // console.log("something went wrong getting the item");
     return;
   }
 

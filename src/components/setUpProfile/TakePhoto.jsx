@@ -35,7 +35,7 @@ const TakePhoto = () => {
       .getUserMedia({ video: true })
       .then(() => setHasPermission(true))
       .catch((error) => {
-        console.error("Error accessing webcam: ", error);
+        // console.error("Error accessing webcam: ", error);
         setHasPermission(false);
       });
   }, []);
