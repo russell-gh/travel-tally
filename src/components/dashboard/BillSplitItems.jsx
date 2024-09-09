@@ -55,7 +55,7 @@ const BillSplitItems = ({
               <AnimatePresence>
                 <motion.img
                   key={paid} // Ensure a new image instance is created for animation
-                  src={`../src/img/${paid ? "paid" : "unpaid"}.svg`}
+                  src={`/${paid ? "paid" : "unpaid"}.svg`}
                   alt={paid ? "paid icon" : "unpaid icon"}
                   className="paidIcon"
                   initial={{ scale: 0.5, y: "-50%" }}

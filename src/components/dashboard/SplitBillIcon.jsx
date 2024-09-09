@@ -7,7 +7,7 @@ const SplitBillIcon = ({ toggleDisplaySplit, expenseId }) => {
       }}
     >
       <img
-        src={`../src/img/split-bill.svg`}
+        src={`/split-bill.svg`}
         alt={`split bill icon`}
         className="splitBillIcon"
       />

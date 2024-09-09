@@ -49,11 +49,11 @@ const Interface = () => {
       return;
     }
     {
-      const { data } = await axios.get(`fakeCurrencies.json`);
+      const { data } = await axios.get(`/fakeCurrencies.json`);
       dispatch(setData({ text: "currencies", data: data.rates }));
     }
     {
-      const { data } = await axios.get(`currencyCodes.json`);
+      const { data } = await axios.get(`/currencyCodes.json`);
       dispatch(setData({ text: "currencyCodes", data }));
     }
     // {
@@ -61,7 +61,7 @@ const Interface = () => {
     //   dispatch(setData({ text: "trips", data }));
     // }
     {
-      const { data } = await axios.get(`countryInfo.json`);
+      const { data } = await axios.get(`/countryInfo.json`);
       dispatch(setData({ text: "countries", data }));
     }
   };

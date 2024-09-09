@@ -114,7 +114,7 @@ const Expenses = ({
                 />
               </div>
               <img
-                src="../src/img/edit.svg"
+                src="/edit.svg"
                 alt="edit"
                 className="edit"
                 onClick={() => {
@@ -132,7 +132,7 @@ const Expenses = ({
                 }}
               />
               <img
-                src="../src/img/delete.svg"
+                src="/delete.svg"
                 alt="delete"
                 className="delete"
                 onClick={() => {

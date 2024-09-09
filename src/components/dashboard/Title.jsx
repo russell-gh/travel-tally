@@ -21,7 +21,7 @@ const Title = ({ destination, startDate, endDate, details }) => {
         <FilterTrip />
         {dayjs().isBefore(endDate) && startDate.isBefore(dayjs()) && (
           <img
-            src="../src/img/travelling.svg"
+            src="/travelling.svg"
             alt="plane icon"
             className="travellingIcon"
           />
