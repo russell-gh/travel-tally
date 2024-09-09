@@ -118,7 +118,7 @@ const Signup = () => {
         />
 
         <p className="signup-text">
-          Already have an account? <a href="/login"> Login! </a>
+          Already have an account? <a onClick={()=> redirect("/login")}> Login! </a>
         </p>
       </div>
     </>

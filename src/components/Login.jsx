@@ -146,7 +146,7 @@ const Login = () => {
         />
 
         <p className="signup-text">
-          Don't have an account? <a href="/signup"> Sign up! </a>
+          Don't have an account? <a onClick={()=> redirect("/signup")}> Sign up! </a>
         </p>
       </div>
     </>
