@@ -130,7 +130,7 @@ const Login = () => {
           placeholder="password"
           className="logsign-input"
           onKeyDown={(e) => {
-            if (e.key === "Enter" && !errors.lenght) {
+            if (e.key === "Enter" && !errors.length) {
               onSubmit();
             }
           }}
