@@ -16,6 +16,16 @@
   text-align: center;
 }
 
+.signup-text a {
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.signup-text a:hover {
+  color:$teal;
+}
+
 .signin-title {
   text-align: center;
 }
