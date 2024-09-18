@@ -111,11 +111,16 @@ body {
     font-size: 16px;
   }
 
+  select:focus-visible {
+    outline: none;
+  }
+
   .dropdown {
     font-size: 14px;
 
     select {
       font-size: 14px;
+      border-radius: 10px;
     }
   }
 
@@ -370,7 +375,7 @@ body {
   .totalBudgetBtn::before,
   .billSplitsGraphBtn::before,
   .dailyBudgetBtn::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     width: 100%;
@@ -399,9 +404,9 @@ body {
     transform: scaleX(1);
   }
 
-  .totalBudgetBtn>span,
-  .billSplitsGraphBtn>span,
-  .dailyBudgetBtn>span {
+  .totalBudgetBtn > span,
+  .billSplitsGraphBtn > span,
+  .dailyBudgetBtn > span {
     position: relative;
     z-index: 1;
     transition: color 0.5s ease;
@@ -543,8 +548,6 @@ controls billSplit and Expenses
     margin: 0px auto 0px auto;
     border-radius: 15px 15px 0px 0px;
     border: $teal 2px solid;
-    ;
-
     .billSplitBtn {
       border-radius: 0px 11px 0px 0px;
     }
@@ -583,7 +586,7 @@ controls billSplit and Expenses
 
   .expensesBtn::before,
   .billSplitBtn::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     width: 100%;
@@ -613,15 +616,15 @@ controls billSplit and Expenses
     transform: scaleX(1);
   }
 
-  .expensesBtn>span,
-  .billSplitBtn>span {
+  .expensesBtn > span,
+  .billSplitBtn > span {
     position: relative;
     z-index: 1;
     transition: color 0.5s ease;
   }
 
-  .expensesBtn.focus>span,
-  .billSplitBtn.focus>span {
+  .expensesBtn.focus > span,
+  .billSplitBtn.focus > span {
     color: white;
   }
 
@@ -674,7 +677,7 @@ controls billSplit and Expenses
 
     .paidIcon {
       height: 40px;
-      width: 40px
+      width: 40px;
     }
 
     .paidCheckboxContainer {
