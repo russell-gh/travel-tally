@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export const Footer = () => {
+
+  const redirect = useNavigate();
+
   return (
     <>
       <footer>
@@ -8,6 +13,7 @@ export const Footer = () => {
           onClick={() => {
             localStorage.clear();
             location.reload();
+            redirect('/');
           }}
         >
           Log Out
