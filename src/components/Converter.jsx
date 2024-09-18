@@ -14,7 +14,7 @@ const Converter = ({ animatingOut }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     from: 0,
-    fromCurrency: "USD",
+    fromCurrency: "GBP",
     to: 0,
     toCurrency: "GBP",
   });
@@ -66,7 +66,7 @@ const Converter = ({ animatingOut }) => {
           label={"To home currency"}
           name={"to"}
           id={"toAmount"}
-          value={convertCurrency(formData.from, formData.fromCurrency, rates).toFixed(4)}
+          value={convertCurrency(formData.from, formData.fromCurrency, rates).toFixed(2)}
           callback={dataInput}
           typed={true}
         />
