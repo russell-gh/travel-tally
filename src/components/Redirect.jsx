@@ -59,13 +59,13 @@ const Redirect = () => {
     }
 
     //if you are on login and you have a token
-    if (pathname === "/login") {
+    if (pathname === "/login" && token) {
       redirect("/dashboard");
       return;
     }
 
     //if you are on signup and you have a token
-    if (pathname === "/signup") {
+    if (pathname === "/signup" && token) {
       redirect("/dashboard");
       return;
     }
